@@ -1,21 +1,40 @@
-@import "tailwindcss";
-
-* {
-    font-family: 'Inter', sans-serif;
+@import 'tailwindcss';
+html,body{
+  @apply h-full w-full overflow-x-hidden m-0 p-0;
 }
-
-/* @media screen and (min-width: 480px) {
-    .card:nth-child(7n + 1) {
-        grid-column: auto/span 2;
-        grid-row: auto/span 2;
-    }
+.container{
+  @apply bg-gray-100 flex justify-center items-center min-h-screen flex-col w-full;
 }
-
-.prompt::-webkit-scrollbar {
-    width: 5px;
+.welcome{
+  @apply text-center font-semibold text-gray-700 text-3xl mb-10
 }
- 
-.prompt::-webkit-scrollbar-thumb {
-  background-color: #666e75;
-  border-radius: 5px;
-} */
+.container2{
+  @apply bg-white w-96 shadow-lg rounded-md p-10
+}
+.log-p{
+  @apply text-base text-gray-500 text-center mt-5 font-medium
+}
+.labels{
+  @apply block mb-2 text-gray-500 text-base mt-1
+}
+.input-style{
+  @apply border-1 border-gray-400 w-full rounded-md px-2 py-1
+}
+.checkbox{
+  @apply flex
+}
+.forgot{
+  @apply flex justify-between  mt-1.5
+}
+a{
+  @apply text-indigo-900
+}
+.btn{
+  @apply w-full bg-indigo-900 text-white px-2 py-2 rounded-md mt-2
+}
+.a_dashboard{
+@apply px-3 text-white
+}
+.li-dashboard{
+  @apply mb-2 rounded hover:shadow hover:bg-blue-500 py-2 text-white
+}
