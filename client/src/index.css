@@ -1,11 +1,20 @@
-@import 'tailwindcss';
-html,body{
-  @apply h-full w-full overflow-x-hidden m-0 p-0;
-}
-.container{
-  @apply bg-gray-100 flex justify-center items-center min-h-screen flex-col w-full;
+@import "tailwindcss";
+
+* {
+    font-family: 'Inter', sans-serif;
 }
 
+.auth_button {
+    @apply w-full rounded-md bg-blue-600 p-3 text-white transition hover:bg-blue-700
+}
+
+.selection_input {
+    @apply w-full rounded-md border border-gray-300 p-3 focus:border-blue-500 focus:outline-none
+}
+
+.input_style {
+    @apply w-full rounded-md border border-gray-300 p-3 focus:border-blue-500 focus:outline-none
+}
 /* @media screen and (min-width: 480px) {
     .card:nth-child(7n + 1) {
         grid-column: auto/span 2;
