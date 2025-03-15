@@ -13,8 +13,11 @@ from rest_framework.response import Response
 
 # Register User
 class RegisterView(APIView):
+    permission_classes = [AllowAny]
+    
     def post(self, request):
-        serializer = UserSerializer(data=request.data)
+        print("Incoming Data from React:", request.data) 
+        serializer = RegisterSerializer(data=request.data)
         if serializer.is_valid():
             user = serializer.save()
             return Response({"message": "User registered succefully"}, status=status.HTTP_201_CREATED)

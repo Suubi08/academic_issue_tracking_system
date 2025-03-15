@@ -4,18 +4,14 @@
     font-family: 'Inter', sans-serif;
 }
 
-/* @media screen and (min-width: 480px) {
-    .card:nth-child(7n + 1) {
-        grid-column: auto/span 2;
-        grid-row: auto/span 2;
-    }
+.auth_button {
+    @apply w-full rounded-md bg-blue-600 p-3 text-white transition hover:bg-blue-700
 }
 
-.prompt::-webkit-scrollbar {
-    width: 5px;
+.selection_input {
+    @apply w-full rounded-md border border-gray-300 p-3 focus:border-blue-500 focus:outline-none
 }
- 
-.prompt::-webkit-scrollbar-thumb {
-  background-color: #666e75;
-  border-radius: 5px;
-} */
+
+.input_style {
+    @apply w-full rounded-md border border-gray-300 p-3 focus:border-blue-500 focus:outline-none
+}

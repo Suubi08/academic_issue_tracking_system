@@ -8,7 +8,7 @@ urlpatterns = [
     path('issues/', IssueListView.as_view(), name='issue-list'),
     path('issues/<int:pk>/', IssueDetailView.as_view(), name='issue-detail'),
     path('notifications/', NotificationListView.as_view(), name='notification-list'),
-    path('register/', RegisterView.as_view(), name='register'),
-    path('login/', LoginView.as_view(), name='login'),
-    path('refresh/', TokenRefreshView.as_view(), name='token_refresh'),
+    path("register/", RegisterView.as_view(), name="register"),
+    path("login/", LoginView.as_view(), name="login"),
+    path("token/refresh/", RefreshTokenView.as_view(), name="token_refresh"),
 ]
