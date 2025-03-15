@@ -9,7 +9,7 @@ class User(AbstractUser):
         ('academic_registrar', 'Academic Registrar'),
         ('admin', 'Administrator'),
     ]
-    role = models.CharField(max_length=20, choices=ROLE_CHOICES, default='student')
+    role = models.CharField(max_length=20, choices=ROLE_CHOICES)
 
     #Student-specific fields
     student_number = models.CharField(max_length=20, blank=True, null=True)
@@ -17,7 +17,7 @@ class User(AbstractUser):
     college = models.CharField(max_length=100, blank=True, null=True)
 
     # Lecture-Specific fields
-    Lecture_number = models.CharField(max_length=20, blank=True, null=True)
+    lecture_number = models.CharField(max_length=20, blank=True, null=True)
     subject_taught = models.TextField(blank=True, null=True)
 
     department = models.CharField(max_length=100, blank=True, null=True) 
@@ -33,6 +33,12 @@ class User(AbstractUser):
         blank=True
     )
 
+    def save(self, *args, **kwargs):
+        """Automatically handle department and college based on role"""
+        if self.role in ['academic_registrar', 'admin']:
+            self.department = None #Academic Registrar & Admins do not belong to a department
+        super().save(*args, **kwargs)
+        
     def __str__(self):
         return f"{self.username} ({self.role})"
 
