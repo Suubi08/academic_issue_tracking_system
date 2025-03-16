@@ -1,20 +1,15 @@
-import React from 'react'
-import { BrowserRouter, Link, Route, Routes } from 'react-router-dom';
+// filepath: c:\Users\Asus\OneDrive\Desktop\New folder\academic_issue_tracking_system\client\src\App.jsx
+import React from "react";
+import AllRoutes from "./routes/AllRoutes";
+import Navbar from "./components/Navbar";
 
-import { Auth, Dashboard } from './pages'
-import { ProtectedRoute } from './components'
-
-const App = ( ) => {
+const App = () => {
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<Auth />} />
-        <Route element={<ProtectedRoute />}>
-          <Route path="/dashboard" element={ <Dashboard />} />
-        </Route>
-      </Routes>
-    </BrowserRouter>
-  )
-}
+    <div>
+      <Navbar />
+      {/* <AllRoutes /> */}
+    </div>
+  );
+};
 
 export default App;
