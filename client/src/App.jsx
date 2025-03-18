@@ -11,12 +11,7 @@ const App = ( ) => {
     <Sidebar/>
     </>
     // <BrowserRouter>
-    //   <Routes>
-    //     <Route path="/" element={<Auth />} />
-    //     <Route element={<ProtectedRoute />}>
-    //       <Route path="/dashboard" element={ <Dashboard />} />
-    //     </Route>
-    //   </Routes>
+   
     // </BrowserRouter>
   )
 }
