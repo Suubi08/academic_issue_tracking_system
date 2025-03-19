@@ -2,7 +2,7 @@ import React from "react";
 
 const Issues = () => {
   return (
-    <div className="bg-gray-100   h-screen px-30 py-10">
+    <div className="bg-white shadow-lg  h-screen px-30 py-10">
       <div>
         <h1>Report Issue</h1>
       </div>

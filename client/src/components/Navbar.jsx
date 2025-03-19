@@ -3,7 +3,7 @@ import { FaSearch, FaBell, FaCog } from "react-icons/fa";
 
 const Navbar = () => {
   return (
-    <nav className="bg-gray-300  p-4 shadow-md">
+    <nav className="bg-white  p-4 shadow-md">
       <div className="container mx-auto flex items-center justify-between">
         <div className="flex flex-col">
           <span className="text-gray-800 font-bold text-lg">USERNAME</span>
@@ -29,9 +29,7 @@ const Navbar = () => {
           <button className="mr-4">
             <FaBell className="w-6 h-6 text-black" />
           </button>
-          <button className="bg-gray-900 text-white font-semibold p-2 rounded-4xl">
-            LogOut
-          </button>
+          <button className=" text-gray-700 font-light">LogOut</button>
         </div>
       </div>
     </nav>

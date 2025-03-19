@@ -5,7 +5,7 @@ import { Navbar, Sidebar } from "../components";
 function Layout() {
   return (
     <div className="grid grid-cols-12 grid-rows-1 min-h-screen">
-      <div className="col-span-2 bg-blue-800 text-white  min-h-full">
+      <div className="col-span-2 bg-blue-950 text-white  min-h-screen">
         <Sidebar />
       </div>
       <div className="col-span-10 flex flex-col min-h-screen">
