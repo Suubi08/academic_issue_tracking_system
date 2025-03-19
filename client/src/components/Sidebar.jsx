@@ -42,7 +42,7 @@ const Sidebar = () => {
               }
             >
               <FileWarning size={20} />
-              My Issues
+              Submit Issue
             </NavLink>
           </li>
           <li>
