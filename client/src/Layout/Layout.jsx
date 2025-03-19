@@ -1,14 +1,21 @@
-import React from 'react'
-import Sidebar from '../components/Sidebar'
+import React from "react";
+import { Outlet } from "react-router-dom";
+import { Navbar, Sidebar } from "../components";
 
-const Layout = () => {
+function Layout() {
   return (
-    <div>
-        <div>
-            <Sidebar/>
-        </div>
+    <div className="grid grid-cols-12 grid-rows-1 min-h-screen">
+      <div className="col-span-2 bg-blue-800 text-white  h-full">
+        <Sidebar />
+      </div>
+      <div className="col-span-10 flex flex-col min-h-screen">
+        <Navbar />
+        <main className="col-span-10 bg-gray-100 p-6 flex-1">
+          <Outlet />
+        </main>
+      </div>
     </div>
-  )
+  );
 }
 
-export default Layout
+export default Layout;

@@ -1,10 +1,7 @@
-import React from "react";
-import Auth from "./Auth";
 import Dashboard from "./Dashboard";
-import Studentdashboard from "./StudentDashboard/studentdashboard.jsx";
-import Issue from "./StudentDashboard/Issue.jsx";
-import Reports from "./StudentDashboard/Reports.jsx"
-import Resolved from "./StudentDashboard/Resolved.jsx";
+import Issues from "./Issues";
+import Reports from "./Reports";
+import Settings from "./Settings";
+import Resolved from "./Resolved";
 
-
-export { Auth, Dashboard,Studentdashboard,Issue,Reports,Resolved };
+export { Dashboard, Issues, Reports, Settings, Resolved };

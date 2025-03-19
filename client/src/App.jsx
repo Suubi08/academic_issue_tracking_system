@@ -1,19 +1,12 @@
-import React from 'react'
-import { BrowserRouter, Link, Route, Routes } from 'react-router-dom';
+import React from "react";
+import AllRoutes from "./routes/AllRoutes";
 
-import { Auth, Dashboard } from './pages'
-import { ProtectedRoute } from './components'
-import Sidebar from './components/Sidebar'
-import AllRoutes from './Routes/AllRoutes';
-
-const App = ( ) => {
+const App = () => {
   return (
-    <>
-    <Sidebar/>
-    <AllRoutes/>
-    </>
-    
-  )
-}
+    <div>
+      <AllRoutes />
+    </div>
+  );
+};
 
 export default App;

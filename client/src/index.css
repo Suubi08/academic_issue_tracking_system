@@ -1,17 +1,17 @@
 @import "tailwindcss";
 
 * {
-    font-family: 'Inter', sans-serif;
+  font-family: "Inter", sans-serif;
 }
 
 .auth_button {
-    @apply w-full rounded-md bg-blue-600 p-3 text-white transition hover:bg-blue-700
+  @apply w-full rounded-md bg-blue-600 p-3 text-white transition hover:bg-blue-700;
 }
 
 .selection_input {
-    @apply w-full rounded-md border border-gray-300 p-3 focus:border-blue-500 focus:outline-none
+  @apply w-full rounded-md border border-gray-300 p-3 focus:border-blue-500 focus:outline-none;
 }
 
 .input_style {
-    @apply w-full rounded-md border border-gray-300 p-3 focus:border-blue-500 focus:outline-none
+  @apply w-full rounded-md border border-gray-300 p-3 focus:border-blue-500 focus:outline-none;
 }
