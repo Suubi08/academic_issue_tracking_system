@@ -1,18 +1,16 @@
 import React from "react";
-import { Route, Routes } from "react-router-dom";
-import Auth from "../pages/Auth"; // Update the path if necessary
-import Dashboard from "../pages/Dashboard"; // Update the path if necessary
-import ProtectedRoute from "../components/ProtectedRoute"; // Update the path if necessary
+import { Routes, Route } from "react-router-dom";
+import Layout from "../Layout/Layout";
 
-function AllRoutes() {
+
+const AllRoutes = () => {
   return (
     <Routes>
-      <Route path="/" element={<Auth />} />
-      <Route element={<ProtectedRoute />}>
-        <Route path="/dashboard" element={<Dashboard />} />
+      <Route path="/" element={<Layout />}>
+        <Route path="*" element={<h1>Not Found</h1>} />
       </Route>
     </Routes>
   );
-}
+};
 
 export default AllRoutes;
