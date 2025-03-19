@@ -1,9 +1,9 @@
-import React from 'react'
+import React from "react";
 
 const Reports = () => {
   return (
-    <div>Reports</div>
-  )
-}
+    <div className="bg-pink-500 text-center text-3xl font-bold">Reports</div>
+  );
+};
 
-export default Reports
+export default Reports;

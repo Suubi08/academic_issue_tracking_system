@@ -34,7 +34,7 @@ const Sidebar = () => {
           </li>
           <li>
             <NavLink
-              to="/myissues"
+              to="/issues"
               className={({ isActive }) =>
                 `flex items-center gap-2 px-4 py-2 rounded-md transition ${
                   isActive ? "bg-blue-700 text-white" : "hover:bg-blue-800"
@@ -47,7 +47,7 @@ const Sidebar = () => {
           </li>
           <li>
             <NavLink
-              to="/resolved_issues"
+              to="/resolved"
               className={({ isActive }) =>
                 `flex items-center  px-4 py-2 rounded-md transition ${
                   isActive ? "bg-blue-700 text-white" : "hover:bg-blue-800"

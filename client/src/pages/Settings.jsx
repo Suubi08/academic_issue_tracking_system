@@ -1,7 +1,9 @@
 import React from "react";
 
 const Settings = () => {
-  return <div>Settings</div>;
+  return (
+    <div className="bg-blue-500 text-center text-3xl font-bold">Settings</div>
+  );
 };
 
 export default Settings;
