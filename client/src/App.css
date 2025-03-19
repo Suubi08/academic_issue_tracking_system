@@ -1,0 +1,17 @@
+@import 'tailwindcss';
+
+.input_style {
+    @apply border-2 px-2 py-1 w-full border-gray-400 rounded-md mb-2 bg-white
+}
+label{
+    @apply block mb-2 text-gray-700
+}
+p{
+    @apply font-semibold text-base
+}
+h1{
+    @apply font-semibold text-center text-2xl
+}
+.member{
+    @apply ml-1
+}
