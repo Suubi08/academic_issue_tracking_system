@@ -3,5 +3,6 @@ import Issues from "./Issues";
 import Reports from "./Reports";
 import Settings from "./Settings";
 import Resolved from "./Resolved";
+import Studentdashboard from "./StudentDashboard/Studentdashboard";
 
-export { Dashboard, Issues, Reports, Settings, Resolved };
+export { Dashboard, Issues, Reports, Settings, Resolved,Studentdashboard };
