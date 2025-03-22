@@ -24,11 +24,12 @@ const Test = () => {
     <div>
         {/* <Issuetable issue={issue} Loading={loading}  /> */}
         {/* <Calendar/> */}
-        <IssueChart 
+        {/* <IssueChart 
         totalissues={totalissues}
         resolvedIssues={resolvedIssues} 
         inProgressIssues={inProgressIssues}
-        pendingIssues={pendingIssues} />
+        pendingIssues={pendingIssues} /> */}
+        
     </div>
   )
 }
