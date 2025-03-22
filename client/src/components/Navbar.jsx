@@ -1,35 +1,36 @@
+import { Menu, Search } from "lucide-react";
 import React from "react";
 import { FaSearch, FaBell, FaCog } from "react-icons/fa";
 
-const Navbar = () => {
+const Navbar = ({ SetSidebarOpen }) => {
   return (
-    <nav className="bg-white  p-4 shadow-md">
-      <div className="container mx-auto flex items-center justify-between">
-        <div className="flex flex-col">
-          <span className="text-gray-800 font-bold text-lg">USERNAME</span>
-          <span className="text-sm text-gray-500">Tue, 27 June 2024</span>
-        </div>
-        <div className="flex items-center space-x-4 relative  ">
-          <span className="relative md:absolute inset-y-0 left-0 flex items-center pl-2">
-            <button className="focus:outline-none p-1 text-white md:text-black">
-              <FaSearch />
+    <nav className="bg-white shadow-sm z-10">
+      <div className="px-4 sm:px-6 lg:px-8">
+        <div className="flex justify-between h-16">
+          <div className="flex">
+            <button
+              type="button"
+              className="btn "
+              onClick={() => SetSidebarOpen(true)}
+            >
+              <span>Open sidebar</span>
+              <Menu className="w-6 h-6" aria-hidden="true" />
             </button>
-          </span>
-          <input
-            type="text"
-            id="search"
-            placeholder="Search...."
-            className="px-4 py-1 pl-12 rounded shadow outline-none hidden md:block"
-          />
-        </div>
-        <div>
-          <p>Profile</p>
-        </div>
-        <div className="flex items-center justify-center">
-          <button className="mr-4">
-            <FaBell className="w-6 h-6 text-black" />
-          </button>
-          <button className=" text-gray-700 font-light">LogOut</button>
+          </div>
+          <div className="flex items-center relative">
+            <div className="max-w-xs w-full">
+              <div className="absolute flex items-center left-0 pl-3 pointer-events-none inset-y-0">
+                <Search className="w-6 h-6 text-gray-400" aria-hidden="true" />
+              </div>
+              <input
+                type="search"
+                name="search"
+                id="search"
+                placeholder="Search here"
+                className="input_nav"
+              />
+            </div>
+          </div>
         </div>
       </div>
     </nav>
