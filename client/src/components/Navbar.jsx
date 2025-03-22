@@ -18,14 +18,16 @@ const Navbar = ({ setSidebarOpen, sidebarOpen }) => {
     <nav className="bg-white shadow-sm z-10">
       <div className="px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between h-16">
-          <div className="flex">
+          <div className="flex items-center gap-2 ">
+            <div>
             <button
               type="button"
-              className="fixed top-4 left-4 z-50 md:hidden border border-gray-200 rounded p-2"
+              className="btn"
               onClick={() => setSidebarOpen(!sidebarOpen)}
             >
               <Menu className="w-6 h-6 text-gray-400" />
             </button>
+            </div>
             <div>
               <h1 className="h1_navbar">ADMIN</h1>
               <p className="p-nav">{getCurrentDate()}</p>
