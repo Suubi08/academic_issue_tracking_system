@@ -1,8 +1,8 @@
 import { Menu, Search } from "lucide-react";
 import React from "react";
-import { FaSearch, FaBell, FaCog } from "react-icons/fa";
+import { FaSearch, FaBell } from "react-icons/fa";
 
-const Navbar = ({ SetSidebarOpen }) => {
+const Navbar = ({ setSidebarOpen, sidebarOpen }) => {
   const getCurrentDate = () => {
     const date = new Date();
     const options = {
@@ -13,6 +13,7 @@ const Navbar = ({ SetSidebarOpen }) => {
     };
     return date.toLocaleDateString("en-US", options);
   };
+
   return (
     <nav className="bg-white shadow-sm z-10">
       <div className="px-4 sm:px-6 lg:px-8">
@@ -20,11 +21,10 @@ const Navbar = ({ SetSidebarOpen }) => {
           <div className="flex">
             <button
               type="button"
-              className="btn "
-              onClick={() => SetSidebarOpen(true)}
+              className="fixed top-4 left-4 z-50 md:hidden border border-gray-200 rounded p-2"
+              onClick={() => setSidebarOpen(!sidebarOpen)}
             >
-              <span>Open sidebar</span>
-              <Menu className="w-6 h-6" aria-hidden="true" />
+              <Menu className="w-6 h-6 text-gray-400" />
             </button>
             <div>
               <h1 className="h1_navbar">ADMIN</h1>
@@ -34,7 +34,7 @@ const Navbar = ({ SetSidebarOpen }) => {
           <div className="flex items-center relative">
             <div className="max-w-xs w-full">
               <div className="absolute flex items-center left-0 pl-3 pointer-events-none inset-y-0">
-                <Search className="w-6 h-6  text-gray-400" aria-hidden="true" />
+                <Search className="w-6 h-6 text-gray-400" aria-hidden="true" />
               </div>
               <input
                 type="search"

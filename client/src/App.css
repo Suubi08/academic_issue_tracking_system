@@ -33,3 +33,6 @@ h1 {
 .h1_navbar {
   @apply text-xl font-bold text-gray-900;
 }
+.sr-only {
+  @apply absolute w-[1px] h-[1px] p-0 m-[-1px] overflow-hidden whitespace-nowrap border-0;
+}

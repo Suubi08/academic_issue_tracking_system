@@ -1,16 +1,21 @@
-import React from "react";
+import React, { useState } from "react";
 import { Outlet } from "react-router-dom";
-import { Navbar, Sidebar } from "../components";
+import Navbar from "../components/Navbar";
+import Sidebar from "../components/Sidebar";
 
 function Layout() {
+  const [sidebarOpen, setSidebarOpen] = useState(false);
+
   return (
-    <div className="grid grid-cols-12 grid-rows-1 min-h-screen">
-      <div className="col-span-2 bg-blue-950 text-white  min-h-screen">
-        <Sidebar />
+    <div className="min-h-screen flex flex-col md:grid md:grid-cols-12 md:grid-rows-1">
+      <div
+        className={`md:col-span-2 ${sidebarOpen ? "block" : "hidden"} md:block`}
+      >
+        <Sidebar open={sidebarOpen} setOpen={setSidebarOpen} />
       </div>
-      <div className="col-span-10 flex flex-col min-h-screen">
-        <Navbar />
-        <main className="col-span-10 bg-gray-100 p-6 flex-1">
+      <div className="flex-1 md:col-span-10 flex flex-col">
+        <Navbar setSidebarOpen={setSidebarOpen} sidebarOpen={sidebarOpen} />
+        <main className="flex-1 p-6">
           <Outlet />
         </main>
       </div>
