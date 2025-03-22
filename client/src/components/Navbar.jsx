@@ -7,7 +7,7 @@ const Navbar = () => {
   const toggleSearch = () => setSearchActive(!searchActive);
 
   return (
-    <nav className="bg-gray-300 p-4 shadow-md">
+    <nav className="bg-gray-300 p-4 shadow-md fixed z-[1] w-[83%] top-0">
       <div className="container mx-auto flex items-center justify-between">
         {/* Left Section (Username & Date) */}
         <div className="flex flex-col">

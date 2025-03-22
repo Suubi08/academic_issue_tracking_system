@@ -11,8 +11,8 @@ import {
 
 const Sidebar = () => {
   return (
-    <aside className=" h-screen bg-blue-950 text-white p-6">
-      <div className="flex flex-col   ">
+    <aside className=" h-screen bg-blue-950 text-white p-6 static">
+      <div className="flex flex-col ">
         <div className="flex flex-col items-center mb-10 mt-15 ">
           <img src={logo} alt="Logo" className="w-16 h-16" />
           <h1 className="text-xl font-bold">AITS</h1>
