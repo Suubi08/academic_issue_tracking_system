@@ -8,6 +8,7 @@ import {
 import { AlertCircle, Bell, MessageSquare, Users } from "lucide-react";
 import QuickActions from "./QuickActions";
 import IssueTracking from "./IssueTracking";
+import RecentActivity from "./RecentActivity";
 
 const Dashboard = () => {
   const summaryItems = [
@@ -64,9 +65,14 @@ const Dashboard = () => {
             </CardContent>
           </Card>
         ))}
-        <div className="mt-4">
+      </div>
+      <div className="mt-4 grid grid-cols-1 gap-4 lg:grid-cols-4">
+        <div className="lg:col-span-3 space-y-4">
           <IssueTracking />
+        </div>
+        <div className="mt-4 lg:col-span-1 space-y-4">
           <QuickActions />
+          <RecentActivity />
         </div>
       </div>
     </>
