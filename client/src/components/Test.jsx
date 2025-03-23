@@ -6,7 +6,19 @@ import IssueChart from './IssueChart'
 import IssueUpdates from './IssueUpdates'
 import UserInfoCard from './UserInfoCard'
 
+import  image1 from "../assets/1.jpg"
+import  image2 from "../assets/2.jpg"
+import  image3 from "../assets/3.jpg"
+import ShowSlide from './ShowSlide'
+
+
 const Test = () => {
+    const images = [
+       image1 ,
+      image2,
+      image3,
+    ];
+    
     const [loading,setloading]=useState(true)
     const [user, setUser] = useState({
         username: "USERNAME",
@@ -40,7 +52,7 @@ const Test = () => {
         inProgressIssues={inProgressIssues}
         pendingIssues={pendingIssues} /> */}
         {/* <IssueUpdates issues={issue}/> */}
-        <UserInfoCard user={user}  />
+        <ShowSlide images={images}  />
 
 
     </div>
