@@ -71,30 +71,34 @@ const Issues = () => {
       </CardHeader>
       <CardContent>
         <div className="space-y-4">
-        {issues.map((issue) => (
-          <div key={issue.id}>
-            <div>
-              <div>{issue.count}</div>
-              <div>
-                <h3>{issue.title}</h3>
-                <p>
-                  {issue.category}
-                  <span>.</span>
-                  Assigned:{issue.assignee}
-                </p>
+          {issues.map((issue) => (
+            <div
+              key={issue.id}
+              className="flex justify-between p-3 border border-gray-200 rounded-md"
+            >
+              <div className="flex items-center space-x-4">
+                <div className="flex items-center justify-center w-8 h-8 rounded-full bg-red-100 text-red-600 font-bold text-sm">
+                  {issue.count}
+                </div>
+                <div>
+                  <h3 className="font-medium">{issue.title}</h3>
+                  <p className="text-sm text-gray-500">
+                    {issue.category}
+                    <span>.</span>
+                    Assigned:{issue.assignee}
+                  </p>
+                </div>
+              </div>
+              <div className="flex items-center space-x-3">
+                <span className="px-2 py-1 text-xs font-medium rounded-full bg-green-100 text-green-800">{issue.status}</span>
+                <button variant="outline" size="sm" className="flex items-center px-3 border border-gray-200 rounded-md">
+                  <Eye  className="h-4 w-4 mr-1"/>
+                  View
+                </button>
               </div>
             </div>
-            <div>
-              <span>{issue.status}</span>
-              <button>
-                <Eye />
-                View
-              </button>
-            </div>
-          </div>
-        ))}
+          ))}
         </div>
-        
       </CardContent>
     </Card>
   );
