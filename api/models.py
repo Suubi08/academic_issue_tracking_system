@@ -2,7 +2,7 @@ from django.db import models
 from django.contrib.auth.models import AbstractUser, Group, Permission
 
 # Create your models here.
-class user (AbstractUser):
+class User (AbstractUser):
     ROLE_CHOICES= [
         ('student', 'Student'),
         ('lecturer', 'Lecturer'),
@@ -40,14 +40,14 @@ class user (AbstractUser):
         return f"{self.username} ({self.role})"
     
 class Notification(models.Model):
-        user = models.ForeignKey(user, on_delete=models.CASCADE)
+        user = models.ForeignKey(User, on_delete=models.CASCADE)
         message = models.TextField()
         status = models.BooleanField(default=False)
-        created_at = models.DateTimeField(auto_bow_add=True)
+        created_at = models.DateTimeField(auto_now_add=True)
 class Issue(models.Model):
     STATUS_CHOICE =[
         ('pending', 'Pending'),
-        ('in_progess', 'In Progress'),
+        ('in_progress', 'In Progress'),
         ('resolved', 'Resolved')
     ]
     title = models.CharField(max_length=255)
@@ -65,7 +65,7 @@ class Comments(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     
 class Attachment(models.Model):
-    Issue = models.ForeignKey(Issue, on_delete=models.CASCADE, related_name='attachment')
+    issue = models.ForeignKey(Issue, on_delete=models.CASCADE, related_name='attachment')
     file = models.FileField(upload_to='attachments/')
     uploaded_at = models.DateTimeField(auto_now_add=True)
     
