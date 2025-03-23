@@ -6,6 +6,8 @@ import {
   CardTitle,
 } from "../components/ui/card";
 import { AlertCircle, Bell, MessageSquare, Users } from "lucide-react";
+import QuickActions from "./QuickActions";
+import IssueTracking from "./IssueTracking";
 
 const Dashboard = () => {
   const summaryItems = [
@@ -43,23 +45,31 @@ const Dashboard = () => {
     },
   ];
   return (
-    <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
-      {summaryItems.map((items) => (
-        <Card key={items.title}>
-          <CardHeader className="flex flex-row items-center justify-between pb-2">
-            <CardTitle className="text-sm font-md">{items.title}</CardTitle>
-            <items.icon className={`h-5 w-5 ${items.color}`} />
-          </CardHeader>
-          <CardContent>
-            <div className="text-2xl font-bold">{items.value}</div>
-            <p className="text-xs text-muted-foreground text-gray-400">{items.description}</p>
-            <a className="text-xs text-blue-600 mt-2 block" href="#">
-              {items.linkText}
-            </a>
-          </CardContent>
-        </Card>
-      ))}
-    </div>
+    <>
+      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
+        {summaryItems.map((items) => (
+          <Card key={items.title}>
+            <CardHeader className="flex flex-row items-center justify-between pb-2">
+              <CardTitle className="text-sm font-md">{items.title}</CardTitle>
+              <items.icon className={`h-5 w-5 ${items.color}`} />
+            </CardHeader>
+            <CardContent>
+              <div className="text-2xl font-bold">{items.value}</div>
+              <p className="text-xs text-muted-foreground text-gray-400">
+                {items.description}
+              </p>
+              <a className="text-xs text-blue-600 mt-2 block" href="#">
+                {items.linkText}
+              </a>
+            </CardContent>
+          </Card>
+        ))}
+        <div className="mt-4">
+          <IssueTracking />
+          <QuickActions />
+        </div>
+      </div>
+    </>
   );
 };
 

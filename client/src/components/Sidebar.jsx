@@ -32,7 +32,7 @@ const Sidebar = ({ open, setOpen }) => {
             <ul className="flex flex-col gap-2">
               <li>
                 <NavLink
-                  to="/studentdashboard"
+                  to="/dashboard"
                   end
                   className={({ isActive }) =>
                     `flex items-center gap-2 px-4 py-2 rounded-md transition ${
@@ -54,7 +54,7 @@ const Sidebar = ({ open, setOpen }) => {
                   }
                 >
                   <FileWarning size={20} />
-                  Submit Issue
+                  Issue Tracking
                 </NavLink>
               </li>
               <li>

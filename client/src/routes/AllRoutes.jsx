@@ -6,8 +6,8 @@ import { Dashboard, Issues, Resolved, Reports, Settings } from "../pages";
 const AllRoutes = () => {
   return (
     <Routes>
-      <Route path="/" element={<Layout />} Navigate={"/dashboard"} >
-        <Route path="studentdashboard" element={<Dashboard />} />
+      <Route path="/" element={<Layout />} Navigate={"/dashboard"}>
+        <Route path="dashboard" element={<Dashboard />} />
         <Route index element={<Dashboard />} />
         <Route path="issues" element={<Issues />} />
         <Route path="resolved" element={<Resolved />} />
