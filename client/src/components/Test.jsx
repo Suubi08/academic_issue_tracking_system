@@ -3,9 +3,19 @@ import Issuetable from './Issuetable'
 import Calendar from './Calendar'
 import { Issues } from '../pages'
 import IssueChart from './IssueChart'
+import IssueUpdates from './IssueUpdates'
+import UserInfoCard from './UserInfoCard'
 
 const Test = () => {
     const [loading,setloading]=useState(true)
+    const [user, setUser] = useState({
+        username: "USERNAME",
+        regNo: "REG NO",
+        semester: "II",
+        course: "Computer Science",
+        year: "2024",
+        profilePic:false,
+      })
     const [issue, setIssue] = useState([
         { id: "1", title: "Course registration error", status: "Pending", lastUpdate: "Feb 15, 2025" },
         { id: "2", title: "Course registration error", status: "Pending", lastUpdate: "Feb 15, 2025" },
@@ -29,7 +39,10 @@ const Test = () => {
         resolvedIssues={resolvedIssues} 
         inProgressIssues={inProgressIssues}
         pendingIssues={pendingIssues} /> */}
-        
+        {/* <IssueUpdates issues={issue}/> */}
+        <UserInfoCard user={user}  />
+
+
     </div>
   )
 }
