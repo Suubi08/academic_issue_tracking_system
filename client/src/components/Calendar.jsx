@@ -149,7 +149,7 @@ const Calendar=({ issues, isLoading })=> {
                             dayIssue.status === "Resolved"
                               ? "bg-green-500"
                               : dayIssue.status === "In Progress"
-                                ? "bg-blue-500"
+                                ? "bg-red-800"
                                 : "bg-yellow-500"
                           }
                         `}
@@ -165,7 +165,7 @@ const Calendar=({ issues, isLoading })=> {
                 <span>pending</span>
               </div>
               <div className="flex items-center">
-                <span className="w-2 h-2 rounded-full bg-blue-500 mr-1"></span>
+                <span className="w-2 h-2 rounded-full bg-red-800 mr-1"></span>
                 <span>in progress</span>
               </div>
               <div className="flex items-center">
