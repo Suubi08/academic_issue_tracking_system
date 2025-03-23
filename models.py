@@ -1,49 +1,57 @@
+from django.contrib.auth.models import AbstractUser
 from django.db import models
 
-# Create your models here.
-class User(models.Model):
-    username = models.CharField(max_length=200, unique=True)
-    email = models.EmailField(max_length=100, unique=True)
-    password = models.CharField(max_length=50)
-    role = models.CharField(max_length=150)
+# Abstract Base Model
+class BaseModel(models.Model):
+    created_at = models.DateTimeField(auto_now_add=True)
 
-    def __str__(self):
-        return self.username
+    class Meta:
+        abstract = True  # This makes it an abstract base model
 
-class Issue(models.Model):
-    title = models.CharField(max_length=200)
+# Custom User Model using AbstractUser
+class User(AbstractUser):
+    ROLE_CHOICES = (
+        ('admin', 'Admin'),
+        ('lecturer', 'Lecturer'),
+        ('student', 'Student'),
+    )
+    role = models.CharField(max_length=20, choices=ROLE_CHOICES)
+
+    # Fix related name conflict for groups and user_permissions
+    groups = models.ManyToManyField(
+        "auth.Group",
+        related_name="custom_user_groups",
+        blank=True
+    )
+    user_permissions = models.ManyToManyField(
+        "auth.Permission",
+        related_name="custom_user_permissions",
+        blank=True
+    )
+
+# Issue Model
+class Issue(BaseModel):
+    title = models.CharField(max_length=255)
     description = models.TextField()
     category = models.CharField(max_length=100)
-    status = models.CharField(max_length=20)
-    created_at = models.DateTimeField(auto_now_add=True)
-    student = models.ForeignKey(User, on_delete=models.CASCADE, related_name='reported_issues')
+    status = models.CharField(max_length=50)
+    student = models.ForeignKey(User, on_delete=models.CASCADE, related_name='student_issues')
     assigned_to = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, related_name='assigned_issues')
 
-    def __str__(self):
-        return self.title
-
-class Notification(models.Model):
+# Comment Model
+class Comment(BaseModel):
+    message = models.TextField()
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    created_at = models.DateTimeField(auto_now_add=True)
+    issue = models.ForeignKey(Issue, on_delete=models.CASCADE, related_name='comments')
+
+# Notification Model
+class Notification(BaseModel):
     message = models.TextField()
     status = models.CharField(max_length=20)
-
-    def __str__(self):
-        return f'Notification for {self.user.username}'
-
-class Comment(models.Model):
-    issue = models.ForeignKey(Issue, on_delete=models.CASCADE)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    message = models.TextField()
-    created_at = models.DateTimeField(auto_now_add=True)
 
-    def __str__(self):
-        return f"Comment by {self.user.username}"
-
-class Attachment(models.Model):
-    issue = models.ForeignKey(Issue, on_delete=models.CASCADE)
+# Attachment Model
+class Attachment(BaseModel):
     file = models.FileField(upload_to='attachments/')
-    upload_at = models.DateTimeField(auto_now_add=True)
+    issue = models.ForeignKey(Issue, on_delete=models.CASCADE, related_name='attachments')
 
-    def __str__(self):
-        return f"Attachment for {self.issue.title}"
