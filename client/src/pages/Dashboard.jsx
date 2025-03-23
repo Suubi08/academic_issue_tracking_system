@@ -14,7 +14,7 @@ const Dashboard = () => {
       value: "8",
       description: "Across all categories",
       icon: AlertCircle,
-      Color: "text-red-500",
+      color: "text-red-500",
       linkText: "View more",
     },
     {
@@ -22,7 +22,7 @@ const Dashboard = () => {
       value: "123",
       description: "To lecturers",
       icon: Users,
-      Color: "text-blue-500",
+      color: "text-blue-500",
       linkText: "View more",
     },
     {
@@ -30,7 +30,7 @@ const Dashboard = () => {
       value: "45",
       description: "Last 24 hours",
       icon: MessageSquare,
-      Color: "text-green-500",
+      color: "text-green-500",
       linkText: "View more",
     },
     {
@@ -38,7 +38,7 @@ const Dashboard = () => {
       value: "12",
       description: "Unread",
       icon: Bell,
-      Color: "text-yellow-500",
+      color: "text-yellow-500",
       linkText: "View more",
     },
   ];
@@ -48,7 +48,7 @@ const Dashboard = () => {
         <Card key={items.title}>
           <CardHeader className="flex flex-row items-center justify-between pb-2">
             <CardTitle className="text-sm font-md">{items.title}</CardTitle>
-            <items.icon className={`h-5 w-5 ${(<items.Color />)}`} />
+            <items.icon className={`h-5 w-5 ${items.color}`} />
           </CardHeader>
           <CardContent>
             <div className="text-2xl font-bold">{items.value}</div>

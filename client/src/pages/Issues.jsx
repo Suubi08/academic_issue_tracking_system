@@ -4,15 +4,17 @@ const Issues = () => {
   return (
     <div className="bg-white shadow-lg  h-screen px-30 py-10">
       <div>
-        <h1>Report Issue</h1>
+        <h1 className="font-semibold text-center text-2xl">Report Issue</h1>
       </div>
       <form action="">
         <div>
-          <p>Personal Details:</p>
+          <p className="paragraph">Personal Details:</p>
           <div className="flex flex-col">
             <div className="flex justify-between mt-2">
               <div class="mb-5">
-                <label for="name">Your Name</label>
+                <label for="name" className="label">
+                  Your Name
+                </label>
                 <input
                   type="text"
                   id="name"
@@ -22,7 +24,9 @@ const Issues = () => {
                 />
               </div>
               <div>
-                <label htmlFor="std_no">Student Number</label>
+                <label htmlFor="std_no" className="label">
+                  Student Number
+                </label>
                 <input
                   type="text"
                   id="std_no"
@@ -31,7 +35,9 @@ const Issues = () => {
                 />
               </div>
               <div>
-                <label htmlFor="reg">Registration Number</label>
+                <label htmlFor="reg" className="label">
+                  Registration Number
+                </label>
                 <input
                   type="text"
                   id="reg"
@@ -43,10 +49,12 @@ const Issues = () => {
           </div>
         </div>
         <div>
-          <p>Issue Details</p>
+          <p className="paragraph">Issue Details</p>
           <div className="flex justify-between mt-2">
             <div>
-              <label htmlFor="issue_id">Issue ID</label>
+              <label htmlFor="issue_id" className="label">
+                Issue ID
+              </label>
               <input
                 type="number"
                 id="issue_id"
@@ -55,7 +63,9 @@ const Issues = () => {
               />
             </div>
             <div>
-              <label htmlFor="category">Issue Category</label>
+              <label htmlFor="category" className="label">
+                Issue Category
+              </label>
               <select className="input_style">
                 <option value="">Select Issue</option>
                 <option value="marks">Missing marks</option>
@@ -64,7 +74,9 @@ const Issues = () => {
               </select>
             </div>
             <div>
-              <label htmlFor="date">Date of Issue</label>
+              <label htmlFor="date" className="label">
+                Date of Issue
+              </label>
               <input
                 type="date"
                 id="date"
@@ -76,7 +88,9 @@ const Issues = () => {
 
           <div className="flex justify-between mt-2">
             <div>
-              <label htmlFor="course">Course Unit</label>
+              <label htmlFor="course" className="label">
+                Course Unit
+              </label>
               <select className="input_style">
                 <option value="">select course unit</option>
                 <option value="OS">Operating Systems</option>
@@ -87,7 +101,9 @@ const Issues = () => {
               </select>
             </div>
             <div>
-              <label htmlFor="lecturer">Lecturer</label>
+              <label htmlFor="lecturer" className="label">
+                Lecturer
+              </label>
               <input
                 type="search"
                 id="lecturer"
@@ -97,7 +113,9 @@ const Issues = () => {
             </div>
           </div>
           <div>
-            <label htmlFor="description">Issue Description</label>
+            <label htmlFor="description" className="label">
+              Issue Description
+            </label>
             <textarea
               id="message"
               rows="4"
@@ -107,7 +125,9 @@ const Issues = () => {
           </div>
           <div className="flex justify-between mt-2 ">
             <div>
-              <label htmlFor="fileUpload">Attachment</label>
+              <label htmlFor="fileUpload" className="label">
+                Attachment
+              </label>
               <input
                 type="file"
                 id="fileUpload"
@@ -116,7 +136,9 @@ const Issues = () => {
               />
             </div>
             <div>
-              <label htmlFor="year">Year of Study</label>
+              <label htmlFor="year" className="label">
+                Year of Study
+              </label>
               <select className="input_style">
                 <option value="student"></option>
                 <option value="">2025/2026</option>
@@ -127,7 +149,9 @@ const Issues = () => {
               </select>
             </div>
             <div>
-              <label htmlFor="semester">Semester</label>
+              <label htmlFor="semester" className="label">
+                Semester
+              </label>
               <select className="input_style">
                 <option value="student"></option>
                 <option value="">Semester one</option>
