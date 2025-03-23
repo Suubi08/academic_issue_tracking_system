@@ -11,7 +11,7 @@ const Dashboard = () => {
   const summaryItems = [
     {
       title: "Active Issues",
-      value: 8,
+      value: "8",
       description: "Across all categories",
       icon: AlertCircle,
       Color: "text-red-500",
@@ -45,7 +45,19 @@ const Dashboard = () => {
   return (
     <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
       {summaryItems.map((items) => (
-        <li>{items.title}</li>
+        <Card key={items.title}>
+          <CardHeader className="flex flex-row items-center justify-between pb-2">
+            <CardTitle className="text-sm font-md">{items.title}</CardTitle>
+            <items.icon className={`h-5 w-5 ${(<items.Color />)}`} />
+          </CardHeader>
+          <CardContent>
+            <div className="text-2xl font-bold">{items.value}</div>
+            <p className="text-xs text-muted-foreground">{items.description}</p>
+            <a className="text-xs text-blue-600 mt-2 block" href="#">
+              {items.linkText}
+            </a>
+          </CardContent>
+        </Card>
       ))}
     </div>
   );
