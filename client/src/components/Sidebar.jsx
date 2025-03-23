@@ -7,7 +7,6 @@ import {
   CheckCircle,
   BarChart3,
 } from "lucide-react";
-import { FaCog } from "react-icons/fa";
 
 const Sidebar = ({ open, setOpen }) => {
   return (
@@ -93,7 +92,7 @@ const Sidebar = ({ open, setOpen }) => {
                     }`
                   }
                 >
-                  <FaCog size={20} className="mr-2" />
+                  {/* <FaCog size={20} className="mr-2" /> */}
                   Settings and Profile
                 </NavLink>
               </li>

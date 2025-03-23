@@ -1,6 +1,5 @@
 import { Menu, Search } from "lucide-react";
 import React from "react";
-import { FaSearch, FaBell } from "react-icons/fa";
 
 const Navbar = ({ setSidebarOpen, sidebarOpen }) => {
   const getCurrentDate = () => {
@@ -18,16 +17,14 @@ const Navbar = ({ setSidebarOpen, sidebarOpen }) => {
     <nav className="bg-white shadow-sm z-10">
       <div className="px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between h-16">
-          <div className="flex items-center gap-2 ">
-            <div>
+          <div className="flex items-center gap-2">
             <button
               type="button"
-              className="btn"
+              className="btn md:hidden"
               onClick={() => setSidebarOpen(!sidebarOpen)}
             >
               <Menu className="w-6 h-6 text-gray-400" />
             </button>
-            </div>
             <div>
               <h1 className="h1_navbar">ADMIN</h1>
               <p className="p-nav">{getCurrentDate()}</p>
