@@ -13,7 +13,7 @@ class user (AbstractUser):
     role = models.CharField(max_length=20, choices=ROLE_CHOICES)
     
     # modifing custom model
-    student = models.CharField(max_length=50, blank=True, Null= True)
+    student = models.CharField(max_length=50, blank=True, null= True)
     course_name = models.CharField(max_length=20, blank=True, null=True)
     college = models.CharField(max_length=100, blank=True, null=True)
     
@@ -21,10 +21,14 @@ class user (AbstractUser):
     department = models.CharField(max_length=50, blank=True, null=True)
     
     groups = models.ManyToManyField(
-        Group, related_name="custom_user_groups", blank=True
+        Group,
+        related_name="custom_user_groups",
+        blank=True
     )
     user_permissions = models.ManyToManyField(
-        Permission, related_name="custom_user_permissions", blank=True         
+        Permission,
+        related_name="custom_user_permissions",
+        blank=True         
     )
     
     def save(self, *args, **kwargs):
@@ -50,8 +54,8 @@ class Issue(models.Model):
     description = models.TextField()
     category = models.CharField(max_length=100)
     status = models.CharField(max_length=15, choices=STATUS_CHOICE, default='pending')
-    student = models.ForeignKey(user, on_delete=models.CASCADE, related_name='issues')
-    assigned_to = models.ForeignKey(user, on_delete=models.SET_NULL, null=True, blank=True, related_name='assigned_issues')
+    student = models.ForeignKey(User, on_delete=models.CASCADE, related_name='issues')
+    assigned_to = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True, related_name='assigned_issues')
     created_at = models.DateTimeField(auto_now_add=True)
     
 class Comments(models.Model):
