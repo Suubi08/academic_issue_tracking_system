@@ -52,7 +52,7 @@ const Dashboard = () => {
           </CardHeader>
           <CardContent>
             <div className="text-2xl font-bold">{items.value}</div>
-            <p className="text-xs text-muted-foreground">{items.description}</p>
+            <p className="text-xs text-muted-foreground text-gray-400">{items.description}</p>
             <a className="text-xs text-blue-600 mt-2 block" href="#">
               {items.linkText}
             </a>
