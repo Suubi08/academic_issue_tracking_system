@@ -7,7 +7,7 @@ import {
   CardDescription,
   CardContent,
 } from "../components/ui/card";
-import { Filter, Search } from "lucide-react";
+import { Eye, Filter, Search } from "lucide-react";
 
 const Issues = () => {
   const issues = [
@@ -70,6 +70,30 @@ const Issues = () => {
         </div>
       </CardHeader>
       <CardContent>
+        <div className="space-y-4">
+        {issues.map((issue) => (
+          <div key={issue.id}>
+            <div>
+              <div>{issue.count}</div>
+              <div>
+                <h3>{issue.title}</h3>
+                <p>
+                  {issue.category}
+                  <span>.</span>
+                  Assigned:{issue.assignee}
+                </p>
+              </div>
+            </div>
+            <div>
+              <span>{issue.status}</span>
+              <button>
+                <Eye />
+                View
+              </button>
+            </div>
+          </div>
+        ))}
+        </div>
         
       </CardContent>
     </Card>
