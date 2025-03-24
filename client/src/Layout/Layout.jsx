@@ -7,7 +7,7 @@ function Layout() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
   return (
-    <div className="min-h-screen flex flex-col md:flex-row">
+    <div className="h-screen flex flex-col md:flex-row">
       {sidebarOpen && (
         <div
           className="fixed inset-0 z-40 bg-gray-600 bg-opacity-75 md:hidden"
@@ -21,9 +21,9 @@ function Layout() {
       >
         <Sidebar open={sidebarOpen} setOpen={setSidebarOpen} />
       </div>
-      <div className="flex-1 flex flex-col ">
+      <div className="flex-1 flex flex-col overflow-hidden ">
         <Navbar setSidebarOpen={setSidebarOpen} sidebarOpen={sidebarOpen} />
-        <main className="flex-1 p-6 bg-gray-50">
+        <main className="flex-1 overflow-y-auto p-6 bg-gray-50">
           <Outlet />
         </main>
       </div>
