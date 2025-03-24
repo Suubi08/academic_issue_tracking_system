@@ -13,14 +13,11 @@ const ShowSlide = ({images}) => {
 
   return (
   <Card className="bg-amber-50 h-[20%] relative overflow-hidden rounded-lg">
-    <CardContent  className=" h-full object-cover transition-opacity duration-500">
-    <img
+ <img
             src={images[currentImage]}
             alt="Slideshow"
-            className='w-full'
-          />  
-    </CardContent>
-   
+            className="w-full h-full object-cover transition-opacity duration-500"
+          />    
           </Card>
   )
 }
