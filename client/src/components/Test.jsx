@@ -52,7 +52,7 @@ const Test = () => {
         inProgressIssues={inProgressIssues}
         pendingIssues={pendingIssues} /> */}
         {/* <IssueUpdates issues={issue}/> */}
-        <ShowSlide images={images} />
+        {/* <ShowSlide images={images} /> */}
 
 
     </div>
