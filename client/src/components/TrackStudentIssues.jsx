@@ -44,8 +44,8 @@ const IssueTracking = () => {
     },
   ];
   return (
-    <Card>
-      <CardHeader className="pb-3">
+    <Card className=''>
+      <CardHeader className="">
         <div className="flex items-center justify-between">
           <CardTitle>Issue Tracking</CardTitle>
           <div className="flex space-x-2">

@@ -2,6 +2,7 @@
 
 import { useState } from "react"
 import { ChevronLeft, ChevronRight } from "lucide-react"
+import { Card, CardContent, CardHeader, CardTitle } from "./ui/Card"
 
 const Calendar=({ issues, isLoading })=> {
   const [currentMonth, setCurrentMonth] = useState(new Date())
@@ -89,7 +90,9 @@ const Calendar=({ issues, isLoading })=> {
 
   return (
     
-    <div className="bg-white dark:bg-gray-800 rounded-lg shadow">
+      <Card className=' dark:bg-gray-800 mt-4'>
+        <CardHeader>
+          <CardTitle>
       <div className="flex items-center justify-between p-4 border-b border-gray-200 dark:border-gray-700">
         <h2 className="text-lg font-medium">Calendar</h2>
         <div className="flex items-center space-x-2">
@@ -107,6 +110,9 @@ const Calendar=({ issues, isLoading })=> {
           </button>
         </div>
       </div>
+      </CardTitle>
+      </CardHeader>
+      <CardContent>
       <div className="p-4">
         {isLoading ? (
           <div className="space-y-2">
@@ -177,7 +183,8 @@ const Calendar=({ issues, isLoading })=> {
           </>
         )}
       </div>
-    </div>
+      </CardContent>
+    </Card>
   )
 }
 
