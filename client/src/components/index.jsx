@@ -11,5 +11,17 @@ import UserInfoCard from "./UserInfoCard";
 import ShowSlide from "./ShowSlide";
 import IssueUpdates from "./IssueUpdates";
 
+import {Card,
+    CardHeader,
+    CardFooter,
+    CardTitle,
+    CardDescription,
+    CardContent,} from './ui/Card'
+
 export { Auth, Loading, Maincontent, Navbar, Sidebar, ProtectedRoute 
-    ,Issuetable,IssueChart,IssueUpdates,Calendar,UserInfoCard,ShowSlide};
+    ,Issuetable,IssueChart,IssueUpdates,Calendar,UserInfoCard,ShowSlide,Card,
+    CardHeader,
+    CardFooter,
+    CardTitle,
+    CardDescription,
+    CardContent,};

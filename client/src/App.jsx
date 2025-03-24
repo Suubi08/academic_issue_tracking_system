@@ -2,12 +2,14 @@ import React from "react";
 import AllRoutes from "./routes/AllRoutes";
 import { Issuetable } from "./components";
 import Test from "./components/Test";
+import GoodCard from './components/GoodCard'
 
 const App = () => {
   return (
     <div>
-      <Test/>
-      {/* <AllRoutes /> */}
+      {/* <GoodCard/> */}
+      {/* <Test/> */}
+      <AllRoutes />
     </div>
   );
 };
