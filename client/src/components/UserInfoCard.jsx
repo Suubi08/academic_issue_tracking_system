@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Copy, Check, User } from "lucide-react";
+import { Card, CardContent, CardHeader } from "./ui/Card";
 
 const Avatar = ({ src, alt }) => {
   return (
@@ -23,7 +24,9 @@ const UserInfoCard = ({ user }) => {
   };
 
   return (
-    <div className="flex flex-col items-center bg-white dark:bg-gray-900 rounded-lg shadow-lg p-6">
+    <Card>
+      <CardHeader className="flex flex-col items-center bg-white dark:bg-gray-900  p-6">
+    
       {/* Avatar */}
       <Avatar src={user.profilePic} alt={user.username} />
 
@@ -39,10 +42,10 @@ const UserInfoCard = ({ user }) => {
           {copied ? <Check className="size-4 text-green-500" /> : <Copy className="size-4" />}
         </button>
       </div>
-
-      {/* Info Card */}
-      <div className="mt-4 bg-gray-100 dark:bg-gray-800 p-4 rounded-lg w-full">
-        <p className="text-xs font-semibold text-gray-500">SEMESTER</p>
+      </CardHeader>
+      <CardContent className="mt-4 bg-gray-100 dark:bg-gray-800 p-10 rounded-lg w-full">
+        <div>
+        <p className="text-xs font-semibold text-gray-500 mt-2">SEMESTER</p>
         <p className="text-lg font-medium">{user.semester}</p>
 
         <p className="text-xs font-semibold text-gray-500 mt-2">Course</p>
@@ -50,8 +53,16 @@ const UserInfoCard = ({ user }) => {
 
         <p className="text-xs font-semibold text-gray-500 mt-2">Year</p>
         <p className="text-lg font-medium">{user.year}</p>
-      </div>
-    </div>
+    
+        </div>
+
+      </CardContent>
+
+
+      
+
+    
+    </Card>
   );
 };
 
