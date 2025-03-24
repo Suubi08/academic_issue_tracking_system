@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import image1 from '../../assets/1.jpg'
 import image2 from '../../assets/2.jpg'
 import image3 from '../../assets/3.jpg'
-import { Calendar, IssueChart, Issuetable, IssueUpdates, ShowSlide, UserInfoCard } from '../../components'
+import { Calendar, IssueChart, Issuetable, IssueUpdates, ShowSlide, TrackStudentIssues, UserInfoCard } from '../../components'
 const Studentdashboard = () => {
     const images = [
          image1 ,
@@ -34,10 +34,11 @@ const Studentdashboard = () => {
       const pendingIssues = issue.filter((issue) => issue.status === "Pending").length
       
   return (
-    <div className='grid grid-cols-1 lg:grid-cols-3'>
-      <div className='col-span-2 '>
+    <div className='mt-4 grid grid-cols-1 gap-4 lg:grid-cols-4'>
+      <div className='lg:col-span-3 space-y-4 '>
       <ShowSlide images={images} />
-      <Issuetable issue={issue} Loading={loading}  />
+      <TrackStudentIssues/>
+      {/* <Issuetable issue={issue} Loading={loading}  /> */}
        <IssueChart  
         totalissues={totalissues}
         resolvedIssues={resolvedIssues} 

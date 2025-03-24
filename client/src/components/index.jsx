@@ -11,6 +11,8 @@ import UserInfoCard from "./UserInfoCard";
 import ShowSlide from "./ShowSlide";
 import IssueUpdates from "./IssueUpdates";
 
+import TrackStudentIssues from './TrackStudentIssues';
+
 import {Card,
     CardHeader,
     CardFooter,
@@ -19,7 +21,7 @@ import {Card,
     CardContent,} from './ui/Card'
 
 export { Auth, Loading, Maincontent, Navbar, Sidebar, ProtectedRoute 
-    ,Issuetable,IssueChart,IssueUpdates,Calendar,UserInfoCard,ShowSlide,Card,
+    ,Issuetable,IssueChart,IssueUpdates,Calendar,UserInfoCard,ShowSlide,TrackStudentIssues,Card,
     CardHeader,
     CardFooter,
     CardTitle,

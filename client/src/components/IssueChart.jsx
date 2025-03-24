@@ -1,6 +1,12 @@
 import React from "react";
 import { PieChart, Pie, Cell, ResponsiveContainer, Tooltip } from "recharts";
-import { Card, CardContent, CardHeader, CardTitle } from "./ui/Card";
+import {
+  Card,
+  CardContent,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "./ui/Card";
 
 const IssueChart = ({
   totalissues,
@@ -15,7 +21,7 @@ const IssueChart = ({
   ];
 
   return (
-    <Card className='m-4 ml-2'>
+    <Card className="m-4 ml-2">
       <CardHeader>
         <CardTitle className="text-lg font-medium">Issue Statistics</CardTitle>
       </CardHeader>
@@ -47,6 +53,27 @@ const IssueChart = ({
           </div>
         </div>
       </CardContent>
+
+      <CardFooter className="grid grid-cols-4 gap-4 w-full mt-4 text-center">
+        <div>
+          <p className="text-sm text-gray-500 dark:text-gray-400">TOTAL</p>
+          <p className="text-2xl font-bold">{totalissues}</p>
+        </div>
+        <div>
+          <p className="text-sm text-gray-500 dark:text-gray-400">Resolved</p>
+          <p className="text-xl font-bold text-green-600">{resolvedIssues}</p>
+        </div>
+        <div>
+          <p className="text-sm text-gray-500 dark:text-gray-400">
+            In Progress
+          </p>
+          <p className="text-xl font-bold text-red-800 ">{inProgressIssues}</p>
+        </div>
+        <div>
+          <p className="text-sm text-gray-500 dark:text-gray-400">Pending</p>
+          <p className="text-xl font-bold text-yellow-600">{pendingIssues}</p>
+        </div>
+      </CardFooter>
     </Card>
   );
 };
