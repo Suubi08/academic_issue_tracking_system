@@ -21,7 +21,7 @@ const IssueChart = ({
   ];
 
   return (
-    <Card className="m-4 ml-2">
+    <Card className="mt-4 ">
       <CardHeader>
         <CardTitle className="text-lg font-medium">Issue Statistics</CardTitle>
       </CardHeader>

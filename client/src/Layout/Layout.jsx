@@ -9,7 +9,7 @@ function Layout() {
 
       <div className="flex-1 flex flex-col overflow-hidden">
         <Navbar />
-        <main className="flex-1 overflow-y-auto p-1 md:p-1">
+        <main className="flex-1 overflow-y-auto p-1 md:p-1 bg-gray-50">
           <Outlet />
          
         </main>
