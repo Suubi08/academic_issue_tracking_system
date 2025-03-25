@@ -10,8 +10,8 @@ const App = () => {
     <div>
       {/* <GoodCard/> */}
       {/* <Test/> */}
-      {/* <AllRoutes /> */}
-      <IssueTracking/>
+      <AllRoutes />
+      {/* <IssueTracking/> */}
     </div>
   );
 };

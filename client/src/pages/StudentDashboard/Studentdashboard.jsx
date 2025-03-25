@@ -3,6 +3,7 @@ import image1 from '../../assets/1.jpg'
 import image2 from '../../assets/2.jpg'
 import image3 from '../../assets/3.jpg'
 import { Calendar, IssueChart, Issuetable, IssueUpdates, ShowSlide, TrackStudentIssues, UserInfoCard } from '../../components'
+import IssueTracking from '../../components/IssueTracking'
 const Studentdashboard = () => {
     const images = [
          image1 ,
@@ -48,7 +49,7 @@ const Studentdashboard = () => {
       <div className='col-span-1 '>
         <UserInfoCard user={user}/>
         <Calendar issues={issue} isLoading={loading}/>
-        <IssueUpdates issues={issue}/>
+        <IssueTracking/>
 
         
       </div>
