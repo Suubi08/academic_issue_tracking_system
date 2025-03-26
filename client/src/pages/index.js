@@ -1,7 +1,7 @@
 import Auth from "./Auth";
-import Dashboard from "./Dashboard";
+import Studentdashboard from "./Studentdashboard";
 
 export {
     Auth,
-    Dashboard,
+    Studentdashboard,
 }
