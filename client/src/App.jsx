@@ -1,7 +1,7 @@
 import React from 'react'
 import { BrowserRouter, Link, Route, Routes } from 'react-router-dom';
 
-import { Auth, Studentdashboard } from './pages'
+import { Auth, Studentdashboard, StudentDash } from './pages'
 import { ProtectedRoute } from './components'
 
 const App = ( ) => {

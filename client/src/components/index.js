@@ -9,6 +9,8 @@ import ShowSlide from "./ShowSlide";
 import UserInfoCard from "./UserInfoCard";
 import IssueUpdates from "./IssueUpdates";
 import Issuetable from "./Issuetable";
+import Sidebar from "./Sidebar";
+import Side from "./Side";
 
 import {Card,
     CardHeader,
@@ -20,6 +22,8 @@ import {Card,
 
 export {
     ProtectedRoute,
+    Sidebar,
+    Side,
     Issuetable, 
     Loader,
     IssueUpdates,
