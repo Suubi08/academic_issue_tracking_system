@@ -7,6 +7,7 @@ const AllRoutes = () => {
   return (
     <Routes>
       <Route path="/" element={<Layout />} Navigate={"/dashboard"} >
+
         <Route path="studentdashboard" element={<Studentdashboard/>} />
         <Route index element={<Dashboard />} />
         <Route path="issues" element={<Issues />} />
