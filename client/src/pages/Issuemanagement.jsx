@@ -57,7 +57,7 @@ const Issuemanagement = () => {
     },
   ];
   return (
-    <div className="p-6">
+    <div className="p-6 bg-white">
       <div className="flex items-center justify-between mb-6">
         <h1 className="text-2xl font-bold">Issue Management</h1>
         <div className="flex space-x-2">
@@ -94,6 +94,34 @@ const Issuemanagement = () => {
           </button>
         </div>
       </div>
+      <Tabs defaultValue="all">
+        <TabsList className="mb-4 bg-indigo-50">
+          <TabsTrigger
+            value="all"
+            className="data-[state=active]:bg-white data-[state=active]:text-black"
+          >
+            All Issues
+          </TabsTrigger>
+          <TabsTrigger
+            value="open"
+            className="data-[state=active]:bg-white data-[state=active]:text-black"
+          >
+            Open
+          </TabsTrigger>
+          <TabsTrigger
+            value="inprogress"
+            className="data-[state=active]:bg-white data-[state=active]:text-black"
+          >
+            In progress
+          </TabsTrigger>
+          <TabsTrigger
+            value="resolved"
+            className="data-[state=active]:bg-white data-[state=active]:text-black"
+          >
+            Resolved
+          </TabsTrigger>
+        </TabsList>
+      </Tabs>
     </div>
   );
 };
