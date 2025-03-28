@@ -21,7 +21,7 @@ const Sidebar = ({ open, setOpen }) => {
     },
     {
       name: "Issue Management",
-      href: "/issue-management",
+      href: "/issues",
       icon: AlertCircle,
       current: false,
       description:
@@ -107,4 +107,3 @@ const Sidebar = ({ open, setOpen }) => {
 };
 
 export default Sidebar;
-

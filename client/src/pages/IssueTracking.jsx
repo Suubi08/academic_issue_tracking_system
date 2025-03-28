@@ -73,7 +73,7 @@ const IssueTracking = () => {
           {issues.map((issue) => (
             <div
               key={issue.id}
-              className="flex justify-between p-3 border border-gray-200 rounded-md"
+              className="flex justify-between p-3 border-2 border-gray-200 rounded-md"
             >
               <div className="flex items-center space-x-4">
                 <div className="flex items-center justify-center w-8 h-8 rounded-full bg-red-100 text-red-600 font-bold text-sm">
