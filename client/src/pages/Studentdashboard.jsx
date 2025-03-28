@@ -2,8 +2,8 @@ import React, { useState } from 'react'
 import image1 from '../../assets/1.jpg'
 import image2 from '../../assets/2.jpg'
 import image3 from '../../assets/3.jpg'
-import { Calendar, IssueChart, Issuetable, IssueUpdates, ShowSlide, TrackStudentIssues, UserInfoCard } from '../../components'
-import IssueTracking from '../../components/IssueTracking'
+import { Calendar, IssueChart, Issuetable, IssueUpdates, ShowSlide, TrackStudentIssues, UserInfoCard } from '../components'
+import IssueTracking from '../components/IssueTracking'
 const Studentdashboard = () => {
     const images = [
          image1 ,
