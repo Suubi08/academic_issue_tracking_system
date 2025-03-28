@@ -76,18 +76,18 @@ const Issuemanagement = () => {
           View,assign, and track academic issues with filters and search
           functionallity
         </p>
-        <div>
+        <div className="flex flex-row gap-4 mb-4 items-center">
           <div className="relative flex-grow">
             <Search className="text-gray-500 w-4 h-4 absolute left-2.5 top-2.5" />
             <input
               type="search"
-              className="border border-gray-500 pl-8 w-full  rounded-md h-9 "
-              placeholder="Search issues by category, title or asignee"
+              className="border border-gray-500 pl-8 w-full rounded-md h-9"
+              placeholder="Search issues by category, title or assignee"
             />
           </div>
           <button
             type="button"
-            className="border px-3 sm:w-auto border-gray-400 bg-white flex items-center mt-2 rounded-md h-9"
+            className="border px-3 border-gray-400 bg-white flex items-center rounded-md h-9"
           >
             <Filter className="h-4 w-4 mr-2" />
             Advanced Filter
