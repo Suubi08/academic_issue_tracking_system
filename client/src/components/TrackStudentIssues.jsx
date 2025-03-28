@@ -2,19 +2,21 @@ import React, { useState } from "react";
 import {
   Card,
   CardHeader,
-  CardContent,
+  CardFooter,
   CardTitle,
+  CardDescription,
+  CardContent,
 } from "../components";
 import { Eye, Filter, Search } from "lucide-react";
 
 const TrackStudentIssues = () => {
-  const [issues] = useState([
-    { id: "1", title: "Course registration error", status: "Pending", lastUpdate: "2025-02-15" },
-    { id: "2", title: "Course registration error", status: "Pending", lastUpdate: "2025-02-15" },
-    { id: "3", title: "Missing marks", status: "In Progress", lastUpdate: "2025-02-15" },
-    { id: "4", title: "Results error", status: "Resolved", lastUpdate: "2025-02-15" },
-    { id: "5", title: "Software development issue", status: "Resolved", lastUpdate: "2025-02-15" },
-    { id: "6", title: "Data structures", status: "Pending", lastUpdate: "2025-02-18" },
+  const [issues, setIssues] = useState([
+    { id: "1", title: "Course registration error", status: "Pending", lastUpdate: "Feb 15, 2025" },
+    { id: "2", title: "Course registration error", status: "Pending", lastUpdate: "Feb 15, 2025" },
+    { id: "3", title: "Missing marks", status: "In Progress", lastUpdate: "Feb 15, 2025" },
+    { id: "4", title: "Results error", status: "Resolved", lastUpdate: "Feb 15, 2025" },
+    { id: "5", title: "Software development issue", status: "Resolved", lastUpdate: "Feb 15, 2025" },
+    { id: "6", title: "Data structures", status: "Pending", lastUpdate: "Feb 15, 2028" },
   ]);
 
   const getStatusStyles = (status) => {
@@ -31,50 +33,75 @@ const TrackStudentIssues = () => {
   };
 
   return (
-    <Card className="p-3">
-      <CardHeader className="pb-2">
+    <Card className="">
+      <CardHeader className="">
         <div className="flex items-center justify-between">
-          <CardTitle className="text-base">Issue Filtering</CardTitle>
+          <CardTitle>Issue Filtering</CardTitle>
           <div className="flex space-x-2">
-            <div className="relative w-40">
-              <Search className="absolute left-2 top-2.5 h-4 w-4 text-gray-500" />
+            <div className="relative">
+              <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-gray-500" />
               <input
                 type="search"
                 placeholder="Search issues"
-                className="pl-8 h-8 w-full border border-gray-200 rounded-md text-sm"
+                className="pl-8 h-9 md:w-[200px] lg:w-[250px] border border-gray-200 rounded-md"
               />
             </div>
-            <button className="h-8 flex items-center px-3 border border-gray-200 rounded-md text-sm">
+            <button
+              variant="outline"
+              size="sm"
+              className="h-9 flex items-center px-3 border border-gray-200 rounded-md"
+            >
               <Filter className="h-4 w-4 mr-2" />
               Filter
             </button>
           </div>
         </div>
       </CardHeader>
-      <CardContent className="space-y-2">
-        {issues.map((issue) => (
-          <div key={issue.id} className="flex justify-between p-2 border border-gray-200 rounded-md text-sm">
-            <div className="flex items-center space-x-3">
-              <div className="w-10 h-10 flex flex-col items-center justify-center bg-gray-100 rounded-lg text-xs">
-                <span className="font-semibold">{new Date(issue.lastUpdate).getDate()}</span>
-                <span className="text-gray-500">{new Date(issue.lastUpdate).toLocaleDateString("en-US", { weekday: "short" })}</span>
+      <CardContent>
+        <div className="space-y-4">
+          {issues.map((issue) => (
+            <div
+              key={issue.id}
+              className="flex justify-between p-3 border border-gray-200 rounded-md"
+            >
+              <div className="flex items-center space-x-4">
+                <div className="flex flex-col items-center justify-center w-14 h-14 bg-gray-100 rounded-lg">
+                  <span className="text-lg font-semibold">
+                    {new Date(issue.lastUpdate).getDate()}
+                  </span>
+                  <span className="text-sm text-gray-500">
+                    {new Date(issue.lastUpdate).toLocaleDateString("en-US", {
+                      weekday: "short",
+                    })}
+                  </span>
+                </div>
+                <div>
+                  <h3 className="font-medium">{issue.title}</h3>
+                  <p className="text-sm text-gray-500">
+                    Last updated: {issue.lastUpdate}
+                  </p>
+                </div>
               </div>
-              <div>
-                <h3 className="font-medium text-sm">{issue.title}</h3>
-                <p className="text-xs text-gray-500">Updated: {issue.lastUpdate}</p>
+              <div className="flex items-center space-x-3">
+                <span
+                  className={`px-2 py-1 text-xs font-medium rounded-full ${getStatusStyles(
+                    issue.status
+                  )}`}
+                >
+                  {issue.status}
+                </span>
+                <button
+                  variant="outline"
+                  size="sm"
+                  className="flex items-center px-3 border border-gray-200 rounded-md"
+                >
+                  <Eye className="h-4 w-4 mr-1" />
+                  View
+                </button>
               </div>
             </div>
-            <div className="flex items-center space-x-2">
-              <span className={`px-2 py-1 text-xs font-medium rounded-full ${getStatusStyles(issue.status)}`}>
-                {issue.status}
-              </span>
-              <button className="flex items-center px-2 border border-gray-200 rounded-md text-xs">
-                <Eye className="h-3 w-3 mr-1" />
-                View
-              </button>
-            </div>
-          </div>
-        ))}
+          ))}
+        </div>
       </CardContent>
     </Card>
   );
