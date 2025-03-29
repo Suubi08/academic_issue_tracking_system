@@ -36,6 +36,6 @@ const Loader = () => (
       />
     </svg>
   </div>
-);
+)
 
 export default Loader;
