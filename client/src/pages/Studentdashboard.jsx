@@ -34,29 +34,30 @@ const Studentdashboard = () => {
       const inProgressIssues = issue.filter((issue) => issue.status === "In Progress").length
       const pendingIssues = issue.filter((issue) => issue.status === "Pending").length
       
-  return (
-    <div className='mt-4 grid grid-cols-1 gap-4 lg:grid-cols-3'>
-      <div className='lg:col-span-2 space-y-4 '>
-      <ShowSlide images={images} />
-      <TrackStudentIssues/>
-      {/* <Issuetable issue={issue} Loading={loading}  /> */}
-       <IssueChart  
-        totalissues={totalissues}
-        resolvedIssues={resolvedIssues} 
-        inProgressIssues={inProgressIssues}
-        pendingIssues={pendingIssues} />
-      </div>
-      <div className='col-span-1 '>
-        <UserInfoCard user={user}/>
-        <Calendar issues={issue} isLoading={loading}/>
-        <IssueTracking/>
-
-        
-      </div>
-      
-
-    </div>
-  )
+      return (
+        <div className="p-4 md:p-6 w-full">
+          <div className="mt-4 grid grid-cols-1 gap-4 lg:grid-cols-3">
+            {/* Left Section (Main Content) */}
+            <div className="lg:col-span-2 space-y-4">
+              <ShowSlide images={images} />
+              <TrackStudentIssues />
+              <IssueChart  
+                totalissues={totalissues}
+                resolvedIssues={resolvedIssues} 
+                inProgressIssues={inProgressIssues}
+                pendingIssues={pendingIssues} 
+              />
+            </div>
+    
+            {/* Right Section (Sidebar Widgets) */}
+            <div className="col-span-1 space-y-4">
+              <UserInfoCard user={user} />
+              <Calendar issues={issue} isLoading={loading} />
+              <IssueTracking />
+            </div>
+          </div>
+        </div>
+      );
 }
 
 export default Studentdashboard;
