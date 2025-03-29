@@ -3,7 +3,6 @@ import Maincontent from "./Maincontent";
 import Navbar from "./Navbar";
 import Sidebar from "./Sidebar";
 import ProtectedRoute from "./ProtectedRoute";
-import Auth from "../pages/Auth";
 import Issuetable from "./Issuetable"
 import IssueChart from "./IssueChart";
 import Calendar from "./Calendar";
@@ -21,7 +20,7 @@ import {Card,
     CardDescription,
     CardContent,} from './ui/Card'
 
-export { Auth, Loader, Maincontent, Navbar, Sidebar, ProtectedRoute 
+export { Loader, Maincontent, Navbar, Sidebar, ProtectedRoute 
     ,Issuetable,IssueChart,IssueUpdates,Calendar,UserInfoCard,ShowSlide,TrackStudentIssues,Card,
     CardHeader,
     CardFooter,
