@@ -19,7 +19,7 @@ function Layout() {
           sidebarOpen ? "translate-x-0" : "-translate-x-full"
         } md:translate-x-0 md:static md:h-screen`}
       >
-        <Sidebar open={sidebarOpen} setOpen={setSidebarOpen} />
+      <Sidebar open={sidebarOpen} setOpen={setSidebarOpen} />
       </div>
       <div className="flex-1 flex flex-col overflow-hidden ">
         <Navbar setSidebarOpen={setSidebarOpen} sidebarOpen={sidebarOpen} />
