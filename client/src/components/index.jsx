@@ -21,6 +21,8 @@ import {Card,
     CardDescription,
     CardContent,} from './ui/Card'
 
+import { Popover, PopoverTrigger, PopoverContent } from './ui/Popover'
+
 export { Auth, Loading, Maincontent, Navbar, Sidebar, ProtectedRoute 
     ,Issuetable,IssueChart,IssueUpdates,Calendar,UserInfoCard,ShowSlide,TrackStudentIssues,Card,
     CardHeader,
@@ -28,4 +30,5 @@ export { Auth, Loading, Maincontent, Navbar, Sidebar, ProtectedRoute
     CardTitle,
     CardDescription,
     CardContent,
+    Popover, PopoverTrigger, PopoverContent,
 Button};
