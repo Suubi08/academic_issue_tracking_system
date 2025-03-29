@@ -49,8 +49,8 @@ const Auth = () => {
         localStorage.setItem("refreshToken", response.data.refresh);
         localStorage.setItem("role", response.data.role);
 
-        console.log("Login successful:", response.data);
-        alert("Login successful!");
+        //console.log("Login successful:", response.data);
+        //alert("Login successful!");
 
         const roleRedirects = {
           admin: "/admin-dashboard",
