@@ -56,8 +56,13 @@ class RegisterSerializer(serializers.ModelSerializer):
 
     def create(self, validated_data):
         """ Create user & hash password properly """
+<<<<<<< HEAD
         validated_data.pop('confirm_password')  # ✅ Remove before saving
         user = User.objects.create_user(**validated_data)  # ✅ Hashes password automatically
+=======
+        validated_data.pop('confirm_password')  # Remove before saving
+        user = User.objects.create_user(**validated_data)  # Hashes password automatically
+>>>>>>> baker
         return user
 
 
