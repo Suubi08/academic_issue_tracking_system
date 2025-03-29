@@ -2,7 +2,7 @@
 
 import * as React from "react";
 import * as AvatarPrimitive from "@radix-ui/react-avatar";
-import { cn } from "@/lib/utils"; // Assuming you have a utility function to combine classes
+import { cn } from "../../utils/utils"; // Assuming you have a utility function to combine classes
 
 const Avatar = ({ className, ...props }) => (
   <AvatarPrimitive.Root

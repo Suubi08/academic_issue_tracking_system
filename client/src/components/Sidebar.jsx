@@ -8,8 +8,9 @@ import {
   CheckCircle,
   BarChart3,
 } from "lucide-react";
+import { Avatar, AvatarFallback, AvatarImage } from "./ui/Avatar";
 
-const Sidebar = () => {
+const Sidebar = ({username='joel'}) => {
   return (
     <aside className=" h-screen bg-blue-950 text-white p-6 static">
       <div className="flex flex-col ">
@@ -86,6 +87,13 @@ const Sidebar = () => {
             </NavLink>
           </li>
         </ul>
+        <div className="flex items-center gap-2 mt-6 border-t pt-4">
+          <Avatar className="h-8 w-8">
+            <AvatarImage src="/placeholder.svg" alt={username} />
+            <AvatarFallback>{username.charAt(0)}</AvatarFallback>
+          </Avatar>
+          <span className="ml-2 font-medium">{username}</span>
+        </div>
       </div>
     </aside>
   );
