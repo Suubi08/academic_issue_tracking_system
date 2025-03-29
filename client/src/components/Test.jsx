@@ -44,7 +44,7 @@ const Test = () => {
     
   return (
     <div>
-        {/* <Issuetable issue={issue} Loading={loading}  /> */}
+        <Issuetable issue={issue} Loading={loading}  />
         {/* <Calendar/> */}
         {/* <IssueChart 
         totalissues={totalissues}
@@ -59,4 +59,4 @@ const Test = () => {
   )
 }
 
-export default Test
+export default Test;

@@ -1,13 +1,13 @@
 import React from "react";
-import { Routes, Route, Navigate } from "react-router-dom";
+import { Routes, Route, } from "react-router-dom";
 import Layout from "../Layout/Layout";
 import { Dashboard, Issues, Resolved, Reports, Settings, Studentdashboard, Issuereport } from "../pages";
-import { Issuetable } from "../components";
 
 const AllRoutes = () => {
   return (
     <Routes>
-      <Route path="/" element={<Layout />} Navigate={"/dashboard"} >
+      <Route path="/" element={<Layout />}   >
+    
 
         <Route path="studentdashboard" element={<Studentdashboard/>} />
         <Route index element={<Dashboard />} />

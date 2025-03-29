@@ -10,6 +10,7 @@ import Calendar from "./Calendar";
 import UserInfoCard from "./UserInfoCard";
 import ShowSlide from "./ShowSlide";
 import IssueUpdates from "./IssueUpdates";
+import { Button } from "./ui/Button";
 
 import TrackStudentIssues from './TrackStudentIssues';
 
@@ -26,4 +27,5 @@ export { Auth, Loading, Maincontent, Navbar, Sidebar, ProtectedRoute
     CardFooter,
     CardTitle,
     CardDescription,
-    CardContent,};
+    CardContent,
+Button};

@@ -2,7 +2,7 @@
 import { useState } from "react";
 import { ArrowLeft, Paperclip } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "../../components/ui/Card";
-import Button from "../../components/ui/Button";
+import {Button }from "../../components/ui/Button";
 
 import  Textarea from "../../components/ui/Textarea";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "../../components/ui/select";
