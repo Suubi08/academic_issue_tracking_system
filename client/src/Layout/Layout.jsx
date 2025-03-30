@@ -3,6 +3,7 @@ import { Outlet } from "react-router-dom";
 import Navbar from "../components/Navbar";
 import Sidebar from "../components/Sidebar";
 
+// outlet: place holder for rendering child routes.
 function Layout() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
