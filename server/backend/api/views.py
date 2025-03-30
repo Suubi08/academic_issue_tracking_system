@@ -1,3 +1,4 @@
+# from rest_framework import generics, status
 from django.shortcuts import render
 from django.contrib.auth.models import update_last_login
 from rest_framework.views import APIView
@@ -9,7 +10,7 @@ from .serializers import UserSerializer, IssueSerializer, NotificationSerializer
 from rest_framework_simplejwt.tokens import RefreshToken
 from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
-# from rest_framework import generics, status
+
 
 # Register User
 class RegisterView(APIView):
@@ -54,7 +55,7 @@ class RefreshTokenView(generics.GenericAPIView):
                 return Response({"error": "Invalid refresh token"}, status=status.HTTP_401_UNAUTHORIZED)
         return Response({"error": "Refresh token required"}, status=status.HTTP_400_BAD_REQUEST)
         
-
+# User list and create View
 class UserListView(ListCreateAPIView):
     queryset = User.objects.all()
     serializer_class = UserSerializer
