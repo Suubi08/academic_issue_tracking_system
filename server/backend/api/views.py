@@ -59,11 +59,13 @@ class RefreshTokenView(generics.GenericAPIView):
 class UserListView(ListCreateAPIView):
     queryset = User.objects.all()
     serializer_class = UserSerializer
+    
 # Issue list and create View
 class IssueListView(ListCreateAPIView):
     queryset = Issue.objects.all()
     serializer_class = IssueSerializer
 
+# Issue detail, update and delete view
 class IssueDetailView(RetrieveUpdateDestroyAPIView):
     queryset = Issue.objects.all()
     serializer_class = IssueSerializer
