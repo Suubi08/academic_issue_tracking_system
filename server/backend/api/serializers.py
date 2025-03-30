@@ -67,11 +67,13 @@ class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         fields = ['id', 'username', 'email', 'role', 'college', 'department']
+        
 # Issue Serializer 
 class IssueSerializer(serializers.ModelSerializer):
     class Meta:
         model = Issue
         fields = '__all__'
+
 # Notification Serializer
 class NotificationSerializer(serializers.ModelSerializer):
     class Meta:
