@@ -59,7 +59,7 @@ class RefreshTokenView(generics.GenericAPIView):
 class UserListView(ListCreateAPIView):
     queryset = User.objects.all()
     serializer_class = UserSerializer
-
+# Issue list and create View
 class IssueListView(ListCreateAPIView):
     queryset = Issue.objects.all()
     serializer_class = IssueSerializer
