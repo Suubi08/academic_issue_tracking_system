@@ -1,11 +1,11 @@
 // Avatar Components
-import { Avatar, AvatarFallback, AvatarImage } from "./Avatar";
+import { Avatar, AvatarFallback, AvatarImage } from "./Avatar"
 
 // Button Component
-import {Button} from "./Button";
+import { Button } from "./Button"
 
 // Card Component
-import { Card } from "./Card";
+import { Card } from "./Card"
 
 // Dropdown Menu Components
 import {
@@ -24,13 +24,13 @@ import {
   DropdownMenuSubContent,
   DropdownMenuSubTrigger,
   DropdownMenuRadioGroup,
-} from "./Dropdown-menu";
+} from "./Dropdown-menu"
 
 // Input Component
-import { Input } from "./Input";
+import { Input } from "./Input"
 
 // Label Component
-import Label from "./Label";
+import {Label} from "./Label"
 
 // Select Components
 import {
@@ -42,7 +42,7 @@ import {
   SelectLabel,
   SelectItem,
   SelectSeparator,
-} from "./select";
+} from "./select"
 
 // Sheet Components
 import {
@@ -56,19 +56,26 @@ import {
   SheetFooter,
   SheetTitle,
   SheetDescription,
-} from "./Sheet";
+} from "./Sheet"
 
 // Switch Component
-import { Switch } from "./Switch";
+import { Switch } from "./Switch"
 
 // Tabs Components
-import { Tabs, TabsList, TabsTrigger, TabsContent } from "./Tabs";
+import { Tabs, TabsList, TabsTrigger, TabsContent } from "./Tabs"
 
 // Textarea Component
-import Textarea from "./Textarea";
+import {Textarea} from "./Textarea"
+import { Popover, PopoverTrigger, PopoverContent } from "./Popover"
+import { Badge, badgeVariants } from "./Badge"
 
 // Export All Components
 export {
+  Popover,
+  PopoverTrigger,
+  PopoverContent,
+  Badge,
+  badgeVariants,
   Avatar,
   AvatarFallback,
   AvatarImage,
@@ -115,4 +122,5 @@ export {
   TabsTrigger,
   TabsContent,
   Textarea,
-};
+}
+

@@ -1,24 +1,37 @@
-import React from "react";
-import { Routes, Route, } from "react-router-dom";
-import Layout from "../Layout/Layout";
-import { Dashboard, Issues, Resolved, Reports, Settings, Studentdashboard, Issuereport } from "../pages";
+import { Routes, Route, Navigate } from "react-router-dom"
+import Layout from "../Layout/Layout"
+import { Issues, Reports, Settings, Studentdashboard, Issuereport } from "../pages"
+import Login from "../pages/Auth/Login"
+import Signup from "../pages/Auth/Signup"
+import ProtectedRoute from "../components/ProtectedRoute"
 
 const AllRoutes = () => {
   return (
     <Routes>
-      <Route path="/" element={<Layout />}   >
-    
+      {/* Public Routes */}
+      <Route path="/login" element={<Login />} />
+      <Route path="/signup" element={<Signup />} />
 
-        <Route path="studentdashboard" element={<Studentdashboard/>} />
-        <Route index element={<Dashboard />} />
-        <Route path="issues" element={<Issuereport/>} />
-        <Route path="resolved" element={<Resolved />} />
-        <Route path="reports" element={<Reports />} />
-        <Route path="settings" element={<Settings/>} />
-        <Route path="*" element={<h1>Not Found</h1>} />
+      {/* Protected Routes (wrapped in Layout) */}
+      <Route element={<ProtectedRoute allowedRoles={["student", "admin", "lecturer", "academic_registrar"]} />}>
+        <Route element={<Layout />}>
+          {/* Redirect root to studentdashboard */}
+          <Route path="/" element={<Navigate to="/studentdashboard" replace />} />
+
+          {/* Student Routes */}
+          <Route path="/studentdashboard" element={<Studentdashboard />} />
+          <Route path="/issues" element={<Issues />} />
+          <Route path="/issuereport" element={<Issuereport />} />
+          <Route path="/reports" element={<Reports />} />
+          <Route path="/settings" element={<Settings />} />
+        </Route>
       </Route>
-    </Routes>
-  );
-};
 
-export default AllRoutes;
+      {/* Catch-all 404 route */}
+      <Route path="*" element={<h1 className="text-center text-2xl mt-10">404 Not Found</h1>} />
+    </Routes>
+  )
+}
+
+export default AllRoutes
+

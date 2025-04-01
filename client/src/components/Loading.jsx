@@ -1,5 +1,3 @@
-import React from "react";
-
 const Loading = () => (
   <div role="status">
     <svg
@@ -36,6 +34,7 @@ const Loading = () => (
       />
     </svg>
   </div>
-);
+)
 
-export default Loading;
+export default Loading
+

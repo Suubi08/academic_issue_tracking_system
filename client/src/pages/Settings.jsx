@@ -1,11 +1,13 @@
-import React, { useState } from "react";
+"use client"
+
+import { useState } from "react"
 
 const Settings = () => {
-  const [selectedOption, setSelectedOption] = useState(""); // State to manage the selected value
+  const [selectedOption, setSelectedOption] = useState("") // State to manage the selected value
 
   const handleSelectChange = (event) => {
-    setSelectedOption(event.target.value); // Update state on change
-  };
+    setSelectedOption(event.target.value) // Update state on change
+  }
 
   return (
     <div>
@@ -27,7 +29,8 @@ const Settings = () => {
         {/* ...existing code... */}
       </form>
     </div>
-  );
-};
+  )
+}
 
-export default Settings;
+export default Settings
+

@@ -1,8 +1,9 @@
-import React, { useState } from "react";
-import axios from "axios";
+"use client"
 
-import { roles, colleges, departments } from "../constants";
-import API from "../utils/axiosInstance";
+import { useState } from "react"
+
+import { roles, colleges, departments } from "../constants"
+import API from "../utils/axiosInstance"
 
 const initialState = {
   first_name: "", // Convert React's "FirstName" to "first_name"
@@ -18,60 +19,57 @@ const initialState = {
   college: "",
   department: "",
   lecture_number: "",
-};
+}
 
 const Auth = () => {
-  const [isSignup, setIsSignup] = useState(false);
-  const [formData, setFormData] = useState(initialState);
-  const [step, setStep] = useState(1);
-  const [error, setError] = useState("");
+  const [isSignup, setIsSignup] = useState(false)
+  const [formData, setFormData] = useState(initialState)
+  const [step, setStep] = useState(1)
+  const [error, setError] = useState("")
 
   const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
-  };
+    setFormData({ ...formData, [e.target.name]: e.target.value })
+  }
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
-    setError(""); // Clear previous errors
+    e.preventDefault()
+    setError("") // Clear previous errors
 
-    console.log("Form Data Before Sending:", formData);
+    console.log("Form Data Before Sending:", formData)
 
     try {
-      const endpoint = isSignup ? "register/" : "login/";
-      const response = await API.post(endpoint, formData);
+      const endpoint = isSignup ? "register/" : "login/"
+      const response = await API.post(endpoint, formData)
 
       if (isSignup) {
-        alert("Registration successful!");
-        setIsSignup(false); // Switch to login form
+        alert("Registration successful!")
+        setIsSignup(false) // Switch to login form
       } else {
         // Store JWT tokens
-        localStorage.setItem("accessToken", response.data.access);
-        localStorage.setItem("refreshToken", response.data.refresh);
-        localStorage.setItem("role", response.data.role);
+        localStorage.setItem("accessToken", response.data.access)
+        localStorage.setItem("refreshToken", response.data.refresh)
+        localStorage.setItem("role", response.data.role)
 
-        console.log("Login successful:", response.data);
-        alert("Login successful!");
+        console.log("Login successful:", response.data)
+        alert("Login successful!")
 
         const roleRedirects = {
           admin: "/admin-dashboard",
           student: "/student-dashboard",
           lecturer: "/lecturer-dashboard",
           academic_registrar: "/registrar-dashboard",
-        };
+        }
 
-        window.location.href =
-          roleRedirects[response.data.role] || "/dashboard";
+        window.location.href = roleRedirects[response.data.role] || "/dashboard"
       }
     } catch (error) {
-      setError(
-        error.response?.data?.error || "Something went wrong. Please try again."
-      );
-      console.error("Error:", error);
+      setError(error.response?.data?.error || "Something went wrong. Please try again.")
+      console.error("Error:", error)
     }
-  };
+  }
 
-  const nextStep = () => setStep(step + 1);
-  const prevStep = () => setStep(step - 1);
+  const nextStep = () => setStep(step + 1)
+  const prevStep = () => setStep(step - 1)
 
   return (
     <div className="flex flex-col min-h-screen items-center justify-center bg-gray-50">
@@ -80,9 +78,7 @@ const Auth = () => {
         <h2 className="font-bold text-center text-3xl text-gray-800">
           {isSignup ? "Join AITS, Create an Account" : "Welcome Back to AITS"}
         </h2>
-        <p className="mt-2 text-center text-lg text-gray-600 max-w-md">
-          Let's get you started quickly and easily!
-        </p>
+        <p className="mt-2 text-center text-lg text-gray-600 max-w-md">Let's get you started quickly and easily!</p>
       </div>
 
       {/* Form Container */}
@@ -155,19 +151,9 @@ const Auth = () => {
               )}
 
               {isSignup && (
-                <select
-                  className="selection_input"
-                  name="role"
-                  onChange={handleChange}
-                  value={formData.role}
-                  required
-                >
+                <select className="selection_input" name="role" onChange={handleChange} value={formData.role} required>
                   {roles.map((role) => (
-                    <option
-                      key={role.value}
-                      value={role.value}
-                      disabled={role.disabled && !formData.role}
-                    >
+                    <option key={role.value} value={role.value} disabled={role.disabled && !formData.role}>
                       {role.label}
                     </option>
                   ))}
@@ -175,11 +161,7 @@ const Auth = () => {
               )}
 
               {isSignup && (
-                <button
-                  type="button"
-                  className="auth_button"
-                  onClick={nextStep}
-                >
+                <button type="button" className="auth_button" onClick={nextStep}>
                   Next
                 </button>
               )}
@@ -233,8 +215,7 @@ const Auth = () => {
                 </>
               )}
 
-              {(formData.role === "student" ||
-                formData.role === "lecturer") && (
+              {(formData.role === "student" || formData.role === "lecturer") && (
                 <>
                   <select
                     name="department"
@@ -244,11 +225,7 @@ const Auth = () => {
                     required
                   >
                     {departments.map((dept) => (
-                      <option
-                        key={dept.value}
-                        value={dept.value}
-                        disabled={dept.disabled && !formData.dept}
-                      >
+                      <option key={dept.value} value={dept.value} disabled={dept.disabled && !formData.dept}>
                         {dept.label}
                       </option>
                     ))}
@@ -274,8 +251,7 @@ const Auth = () => {
                 </>
               )}
 
-              {(formData.role === "academic_registrar" ||
-                formData.role === "admin") && (
+              {(formData.role === "academic_registrar" || formData.role === "admin") && (
                 <select
                   name="college"
                   className="selection_input"
@@ -284,11 +260,7 @@ const Auth = () => {
                   required
                 >
                   {colleges.map((college) => (
-                    <option
-                      key={college.value}
-                      value={college.value}
-                      disabled={college.disabled && !formData.college}
-                    >
+                    <option key={college.value} value={college.value} disabled={college.disabled && !formData.college}>
                       {college.label}
                     </option>
                   ))}
@@ -296,11 +268,7 @@ const Auth = () => {
               )}
 
               <div className="flex justify-between gap-4">
-                <button
-                  type="button"
-                  className="auth_button bg-gray-500"
-                  onClick={prevStep}
-                >
+                <button type="button" className="auth_button bg-gray-500" onClick={prevStep}>
                   Back
                 </button>
                 <button type="submit" className="auth_button">
@@ -321,18 +289,17 @@ const Auth = () => {
         {/* Toggle Signup/Login */}
         <p
           onClick={() => {
-            setIsSignup(!isSignup);
-            setStep(1);
+            setIsSignup(!isSignup)
+            setStep(1)
           }}
           className="text-blue-500 cursor-pointer mt-4 text-center"
         >
-          {isSignup
-            ? "Already have an account? Sign In"
-            : "Don't have an account? Sign Up"}
+          {isSignup ? "Already have an account? Sign In" : "Don't have an account? Sign Up"}
         </p>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default Auth;
+export default Auth
+
