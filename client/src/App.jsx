@@ -1,20 +1,29 @@
-import React from 'react'
-import { BrowserRouter, Link, Route, Routes } from 'react-router-dom';
+"use client"
 
-import { Auth, Studentdashboard } from './pages'
-import { ProtectedRoute } from './components'
+import { useEffect } from "react"
+import AllRoutes from "./routes/AllRoutes"
+import "./App.css"
 
-const App = ( ) => {
-  return (
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<Auth />} />
-        <Route element={<ProtectedRoute />}>
-          <Route path="/student-dashboard" element={ <Studentdashboard />} />
-        </Route>
-      </Routes>
-    </BrowserRouter>
-  )
+function App() {
+  // Check for authentication on app load
+  useEffect(() => {
+    // This is where you would typically check if the token is valid
+    // For demo purposes, we're just checking if it exists
+    const token = localStorage.getItem("accessToken")
+    const tokenExpiry = localStorage.getItem("tokenExpiry")
+
+    // If token exists but is expired, clear it
+    if (token && tokenExpiry && new Date(tokenExpiry) < new Date()) {
+      localStorage.removeItem("accessToken")
+      localStorage.removeItem("refreshToken")
+      localStorage.removeItem("role")
+      localStorage.removeItem("username")
+      localStorage.removeItem("tokenExpiry")
+    }
+  }, [])
+
+  return <AllRoutes />
 }
 
-export default App;
+export default App
+

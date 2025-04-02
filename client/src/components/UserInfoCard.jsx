@@ -1,6 +1,8 @@
-import { useState } from "react";
-import { Copy, Check, User } from "lucide-react";
-import { Card, CardContent, CardHeader } from "./ui/Card";
+"use client"
+
+import { useState } from "react"
+import { Copy, Check, User } from "lucide-react"
+import { Card, CardContent, CardHeader } from "./ui/Card"
 
 const Avatar = ({ src, alt }) => {
   return (
@@ -11,17 +13,17 @@ const Avatar = ({ src, alt }) => {
         <User className="size-10 text-purple-600" />
       )}
     </div>
-  );
-};
+  )
+}
 
 const UserInfoCard = ({ user }) => {
-  const [copied, setCopied] = useState(false);
+  const [copied, setCopied] = useState(false)
 
   const handleCopy = () => {
-    navigator.clipboard.writeText(user.regNo);
-    setCopied(true);
-    setTimeout(() => setCopied(false), 2000); // Reset after 2 seconds
-  };
+    navigator.clipboard.writeText(user.regNo)
+    setCopied(true)
+    setTimeout(() => setCopied(false), 2000) // Reset after 2 seconds
+  }
 
   return (
     <Card className="p-2">
@@ -30,19 +32,13 @@ const UserInfoCard = ({ user }) => {
         <Avatar src={user.profilePic} alt={user.username} />
 
         {/* Username */}
-        <h2 className="mt-4 text-lg font-bold text-gray-900 dark:text-white">
-          WELCOME, {user.username.toUpperCase()}
-        </h2>
+        <h2 className="mt-4 text-lg font-bold text-gray-900 dark:text-white">WELCOME, {user.username.toUpperCase()}</h2>
 
         {/* Registration Number with Copy Button */}
         <div className="flex items-center space-x-2 mt-1 text-gray-500 dark:text-gray-400 cursor-pointer">
           <p className="text-sm">{user.regNo}</p>
           <button onClick={handleCopy} className="hover:text-gray-700">
-            {copied ? (
-              <Check className="size-4 text-green-500" />
-            ) : (
-              <Copy className="size-4" />
-            )}
+            {copied ? <Check className="size-4 text-green-500" /> : <Copy className="size-4" />}
           </button>
         </div>
       </CardHeader>
@@ -63,7 +59,8 @@ const UserInfoCard = ({ user }) => {
         </div>
       </CardContent>
     </Card>
-  );
-};
+  )
+}
 
-export default UserInfoCard;
+export default UserInfoCard
+

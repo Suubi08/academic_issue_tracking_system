@@ -1,11 +1,17 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { ChevronLeft, ChevronRight } from "lucide-react"
 import { Card, CardContent, CardHeader, CardTitle } from "./ui/Card"
 
-const Calendar=({ issues, isLoading })=> {
+const Calendar = ({ issues = [], isLoading }) => {
   const [currentMonth, setCurrentMonth] = useState(new Date())
+  const [filteredIssues, setFilteredIssues] = useState(issues)
+
+  // Update filtered issues when issues prop changes
+  useEffect(() => {
+    setFilteredIssues(issues)
+  }, [issues])
 
   const daysOfWeek = ["Mon", "Tue", "Wed", "Thur", "Fri", "Sat", "Sun"]
 
@@ -79,8 +85,22 @@ const Calendar=({ issues, isLoading })=> {
 
   // Check if a day has issues
   const getDayIssues = (date) => {
-    // This is a placeholder. In a real app, you would check if any issues fall on this date
-    // For now, we'll just randomly assign issues to some days
+    // Convert date to string format for comparison (YYYY-MM-DD)
+    const dateStr = date.toISOString().split("T")[0]
+
+    // Check if any issues fall on this date
+    // This is a simplified example - in a real app, you'd compare with actual issue dates
+    const issuesOnDay = filteredIssues.filter((issue) => {
+      const issueDate = new Date(issue.lastUpdate).toISOString().split("T")[0]
+      return issueDate === dateStr
+    })
+
+    if (issuesOnDay.length > 0) {
+      // Determine status based on the first issue (you could enhance this logic)
+      return { hasIssue: true, status: issuesOnDay[0].status }
+    }
+
+    // Fallback to the random assignment for demo purposes
     const day = date.getDate()
     if (day % 5 === 0) return { hasIssue: true, status: "Resolved" }
     if (day % 7 === 0) return { hasIssue: true, status: "Pending" }
@@ -89,55 +109,54 @@ const Calendar=({ issues, isLoading })=> {
   }
 
   return (
-    
-      <Card className=' dark:bg-gray-800 mt-4'>
-        <CardHeader>
-          <CardTitle>
-      <div className="flex items-center justify-between p-4 border-b border-gray-200 dark:border-gray-700">
-        <h2 className="text-lg font-medium">Calendar</h2>
-        <div className="flex items-center space-x-2">
-          <button
-            className="p-1 rounded-md border border-gray-300 dark:border-gray-600 hover:bg-gray-100 dark:hover:bg-gray-700"
-            onClick={prevMonth}
-          >
-            <ChevronLeft className="h-4 w-4" />
-          </button>
-          <button
-            className="p-1 rounded-md border border-gray-300 dark:border-gray-600 hover:bg-gray-100 dark:hover:bg-gray-700"
-            onClick={nextMonth}
-          >
-            <ChevronRight className="h-4 w-4" />
-          </button>
-        </div>
-      </div>
-      </CardTitle>
+    <Card className="dark:bg-gray-800 mt-4 shadow-md">
+      <CardHeader>
+        <CardTitle>
+          <div className="flex items-center justify-between p-4 border-b border-gray-200 dark:border-gray-700">
+            <h2 className="text-lg font-medium">Calendar</h2>
+            <div className="flex items-center space-x-2">
+              <button
+                className="p-1 rounded-md border border-gray-300 dark:border-gray-600 hover:bg-gray-100 dark:hover:bg-gray-700"
+                onClick={prevMonth}
+              >
+                <ChevronLeft className="h-4 w-4" />
+              </button>
+              <button
+                className="p-1 rounded-md border border-gray-300 dark:border-gray-600 hover:bg-gray-100 dark:hover:bg-gray-700"
+                onClick={nextMonth}
+              >
+                <ChevronRight className="h-4 w-4" />
+              </button>
+            </div>
+          </div>
+        </CardTitle>
       </CardHeader>
       <CardContent>
-      <div className="p-4">
-        {isLoading ? (
-          <div className="space-y-2">
-            <div className="h-8 w-full bg-gray-200 dark:bg-gray-700 rounded animate-pulse" />
-            <div className="h-64 w-full bg-gray-200 dark:bg-gray-700 rounded animate-pulse" />
-          </div>
-        ) : (
-          <>
-            <div className="text-center mb-4">
-              <h3 className="text-lg font-medium">
-                {monthName} {year}
-              </h3>
+        <div className="p-4">
+          {isLoading ? (
+            <div className="space-y-2">
+              <div className="h-8 w-full bg-gray-200 dark:bg-gray-700 rounded animate-pulse" />
+              <div className="h-64 w-full bg-gray-200 dark:bg-gray-700 rounded animate-pulse" />
             </div>
-            <div className="grid grid-cols-7 gap-1">
-              {daysOfWeek.map((day) => (
-                <div key={day} className="text-center text-xs font-medium text-gray-500 py-1">
-                  {day}
-                </div>
-              ))}
-              {calendarDays.map((day, index) => {
-                const dayIssue = getDayIssues(day.date)
-                return (
-                  <div
-                    key={index}
-                    className={`
+          ) : (
+            <>
+              <div className="text-center mb-4">
+                <h3 className="text-lg font-medium">
+                  {monthName} {year}
+                </h3>
+              </div>
+              <div className="grid grid-cols-7 gap-1">
+                {daysOfWeek.map((day) => (
+                  <div key={day} className="text-center text-xs font-medium text-gray-500 py-1">
+                    {day}
+                  </div>
+                ))}
+                {calendarDays.map((day, index) => {
+                  const dayIssue = getDayIssues(day.date)
+                  return (
+                    <div
+                      key={index}
+                      className={`
                       text-center p-1 relative min-h-[40px] flex flex-col items-center justify-center
                       ${!day.isCurrentMonth ? "text-gray-400" : ""}
                       ${
@@ -146,11 +165,11 @@ const Calendar=({ issues, isLoading })=> {
                           : ""
                       }
                     `}
-                  >
-                    <span>{day.day}</span>
-                    {dayIssue.hasIssue && (
-                      <span
-                        className={`
+                    >
+                      <span>{day.day}</span>
+                      {dayIssue.hasIssue && (
+                        <span
+                          className={`
                           w-2 h-2 rounded-full mt-1
                           ${
                             dayIssue.status === "Resolved"
@@ -160,32 +179,33 @@ const Calendar=({ issues, isLoading })=> {
                                 : "bg-yellow-500"
                           }
                         `}
-                      />
-                    )}
-                  </div>
-                )
-              })}
-            </div>
-            <div className="mt-4 flex items-center justify-center space-x-4 text-xs">
-              <div className="flex items-center">
-                <span className="w-2 h-2 rounded-full bg-yellow-500 mr-1"></span>
-                <span>pending</span>
+                        />
+                      )}
+                    </div>
+                  )
+                })}
               </div>
-              <div className="flex items-center">
-                <span className="w-2 h-2 rounded-full bg-red-800 mr-1"></span>
-                <span>in progress</span>
+              <div className="mt-4 flex items-center justify-center space-x-4 text-xs">
+                <div className="flex items-center">
+                  <span className="w-2 h-2 rounded-full bg-yellow-500 mr-1"></span>
+                  <span>pending</span>
+                </div>
+                <div className="flex items-center">
+                  <span className="w-2 h-2 rounded-full bg-red-800 mr-1"></span>
+                  <span>in progress</span>
+                </div>
+                <div className="flex items-center">
+                  <span className="w-2 h-2 rounded-full bg-green-500 mr-1"></span>
+                  <span>resolved</span>
+                </div>
               </div>
-              <div className="flex items-center">
-                <span className="w-2 h-2 rounded-full bg-green-500 mr-1"></span>
-                <span>resolved</span>
-              </div>
-            </div>
-          </>
-        )}
-      </div>
+            </>
+          )}
+        </div>
       </CardContent>
     </Card>
   )
 }
 
-export default Calendar;
+export default Calendar
+
