@@ -120,49 +120,10 @@ const Issuereport = () => {
         <CardContent>
           {successMessage && <p className="text-green-600 text-center mb-4">{successMessage}</p>}
           <form onSubmit={handleSubmit} className="space-y-6">
-            {/* Personal Details Section */}
-            <div>
-              <h2 className="text-lg font-semibold mb-4 pb-1 border-b">Personal Details</h2>
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <FormField
-                  id="name"
-                  label="Your Name"
-                  placeholder="Enter your name"
-                  value={formData.name}
-                  onChange={handleChange}
-                  error={errors.name}
-                />
-                <FormField
-                  id="studentNumber"
-                  label="Student Number"
-                  placeholder="Enter your student number"
-                  value={formData.studentNumber}
-                  onChange={handleChange}
-                  error={errors.studentNumber}
-                />
-                <FormField
-                  id="registrationNumber"
-                  label="Registration Number"
-                  placeholder="Enter your registration number"
-                  value={formData.registrationNumber}
-                  onChange={handleChange}
-                  error={errors.registrationNumber}
-                />
-              </div>
-            </div>
-
             {/* Issue Details Section */}
             <div>
               <h2 className="text-lg font-semibold mb-4 pb-1 border-b">Issue Details</h2>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
-                <FormField
-                  id="issueId"
-                  label="Issue ID"
-                  type="number"
-                  placeholder="1009"
-                  value={formData.issueId}
-                  onChange={handleChange}
-                />
                 <FormSelect
                   id="category"
                   label="Issue Category"

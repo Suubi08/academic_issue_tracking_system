@@ -54,25 +54,33 @@ class Notification(models.Model):
 
 # Issues model
 class Issue(models.Model):
-    title = models.CharField(max_length=255)
+    STATUS_CHOICES = [
+        ('open', 'Open'),
+        ('in_progress', 'In Progress'),
+        ('resolved', 'Resolved'),
+        ('closed', 'Closed'),
+    ]
+
+    category = models.CharField(max_length=100)
+    date_of_issue = models.DateField()
+    course_unit = models.CharField(max_length=200)
+    assigned_to = models.ForeignKey(
+        User, 
+        on_delete=models.SET_NULL, 
+        null=True, 
+        blank=True, 
+        limit_choices_to={'role': 'lecturer'}
+    )  # Only lecturers can be assigned
     description = models.TextField()
-    status = models.CharField(
-        max_length=20,
-        choices=[("open", "Open"), ("in_progress", "In Progress"), ("resolved", "Resolved")],
-        default="open",
-    )
-    priority = models.CharField(
-        max_length=10,
-        choices=[("low", "Low"), ("medium", "Medium"), ("high", "High")],
-        default="medium",
-    )
-    created_by = models.ForeignKey(User, related_name="created_issues", null=True, blank=True, on_delete=models.CASCADE)
-    assigned_to = models.ForeignKey(User, related_name="assigned_issues", on_delete=models.SET_NULL, null=True, blank=True)
+    attachment = models.FileField(upload_to='issue_attachments/', null=True, blank=True)
+    year_of_study = models.CharField(max_length=50)
+    semester = models.CharField(max_length=50)
+    status = models.CharField(max_length=20, choices=STATUS_CHOICES, default='open')
+    created_by = models.ForeignKey(User, related_name='created_issues', on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        return self.title
+        return f"{self.category} - {self.status}"
 
 # Comments model
 class Comments(models.Model):
