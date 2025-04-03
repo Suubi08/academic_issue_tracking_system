@@ -13,5 +13,5 @@ const Textarea = ({ className, isError, ...props }) => {
   )
 }
 
-export { Textarea}
+export { Textarea }
 

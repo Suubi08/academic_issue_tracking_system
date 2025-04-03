@@ -2,9 +2,9 @@ import Loading from "./Loading"
 import Maincontent from "./Maincontent"
 import Navbar from "./Navbar"
 import Sidebar from "./Sidebar"
+import admin_Sidebar from "./admin_Sidebar"
 import ProtectedRoute from "./ProtectedRoute"
-import Auth from "./Auth"
-import Issuetable from "./Issuetable"
+  import Issuetable from "./Issuetable"
 import IssueChart from "./IssueChart"
 import Calendar from "./Calendar"
 import UserInfoCard from "./UserInfoCard"
@@ -20,11 +20,11 @@ import { Popover, PopoverTrigger, PopoverContent } from "./ui/Popover"
 import { Badge, badgeVariants } from "./ui/Badge"
 
 export {
-  Auth,
   Loading,
   Maincontent,
   Navbar,
   Sidebar,
+  admin_Sidebar,
   ProtectedRoute,
   Issuetable,
   IssueChart,

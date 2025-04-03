@@ -1,34 +1,34 @@
-import { Navigate, Outlet, useLocation } from "react-router-dom"
+import { Navigate, Outlet, useLocation } from "react-router-dom";
+import { useEffect, useMemo } from "react";
 
 const ProtectedRoute = ({ allowedRoles = [] }) => {
-  const location = useLocation()
+  const location = useLocation();
 
-  // Check if user is authenticated by looking for the token
-  const isAuthenticated = !!localStorage.getItem("accessToken")
+  // Memoized authentication and role retrieval
+  const isAuthenticated = useMemo(() => !!localStorage.getItem("accessToken"), []);
+  const userRole = useMemo(() => localStorage.getItem("role"), []);
 
-  // Get user role from localStorage
-  const userRole = localStorage.getItem("role")
+  // Debugging log (only runs when location changes)
+  useEffect(() => {
+    console.log("ProtectedRoute Debug:", {
+      isAuthenticated,
+      userRole,
+      allowedRoles,
+      currentPath: location.pathname,
+    });
+  }, [location.pathname]);
 
-  // If not authenticated, redirect to login
+  // Redirect to login if not authenticated
   if (!isAuthenticated) {
-    return <Navigate to="/login" state={{ from: location }} replace />
+    return <Navigate to="/login" state={{ from: location }} replace />;
   }
 
-  // If roles are specified and user's role is not included, redirect to appropriate dashboard
+  // Redirect to home if role is not allowed
   if (allowedRoles.length > 0 && !allowedRoles.includes(userRole)) {
-    const roleRedirects = {
-      admin: "/admin-dashboard",
-      student: "/studentdashboard",
-      lecturer: "/lecturer-dashboard",
-      academic_registrar: "/registrar-dashboard",
-    }
-
-    return <Navigate to={roleRedirects[userRole] || "/"} replace />
+    return <Navigate to="/" replace />;
   }
 
-  // If authenticated and authorized, render the child routes
-  return <Outlet />
-}
+  return <Outlet />;
+};
 
-export default ProtectedRoute
-
+export default ProtectedRoute;

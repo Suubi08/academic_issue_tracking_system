@@ -30,7 +30,7 @@ import {
 import { Input } from "./Input"
 
 // Label Component
-import {Label} from "./Label"
+import { Label } from "./Label"
 
 // Select Components
 import {
@@ -65,7 +65,7 @@ import { Switch } from "./Switch"
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "./Tabs"
 
 // Textarea Component
-import {Textarea} from "./Textarea"
+import { Textarea } from "./Textarea"
 import { Popover, PopoverTrigger, PopoverContent } from "./Popover"
 import { Badge, badgeVariants } from "./Badge"
 
