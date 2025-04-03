@@ -2,6 +2,9 @@ from django.db import models
 from django.contrib.auth.models import AbstractUser, Group, Permission
 
 # User model.
+from django.contrib.auth.models import AbstractUser, Group, Permission
+from django.db import models
+
 class User(AbstractUser):
     ROLE_CHOICES = [
         ('student', 'Student'),
@@ -9,49 +12,47 @@ class User(AbstractUser):
         ('academic_registrar', 'Academic Registrar'),
         ('admin', 'Administrator'),
     ]
-    role = models.CharField(max_length=20, choices=ROLE_CHOICES)
+    
+    role = models.CharField(max_length=20, choices=ROLE_CHOICES, default="student")
 
-    #Student-specific fields
+    # Student-specific fields
     student_number = models.CharField(max_length=20, blank=True, null=True)
     course_name = models.CharField(max_length=100, blank=True, null=True)
     college = models.CharField(max_length=100, blank=True, null=True)
 
-    # Lecture-Specific fields
+    # Lecturer-specific fields
     lecture_number = models.CharField(max_length=20, blank=True, null=True)
     subject_taught = models.TextField(blank=True, null=True)
 
     department = models.CharField(max_length=100, blank=True, null=True) 
 
-    groups = models.ManyToManyField(
-        Group,
-        related_name="custom_user_groups",
-        blank=True
-    )
-    user_permissions = models.ManyToManyField(
-        Permission,
-        related_name="custom_user_permissions",
-        blank=True
-    )
+    # Fix groups and user_permissions
+    groups = models.ManyToManyField("auth.Group", related_name="custom_user_groups", blank=True)
+    user_permissions = models.ManyToManyField("auth.Permission", related_name="custom_user_permissions", blank=True)
 
     def save(self, *args, **kwargs):
-        """Automatically handle department and college based on role"""
-        if self.role in ['academic_registrar', 'admin']:
-            self.department = None #Academic Registrar & Admins do not belong to a department
+        """Ensure only role-specific fields are filled"""
+        if self.role == 'student':
+            self.lecture_number = None
+            self.subject_taught = None
+            self.department = None
+
+        elif self.role == 'lecturer':
+            self.student_number = None
+            self.course_name = None
+            self.college = None
+
+        elif self.role in ['academic_registrar', 'admin']:
+            self.student_number = None
+            self.course_name = None
+            self.lecture_number = None
+            self.subject_taught = None
+
         super().save(*args, **kwargs)
-        
+
     def __str__(self):
         return f"{self.username} ({self.role})"
-
-# Notifications model
-class Notification(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
-    message = models.TextField()
-    status = models.BooleanField(default=False)
-    created_at = models.DateTimeField(auto_now_add=True)
-
-    def __str__(self):
-        return f"Notification for {self.user.username}"
-
+    
 # Issues model
 class Issue(models.Model):
     STATUS_CHOICES = [
@@ -81,6 +82,16 @@ class Issue(models.Model):
 
     def __str__(self):
         return f"{self.category} - {self.status}"
+
+# Notifications model
+class Notification(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    message = models.TextField()
+    status = models.BooleanField(default=False)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def _str_(self):
+        return f"Notification for {self.user.username}"
 
 # Comments model
 class Comments(models.Model):

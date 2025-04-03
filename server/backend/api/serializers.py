@@ -3,10 +3,9 @@ from rest_framework import serializers
 from .models import User, Issue, Notification
 from django.contrib.auth.hashers import make_password
 
-
-# Register Serializer
 class RegisterSerializer(serializers.ModelSerializer):
-    confirm_password = serializers.CharField(write_only=True) 
+    confirm_password = serializers.CharField(write_only=True)
+
     class Meta:
         model = User
         fields = [
@@ -15,12 +14,10 @@ class RegisterSerializer(serializers.ModelSerializer):
             'student_number', 'course_name', 'college', 
             'lecture_number', 'subject_taught', 'department'
         ]
-
         extra_kwargs = {
-            'password': {'write_only': True}, 
-            'confirm_password': {'write_only': True} 
+            'password': {'write_only': True},
+            'confirm_password': {'write_only': True}
         }
-        
 
     def validate(self, data):
         if data['password'] != data['confirm_password']:
@@ -35,7 +32,7 @@ class RegisterSerializer(serializers.ModelSerializer):
                 )
 
         elif role == 'lecturer':
-            if not all([data.get('lecture_number'), data.get('subjects_taught'), data.get('department')]):
+            if not all([data.get('lecture_number'), data.get('subject_taught'), data.get('department')]):
                 raise serializers.ValidationError(
                     {"lecturer_info": "Lecturers must provide lecturer number, subjects taught, and department."}
                 )
@@ -55,14 +52,26 @@ class RegisterSerializer(serializers.ModelSerializer):
         return data
 
     def create(self, validated_data):
-        """ Create user & hash password properly """
-        validated_data.pop('confirm_password')  # Remove before saving
-        user = User.objects.create_user(**validated_data)  # Hashes password automatically
-        validated_data.pop('confirm_password')  # Remove before saving
-        user = User.objects.create_user(**validated_data)  # Hashes password automatically
+        """Create user & hash password properly"""
+        validated_data.pop('confirm_password', None)  # Avoid KeyError
+
+        user = User.objects.create_user(
+            username=validated_data['username'],
+            email=validated_data['email'],
+            first_name=validated_data['first_name'],
+            last_name=validated_data['last_name'],
+            password=validated_data['password'],
+            role=validated_data.get('role', 'student'),
+            student_number=validated_data.get('student_number'),
+            course_name=validated_data.get('course_name'),
+            college=validated_data.get('college'),
+            lecture_number=validated_data.get('lecture_number'),
+            subject_taught=validated_data.get('subject_taught'),
+            department=validated_data.get('department')
+        )
+
         return user
-
-
+    
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User

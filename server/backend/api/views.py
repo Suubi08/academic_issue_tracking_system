@@ -21,13 +21,28 @@ class RegisterView(APIView):
     permission_classes = [AllowAny]
     
     def post(self, request):
-        print("Incoming Data from React:", request.data) 
+        print("Incoming Data from React:", request.data)
         serializer = RegisterSerializer(data=request.data)
-        if serializer.is_valid():
-            user = serializer.save()
-            return Response({"message": "User registered succefully"}, status=status.HTTP_201_CREATED)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
+        if serializer.is_valid():
+            # Save the user
+            user = serializer.save()
+
+            # Generate JWT tokens
+            refresh = RefreshToken.for_user(user)
+            access = str(refresh.access_token)
+
+            # Prepare response data
+            response_data = {
+                "username": user.username,
+                "role": user.role,
+                "access": access,
+                "refresh": str(refresh),
+            }
+
+            return Response(response_data, status=status.HTTP_201_CREATED)
+
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 # Login and get JWT Token
 class LoginView(APIView):
     def post(self, request):

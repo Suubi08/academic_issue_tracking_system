@@ -18,54 +18,58 @@ const Login = () => {
   }
 
   const handleSubmit = async (e) => {
-    e.preventDefault()
-    setError("")
-    setLoading(true)
-
+    e.preventDefault();
+    setError("");
+    setLoading(true);
+  
     try {
-      const endpoint = "login/";
-      const response = await API.post(endpoint, formData);
-      let role = "student"
-
-      if (response.ok) {
-        localStorage.setItem("accessToken", response.data.access);
-        localStorage.setItem("refreshToken", response.data.refresh);
-        localStorage.setItem("role", role);
-        localStorage.setItem("username", response.data.username)
-
-        // Check for specific role keywords in the username
-        const username = response.data.username.toLowerCase()
-        if (username.includes("admin")) {
-          role = "admin"
-        } else if (username.includes("lecturer")) {
-          role = "lecturer"
-        } else if (username.includes("registrar")) {
-          role = "academic_registrar"
+      const response = await API.post("login/", formData);
+  
+      // Axios does not use response.ok, check response.status instead
+      if (response.status === 200) {
+        // Extract data
+        const { access, refresh, username } = response.data;
+  
+        // Store tokens in local storage
+        localStorage.setItem("accessToken", access);
+        localStorage.setItem("refreshToken", refresh);
+        localStorage.setItem("username", username);
+  
+        // Determine role based on username
+        let role = "student";
+        if (username.toLowerCase().includes("admin")) {
+          role = "admin";
+        } else if (username.toLowerCase().includes("lecturer")) {
+          role = "lecturer";
+        } else if (username.toLowerCase().includes("registrar")) {
+          role = "academic_registrar";
         }
-
-        console.log(`Login successful - Role: ${role}`)
-
-        // Redirect based on role
+  
+        // Store role in local storage
+        localStorage.setItem("role", role);
+  
+        console.log(`Login successful - Role: ${role}`);
+  
+        // Role-based redirection
         const roleRedirects = {
           admin: "/admin-dashboard",
           student: "/studentdashboard",
           lecturer: "/lecturer-dashboard",
           academic_registrar: "/registrar-dashboard",
-        }
-
-        // Navigate to the appropriate dashboard
-        navigate(roleRedirects[role], { replace: true })
+        };
+  
+        navigate(roleRedirects[role], { replace: true });
       } else {
-        console.log("Failed to get a response")
+        setError("Invalid credentials. Please try again.");
       }
-      
     } catch (error) {
-      const errorMessage = error.response?.data?.error || "Login failed. Please try again."
-      setError(errorMessage)
+      const errorMessage = error.response?.data?.error || "Login failed. Please try again.";
+      setError(errorMessage);
     } finally {
-      setLoading(false)
+      setLoading(false);
     }
-  }
+  };
+  
 
   return (
     <div className="flex flex-col min-h-screen items-center justify-center bg-gray-50">
