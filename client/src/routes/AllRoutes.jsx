@@ -36,7 +36,6 @@ import {
   Studentsubmitissue,
   Studentsettings,
 } from "../features";
-import Studentissuereport from "../features/Studentissuereport";
 
 const AllRoutes = () => {
   return (
