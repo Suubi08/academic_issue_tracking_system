@@ -309,6 +309,25 @@ const Auth = () => {
               </div>
             </>
           )}
+          <label className="block text-sm font-medium text-gray-700"></label>
+          <select
+              className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm focus:border-blue-500 focus:outline-none focus:ring-blue-500"
+              id="role"
+              name="role"
+              onChange={handleChange}
+              value={formData.role}
+              required
+            ></select>
+            <input
+              className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm focus:border-blue-500 focus:outline-none focus:ring-blue-500"
+              type="password"
+              id="confirmPassword"
+              name="confirmPassword"
+              placeholder="Confirm your password"
+              onChange={handleChange}
+              required
+              autoComplete="new-password"
+            />
 
           {/*  Login Button if not Signup */}
           {!isSignup && (

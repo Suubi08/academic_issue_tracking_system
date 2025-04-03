@@ -4,6 +4,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Menu, X, ChevronLeft, Bell, User, LogOut } from "lucide-react";
 import { logout } from "../utils/authService";
+import { Avatar, AvatarFallback, AvatarImage } from "./ui/Avatar";
 
 const Navbar = ({
   setSidebarOpen,
@@ -14,8 +15,11 @@ const Navbar = ({
   showReportButton,
 }) => {
   const [userMenuOpen, setUserMenuOpen] = useState(false);
+  // const navigate = useNavigate();
+  // const username = localStorage.getItem("username") || "User";
   const navigate = useNavigate();
   const username = localStorage.getItem("username") || "User";
+  const userRole = localStorage.getItem("role") || "student";
 
   const handleLogout = () => {
     logout();
@@ -63,11 +67,21 @@ const Navbar = ({
             )}
 
             {/* Page title */}
-            <div className="ml-4">
+            {/* <div className="ml-4">
               <h1 className="text-lg font-medium text-gray-900">{title}</h1>
               <p className="text-sm text-gray-500 hidden sm:block">
                 {description}
               </p>
+            </div> */}
+            {/* User info */}
+            <div className="flex items-center gap-3">
+              {username ? (
+                <h1 className="text-lg font-medium">
+                  Welcome <span className="font-semibold">{username}</span>
+                </h1>
+              ) : (
+                <h1 className="text-lg font-medium">Welcome Guest</h1>
+              )}
             </div>
           </div>
 

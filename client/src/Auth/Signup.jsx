@@ -1,178 +1,335 @@
-"use client"
-
-import { useState } from "react"
-import { Link, useNavigate } from "react-router-dom"
+import { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import API from "../utils/axiosInstance";
+import { roles, colleges, departments } from "../constants";
 
 const Signup = () => {
   const [formData, setFormData] = useState({
+    first_name: "",
+    last_name: "",
     username: "",
     email: "",
     password: "",
-    confirmPassword: "",
-    role: "student", // Default role
-  })
-  const [loading, setLoading] = useState(false)
-  const [error, setError] = useState("")
-  const navigate = useNavigate()
+    confirm_password: "",
+    role: "",
+    student_number: "",
+    course_name: "",
+    subject_taught: "",
+    college: "",
+    department: "",
+    lecture_number: "",
+  });
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
+  const [step, setStep] = useState(1);
+  const navigate = useNavigate();
 
   const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value })
-  }
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
 
   const handleSubmit = async (e) => {
-    e.preventDefault()
-    setError("")
+    e.preventDefault();
+    setError("");
 
-    // Basic validation
-    if (formData.password !== formData.confirmPassword) {
-      setError("Passwords do not match")
-      return
+    if (formData.password !== formData.confirm_password) {
+      setError("Passwords do not match");
+      return;
     }
 
-    setLoading(true)
+    setLoading(true);
 
     try {
-      // For demo purposes, we'll simulate a successful signup
-      // In a real app, you would use the API call below
-      // const response = await API.post("register/", formData)
-
-      // Set token expiry to 24 hours from now
-      const expiryDate = new Date()
-      expiryDate.setHours(expiryDate.getHours() + 24)
-
-      // Store tokens and user info
-      localStorage.setItem("accessToken", "demo-token")
-      localStorage.setItem("refreshToken", "demo-refresh-token")
-      localStorage.setItem("role", formData.role)
-      localStorage.setItem("username", formData.username)
-      localStorage.setItem("tokenExpiry", expiryDate.toISOString())
-
-      // Redirect based on role
-      const roleRedirects = {
-        admin: "/admin-dashboard",
-        student: "/studentdashboard",
-        lecturer: "/lecturer-dashboard",
-        academic_registrar: "/registrar-dashboard",
-      }
-
-      // Navigate to the appropriate dashboard
-      navigate(roleRedirects[formData.role], { replace: true })
+      await API.post("register/", formData);
+      alert("Registration successful!");
+      navigate("/studentdashboard");
     } catch (error) {
-      const errorMessage = error.response?.data?.error || "Signup failed. Please try again."
-      setError(errorMessage)
+      setError(
+        error.response?.data?.error || "Signup failed. Please try again."
+      );
     } finally {
-      setLoading(false)
+      setLoading(false);
     }
-  }
+  };
 
   return (
     <div className="flex flex-col min-h-screen items-center justify-center bg-gray-50">
       <div className="w-full max-w-md bg-white p-8 rounded-lg shadow-lg">
         <h2 className="text-2xl font-bold text-center">Sign Up for AITS</h2>
-        <p className="text-center text-gray-600 mt-2">Academic Issue Tracking System</p>
-
+        <p className="text-center text-gray-600 mt-2">
+          Academic Issue Tracking System
+        </p>
         {error && <p className="text-red-500 text-sm mt-2">{error}</p>}
 
         <form className="space-y-4 mt-4" onSubmit={handleSubmit}>
-          <div>
-            <label htmlFor="username" className="block text-sm font-medium text-gray-700">
-              Username
-            </label>
-            <input
-              className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm focus:border-blue-500 focus:outline-none focus:ring-blue-500"
-              type="text"
-              id="username"
-              name="username"
-              placeholder="Choose a username"
-              onChange={handleChange}
-              required
-              autoComplete="username"
-            />
-          </div>
+          {step === 1 && (
+            <>
+              <div>
+                <label className="block text-sm font-medium text-gray-700">
+                  Firstname
+                </label>
+                <input
+                  className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm focus:border-blue-500 focus:outline-none focus:ring-blue-500"
+                  type="text"
+                  name="first_name"
+                  placeholder="First Name"
+                  onChange={handleChange}
+                  required
+                />
+              </div>
+              <div>
+                <label className="block text-sm font-medium text-gray-700">
+                  Lastname
+                </label>
+                <input
+                  className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm focus:border-blue-500 focus:outline-none focus:ring-blue-500"
+                  type="text"
+                  name="last_name"
+                  placeholder="Last Name"
+                  onChange={handleChange}
+                  required
+                />
+              </div>
+              <div>
+                <label className="block text-sm font-medium text-gray-700">
+                  Username
+                </label>
+                <input
+                  className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm focus:border-blue-500 focus:outline-none focus:ring-blue-500"
+                  type="text"
+                  name="username"
+                  placeholder="Username"
+                  onChange={handleChange}
+                  required
+                />
+              </div>
+              <div>
+                <label className="block text-sm font-medium text-gray-700">
+                  Email
+                </label>
+                <input
+                  className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm focus:border-blue-500 focus:outline-none focus:ring-blue-500"
+                  type="email"
+                  name="email"
+                  placeholder="Email"
+                  onChange={handleChange}
+                  required
+                />
+              </div>
+              <div>
+                <label className="block text-sm font-medium text-gray-700">
+                  Password
+                </label>
+                <input
+                  className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm focus:border-blue-500 focus:outline-none focus:ring-blue-500"
+                  type="password"
+                  name="password"
+                  placeholder="Password"
+                  onChange={handleChange}
+                  required
+                />
+              </div>
+              <div>
+                <label className="block text-sm font-medium text-gray-700">
+                  Confirm Password
+                </label>
+                <input
+                  className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm focus:border-blue-500 focus:outline-none focus:ring-blue-500"
+                  type="password"
+                  name="confirm_password"
+                  placeholder="Confirm Password"
+                  onChange={handleChange}
+                  required
+                />
+              </div>
+              <div>
+                <label className="block text-sm font-medium text-gray-700">
+                  Role
+                </label>
+                <select
+                  className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm focus:border-blue-500 focus:outline-none focus:ring-blue-500"
+                  name="role"
+                  onChange={handleChange}
+                  value={formData.role}
+                  required
+                >
+                  {roles.map((role) => (
+                    <option
+                      key={role.value}
+                      value={role.value}
+                      disabled={role.disabled}
+                    >
+                      {role.label}
+                    </option>
+                  ))}
+                </select>
+              </div>
+              <button
+                className="w-full rounded-md bg-blue-600 p-3 text-white transition hover:bg-blue-700"
+                onClick={() => setStep(2)}
+                disabled={loading}
+              >
+                {loading ? "Loading..." : "Next"}
+              </button>
+            </>
+          )}
 
-          <div>
-            <label htmlFor="email" className="block text-sm font-medium text-gray-700">
-              Email
-            </label>
-            <input
-              className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm focus:border-blue-500 focus:outline-none focus:ring-blue-500"
-              type="email"
-              id="email"
-              name="email"
-              placeholder="Enter your email"
-              onChange={handleChange}
-              required
-              autoComplete="email"
-            />
-          </div>
+          {step === 2 && (
+            <>
+              {formData.role === "student" && (
+                <>
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700">
+                      Student Number
+                    </label>
+                    <input
+                      className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm focus:border-blue-500 focus:outline-none focus:ring-blue-500"
+                      type="text"
+                      name="student_number"
+                      placeholder="Student Number"
+                      onChange={handleChange}
+                      required
+                    />
+                  </div>
 
-          <div>
-            <label htmlFor="password" className="block text-sm font-medium text-gray-700">
-              Password
-            </label>
-            <input
-              className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm focus:border-blue-500 focus:outline-none focus:ring-blue-500"
-              type="password"
-              id="password"
-              name="password"
-              placeholder="Create a password"
-              onChange={handleChange}
-              required
-              autoComplete="new-password"
-            />
-          </div>
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700">
+                      Course name
+                    </label>
+                    <input
+                      className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm focus:border-blue-500 focus:outline-none focus:ring-blue-500"
+                      type="text"
+                      name="course_name"
+                      placeholder="Course Name"
+                      onChange={handleChange}
+                      required
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700">
+                      Department
+                    </label>
+                    <select
+                      className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm focus:border-blue-500 focus:outline-none focus:ring-blue-500"
+                      name="department"
+                      onChange={handleChange}
+                      value={formData.department}
+                      required
+                    >
+                      {departments.map((dept) => (
+                        <option
+                          key={dept.value}
+                          value={dept.value}
+                          disabled={dept.disabled}
+                        >
+                          {dept.label}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
+                </>
+              )}
+              {formData.role === "lecturer" && (
+                <>
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700">
+                      Lecturer Number
+                    </label>
+                    <input
+                      className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm focus:border-blue-500 focus:outline-none focus:ring-blue-500"
+                      type="text"
+                      name="lecture_number"
+                      placeholder="Lecturer Number"
+                      onChange={handleChange}
+                      required
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700">
+                      Subject Taught
+                    </label>
+                    <input
+                      className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm focus:border-blue-500 focus:outline-none focus:ring-blue-500"
+                      type="text"
+                      name="subject_taught"
+                      placeholder="Subject Taught"
+                      onChange={handleChange}
+                      required
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700">
+                      Department
+                    </label>
+                    <select
+                      className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm focus:border-blue-500 focus:outline-none focus:ring-blue-500"
+                      name="department"
+                      onChange={handleChange}
+                      value={formData.department}
+                      required
+                    >
+                      {departments.map((dept) => (
+                        <option
+                          key={dept.value}
+                          value={dept.value}
+                          disabled={dept.disabled}
+                        >
+                          {dept.label}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
+                </>
+              )}
 
-          <div>
-            <label htmlFor="confirmPassword" className="block text-sm font-medium text-gray-700">
-              Confirm Password
-            </label>
-            <input
-              className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm focus:border-blue-500 focus:outline-none focus:ring-blue-500"
-              type="password"
-              id="confirmPassword"
-              name="confirmPassword"
-              placeholder="Confirm your password"
-              onChange={handleChange}
-              required
-              autoComplete="new-password"
-            />
-          </div>
-
-          <div>
-            <label htmlFor="role" className="block text-sm font-medium text-gray-700">
-              Role
-            </label>
-            <select
-              className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm focus:border-blue-500 focus:outline-none focus:ring-blue-500"
-              id="role"
-              name="role"
-              onChange={handleChange}
-              value={formData.role}
-              required
-            >
-              <option value="student">Student</option>
-              <option value="lecturer">Lecturer</option>
-              <option value="admin">Admin</option>
-              <option value="academic_registrar">Academic Registrar</option>
-            </select>
-          </div>
-
-          <button
-            type="submit"
-            className="w-full rounded-md bg-blue-600 p-3 text-white transition hover:bg-blue-700"
-            disabled={loading}
-          >
-            {loading ? "Signing up..." : "Sign Up"}
-          </button>
+              <div>
+                <label className="block text-sm font-medium text-gray-700">
+                  College/School
+                </label>
+                <select
+                  className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm focus:border-blue-500 focus:outline-none focus:ring-blue-500"
+                  name="college"
+                  onChange={handleChange}
+                  value={formData.college}
+                  required
+                >
+                  {colleges.map((college) => (
+                    <option
+                      key={college.value}
+                      value={college.value}
+                      disabled={college.disabled}
+                    >
+                      {college.label}
+                    </option>
+                  ))}
+                </select>
+              </div>
+              <div className="flex justify-between gap-4">
+                <button
+                  type="button"
+                  className="auth_button bg-gray-500"
+                  onClick={() => setStep(1)}
+                  disabled={loading}
+                >
+                  {loading ? "Loading..." : "Back"}
+                </button>
+                <button
+                  type="submit"
+                  className="auth_button bg-blue-600 text-white hover:bg-blue-700"
+                  disabled={loading}
+                >
+                  {loading ? "Registering..." : "Register"}
+                </button>
+              </div>
+            </>
+          )}
         </form>
-
         <p className="text-center mt-4 text-blue-500">
-          Already have an account? <Link to="/login">Login</Link>
+          Don't have an account? <Link to="/login">Login</Link>
         </p>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default Signup
-
+export default Signup;

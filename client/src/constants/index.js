@@ -4,7 +4,7 @@ export const roles = [
   { value: "lecturer", label: "Lecturer" },
   { value: "academic_registrar", label: "Academic Registrar" },
   { value: "admin", label: "Administrator" },
-]
+];
 
 export const colleges = [
   { value: "", label: "Select College / School", disabled: true },
@@ -13,7 +13,7 @@ export const colleges = [
   { value: "business_management", label: "Business and Management" },
   { value: "medicine", label: "College of Medicine" },
   { value: "education", label: "College of Education" },
-]
+];
 
 export const departments = [
   { value: "", label: "Select Department", disabled: true },
@@ -22,5 +22,4 @@ export const departments = [
   { value: "business_administration", label: "Business Administration" },
   { value: "biomedical_sciences", label: "Biomedical Science" },
   { value: "literature", label: "Literature" },
-]
-
+];

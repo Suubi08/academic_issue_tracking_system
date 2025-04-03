@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Paperclip } from "lucide-react";
 import { Button } from "../components";
 import { useNavigate } from "react-router-dom";
@@ -47,6 +47,9 @@ const Studentsubmitissue = () => {
 
   const [errors, setErrors] = useState({});
   const [successMessage, setSuccessMessage] = useState("");
+  const [showDropdown, setShowDropdown] = useState(false);
+  const [searchTerm, setSearchTerm] = useState("");
+  const [filteredLecturers, setFilteredLecturers] = useState([]);
 
   const handleChange = (e) => {
     const { id, value } = e.target;
@@ -54,13 +57,17 @@ const Studentsubmitissue = () => {
       ...prev,
       [id]: value,
     }));
+    if (id === "lecturer") {
+      setSearchTerm(value);
+      setShowDropdown(true);
+    }
   };
 
   const handleSelectChange = (e, id) => {
     const { value } = e.target;
     setFormData({
       ...formData,
-      [id]: value, // Update the selected field dynamically based on id
+      [id]: value,
     });
   };
 
@@ -103,6 +110,38 @@ const Studentsubmitissue = () => {
   const handleCancel = () => {
     navigate("/studentdashboard");
   };
+
+  const handleLecturerSelect = (lecturer) => {
+    setFormData((prev) => ({
+      ...prev,
+      lecturer: lecturer.name,
+    }));
+    setShowDropdown(false);
+  };
+
+  useEffect(() => {
+    const fetchLecturers = async () => {
+      try {
+        const response = await fetch(
+          `http://127.0.0.1:8000/api/users/lecturer/?search=${searchTerm}`
+        );
+        if (response.ok) {
+          const data = await response.json();
+          setFilteredLecturers(data);
+        } else {
+          console.error("Failed to fetch lecturers");
+        }
+      } catch (error) {
+        console.error("Error fetching lecturers:", error);
+      }
+    };
+
+    if (searchTerm) {
+      fetchLecturers();
+    } else {
+      setFilteredLecturers([]);
+    }
+  }, [searchTerm]);
 
   return (
     <div className="flex-1 p-4 md:p-6 max-w-6xl mx-auto w-full">
@@ -189,6 +228,19 @@ const Studentsubmitissue = () => {
                   onChange={handleChange}
                   className="w-full p-2 border border-gray-300 rounded"
                 />
+                {showDropdown && (
+                  <ul className="absolute z-10 bg-white border rounded w-full max-h-40 overflow-y-auto shadow-lg mt-1">
+                    {filteredLecturers.map((lecturer) => (
+                      <li
+                        key={lecturer.id}
+                        className="p-2 hover:bg-gray-200 cursor-pointer"
+                        onClick={() => handleLecturerSelect(lecturer)}
+                      >
+                        {lecturer.name}
+                      </li>
+                    ))}
+                  </ul>
+                )}
               </div>
             </div>
 
