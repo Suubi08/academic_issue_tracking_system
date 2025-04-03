@@ -30,24 +30,6 @@ const Sidebar = () => {
 
   // Define navigation links based on user role
   const getNavLinks = () => {
-    const commonLinks = [
-      {
-        to: "/issues",
-        icon: FileWarning,
-        label: "My Issues",
-      },
-      {
-        to: "/reports",
-        icon: BarChart3,
-        label: "Reports & Analysis",
-      },
-      {
-        to: "/settings",
-        icon: Settings,
-        label: "Settings",
-      },
-    ];
-
     if (userRole === "student") {
       return [
         {
@@ -55,11 +37,20 @@ const Sidebar = () => {
           icon: LayoutDashboard,
           label: "Dashboard",
         },
-        ...commonLinks,
         {
-          to: "/issuereport",
+          to: "/submitissue",
           icon: PlusCircle,
-          label: "Report Issue",
+          label: "Submit Issue",
+        },
+        {
+          to: "/studentissues",
+          icon: PlusCircle,
+          label: "My Issues",
+        },
+        {
+          to: "/studentsettings",
+          icon: PlusCircle,
+          label: "Settings and Profile",
         },
       ];
     } else if (userRole === "lecturer") {
@@ -73,6 +64,11 @@ const Sidebar = () => {
           to: "/issuemanagement",
           icon: FileWarning,
           label: "Issue management",
+        },
+        {
+          to: "/status-update",
+          icon: FileWarning,
+          label: "Status and Updates",
         },
         {
           to: "/lecturernotifications",
@@ -93,7 +89,7 @@ const Sidebar = () => {
           label: "Dashboard",
         },
         {
-          to: "/adminIssuemanagement",
+          to: "/adminissuemanagement",
           icon: FileWarning,
           label: "Issue management",
         },
@@ -103,7 +99,7 @@ const Sidebar = () => {
           label: "Notifications & Alerts",
         },
         {
-          to: "/usermanagement",
+          to: "/adminusermanagement",
           icon: UserCog,
           label: "User Management",
         },

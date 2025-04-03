@@ -1,20 +1,27 @@
-"use client"
+"use client";
 
-import { useEffect } from "react"
-import { useNavigate } from "react-router-dom"
-import { Card, CardContent, CardHeader, CardTitle } from "../../components/ui/Card"
-import { AlertCircle, Bell, MessageSquare, Users } from "lucide-react"
+import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import {
+  Card,
+  CardHeader,
+  CardFooter,
+  CardTitle,
+  CardDescription,
+  CardContent,
+} from "../components";
+import { AlertCircle, Bell, MessageSquare, Users } from "lucide-react";
 
 const AdminDashboard = () => {
-  const navigate = useNavigate()
-  const userRole = localStorage.getItem("role")
+  const navigate = useNavigate();
+  const userRole = localStorage.getItem("role");
 
   useEffect(() => {
     // Ensure the user is an admin or academic registrar
     if (userRole !== "admin" && userRole !== "academic_registrar") {
-      navigate("/login")
+      navigate("/login");
     }
-  }, [userRole, navigate])
+  }, [userRole, navigate]);
 
   const summaryItems = [
     {
@@ -49,12 +56,14 @@ const AdminDashboard = () => {
       color: "text-yellow-500",
       linkText: "View more",
     },
-  ]
+  ];
 
   return (
     <div>
       <h1 className="text-2xl font-bold mb-6">
-        {userRole === "admin" ? "Admin Dashboard" : "Academic Registrar Dashboard"}
+        {userRole === "admin"
+          ? "Admin Dashboard"
+          : "Academic Registrar Dashboard"}
       </h1>
 
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4 mb-6">
@@ -66,7 +75,9 @@ const AdminDashboard = () => {
             </CardHeader>
             <CardContent>
               <div className="text-2xl font-bold">{item.value}</div>
-              <p className="text-xs text-muted-foreground text-gray-400">{item.description}</p>
+              <p className="text-xs text-muted-foreground text-gray-400">
+                {item.description}
+              </p>
               <a className="text-xs text-blue-600 mt-2 block" href="#">
                 {item.linkText}
               </a>
@@ -89,7 +100,9 @@ const AdminDashboard = () => {
                   </div>
                   <div>
                     <h3 className="font-medium">Issue #{i}: Missing marks</h3>
-                    <p className="text-sm text-gray-500">Reported by Student {i} • 2 hours ago</p>
+                    <p className="text-sm text-gray-500">
+                      Reported by Student {i} • 2 hours ago
+                    </p>
                   </div>
                 </div>
               ))}
@@ -105,11 +118,15 @@ const AdminDashboard = () => {
             <div className="space-y-4">
               <div className="flex justify-between items-center">
                 <span>Server Status</span>
-                <span className="px-2 py-1 bg-green-100 text-green-800 rounded-full text-xs font-medium">Online</span>
+                <span className="px-2 py-1 bg-green-100 text-green-800 rounded-full text-xs font-medium">
+                  Online
+                </span>
               </div>
               <div className="flex justify-between items-center">
                 <span>Database</span>
-                <span className="px-2 py-1 bg-green-100 text-green-800 rounded-full text-xs font-medium">Healthy</span>
+                <span className="px-2 py-1 bg-green-100 text-green-800 rounded-full text-xs font-medium">
+                  Healthy
+                </span>
               </div>
               <div className="flex justify-between items-center">
                 <span>API Services</span>
@@ -126,8 +143,7 @@ const AdminDashboard = () => {
         </Card>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default AdminDashboard
-
+export default AdminDashboard;

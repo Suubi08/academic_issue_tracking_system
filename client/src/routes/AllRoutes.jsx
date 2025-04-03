@@ -1,20 +1,26 @@
 import { Routes, Route, Navigate } from "react-router-dom";
 import Layout from "../Layout/Layout";
-import {
-  Issues,
-  Reports,
-  Settings,
-  Studentdashboard,
-  Issuereport,
-} from "../pages/";
-import Login from "../pages/Auth/Login";
-import Signup from "../pages/Auth/Signup";
+// import {
+//   Issues,
+//   Reports,
+//   Settings,
+//   Studentdashboard,
+//   Issuereport,
+// } from "../pages/";
+import Login from "../Auth/Login";
+import Signup from "../Auth/Signup";
+// import Auth from "../Auth/Auth";
 import ProtectedRoute from "../components/ProtectedRoute";
 import {
   AdminDashboard,
+  Dashboard,
+  IssueTracking,
   LecturerDashboard,
   PageNotFound,
-} from "../pages/LecturerDashboard";
+  QuickActions,
+  RecentActivity,
+  Studentdashboard,
+} from "../Hello";
 import {
   Lecturerissuemanagement,
   LecturerNotifications,
@@ -26,10 +32,11 @@ import {
   Lecturerstatusupdates,
   Lecturersettings,
   Studentnotifications,
-  Studentresolvedissues,
+  Studentissues,
   Studentsubmitissue,
   Studentsettings,
 } from "../features";
+import Studentissuereport from "../features/Studentissuereport";
 
 const AllRoutes = () => {
   return (
@@ -45,10 +52,10 @@ const AllRoutes = () => {
       <Route element={<ProtectedRoute allowedRoles={["student"]} />}>
         <Route element={<Layout />}>
           <Route path="/studentdashboard" element={<Studentdashboard />} />
-          <Route path="/issues" element={<Issues />} />
-          <Route path="/issuereport" element={<Issuereport />} />
-          <Route path="/reports" element={<Reports />} />
-          <Route path="/settings" element={<Settings />} />
+          <Route path="/studentissues" element={<Studentissues />} />
+          <Route path="/submitissue" element={<Studentsubmitissue />} />
+          {/* <Route path="/studentissuereport" element={<Studentissuereport />} /> */}
+          <Route path="/studentsettings" element={<Studentsettings />} />
         </Route>
       </Route>
 
@@ -60,6 +67,7 @@ const AllRoutes = () => {
             path="/issuemanagement"
             element={<Lecturerissuemanagement />}
           />
+          <Route path="/status-update" element={<Lecturerstatusupdates />} />
           <Route
             path="/lecturernotifications"
             element={<LecturerNotifications />}
@@ -73,8 +81,12 @@ const AllRoutes = () => {
         <Route element={<Layout />}>
           <Route path="/admin-dashboard" element={<AdminDashboard />} />
           <Route
-            path="/adminIssuemanagement"
+            path="/adminissuemanagement"
             element={<Adminissuemanagement />}
+          />
+          <Route
+            path="/adminusermanagement"
+            element={<Adminusermanagement />}
           />
           <Route path="/adminNotifications" element={<AdminNotifications />} />
           <Route path="/adminreports" element={<AdminReports />} />
@@ -82,7 +94,7 @@ const AllRoutes = () => {
         </Route>
       </Route>
 
-      {/* Academic Registrar Routes */}
+      {/* Academic Registrar Routes
       <Route element={<ProtectedRoute allowedRoles={["academic_registrar"]} />}>
         <Route element={<Layout />}>
           <Route path="/registrar-dashboard" element={<AdminDashboard />} />
@@ -90,7 +102,7 @@ const AllRoutes = () => {
           <Route path="/reports" element={<Reports />} />
           <Route path="/settings" element={<Settings />} />
         </Route>
-      </Route>
+      </Route> */}
 
       {/* Catch-all 404 route */}
       <Route path="*" element={<PageNotFound />} />

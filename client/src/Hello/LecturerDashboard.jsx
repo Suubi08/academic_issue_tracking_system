@@ -3,7 +3,7 @@
 import { Calendar, FileText, FileTextIcon, MessageSquare } from "lucide-react"
 import { useEffect } from "react"
 import { useNavigate } from "react-router-dom"
-import { Card, CardHeader, CardTitle, CardContent } from "../../components/ui/card"
+import { Card, CardHeader, CardTitle, CardContent } from "../components/ui/card"
 
 const LecturerDashboard = () => {
   const navigate = useNavigate()

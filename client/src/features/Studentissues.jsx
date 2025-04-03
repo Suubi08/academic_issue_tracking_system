@@ -1,13 +1,34 @@
-"use client"
+"use client";
 
-import { useState, useEffect } from "react"
-import { Tabs, TabsList, TabsTrigger, TabsContent } from "../components/ui/Tabs"
-import { Card, CardContent, CardHeader, CardTitle, CardFooter } from "../components/ui/Card"
-import { Button } from "../components/ui/Button"
-import { Search, Filter, ChevronDown, X, Eye, Clock, CheckCircle, AlertCircle } from "lucide-react"
-import { Badge } from "../components/ui/Badge"
+import { useState, useEffect } from "react";
+import {
+  Tabs,
+  TabsList,
+  TabsTrigger,
+  TabsContent,
+} from "../components/ui/Tabs";
+import {
+  Card,
+  CardHeader,
+  CardFooter,
+  CardTitle,
+  CardDescription,
+  CardContent,
+} from "../components";
+import { Button } from "../components/ui/Button";
+import {
+  Search,
+  Filter,
+  ChevronDown,
+  X,
+  Eye,
+  Clock,
+  CheckCircle,
+  AlertCircle,
+} from "lucide-react";
+import { Badge } from "../components/ui/Badge";
 
-const Issues = () => {
+const Studentissues = () => {
   // Sample data
   const allIssues = [
     {
@@ -74,116 +95,140 @@ const Issues = () => {
       priority: "Low",
       category: "Resources",
     },
-  ]
+  ];
 
-  const [issues, setIssues] = useState(allIssues)
-  const [searchTerm, setSearchTerm] = useState("")
-  const [statusFilter, setStatusFilter] = useState("all")
-  const [categoryFilter, setCategoryFilter] = useState("all")
-  const [priorityFilter, setPriorityFilter] = useState("all")
-  const [sortOrder, setSortOrder] = useState("newest")
-  const [showFilters, setShowFilters] = useState(false)
-  const [activeTab, setActiveTab] = useState("all")
+  const [issues, setIssues] = useState(allIssues);
+  const [searchTerm, setSearchTerm] = useState("");
+  const [statusFilter, setStatusFilter] = useState("all");
+  const [categoryFilter, setCategoryFilter] = useState("all");
+  const [priorityFilter, setPriorityFilter] = useState("all");
+  const [sortOrder, setSortOrder] = useState("newest");
+  const [showFilters, setShowFilters] = useState(false);
+  const [activeTab, setActiveTab] = useState("all");
 
   // Apply filters when search term, status filter, or sort changes
   useEffect(() => {
-    let filteredIssues = [...allIssues]
+    let filteredIssues = [...allIssues];
 
     // Apply search filter
     if (searchTerm) {
       filteredIssues = filteredIssues.filter(
         (issue) =>
           issue.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-          issue.category.toLowerCase().includes(searchTerm.toLowerCase()),
-      )
+          issue.category.toLowerCase().includes(searchTerm.toLowerCase())
+      );
     }
 
     // Apply tab filter
     if (activeTab !== "all") {
-      filteredIssues = filteredIssues.filter((issue) => issue.status.toLowerCase() === activeTab.toLowerCase())
+      filteredIssues = filteredIssues.filter(
+        (issue) => issue.status.toLowerCase() === activeTab.toLowerCase()
+      );
     }
 
     // Apply status filter
     if (statusFilter !== "all") {
-      filteredIssues = filteredIssues.filter((issue) => issue.status === statusFilter)
+      filteredIssues = filteredIssues.filter(
+        (issue) => issue.status === statusFilter
+      );
     }
 
     // Apply category filter
     if (categoryFilter !== "all") {
-      filteredIssues = filteredIssues.filter((issue) => issue.category === categoryFilter)
+      filteredIssues = filteredIssues.filter(
+        (issue) => issue.category === categoryFilter
+      );
     }
 
     // Apply priority filter
     if (priorityFilter !== "all") {
-      filteredIssues = filteredIssues.filter((issue) => issue.priority === priorityFilter)
+      filteredIssues = filteredIssues.filter(
+        (issue) => issue.priority === priorityFilter
+      );
     }
 
     // Apply sorting
     filteredIssues.sort((a, b) => {
-      const dateA = new Date(a.lastUpdate)
-      const dateB = new Date(b.lastUpdate)
+      const dateA = new Date(a.lastUpdate);
+      const dateB = new Date(b.lastUpdate);
 
       if (sortOrder === "newest") {
-        return dateB - dateA
+        return dateB - dateA;
       } else {
-        return dateA - dateB
+        return dateA - dateB;
       }
-    })
+    });
 
-    setIssues(filteredIssues)
-  }, [searchTerm, statusFilter, categoryFilter, priorityFilter, sortOrder, activeTab])
+    setIssues(filteredIssues);
+  }, [
+    searchTerm,
+    statusFilter,
+    categoryFilter,
+    priorityFilter,
+    sortOrder,
+    activeTab,
+  ]);
 
   const clearFilters = () => {
-    setSearchTerm("")
-    setStatusFilter("all")
-    setCategoryFilter("all")
-    setPriorityFilter("all")
-    setSortOrder("newest")
-  }
+    setSearchTerm("");
+    setStatusFilter("all");
+    setCategoryFilter("all");
+    setPriorityFilter("all");
+    setSortOrder("newest");
+  };
 
   const getActiveFiltersCount = () => {
-    let count = 0
-    if (statusFilter !== "all") count++
-    if (categoryFilter !== "all") count++
-    if (priorityFilter !== "all") count++
-    if (sortOrder !== "newest") count++
-    return count
-  }
+    let count = 0;
+    if (statusFilter !== "all") count++;
+    if (categoryFilter !== "all") count++;
+    if (priorityFilter !== "all") count++;
+    if (sortOrder !== "newest") count++;
+    return count;
+  };
 
   const getStatusStyles = (status) => {
     switch (status) {
       case "Resolved":
-        return "bg-green-100 text-green-800 border-green-200"
+        return "bg-green-100 text-green-800 border-green-200";
       case "In Progress":
-        return "bg-yellow-100 text-yellow-800 border-yellow-200"
+        return "bg-yellow-100 text-yellow-800 border-yellow-200";
       case "Pending":
-        return "bg-red-100 text-red-800 border-red-200"
+        return "bg-red-100 text-red-800 border-red-200";
       default:
-        return "bg-gray-100 text-gray-800 border-gray-200"
+        return "bg-gray-100 text-gray-800 border-gray-200";
     }
-  }
+  };
 
   const getPriorityStyles = (priority) => {
     switch (priority) {
       case "High":
-        return "bg-red-100 text-red-800 border-red-200"
+        return "bg-red-100 text-red-800 border-red-200";
       case "Medium":
-        return "bg-yellow-100 text-yellow-800 border-yellow-200"
+        return "bg-yellow-100 text-yellow-800 border-yellow-200";
       case "Low":
-        return "bg-green-100 text-green-800 border-green-200"
+        return "bg-green-100 text-green-800 border-green-200";
       default:
-        return "bg-gray-100 text-gray-800 border-gray-200"
+        return "bg-gray-100 text-gray-800 border-gray-200";
     }
-  }
+  };
 
   // Calculate statistics
-  const totalIssues = allIssues.length
-  const pendingIssues = allIssues.filter((issue) => issue.status === "Pending").length
-  const inProgressIssues = allIssues.filter((issue) => issue.status === "In Progress").length
-  const resolvedIssues = allIssues.filter((issue) => issue.status === "Resolved").length
+  const totalIssues = allIssues.length;
+  const pendingIssues = allIssues.filter(
+    (issue) => issue.status === "Pending"
+  ).length;
+  const inProgressIssues = allIssues.filter(
+    (issue) => issue.status === "In Progress"
+  ).length;
+  const resolvedIssues = allIssues.filter(
+    (issue) => issue.status === "Resolved"
+  ).length;
 
   // Get unique categories
-  const categories = ["all", ...new Set(allIssues.map((issue) => issue.category))]
+  const categories = [
+    "all",
+    ...new Set(allIssues.map((issue) => issue.category)),
+  ];
 
   return (
     <div className="space-y-6">
@@ -264,7 +309,11 @@ const Issues = () => {
               <Button
                 variant="outline"
                 size="sm"
-                className={`${showFilters || getActiveFiltersCount() > 0 ? "bg-blue-50 border-blue-200 text-blue-600" : ""}`}
+                className={`${
+                  showFilters || getActiveFiltersCount() > 0
+                    ? "bg-blue-50 border-blue-200 text-blue-600"
+                    : ""
+                }`}
                 onClick={() => setShowFilters(!showFilters)}
               >
                 <Filter className="h-4 w-4 mr-1" />
@@ -278,10 +327,14 @@ const Issues = () => {
               <Button
                 variant="outline"
                 size="sm"
-                onClick={() => setSortOrder(sortOrder === "newest" ? "oldest" : "newest")}
+                onClick={() =>
+                  setSortOrder(sortOrder === "newest" ? "oldest" : "newest")
+                }
               >
                 <ChevronDown
-                  className={`h-4 w-4 mr-1 transition-transform ${sortOrder === "oldest" ? "rotate-180" : ""}`}
+                  className={`h-4 w-4 mr-1 transition-transform ${
+                    sortOrder === "oldest" ? "rotate-180" : ""
+                  }`}
                 />
                 {sortOrder === "newest" ? "Newest" : "Oldest"}
               </Button>
@@ -293,13 +346,18 @@ const Issues = () => {
             <div className="mt-4 p-3 border border-gray-200 rounded-md bg-gray-50">
               <div className="flex justify-between items-center mb-2">
                 <h3 className="text-sm font-medium">Filters</h3>
-                <button onClick={clearFilters} className="text-xs text-blue-600 flex items-center">
+                <button
+                  onClick={clearFilters}
+                  className="text-xs text-blue-600 flex items-center"
+                >
                   Clear all <X className="h-3 w-3 ml-1" />
                 </button>
               </div>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-2">
                 <div>
-                  <label className="text-xs font-medium block mb-1">Status</label>
+                  <label className="text-xs font-medium block mb-1">
+                    Status
+                  </label>
                   <select
                     className="w-full text-sm p-1.5 border border-gray-200 rounded-md"
                     value={statusFilter}
@@ -312,7 +370,9 @@ const Issues = () => {
                   </select>
                 </div>
                 <div>
-                  <label className="text-xs font-medium block mb-1">Category</label>
+                  <label className="text-xs font-medium block mb-1">
+                    Category
+                  </label>
                   <select
                     className="w-full text-sm p-1.5 border border-gray-200 rounded-md"
                     value={categoryFilter}
@@ -326,7 +386,9 @@ const Issues = () => {
                   </select>
                 </div>
                 <div>
-                  <label className="text-xs font-medium block mb-1">Priority</label>
+                  <label className="text-xs font-medium block mb-1">
+                    Priority
+                  </label>
                   <select
                     className="w-full text-sm p-1.5 border border-gray-200 rounded-md"
                     value={priorityFilter}
@@ -348,19 +410,27 @@ const Issues = () => {
             <TabsList className="mb-4">
               <TabsTrigger value="all">
                 All Issues
-                <Badge className="ml-2 bg-gray-100 text-gray-800">{totalIssues}</Badge>
+                <Badge className="ml-2 bg-gray-100 text-gray-800">
+                  {totalIssues}
+                </Badge>
               </TabsTrigger>
               <TabsTrigger value="pending">
                 Pending
-                <Badge className="ml-2 bg-red-100 text-red-800">{pendingIssues}</Badge>
+                <Badge className="ml-2 bg-red-100 text-red-800">
+                  {pendingIssues}
+                </Badge>
               </TabsTrigger>
               <TabsTrigger value="in progress">
                 In Progress
-                <Badge className="ml-2 bg-yellow-100 text-yellow-800">{inProgressIssues}</Badge>
+                <Badge className="ml-2 bg-yellow-100 text-yellow-800">
+                  {inProgressIssues}
+                </Badge>
               </TabsTrigger>
               <TabsTrigger value="resolved">
                 Resolved
-                <Badge className="ml-2 bg-green-100 text-green-800">{resolvedIssues}</Badge>
+                <Badge className="ml-2 bg-green-100 text-green-800">
+                  {resolvedIssues}
+                </Badge>
               </TabsTrigger>
             </TabsList>
 
@@ -397,18 +467,20 @@ const Issues = () => {
         )}
       </Card>
     </div>
-  )
+  );
 
   function renderIssuesList(issues) {
     if (issues.length === 0) {
       return (
         <div className="text-center py-8">
-          <p className="text-gray-500">No issues found matching your filters.</p>
+          <p className="text-gray-500">
+            No issues found matching your filters.
+          </p>
           <button onClick={clearFilters} className="mt-2 text-blue-600 text-sm">
             Clear filters
           </button>
         </div>
-      )
+      );
     }
 
     return (
@@ -420,7 +492,9 @@ const Issues = () => {
           >
             <div className="flex items-start gap-4 mb-3 md:mb-0">
               <div className="flex flex-col items-center justify-center w-12 h-12 bg-gray-100 rounded-lg shrink-0">
-                <span className="text-lg font-semibold">{new Date(issue.lastUpdate).getDate()}</span>
+                <span className="text-lg font-semibold">
+                  {new Date(issue.lastUpdate).getDate()}
+                </span>
                 <span className="text-xs text-gray-500">
                   {new Date(issue.lastUpdate).toLocaleDateString("en-US", {
                     month: "short",
@@ -431,12 +505,16 @@ const Issues = () => {
                 <h3 className="font-medium">{issue.title}</h3>
                 <div className="flex flex-wrap gap-2 mt-1">
                   <span
-                    className={`px-2 py-0.5 text-xs font-medium rounded-full border ${getStatusStyles(issue.status)}`}
+                    className={`px-2 py-0.5 text-xs font-medium rounded-full border ${getStatusStyles(
+                      issue.status
+                    )}`}
                   >
                     {issue.status}
                   </span>
                   <span
-                    className={`px-2 py-0.5 text-xs font-medium rounded-full border ${getPriorityStyles(issue.priority)}`}
+                    className={`px-2 py-0.5 text-xs font-medium rounded-full border ${getPriorityStyles(
+                      issue.priority
+                    )}`}
                   >
                     {issue.priority}
                   </span>
@@ -444,19 +522,24 @@ const Issues = () => {
                     {issue.category}
                   </span>
                 </div>
-                <p className="text-xs text-gray-500 mt-1">Last updated: {issue.lastUpdate}</p>
+                <p className="text-xs text-gray-500 mt-1">
+                  Last updated: {issue.lastUpdate}
+                </p>
               </div>
             </div>
-            <Button variant="outline" size="sm" className="flex items-center gap-1 self-end md:self-auto">
+            <Button
+              variant="outline"
+              size="sm"
+              className="flex items-center gap-1 self-end md:self-auto"
+            >
               <Eye className="h-4 w-4" />
               View Details
             </Button>
           </div>
         ))}
       </div>
-    )
+    );
   }
-}
+};
 
-export default Issues
-
+export default Studentissues;
