@@ -1,8 +1,7 @@
-"use client";
 
 import { useState, useEffect } from "react";
 import { Paperclip } from "lucide-react";
-import { Button } from "../components";
+//import { Button } from "../components";
 import { useNavigate } from "react-router-dom";
 
 const categories = [

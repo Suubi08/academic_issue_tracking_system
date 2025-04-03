@@ -1,6 +1,7 @@
 import { Routes, Route, Navigate } from "react-router-dom"
 import Layout from "../Layout/Layout"
-import { Issues, Reports, Settings, Studentdashboard, Issuereport } from "../pages/"
+import { Issues, Reports, Settings, Studentdashboard} from "../pages/"
+import Studentsubmitissue from "../pages/StudentDashboard/Studentsubmitissue"
 import Login from "../pages/Auth/Login"
 import Signup from "../pages/Auth/Signup"
 import ProtectedRoute from "../components/ProtectedRoute"
@@ -21,7 +22,7 @@ const AllRoutes = () => {
         <Route element={<Layout />}>
           <Route path="/studentdashboard" element={<Studentdashboard />} />
           <Route path="/issues" element={<Issues />} />
-          <Route path="/issuereport" element={<Issuereport />} />
+          <Route path="/studentsubmitissue" element={<Studentsubmitissue />} />
           <Route path="/reports" element={<Reports />} />
           <Route path="/settings" element={<Settings />} />
         </Route>

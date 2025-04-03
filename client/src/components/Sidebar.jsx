@@ -48,9 +48,9 @@ const Sidebar = () => {
         },
         ...commonLinks,
         {
-          to: "/issuereport",
+          to: "/studentsubmitissue",
           icon: PlusCircle,
-          label: "Report Issue",
+          label: "Submit Issue",
         },
       ]
     } else if (userRole === "lecturer") {

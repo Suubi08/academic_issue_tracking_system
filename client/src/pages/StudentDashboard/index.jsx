@@ -1,7 +1,7 @@
 import Reports from "./Reports"
 import Settings from "./Settings"
 import Studentdashboard from "./Studentdashboard"
-import Issuereport from "./Issuereport"
+import Studentssubmitissue from "./Studentsubmitissue"
 
-export { Reports, Settings, Studentdashboard, Issuereport, Studentssubmitissue }
+export { Reports, Settings, Studentdashboard, Studentssubmitissue }
 
