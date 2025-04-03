@@ -1,5 +1,5 @@
-"use client"
 
+import API from '../../utils/axiosInstance';
 import { useState } from "react"
 import { Link, useNavigate, useLocation } from "react-router-dom"
 
@@ -23,46 +23,42 @@ const Login = () => {
     setLoading(true)
 
     try {
-      // For demo purposes, we'll simulate a successful login
-      // In a real app, you would use the API call below
-      // const response = await API.post("login/", formData)
-
-      // Determine role based on username
+      const endpoint = "login/";
+      const response = await API.post(endpoint, formData);
       let role = "student"
 
-      // Check for specific role keywords in the username
-      const username = formData.username.toLowerCase()
-      if (username.includes("admin")) {
-        role = "admin"
-      } else if (username.includes("lecturer")) {
-        role = "lecturer"
-      } else if (username.includes("registrar")) {
-        role = "academic_registrar"
+      if (response.ok) {
+        localStorage.setItem("accessToken", response.data.access);
+        localStorage.setItem("refreshToken", response.data.refresh);
+        localStorage.setItem("role", role);
+        localStorage.setItem("username", response.data.username)
+
+        // Check for specific role keywords in the username
+        const username = response.data.username.toLowerCase()
+        if (username.includes("admin")) {
+          role = "admin"
+        } else if (username.includes("lecturer")) {
+          role = "lecturer"
+        } else if (username.includes("registrar")) {
+          role = "academic_registrar"
+        }
+
+        console.log(`Login successful - Role: ${role}`)
+
+        // Redirect based on role
+        const roleRedirects = {
+          admin: "/admin-dashboard",
+          student: "/studentdashboard",
+          lecturer: "/lecturer-dashboard",
+          academic_registrar: "/registrar-dashboard",
+        }
+
+        // Navigate to the appropriate dashboard
+        navigate(roleRedirects[role], { replace: true })
+      } else {
+        console.log("Failed to get a response")
       }
-
-      // Set token expiry to 24 hours from now
-      const expiryDate = new Date()
-      expiryDate.setHours(expiryDate.getHours() + 24)
-
-      // Store tokens and user info
-      localStorage.setItem("accessToken", "demo-token")
-      localStorage.setItem("refreshToken", "demo-refresh-token")
-      localStorage.setItem("role", role)
-      localStorage.setItem("username", formData.username)
-      localStorage.setItem("tokenExpiry", expiryDate.toISOString())
-
-      console.log(`Login successful - Role: ${role}`)
-
-      // Redirect based on role
-      const roleRedirects = {
-        admin: "/admin-dashboard",
-        student: "/studentdashboard",
-        lecturer: "/lecturer-dashboard",
-        academic_registrar: "/registrar-dashboard",
-      }
-
-      // Navigate to the appropriate dashboard
-      navigate(roleRedirects[role], { replace: true })
+      
     } catch (error) {
       const errorMessage = error.response?.data?.error || "Login failed. Please try again."
       setError(errorMessage)

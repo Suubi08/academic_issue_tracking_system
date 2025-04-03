@@ -1,6 +1,4 @@
-"use client"
-
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { Paperclip } from "lucide-react"
 import { Card, CardContent, CardHeader, CardTitle } from "../../components/ui/Card"
 import { Button } from "../../components/ui/Button"
@@ -39,11 +37,11 @@ const semesters = [
 
 const Issuereport = () => {
   const navigate = useNavigate()
+  const [lecturers, setLecturers] = useState([])
+  const [searchTerm, setSearchTerm] = useState("")
+  const [filteredLecturers, setFilteredLectures] = useState([]);
+  const [showDropdown, setShowDropdown] = useState(false);
   const [formData, setFormData] = useState({
-    name: "",
-    studentNumber: "",
-    registrationNumber: "",
-    issueId: "",
     category: "",
     dateOfIssue: "",
     courseUnit: "",
@@ -86,9 +84,6 @@ const Issuereport = () => {
 
   const validateForm = () => {
     const newErrors = {}
-    if (!formData.name) newErrors.name = "Name is required."
-    if (!formData.studentNumber) newErrors.studentNumber = "Student number is required."
-    if (!formData.registrationNumber) newErrors.registrationNumber = "Registration number is required."
     if (!formData.category) newErrors.category = "Category is required."
     if (!formData.dateOfIssue) newErrors.dateOfIssue = "Date of issue is required."
     if (!formData.description) newErrors.description = "Description is required."
@@ -96,20 +91,89 @@ const Issuereport = () => {
     return Object.keys(newErrors).length === 0
   }
 
-  const handleSubmit = (e) => {
-    e.preventDefault()
-    if (!validateForm()) return
-
-    console.log("Form submitted:", formData)
-    setSuccessMessage("Issue reported successfully!")
-    setTimeout(() => {
-      navigate("/studentdashboard")
-    }, 2000)
-  }
-
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    
+    // Validate the form before submission
+    if (!validateForm()) return;
+  
+    // Convert date format from MM/DD/YYYY to YYYY-MM-DD
+    const formattedDate = new Date(formData.dateOfIssue).toISOString().split("T")[0];
+  
+    // Prepare form data
+    const formDataToSend = new FormData();
+    formDataToSend.append("category", formData.category);
+    formDataToSend.append("date_of_issue", formattedDate);  // ✅ Fixing date format
+    formDataToSend.append("course_unit", formData.courseUnit);
+    formDataToSend.append("lecturer", formData.lecturer); // Send lecturer ID
+    formDataToSend.append("description", formData.description);
+    formDataToSend.append("year_of_study", formData.yearOfStudy);
+    formDataToSend.append("semester", formData.semester);
+  
+    // Attach file if available
+    if (formData.attachment) {
+      formDataToSend.append("attachment", formData.attachment);
+    }
+  
+    try {
+      const response = await fetch("http://127.0.0.1:8000/api/issues/", {
+        method: "POST",
+        body: formDataToSend,
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`, // Include authentication if needed
+        },
+      });
+  
+      if (response.ok) {
+        setSuccessMessage("Issue reported successfully!");
+        setTimeout(() => navigate("/studentdashboard"), 2000);
+      } else {
+        const errorData = await response.json();
+        setErrors(errorData);
+        console.error("Failed to submit issue:", errorData);
+      }
+    } catch (error) {
+      console.error("Error submitting issue:", error);
+    }
+  };
+  
+  // Handle cancel action
   const handleCancel = () => {
-    navigate("/studentdashboard")
-  }
+    navigate("/studentdashboard");
+  };
+  
+
+  useEffect(() => {
+    const fetchLecturers = async () => {
+      try {
+        const response = await fetch(`http://127.0.0.1:8000/api/users/lecturer/?search=${searchTerm}`);
+        if (response.ok) {
+          const data = await response.json();
+          setFilteredLectures(data);
+        } else {
+          console.error("Failed to fetch lecturers");
+        }
+      } catch (error) {
+        console.error("Error fetching lecturers:", error);
+      }
+    };
+
+    if (searchTerm.length > 1) {
+      fetchLecturers();
+      setShowDropdown(true);
+    } else {
+      setShowDropdown(false);
+    }
+  }, [searchTerm]);
+
+  const handleLecturerSelect = (lecturer) => {
+    setFormData((prev) => ({
+      ...prev,
+      lecturer: lecturer.id, // Store lecturer ID
+    }));
+    setSearchTerm(lecturer.name);
+    setShowDropdown(false);
+  };
 
   return (
     <div className="flex-1 p-4 md:p-6 max-w-6xl mx-auto w-full">
@@ -125,6 +189,7 @@ const Issuereport = () => {
               <h2 className="text-lg font-semibold mb-4 pb-1 border-b">Issue Details</h2>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
                 <FormSelect
+                  className="text-black"
                   id="category"
                   label="Issue Category"
                   value={formData.category}
@@ -155,11 +220,24 @@ const Issuereport = () => {
                 <FormField
                   id="lecturer"
                   label="Lecturer"
-                  type="search"
+                  type="text"
                   placeholder="Search lecturer"
-                  value={formData.lecturer}
-                  onChange={handleChange}
+                  value={searchTerm}
+                  onChange={(e) => setSearchTerm(e.target.value)}
                 />
+                {showDropdown && (
+                  <ul className="absolute z-10 bg-white border rounded w-full max-h-40 overflow-y-auto shadow-lg">
+                    {filteredLecturers.map((lecturer) => (
+                      <li
+                        key={lecturer.id}
+                        className="p-2 hover:bg-gray-200 cursor-pointer"
+                        onClick={() => handleLecturerSelect(lecturer)}
+                      >
+                        {lecturer.name}
+                      </li>
+                    ))}
+                  </ul>
+                )}
               </div>
 
               <div className="space-y-2 mb-6">

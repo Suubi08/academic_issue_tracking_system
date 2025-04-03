@@ -1,7 +1,8 @@
-"use client"
 
 import { useState } from "react"
 import { Link, useNavigate } from "react-router-dom"
+import API from '../../utils/axiosInstance';
+import { colleges, departments } from '../../constants';
 
 const Signup = () => {
   const [formData, setFormData] = useState({
@@ -13,6 +14,7 @@ const Signup = () => {
   })
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState("")
+  const [step, setStep] = useState(1);
   const navigate = useNavigate()
 
   const handleChange = (e) => {
@@ -22,48 +24,55 @@ const Signup = () => {
   const handleSubmit = async (e) => {
     e.preventDefault()
     setError("")
-
-    // Basic validation
-    if (formData.password !== formData.confirmPassword) {
-      setError("Passwords do not match")
-      return
-    }
-
     setLoading(true)
 
     try {
-      // For demo purposes, we'll simulate a successful signup
-      // In a real app, you would use the API call below
-      // const response = await API.post("register/", formData)
+      const endpoint = "register/";
+      const response = await API.post(endpoint, formData);
+      let role = "student"
 
-      // Set token expiry to 24 hours from now
-      const expiryDate = new Date()
-      expiryDate.setHours(expiryDate.getHours() + 24)
+      if (response.ok) {
+        localStorage.setItem("accessToken", response.data.access);
+        localStorage.setItem("refreshToken", response.data.refresh);
+        localStorage.setItem("role", role);
+        localStorage.setItem("username", response.data.username)
 
-      // Store tokens and user info
-      localStorage.setItem("accessToken", "demo-token")
-      localStorage.setItem("refreshToken", "demo-refresh-token")
-      localStorage.setItem("role", formData.role)
-      localStorage.setItem("username", formData.username)
-      localStorage.setItem("tokenExpiry", expiryDate.toISOString())
+        // Check for specific role keywords in the username
+        const username = response.data.username.toLowerCase()
+        if (username.includes("admin")) {
+          role = "admin"
+        } else if (username.includes("lecturer")) {
+          role = "lecturer"
+        } else if (username.includes("registrar")) {
+          role = "academic_registrar"
+        }
 
-      // Redirect based on role
-      const roleRedirects = {
-        admin: "/admin-dashboard",
-        student: "/studentdashboard",
-        lecturer: "/lecturer-dashboard",
-        academic_registrar: "/registrar-dashboard",
+        console.log(`Login successful - Role: ${role}`)
+
+        // Redirect based on role
+        const roleRedirects = {
+          admin: "/admin-dashboard",
+          student: "/studentdashboard",
+          lecturer: "/lecturer-dashboard",
+          academic_registrar: "/registrar-dashboard",
+        }
+
+        // Navigate to the appropriate dashboard
+        navigate(roleRedirects[role], { replace: true })
+      } else {
+        console.log("Failed to get a response")
       }
 
-      // Navigate to the appropriate dashboard
-      navigate(roleRedirects[formData.role], { replace: true })
     } catch (error) {
-      const errorMessage = error.response?.data?.error || "Signup failed. Please try again."
+      const errorMessage = error.response?.data?.error || "Login failed. Please try again."
       setError(errorMessage)
     } finally {
       setLoading(false)
     }
   }
+
+  const nextStep = () => setStep(step + 1);
+  const prevStep = () => setStep(step - 1);
 
   return (
     <div className="flex flex-col min-h-screen items-center justify-center bg-gray-50">
@@ -138,6 +147,36 @@ const Signup = () => {
             />
           </div>
 
+          <div>
+            <label htmlFor="role" className="block text-sm font-medium text-gray-700">
+              Role
+            </label>
+            <select
+              className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm focus:border-blue-500 focus:outline-none focus:ring-blue-500"
+              id="role"
+              name="role"
+              onChange={handleChange}
+              value={formData.role}
+              required
+            >
+              <option value="student">Student</option>
+              <option value="lecturer">Lecturer</option>
+              <option value="admin">Admin</option>
+              <option value="academic_registrar">Academic Registrar</option>
+            </select>
+          </div>
+          <div>
+            <label htmlFor="role" className="block text-sm font-medium text-gray-700">
+              Select College
+            </label>
+            <select name='college' className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm focus:border-blue-500 focus:outline-none focus:ring-blue-500" onChange={handleChange} value={formData.college} required>
+              {colleges.map((college) => (
+                <option key={college.value} value={college.value} disabled={college.disabled && !formData.college}>
+                  {college.label}
+                </option>
+              ))}
+            </select>
+          </div>
           <div>
             <label htmlFor="role" className="block text-sm font-medium text-gray-700">
               Role

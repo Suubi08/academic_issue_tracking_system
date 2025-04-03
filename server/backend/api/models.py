@@ -5,7 +5,7 @@ from django.contrib.auth.models import AbstractUser, Group, Permission
 class User(AbstractUser):
     ROLE_CHOICES = [
         ('student', 'Student'),
-        ('lecturer', 'Lecture'),
+        ('lecturer', 'Lecturer'),
         ('academic_registrar', 'Academic Registrar'),
         ('admin', 'Administrator'),
     ]

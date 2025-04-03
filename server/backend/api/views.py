@@ -1,14 +1,19 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.contrib.auth.models import update_last_login
 from rest_framework.views import APIView
 from django.contrib.auth import authenticate
-from rest_framework.generics import ListCreateAPIView, RetrieveUpdateDestroyAPIView, CreateAPIView
+from django.contrib.auth.decorators import login_required
+from django.contrib import messages
+from rest_framework.filters import SearchFilter
+from rest_framework.generics import ListAPIView, ListCreateAPIView, RetrieveUpdateDestroyAPIView, CreateAPIView
 from .models import User, Issue, Notification
 from rest_framework import generics, status
+from rest_framework.parsers import MultiPartParser, FormParser
 from .serializers import UserSerializer, IssueSerializer, NotificationSerializer, RegisterSerializer
 from rest_framework_simplejwt.tokens import RefreshToken
 from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
+from rest_framework.permissions import IsAuthenticated
 # from rest_framework import generics, status
 
 # Register User
@@ -53,7 +58,22 @@ class RefreshTokenView(generics.GenericAPIView):
             except Exception:
                 return Response({"error": "Invalid refresh token"}, status=status.HTTP_401_UNAUTHORIZED)
         return Response({"error": "Refresh token required"}, status=status.HTTP_400_BAD_REQUEST)
-        
+
+class IssueCreateView(generics.CreateAPIView):
+    queryset = Issue.objects.all()
+    serializer_class = IssueSerializer
+    parser_classes = (MultiPartParser, FormParser)  # Support file uploads
+
+    def perform_create(self, serializer):
+        serializer.save(created_by=self.request.user)  # Set the user automatically
+
+class LecturerListView(ListAPIView):
+    serializer_class = UserSerializer
+    filter_backends = [SearchFilter]
+    search_fields = ['first_name', 'last_name']
+
+    def get_queryset(self):
+        return User.objects.filter(role="lecturer")  # Ensure only lecturers are returned
 
 class UserListView(ListCreateAPIView):
     queryset = User.objects.all()
