@@ -1,11 +1,11 @@
-import React, { useState } from 'react';      #allows add state
-import axios from "axios";                    #allows to make requests from API
+import React, { useState } from 'react';      //allows add state
+import axios from "axios";                    //to make requests from API
 
 import { roles, colleges, departments } from '../constants';
 import API from '../utils/axiosInstance';
 
 const initialState = {
-    first_name: "", // Convert React's "FirstName" to "first_name"
+    first_name: "",       // default field form to start value with empty inputs
     last_name: "",  
     username: "",
     email: "",
