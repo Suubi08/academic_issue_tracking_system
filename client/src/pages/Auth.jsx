@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import axios from "axios";
+import React, { useState } from 'react';      #allows add state
+import axios from "axios";                    #allows to make requests from API
 
 import { roles, colleges, departments } from '../constants';
 import API from '../utils/axiosInstance';
