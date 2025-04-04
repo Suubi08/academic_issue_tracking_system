@@ -31,10 +31,10 @@ const Auth = () => {                                           // for user signi
     };
 
 const handleSubmit = async (e) => {
-    e.preventDefault();
-    setError(""); // Clear previous errors
+    e.preventDefault();                      //prevents full page refresh
+    setError("");                          // Clear previous errors
 
-    console.log("Form Data Before Sending:", formData);
+    console.log("Form Data Before Sending:", formData);   //debugging form data 
 
     try {
         const endpoint = isSignup ? "register/" : "login/";
@@ -67,7 +67,7 @@ const handleSubmit = async (e) => {
     }
 };
 
-    
+    // UI structure and branding
     const nextStep = () => setStep(step + 1);
     const prevStep = () => setStep(step - 1);
 
