@@ -20,14 +20,14 @@ const initialState = {
     lecture_number: "",
 };
 
-const Auth = () => {
-    const [isSignup, setIsSignup] = useState(false);
+const Auth = () => {                                           // for user signin and sign up plus form state
+    const [isSignup, setIsSignup] = useState(false);           //false ;user is signing in
     const [formData, setFormData] = useState(initialState);
     const [step, setStep] = useState(1);
-    const [error, setError] = useState(""); 
+    const [error, setError] = useState("");                    //display signin error or errors in filled fields 
 
     const handleChange = (e) => {
-        setFormData({ ...formData, [e.target.name]: e.target.value });
+        setFormData({ ...formData, [e.target.name]: e.target.value });   //update fields
     };
 
 const handleSubmit = async (e) => {
