@@ -84,7 +84,7 @@ const IssueTracking = () => {
       <CardHeader>
         <div className="flex justify-between items-center">
           <CardTitle>
-            <h2 className="text-xl font-semibold">Issue Tracking</h2>
+            Issue Tracking
           </CardTitle>
           <div className="flex items-center gap-2">
             <div className="relative">

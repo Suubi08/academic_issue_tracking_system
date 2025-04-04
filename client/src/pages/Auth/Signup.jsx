@@ -32,34 +32,21 @@ const Signup = () => {
     e.preventDefault();
     setError("");
     setLoading(true);
-  
+
     try {
       const response = await API.post("register/", formData);
-  
+
       if (response.status === 201) {
-        // Extract data
-        const { access, refresh, username } = response.data;
-  
+        const { access, refresh, username, role } = response.data;
+
         // Store tokens in local storage
         localStorage.setItem("accessToken", access);
         localStorage.setItem("refreshToken", refresh);
         localStorage.setItem("username", username);
-  
-        // Determine role based on username
-        let role = "student";
-        if (username.toLowerCase().includes("admin")) {
-          role = "admin";
-        } else if (username.toLowerCase().includes("lecturer")) {
-          role = "lecturer";
-        } else if (username.toLowerCase().includes("registrar")) {
-          role = "academic_registrar";
-        }
-  
-        // Store role in local storage
         localStorage.setItem("role", role);
-  
+
         console.log(`Registration successful - Role: ${role}`);
-  
+
         // Role-based redirection
         const roleRedirects = {
           admin: "/admin-dashboard",
@@ -67,8 +54,8 @@ const Signup = () => {
           lecturer: "/lecturer-dashboard",
           academic_registrar: "/registrar-dashboard",
         };
-  
-        navigate(roleRedirects[role], { replace: true });
+
+        navigate(roleRedirects[role] || "/");
       } else {
         setError("Registration failed. Please try again.");
       }
@@ -79,7 +66,7 @@ const Signup = () => {
       setLoading(false);
     }
   };
-  
+
 
   return (
     <div className="flex flex-col min-h-screen items-center justify-center bg-gray-50">

@@ -21,54 +21,43 @@ const Login = () => {
     e.preventDefault();
     setError("");
     setLoading(true);
-  
+
     try {
-      const response = await API.post("login/", formData);
-  
-      // Axios does not use response.ok, check response.status instead
-      if (response.status === 200) {
-        // Extract data
-        const { access, refresh, username } = response.data;
-  
-        // Store tokens in local storage
-        localStorage.setItem("accessToken", access);
-        localStorage.setItem("refreshToken", refresh);
-        localStorage.setItem("username", username);
-  
-        // Determine role based on username
-        let role = "student";
-        if (username.toLowerCase().includes("admin")) {
-          role = "admin";
-        } else if (username.toLowerCase().includes("lecturer")) {
-          role = "lecturer";
-        } else if (username.toLowerCase().includes("registrar")) {
-          role = "academic_registrar";
+        const response = await API.post("login/", formData);
+
+        if (response.status === 200) {
+            const { access, refresh, username, role } = response.data; 
+
+            // Store tokens in local storage
+            localStorage.setItem("accessToken", access);
+            localStorage.setItem("refreshToken", refresh);
+            localStorage.setItem("username", username);
+            localStorage.setItem("role", role);  // Store role correctly
+
+            console.log(`Login successful - Role: ${role}`);
+
+            // Role-based redirection
+            const roleRedirects = {
+                admin: "/admin-dashboard",
+                student: "/studentdashboard",
+                lecturer: "/lecturer-dashboard",
+                academic_registrar: "/registrar-dashboard",
+            };
+
+            navigate(roleRedirects[role] || "/", { replace: true });
+
+        } else {
+            setError("Invalid credentials. Please try again.");
         }
-  
-        // Store role in local storage
-        localStorage.setItem("role", role);
-  
-        console.log(`Login successful - Role: ${role}`);
-  
-        // Role-based redirection
-        const roleRedirects = {
-          admin: "/admin-dashboard",
-          student: "/studentdashboard",
-          lecturer: "/lecturer-dashboard",
-          academic_registrar: "/registrar-dashboard",
-        };
-  
-        navigate(roleRedirects[role], { replace: true });
-      } else {
-        setError("Invalid credentials. Please try again.");
-      }
     } catch (error) {
-      const errorMessage = error.response?.data?.error || "Login failed. Please try again.";
-      setError(errorMessage);
+        console.error("Login error:", error.response?.data);
+        const errorMessage = error.response?.data?.error || "Login failed. Please check your credentials.";
+        setError(errorMessage);
     } finally {
-      setLoading(false);
+        setLoading(false);
     }
-  };
+};
+
   
 
   return (
