@@ -35,9 +35,9 @@ class RegisterSerializer(serializers.ModelSerializer):
                 )
 
         elif role == 'lecturer':
-            if not all([data.get('lecture_number'), data.get('subjects_taught'), data.get('department')]):
+            if not all([data.get('lecture_number'), data.get('subject_taught'), data.get('department'),data.get('college')]):
                 raise serializers.ValidationError(
-                    {"lecturer_info": "Lecturers must provide lecturer number, subjects taught, and department."}
+                    {"lecturer_info": "Lecturers must provide lecturer number, subjects taught, college and department."}
                 )
 
         elif role == 'academic_registrar':
