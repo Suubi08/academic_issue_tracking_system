@@ -1,7 +1,7 @@
 
 import { useState, useEffect } from "react";
 import { Paperclip } from "lucide-react";
-//import { Button } from "../components";
+import API from '../../utils/axiosInstance';
 import { useNavigate } from "react-router-dom";
 
 const categories = [
@@ -10,7 +10,7 @@ const categories = [
   { value: "corrections", label: "Corrections" },
 ];
 
-const courseUnits = [
+const course_units = [
   { value: "OS", label: "Operating Systems" },
   { value: "DSA", label: "Data Structures and Algorithms" },
   { value: "SAD", label: "System Analysis and Design" },
@@ -18,7 +18,7 @@ const courseUnits = [
   { value: "PS", label: "Probability and Statistics" },
 ];
 
-const yearsOfStudy = [
+const years_of_Study = [
   { value: "2025/2026", label: "2025/2026" },
   { value: "2024/2025", label: "2024/2025" },
   { value: "2023/2024", label: "2023/2024" },
@@ -35,16 +35,18 @@ const Studentsubmitissue = () => {
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
     category: "",
-    dateOfIssue: "",
-    courseUnit: "",
-    lecturer: "",
+    date_of_issue: "",
+    course_unit: "",
+    assigned_to: "",
     description: "",
     attachment: null,
-    yearOfStudy: "",
+    year_of_study: "",
     semester: "",
   });
 
   const [errors, setErrors] = useState({});
+  const [loading, setLoading] = useState(false);
+  const [lecturers, setLecturers] = useState([]);
   const [successMessage, setSuccessMessage] = useState("");
   const [showDropdown, setShowDropdown] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
@@ -52,58 +54,99 @@ const Studentsubmitissue = () => {
 
   const handleChange = (e) => {
     const { id, value } = e.target;
-    setFormData((prev) => ({
-      ...prev,
+
+    setFormData((prevFormData) => ({
+      ...prevFormData,
       [id]: value,
     }));
+
     if (id === "lecturer") {
       setSearchTerm(value);
       setShowDropdown(true);
+
+      const filtered = lecturers.filter((lecturer) =>
+        lecturer.username.toLowerCase().includes(value.toLowerCase())
+      );
+      setFilteredLecturers(filtered); // ✅ now it works
     }
   };
 
   const handleSelectChange = (e, id) => {
     const { value } = e.target;
-    setFormData({
-      ...formData,
-      [id]: value,
-    });
+
+    setFormData((prev) => ({
+      ...prev, // Keep existing properties
+      [id]: value || "", // Ensure it's never undefined
+    }));
   };
+
 
   const handleFileChange = (e) => {
-    const file = e.target.files[0];
+    const file = e.target.files[0] || null; // Ensure it never becomes undefined
+
     if (file && file.size > 5 * 1024 * 1024) {
-      setErrors({ ...errors, attachment: "File size must be less than 5MB." });
+      setErrors((prev) => ({ ...prev, attachment: "File size must be less than 5MB." }));
       return;
     }
+
     setFormData((prev) => ({
       ...prev,
-      attachment: file,
+      attachment: file, // Always set it
     }));
-    setErrors({ ...errors, attachment: null });
+    setErrors((prev) => ({ ...prev, attachment: null }));
   };
 
-  const validateForm = () => {
-    const newErrors = {};
-
-    if (!formData.category) newErrors.category = "Category is required.";
-    if (!formData.dateOfIssue)
-      newErrors.dateOfIssue = "Date of issue is required.";
-    if (!formData.description)
-      newErrors.description = "Description is required.";
-    setErrors(newErrors);
-    return Object.keys(newErrors).length === 0;
-  };
-
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!validateForm()) return;
+    setErrors("");
+    setLoading(true);
 
-    console.log("Form submitted:", formData);
-    setSuccessMessage("Issue reported successfully!");
-    setTimeout(() => {
-      navigate("/studentdashboard");
-    }, 2000);
+    if (!formData.year_of_study) {
+      setErrors("Year of study is required.");
+      setLoading(false);
+      return;
+    }
+
+    console.log("Raw formData before FormData append:", formData);
+
+    const data = new FormData();
+    data.append("category", formData.category || "");
+    data.append("date_of_issue", formData.date_of_issue || "");
+    data.append("course_unit", formData.course_unit || "");
+    data.append("description", formData.description || "");
+    data.append("semester", formData.semester || "");
+    data.append("assigned_to", formData.assigned_to || "");
+    data.append("year_of_study", formData.year_of_study || "");  // Make sure this is not empty
+    if (formData.attachment) {
+      data.append("attachment", formData.attachment);
+    }
+
+    for (let pair of data.entries()) {
+      console.log(`${pair[0]}: ${pair[1]}`);
+    }  
+  
+    try {
+      const response = await API.post("issues/", data, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+          Authorization: `Bearer ${localStorage.getItem("access_token")}`,
+        },
+      });
+  
+      if (response.status === 201) {
+        setSuccessMessage("Issue reported successfully!");
+        setTimeout(() => {
+          navigate("/studentdashboard");
+        }, 2000);
+      } else {
+        setErrors("Issue submission failed. Please try again.");
+      }
+    } catch (error) {
+      const errorMessage = error.response?.data || "Issue failed. Please try again.";
+      setErrors(errorMessage);
+    } finally {
+      setLoading(false);
+    }
   };
 
   const handleCancel = () => {
@@ -111,36 +154,46 @@ const Studentsubmitissue = () => {
   };
 
   const handleLecturerSelect = (lecturer) => {
-    setFormData((prev) => ({
-      ...prev,
-      lecturer: lecturer.name,
+    setFormData((prevFormData) => ({
+      ...prevFormData,
+      assigned_to: lecturer.id,
     }));
-    setShowDropdown(false);
+    setSearchTerm(lecturer.username);
+    setShowDropdown(false); // ✅ Hide dropdown after selection
   };
+
+
+
 
   useEffect(() => {
     const fetchLecturers = async () => {
       try {
-        const response = await fetch(
-          `http://127.0.0.1:8000/api/users/lecturer/?search=${searchTerm}`
-        );
+        const response = await fetch(`http://127.0.0.1:8000/api/users/lecturer/?search=${searchTerm}`);
         if (response.ok) {
           const data = await response.json();
-          setFilteredLecturers(data);
+          console.log("Fetched Lecturers:", data);
+          setLecturers(data); // ✅ store all
+          setFilteredLecturers(data); // Optionally filtered later
         } else {
           console.error("Failed to fetch lecturers");
+          setLecturers([]);
+          setFilteredLecturers([]);
         }
       } catch (error) {
         console.error("Error fetching lecturers:", error);
+        setLecturers([]);
+        setFilteredLecturers([]);
       }
     };
 
     if (searchTerm) {
       fetchLecturers();
     } else {
+      setLecturers([]);
       setFilteredLecturers([]);
     }
   }, [searchTerm]);
+
 
   return (
     <div className="flex-1 p-4 md:p-6 max-w-6xl mx-auto w-full">
@@ -180,42 +233,43 @@ const Studentsubmitissue = () => {
                 )}
               </div>
               <div className="space-y-2">
-                <label htmlFor="dateOfIssue" className="block">
+                <label htmlFor="date_of_issue" className="block">
                   Date of Issue
                 </label>
                 <input
-                  id="dateOfIssue"
+                  id="date_of_issue"
                   type="date"
-                  value={formData.dateOfIssue}
+                  value={formData.date_of_issue || ""}
                   onChange={handleChange}
                   className="w-full p-2 border border-gray-300 rounded"
                 />
-                {errors.dateOfIssue && (
-                  <p className="text-red-600 text-sm">{errors.dateOfIssue}</p>
+
+                {errors.date_of_Issue && (
+                  <p className="text-red-600 text-sm">{errors.date_of_Issue}</p>
                 )}
               </div>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
               <div className="space-y-2">
-                <label htmlFor="courseUnit" className="block">
+                <label htmlFor="course_unit" className="block">
                   Course Unit
                 </label>
                 <select
-                  id="courseUnit"
-                  value={formData.courseUnit}
-                  onChange={(e) => handleSelectChange(e, "courseUnit")}
+                  id="course_unit"
+                  value={formData.course_unit}
+                  onChange={(e) => handleSelectChange(e, "course_unit")}
                   className="w-full p-2 border border-gray-300 rounded"
                 >
                   <option value="">Select course unit</option>
-                  {courseUnits.map((option) => (
+                  {course_units.map((option) => (
                     <option key={option.value} value={option.value}>
                       {option.label}
                     </option>
                   ))}
                 </select>
               </div>
-              <div className="space-y-2">
+              <div className="space-y-2 relative">
                 <label htmlFor="lecturer" className="block">
                   Lecturer
                 </label>
@@ -223,11 +277,13 @@ const Studentsubmitissue = () => {
                   id="lecturer"
                   type="search"
                   placeholder="Search lecturer"
-                  value={formData.lecturer}
+                  value={searchTerm}
                   onChange={handleChange}
+                  onFocus={() => setShowDropdown(true)}
                   className="w-full p-2 border border-gray-300 rounded"
                 />
-                {showDropdown && (
+
+                {showDropdown && filteredLecturers.length > 0 ? (
                   <ul className="absolute z-10 bg-white border rounded w-full max-h-40 overflow-y-auto shadow-lg mt-1">
                     {filteredLecturers.map((lecturer) => (
                       <li
@@ -235,12 +291,15 @@ const Studentsubmitissue = () => {
                         className="p-2 hover:bg-gray-200 cursor-pointer"
                         onClick={() => handleLecturerSelect(lecturer)}
                       >
-                        {lecturer.name}
+                        {lecturer.username}
                       </li>
                     ))}
                   </ul>
+                ) : (
+                  showDropdown && <p className="text-gray-500">No lecturers found.</p> // Show only when dropdown is open
                 )}
               </div>
+
             </div>
 
             <div className="space-y-2 mb-6">
@@ -295,13 +354,14 @@ const Studentsubmitissue = () => {
                   Year of Study
                 </label>
                 <select
-                  id="yearOfStudy"
-                  value={formData.yearOfStudy}
-                  onChange={(e) => handleSelectChange(e, "yearOfStudy")}
+                  id="year_of_study"  // ✅ Use correct ID
+                  value={formData.year_of_study}
+                  onChange={(e) => handleSelectChange(e, "year_of_study")}  // ✅ Matches backend
                   className="w-full p-2 border border-gray-300 rounded"
                 >
+
                   <option value="">Select academic year</option>
-                  {yearsOfStudy.map((option) => (
+                  {years_of_Study.map((option) => (
                     <option key={option.value} value={option.value}>
                       {option.label}
                     </option>
@@ -337,7 +397,7 @@ const Studentsubmitissue = () => {
             >
               Cancel
             </button>
-            <Button type="submit">Submit Issue</Button>
+            <button type="submit">Submit Issue</button>
           </div>
         </form>
       </div>

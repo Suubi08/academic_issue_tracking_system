@@ -325,11 +325,16 @@ const Signup = () => {
                   type="button"
                   className="auth_button bg-gray-500"
                   onClick={() => setStep(1)}
+                  disabled={loading}
                 >
-                  Back
+                  {loading ? "Loading..." : "Back"}
                 </button>
-                <button type="submit" className="auth_button">
-                  Register
+                <button
+                  type="submit"
+                  className="auth_button bg-blue-600 text-white hover:bg-blue-700"
+                  disabled={loading}
+                >
+                  {loading ? "Registering..." : "Register"}
                 </button>
               </div>
             </>

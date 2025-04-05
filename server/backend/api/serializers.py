@@ -86,3 +86,6 @@ class NotificationSerializer(serializers.ModelSerializer):
     class Meta:
         model = Notification
         fields = '__all__'
+        extra_kwargs = {
+            'created_by': {'read_only': True},  # Prevent requiring this field in API requests
+        }
