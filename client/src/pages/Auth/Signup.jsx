@@ -1,7 +1,8 @@
 import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import API from "../utils/axiosInstance";
-import { roles, colleges, departments } from "../constants";
+import { useNavigate, Link } from "react-router-dom";
+import API from "../../utils/axiosInstance";
+import { roles, colleges, departments } from "../../constants";
+import Swal from "sweetalert2";
 
 const Signup = () => {
   const [formData, setFormData] = useState({
@@ -27,26 +28,57 @@ const Signup = () => {
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
+  console.log("Selected Role:", formData.role);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError("");
-
-    if (formData.password !== formData.confirm_password) {
-      setError("Passwords do not match");
-      return;
-    }
-
     setLoading(true);
 
     try {
-      await API.post("register/", formData);
-      alert("Registration successful!");
-      navigate("/studentdashboard");
+      const response = await API.post("register/", formData);
+
+      if (response.status === 201) {
+        const { access, refresh, username, role } = response.data;
+
+        // Store tokens in local storage
+        localStorage.setItem("accessToken", access);
+        localStorage.setItem("refreshToken", refresh);
+        localStorage.setItem("username", username);
+        localStorage.setItem("role", role);
+
+        console.log(`Registration successful - Role: ${role}`);
+        Swal.fire({
+          icon: "success",
+          title: "Registration Successful",
+          text: `Welcome ${username}!`,
+        });
+
+        // Role-based redirection
+        const roleRedirects = {
+          admin: "/admin-dashboard",
+          student: "/studentdashboard",
+          lecturer: "/lecturer-dashboard",
+          academic_registrar: "/registrar-dashboard",
+        };
+
+        navigate(roleRedirects[role] || "/");
+      } else {
+        Swal.fire({
+          icon: "error",
+          title: "Registration Failed",
+          text: "Please try again.",
+        });
+      }
     } catch (error) {
-      setError(
-        error.response?.data?.error || "Signup failed. Please try again."
-      );
+      const errorMessage =
+        error.response?.data?.error || "Registration failed. Please try again.";
+      setError(errorMessage);
+      Swal.fire({
+        icon: "error",
+        title: "Registration Failed",
+        text: errorMessage,
+      });
     } finally {
       setLoading(false);
     }
@@ -69,7 +101,7 @@ const Signup = () => {
                   Firstname
                 </label>
                 <input
-                  className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm focus:border-blue-500 focus:outline-none focus:ring-blue-500"
+                  className="input_style"
                   type="text"
                   name="first_name"
                   placeholder="First Name"
@@ -82,7 +114,7 @@ const Signup = () => {
                   Lastname
                 </label>
                 <input
-                  className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm focus:border-blue-500 focus:outline-none focus:ring-blue-500"
+                  className="input_style"
                   type="text"
                   name="last_name"
                   placeholder="Last Name"
@@ -95,7 +127,7 @@ const Signup = () => {
                   Username
                 </label>
                 <input
-                  className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm focus:border-blue-500 focus:outline-none focus:ring-blue-500"
+                  className="input_style"
                   type="text"
                   name="username"
                   placeholder="Username"
@@ -108,7 +140,7 @@ const Signup = () => {
                   Email
                 </label>
                 <input
-                  className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm focus:border-blue-500 focus:outline-none focus:ring-blue-500"
+                  className="input_style"
                   type="email"
                   name="email"
                   placeholder="Email"
@@ -121,7 +153,7 @@ const Signup = () => {
                   Password
                 </label>
                 <input
-                  className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm focus:border-blue-500 focus:outline-none focus:ring-blue-500"
+                  className="input_style"
                   type="password"
                   name="password"
                   placeholder="Password"
@@ -134,10 +166,10 @@ const Signup = () => {
                   Confirm Password
                 </label>
                 <input
-                  className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm focus:border-blue-500 focus:outline-none focus:ring-blue-500"
+                  className="input_style"
                   type="password"
                   name="confirm_password"
-                  placeholder="Confirm Password"
+                  placeholder="confirm_password"
                   onChange={handleChange}
                   required
                 />
@@ -147,7 +179,7 @@ const Signup = () => {
                   Role
                 </label>
                 <select
-                  className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm focus:border-blue-500 focus:outline-none focus:ring-blue-500"
+                  className="selection_input"
                   name="role"
                   onChange={handleChange}
                   value={formData.role}
@@ -165,11 +197,11 @@ const Signup = () => {
                 </select>
               </div>
               <button
-                className="w-full rounded-md bg-blue-600 p-3 text-white transition hover:bg-blue-700"
+                type="button"
+                className="auth_button"
                 onClick={() => setStep(2)}
-                disabled={loading}
               >
-                {loading ? "Loading..." : "Next"}
+                Next
               </button>
             </>
           )}
@@ -183,7 +215,7 @@ const Signup = () => {
                       Student Number
                     </label>
                     <input
-                      className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm focus:border-blue-500 focus:outline-none focus:ring-blue-500"
+                      className="input_style"
                       type="text"
                       name="student_number"
                       placeholder="Student Number"
@@ -197,7 +229,7 @@ const Signup = () => {
                       Course name
                     </label>
                     <input
-                      className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm focus:border-blue-500 focus:outline-none focus:ring-blue-500"
+                      className="input_style"
                       type="text"
                       name="course_name"
                       placeholder="Course Name"
@@ -210,7 +242,7 @@ const Signup = () => {
                       Department
                     </label>
                     <select
-                      className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm focus:border-blue-500 focus:outline-none focus:ring-blue-500"
+                      className="selection_input"
                       name="department"
                       onChange={handleChange}
                       value={formData.department}
@@ -236,7 +268,7 @@ const Signup = () => {
                       Lecturer Number
                     </label>
                     <input
-                      className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm focus:border-blue-500 focus:outline-none focus:ring-blue-500"
+                      className="input_style"
                       type="text"
                       name="lecture_number"
                       placeholder="Lecturer Number"
@@ -249,7 +281,7 @@ const Signup = () => {
                       Subject Taught
                     </label>
                     <input
-                      className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm focus:border-blue-500 focus:outline-none focus:ring-blue-500"
+                      className="input_style"
                       type="text"
                       name="subject_taught"
                       placeholder="Subject Taught"
@@ -262,7 +294,7 @@ const Signup = () => {
                       Department
                     </label>
                     <select
-                      className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm focus:border-blue-500 focus:outline-none focus:ring-blue-500"
+                      className="selection_input"
                       name="department"
                       onChange={handleChange}
                       value={formData.department}
@@ -287,7 +319,7 @@ const Signup = () => {
                   College/School
                 </label>
                 <select
-                  className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm focus:border-blue-500 focus:outline-none focus:ring-blue-500"
+                  className="selection_input"
                   name="college"
                   onChange={handleChange}
                   value={formData.college}
@@ -309,16 +341,11 @@ const Signup = () => {
                   type="button"
                   className="auth_button bg-gray-500"
                   onClick={() => setStep(1)}
-                  disabled={loading}
                 >
-                  {loading ? "Loading..." : "Back"}
+                  Back
                 </button>
-                <button
-                  type="submit"
-                  className="auth_button bg-blue-600 text-white hover:bg-blue-700"
-                  disabled={loading}
-                >
-                  {loading ? "Registering..." : "Register"}
+                <button type="submit" className="auth_button">
+                  Register
                 </button>
               </div>
             </>

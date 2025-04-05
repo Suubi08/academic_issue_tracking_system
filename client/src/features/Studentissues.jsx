@@ -1,4 +1,3 @@
-"use client";
 
 import { useState, useEffect } from "react";
 import {
@@ -27,6 +26,7 @@ import {
   AlertCircle,
 } from "lucide-react";
 import { Badge } from "../components/ui/Badge";
+import { useNavigate } from "react-router-dom";
 
 const Studentissues = () => {
   // Sample data
@@ -106,6 +106,9 @@ const Studentissues = () => {
   const [showFilters, setShowFilters] = useState(false);
   const [activeTab, setActiveTab] = useState("all");
 
+  const navigate= useNavigate();
+
+  // Function to get the status styles
   // Apply filters when search term, status filter, or sort changes
   useEffect(() => {
     let filteredIssues = [...allIssues];
@@ -531,6 +534,7 @@ const Studentissues = () => {
               variant="outline"
               size="sm"
               className="flex items-center gap-1 self-end md:self-auto"
+              onClick={() => navigate(`/viewissue/${issue.id}`)}
             >
               <Eye className="h-4 w-4" />
               View Details

@@ -7,20 +7,19 @@ import Layout from "../Layout/Layout";
 //   Studentdashboard,
 //   Issuereport,
 // } from "../pages/";
-import Login from "../Auth/Login";
-import Signup from "../Auth/Signup";
+import Login from "../pages/Auth/Login";
+import Signup from "../pages/Auth/Signup";
+import IssueDetail from "../pages/id/IssueDetail";
 // import Auth from "../Auth/Auth";
 import ProtectedRoute from "../components/ProtectedRoute";
+
 import {
   AdminDashboard,
-  Dashboard,
-  IssueTracking,
   LecturerDashboard,
   PageNotFound,
-  QuickActions,
-  RecentActivity,
   Studentdashboard,
-} from "../Hello";
+} from "../pages";
+
 import {
   Lecturerissuemanagement,
   LecturerNotifications,
@@ -31,7 +30,6 @@ import {
   Adminusermanagement,
   Lecturerstatusupdates,
   Lecturersettings,
-  Studentnotifications,
   Studentissues,
   Studentsubmitissue,
   Studentsettings,
@@ -50,9 +48,10 @@ const AllRoutes = () => {
       {/* Student Routes */}
       <Route element={<ProtectedRoute allowedRoles={["student"]} />}>
         <Route element={<Layout />}>
-          <Route path="/studentdashboard" element={<Studentdashboard />} />
+          <Route path="/student-dashboard" element={<Studentdashboard />} />
           <Route path="/studentissues" element={<Studentissues />} />
           <Route path="/submitissue" element={<Studentsubmitissue />} />
+          <Route path="/viewissue/:id" element={<IssueDetail />} />
           {/* <Route path="/studentissuereport" element={<Studentissuereport />} /> */}
           <Route path="/studentsettings" element={<Studentsettings />} />
         </Route>

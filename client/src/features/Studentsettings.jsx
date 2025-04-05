@@ -360,7 +360,11 @@ const Studentsettings = () => {
                       </Select>
                     </div>
                   </div>
-                  <Button type="submit" className="w-full">
+                  <Button
+                    type="submit"
+                    className="w-full bg-emerald-600 hover:bg-emerald-700 text-white
+"
+                  >
                     <Save className="mr-2 h-4 w-4" />
                     Save Changes
                   </Button>

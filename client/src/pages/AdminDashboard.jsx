@@ -2,14 +2,7 @@
 
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import {
-  Card,
-  CardHeader,
-  CardFooter,
-  CardTitle,
-  CardDescription,
-  CardContent,
-} from "../components";
+import { Card, CardHeader, CardTitle, CardContent } from "../components";
 import { AlertCircle, Bell, MessageSquare, Users } from "lucide-react";
 
 const AdminDashboard = () => {
@@ -60,11 +53,11 @@ const AdminDashboard = () => {
 
   return (
     <div>
-      <h1 className="text-2xl font-bold mb-6">
+      {/* <h1 className="text-2xl font-bold mb-6">
         {userRole === "admin"
           ? "Admin Dashboard"
           : "Academic Registrar Dashboard"}
-      </h1>
+      </h1> */}
 
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4 mb-6">
         {summaryItems.map((item, index) => (

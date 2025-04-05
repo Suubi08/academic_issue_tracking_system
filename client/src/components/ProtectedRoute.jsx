@@ -27,22 +27,16 @@ const ProtectedRoute = ({ allowedRoles = [] }) => {
     return <Navigate to="/login" state={{ from: location }} replace />;
   }
 
-  // If roles are specified and user's role is not included, redirect to the appropriate dashboard
-  if (allowedRoles.length > 0 && !allowedRoles.includes(userRole)) {
-    return <Navigate to="/" replace />;
-  }
   // If roles are specified and user's role is not included, redirect to their respective dashboard
   if (allowedRoles.length > 0 && !allowedRoles.includes(userRole)) {
-    // Redirect based on user role
-    if (userRole === "student") {
-      return <Navigate to="/studentdashboard" replace />;
-    } else if (userRole === "lecturer") {
-      return <Navigate to="/lecturer-dashboard" replace />;
-    } else if (userRole === "admin") {
-      return <Navigate to="/admin-dashboard" replace />;
-    } else {
-      return <Navigate to="/login" replace />; // Fallback for unknown roles
-    }
+    const roleRedirects = {
+      student: "/studentdashboard",
+      lecturer: "/lecturer-dashboard",
+      admin: "/admin-dashboard",
+    };
+
+    // Redirect to the user's respective dashboard or fallback to login
+    return <Navigate to={roleRedirects[userRole] || "/login"} replace />;
   }
 
   // If authenticated and authorized, render the child routes

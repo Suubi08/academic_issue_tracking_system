@@ -147,7 +147,7 @@ const Studentsubmitissue = () => {
     <div className="flex-1 p-4 md:p-6 max-w-6xl mx-auto w-full">
       <div className="bg-white shadow-lg rounded-lg p-6">
         <h2 className="text-center text-xl font-semibold mb-6">
-          Academic Issue Report Form
+          Submit Issue Form
         </h2>
         {successMessage && (
           <p className="text-green-600 text-center mb-4">{successMessage}</p>

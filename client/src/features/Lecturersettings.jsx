@@ -54,13 +54,7 @@ const Lecturersettings = () => {
   };
 
   return (
-    <div className="space-y-6">
-      <div className="flex justify-between items-center">
-        <h2 className="text-2xl font-bold text-gray-900">
-          Settings and Profile
-        </h2>
-      </div>
-
+    <div className="p-4">
       <Tabs defaultValue="profile" className="w-full">
         <TabsList className="mb-4">
           <TabsTrigger value="profile">

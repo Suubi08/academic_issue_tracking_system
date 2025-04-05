@@ -1,99 +1,146 @@
-"use client"
+"use client";
 
-import { useState, useEffect } from "react"
-import { Card, CardHeader, CardFooter, CardTitle, CardContent } from "../components"
-import { Eye, Filter, Search, X, ChevronDown } from "lucide-react"
-import { Button } from "./ui/Button"
-import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "./ui/Dropdown-menu"
+import { useState, useEffect } from "react";
+import {
+  Card,
+  CardHeader,
+  CardFooter,
+  CardTitle,
+  CardContent,
+} from "../components";
+import { Eye, Filter, Search, X, ChevronDown } from "lucide-react";
+import { Button } from "./ui/Button";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "./ui/Dropdown-menu";
+import { Navigate, useNavigate } from "react-router-dom";
 
 const TrackStudentIssues = () => {
+  const navigate = useNavigate();
   // Sample data
   const allIssues = [
-    { id: "1", title: "Course registration error", status: "Pending", lastUpdate: "Feb 15, 2025" },
-    { id: "2", title: "Course registration error", status: "Pending", lastUpdate: "Feb 15, 2025" },
-    { id: "3", title: "Missing marks", status: "In Progress", lastUpdate: "Feb 15, 2025" },
-    { id: "4", title: "Results error", status: "Resolved", lastUpdate: "Feb 15, 2025" },
-    { id: "5", title: "Software development issue", status: "Resolved", lastUpdate: "Feb 15, 2025" },
-    { id: "6", title: "Data structures", status: "Pending", lastUpdate: "Feb 15, 2028" },
-  ]
+    {
+      id: "1",
+      title: "Course registration error",
+      status: "Pending",
+      lastUpdate: "Feb 15, 2025",
+    },
+    {
+      id: "2",
+      title: "Course registration error",
+      status: "Pending",
+      lastUpdate: "Feb 15, 2025",
+    },
+    {
+      id: "3",
+      title: "Missing marks",
+      status: "In Progress",
+      lastUpdate: "Feb 15, 2025",
+    },
+    {
+      id: "4",
+      title: "Results error",
+      status: "Resolved",
+      lastUpdate: "Feb 15, 2025",
+    },
+    {
+      id: "5",
+      title: "Software development issue",
+      status: "Resolved",
+      lastUpdate: "Feb 15, 2025",
+    },
+    {
+      id: "6",
+      title: "Data structures",
+      status: "Pending",
+      lastUpdate: "Feb 15, 2028",
+    },
+  ];
 
-  const [issues, setIssues] = useState(allIssues)
-  const [searchTerm, setSearchTerm] = useState("")
-  const [statusFilter, setStatusFilter] = useState("all")
-  const [sortBy, setSortBy] = useState("newest")
-  const [showFilters, setShowFilters] = useState(false)
+  const [issues, setIssues] = useState(allIssues);
+  const [searchTerm, setSearchTerm] = useState("");
+  const [statusFilter, setStatusFilter] = useState("all");
+  const [sortBy, setSortBy] = useState("newest");
+  const [showFilters, setShowFilters] = useState(false);
 
   // Apply filters when search term, status filter, or sort changes
   useEffect(() => {
-    let filteredIssues = [...allIssues]
+    let filteredIssues = [...allIssues];
 
     // Apply search filter
     if (searchTerm) {
-      filteredIssues = filteredIssues.filter((issue) => issue.title.toLowerCase().includes(searchTerm.toLowerCase()))
+      filteredIssues = filteredIssues.filter((issue) =>
+        issue.title.toLowerCase().includes(searchTerm.toLowerCase())
+      );
     }
 
     // Apply status filter
     if (statusFilter !== "all") {
-      filteredIssues = filteredIssues.filter((issue) => issue.status === statusFilter)
+      filteredIssues = filteredIssues.filter(
+        (issue) => issue.status === statusFilter
+      );
     }
 
     // Apply sorting
     filteredIssues.sort((a, b) => {
-      const dateA = new Date(a.lastUpdate)
-      const dateB = new Date(b.lastUpdate)
+      const dateA = new Date(a.lastUpdate);
+      const dateB = new Date(b.lastUpdate);
 
       if (sortBy === "newest") {
-        return dateB - dateA
+        return dateB - dateA;
       } else if (sortBy === "oldest") {
-        return dateA - dateB
+        return dateA - dateB;
       }
-      return 0
-    })
+      return 0;
+    });
 
-    setIssues(filteredIssues)
-  }, [searchTerm, statusFilter, sortBy])
+    setIssues(filteredIssues);
+  }, [searchTerm, statusFilter, sortBy]);
 
   const getStatusStyles = (status) => {
     switch (status) {
       case "Resolved":
-        return "bg-green-100 text-green-800"
+        return "bg-green-100 text-green-800";
       case "In Progress":
-        return "bg-yellow-100 text-yellow-800"
+        return "bg-yellow-100 text-yellow-800";
       case "Pending":
-        return "bg-red-100 text-red-800"
+        return "bg-red-100 text-red-800";
       default:
-        return "bg-gray-100 text-gray-800"
+        return "bg-gray-100 text-gray-800";
     }
-  }
+  };
 
   const handleSearch = (e) => {
-    setSearchTerm(e.target.value)
-  }
+    setSearchTerm(e.target.value);
+  };
 
   const handleFilterToggle = () => {
-    setShowFilters(!showFilters)
-  }
+    setShowFilters(!showFilters);
+  };
 
   const handleStatusFilter = (status) => {
-    setStatusFilter(status)
-  }
+    setStatusFilter(status);
+  };
 
   const handleSortChange = (sortOption) => {
-    setSortBy(sortOption)
-  }
+    setSortBy(sortOption);
+  };
 
   const clearFilters = () => {
-    setSearchTerm("")
-    setStatusFilter("all")
-    setSortBy("newest")
-  }
+    setSearchTerm("");
+    setStatusFilter("all");
+    setSortBy("newest");
+  };
 
   const getActiveFiltersCount = () => {
-    let count = 0
-    if (statusFilter !== "all") count++
-    if (sortBy !== "newest") count++
-    return count
-  }
+    let count = 0;
+    if (statusFilter !== "all") count++;
+    if (sortBy !== "newest") count++;
+    return count;
+  };
 
   return (
     <Card className="shadow-md">
@@ -152,7 +199,10 @@ const TrackStudentIssues = () => {
           <div className="mt-4 p-3 border border-gray-200 rounded-md bg-gray-50">
             <div className="flex justify-between items-center mb-2">
               <h3 className="text-sm font-medium">Filter by Status</h3>
-              <button onClick={clearFilters} className="text-xs text-blue-600 flex items-center">
+              <button
+                onClick={clearFilters}
+                className="text-xs text-blue-600 flex items-center"
+              >
                 Clear all <X className="h-3 w-3 ml-1" />
               </button>
             </div>
@@ -204,8 +254,13 @@ const TrackStudentIssues = () => {
       <CardContent>
         {issues.length === 0 ? (
           <div className="text-center py-8">
-            <p className="text-gray-500">No issues found matching your filters.</p>
-            <button onClick={clearFilters} className="mt-2 text-blue-600 text-sm">
+            <p className="text-gray-500">
+              No issues found matching your filters.
+            </p>
+            <button
+              onClick={clearFilters}
+              className="mt-2 text-blue-600 text-sm"
+            >
               Clear filters
             </button>
           </div>
@@ -218,7 +273,9 @@ const TrackStudentIssues = () => {
               >
                 <div className="flex items-center space-x-4">
                   <div className="flex flex-col items-center justify-center w-14 h-14 bg-gray-100 rounded-lg">
-                    <span className="text-lg font-semibold">{new Date(issue.lastUpdate).getDate()}</span>
+                    <span className="text-lg font-semibold">
+                      {new Date(issue.lastUpdate).getDate()}
+                    </span>
                     <span className="text-sm text-gray-500">
                       {new Date(issue.lastUpdate).toLocaleDateString("en-US", {
                         weekday: "short",
@@ -227,14 +284,25 @@ const TrackStudentIssues = () => {
                   </div>
                   <div>
                     <h3 className="font-medium">{issue.title}</h3>
-                    <p className="text-sm text-gray-500">Last updated: {issue.lastUpdate}</p>
+                    <p className="text-sm text-gray-500">
+                      Last updated: {issue.lastUpdate}
+                    </p>
                   </div>
                 </div>
                 <div className="flex items-center space-x-3">
-                  <span className={`px-2 py-1 text-xs font-medium rounded-full ${getStatusStyles(issue.status)}`}>
+                  <span
+                    className={`px-2 py-1 text-xs font-medium rounded-full ${getStatusStyles(
+                      issue.status
+                    )}`}
+                  >
                     {issue.status}
                   </span>
-                  <Button variant="outline" size="sm" className="flex items-center gap-1">
+                  <Button
+                    variant="outline"
+                    onClick={() => navigate(`/viewissue/${issue.id}`)}
+                    size="sm"
+                    className="flex items-center gap-1"
+                  >
                     <Eye className="h-4 w-4" />
                     View
                   </Button>
@@ -257,8 +325,7 @@ const TrackStudentIssues = () => {
         </CardFooter>
       )}
     </Card>
-  )
-}
+  );
+};
 
-export default TrackStudentIssues
-
+export default TrackStudentIssues;

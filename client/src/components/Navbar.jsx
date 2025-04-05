@@ -35,7 +35,7 @@ const Navbar = ({
   };
 
   return (
-    <header className="bg-white border-b border-gray-200 sticky top-0 z-30">
+    <header className="bg-white border-b border-gray-200 sticky top-0 z-30 shadow-lg">
       <div className="px-4 sm:px-6 lg:px-8">
         <div className="flex h-16 items-center justify-between">
           {/* Left section */}
@@ -73,11 +73,13 @@ const Navbar = ({
                 {description}
               </p>
             </div> */}
-            {/* User info */}
+            {/* Role info */}
             <div className="flex items-center gap-3">
               {username ? (
                 <h1 className="text-lg font-medium">
-                  Welcome <span className="font-semibold">{username}</span>
+                  Welcome to{" "}
+                  {userRole.charAt(0).toUpperCase() + userRole.slice(1)}'s
+                  Dashboard
                 </h1>
               ) : (
                 <h1 className="text-lg font-medium">Welcome Guest</h1>
@@ -92,7 +94,8 @@ const Navbar = ({
               <button
                 type="button"
                 onClick={handleReport}
-                className="hidden sm:inline-flex items-center rounded-md bg-blue-600 px-3 py-2 text-sm font-medium text-white shadow-sm hover:bg-blue-700"
+                className="hidden sm:inline-flex items-center rounded-md  px-3 py-2 text-sm font-medium  shadow-sm bg-emerald-600 hover:bg-emerald-700 text-white
+"
               >
                 Report Issue
               </button>

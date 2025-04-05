@@ -8,8 +8,11 @@ import {
   PlusCircle,
   Bell,
   UserCog,
+  FileText,
+  RefreshCcw,
+  SettingsIcon,
 } from "lucide-react";
-import logo from "../assets/logo.png";
+import logo2 from "../assets/logo2.png";
 
 const Sidebar = () => {
   const navigate = useNavigate();
@@ -32,7 +35,7 @@ const Sidebar = () => {
     if (userRole === "student") {
       return [
         {
-          to: "/studentdashboard",
+          to: "/student-dashboard",
           icon: LayoutDashboard,
           label: "Dashboard",
         },
@@ -43,13 +46,13 @@ const Sidebar = () => {
         },
         {
           to: "/studentissues",
-          icon: PlusCircle,
+          icon: FileText,
           label: "My Issues",
         },
         {
           to: "/studentsettings",
-          icon: PlusCircle,
-          label: "Settings and Profile",
+          icon: Settings,
+          label: "Settings & Profile",
         },
       ];
     } else if (userRole === "lecturer") {
@@ -62,11 +65,11 @@ const Sidebar = () => {
         {
           to: "/issuemanagement",
           icon: FileWarning,
-          label: "Issue management",
+          label: "Issue Management",
         },
         {
           to: "/status-update",
-          icon: FileWarning,
+          icon: RefreshCcw,
           label: "Status and Updates",
         },
         {
@@ -77,7 +80,7 @@ const Sidebar = () => {
         {
           to: "/lecturersettings",
           icon: Settings,
-          label: "Settings",
+          label: "Settings & Profile",
         },
       ];
     } else if (userRole === "admin") {
@@ -90,7 +93,7 @@ const Sidebar = () => {
         {
           to: "/adminissuemanagement",
           icon: FileWarning,
-          label: "Issue management",
+          label: "Issue Management",
         },
         {
           to: "/adminNotifications",
@@ -104,37 +107,31 @@ const Sidebar = () => {
         },
         {
           to: "/adminreports",
-          icon: PlusCircle,
-          label: "Report & Analytics",
+          icon: BarChart3,
+          label: "Reports & Analytics",
         },
         {
-          to: "/adminsettings",
-          icon: Settings,
-          label: "Settings & Profile",
+          to: "/adminsettings", // Renamed route for consistency
+          icon: SettingsIcon,
+          label: "System Settings",
         },
-      ];
-    } else if (userRole === "academic_registrar") {
-      return [
-        {
-          to: "/registrar-dashboard",
-          icon: LayoutDashboard,
-          label: "Dashboard",
-        },
-        ...commonLinks,
       ];
     }
 
-    return commonLinks;
+    return [];
   };
 
   const navLinks = getNavLinks();
 
   return (
-    <aside className="h-screen bg-blue-950 text-white p-4 flex flex-col">
+    <aside className="h-screen bg-zinc-900 text-white p-4 flex flex-col">
       <div className="flex flex-col">
-        <div className="flex flex-col items-center mb-20 ">
-          <img src={logo} alt="Logo" className="w-full h-40" />
+        {/* Logo */}
+        <div className="flex flex-col items-center mb-20">
+          <img src={logo2} alt="Logo" className="w-full h-40" />
         </div>
+
+        {/* Navigation Links */}
         <ul className="flex flex-col gap-2 flex-1">
           {navLinks.map((link) => (
             <li key={link.to}>
@@ -142,7 +139,9 @@ const Sidebar = () => {
                 to={link.to}
                 className={({ isActive }) =>
                   `flex items-center gap-2 px-4 py-2 rounded-md transition ${
-                    isActive ? "bg-blue-700 text-white" : "hover:bg-blue-800"
+                    isActive
+                      ? "bg-zinc-700 text-white font-semibold"
+                      : "hover:bg-zinc-800 text-zinc-200"
                   }`
                 }
               >
@@ -153,8 +152,8 @@ const Sidebar = () => {
           ))}
         </ul>
 
-        {/* User profile and logout */}
-        <div className=" mt-40 pt-4 border-t border-blue-800">
+        {/* Logout Button */}
+        <div className="mt-40 pt-4 border-t border-blue-800">
           <button
             onClick={handleLogout}
             className="flex items-center gap-2 px-4 py-2 rounded-md transition w-full hover:bg-blue-800 text-left"
