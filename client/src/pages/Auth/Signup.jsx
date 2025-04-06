@@ -1,7 +1,8 @@
 import { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
-import API from '../../utils/axiosInstance';
+import API from "../../utils/axiosInstance";
 import { roles, colleges, departments } from "../../constants";
+import Swal from "sweetalert2";
 
 const Signup = () => {
   const [formData, setFormData] = useState({
@@ -27,6 +28,7 @@ const Signup = () => {
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
+  console.log("Selected Role:", formData.role);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -46,6 +48,11 @@ const Signup = () => {
         localStorage.setItem("role", role);
 
         console.log(`Registration successful - Role: ${role}`);
+        Swal.fire({
+          icon: "success",
+          title: "Registration Successful",
+          text: `Welcome ${username}!`,
+        });
 
         // Role-based redirection
         const roleRedirects = {
@@ -57,16 +64,25 @@ const Signup = () => {
 
         navigate(roleRedirects[role] || "/");
       } else {
-        setError("Registration failed. Please try again.");
+        Swal.fire({
+          icon: "error",
+          title: "Registration Failed",
+          text: "Please try again.",
+        });
       }
     } catch (error) {
-      const errorMessage = error.response?.data?.error || "Registration failed. Please try again.";
+      const errorMessage =
+        error.response?.data?.error || "Registration failed. Please try again.";
       setError(errorMessage);
+      Swal.fire({
+        icon: "error",
+        title: "Registration Failed",
+        text: errorMessage,
+      });
     } finally {
       setLoading(false);
     }
   };
-
 
   return (
     <div className="flex flex-col min-h-screen items-center justify-center bg-gray-50">
@@ -325,16 +341,11 @@ const Signup = () => {
                   type="button"
                   className="auth_button bg-gray-500"
                   onClick={() => setStep(1)}
-                  disabled={loading}
                 >
-                  {loading ? "Loading..." : "Back"}
+                  Back
                 </button>
-                <button
-                  type="submit"
-                  className="auth_button bg-blue-600 text-white hover:bg-blue-700"
-                  disabled={loading}
-                >
-                  {loading ? "Registering..." : "Register"}
+                <button type="submit" className="auth_button">
+                  Register
                 </button>
               </div>
             </>

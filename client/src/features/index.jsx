@@ -10,11 +10,13 @@ import Studentnotifications from "./Studentnotifications"
 import Studentresolvedissues from "./Studentresolvedissues"
 import Studentsubmitissue from "./Studentsubmitissue"
 import Studentsettings from "./Studentsettings"
+import Studentissues from "./Studentissues"
 import LecturerNotifications from "./Lecturernotifications"
 
 export {
   LecturerNotifications,
   Adminissuemanagement,
+  Studentissues,
   Adminsettings,
   AdminReports,
   AdminNotifications,

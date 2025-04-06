@@ -1,7 +1,6 @@
-
 import { useState, useEffect } from "react";
 import { Paperclip } from "lucide-react";
-import API from '../../utils/axiosInstance';
+import API from '../utils/axiosInstance';
 import { useNavigate } from "react-router-dom";
 
 const categories = [

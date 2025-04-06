@@ -1,36 +1,29 @@
-"use client"
+import { Switch } from "../components/ui";
+import { Textarea } from "../components/ui";
+import {
+  Select,
+  SelectItem,
+  SelectContent,
+  SelectValue,
+  SelectTrigger,
+} from "../components/ui";
+import { Input } from "../components/ui";
+import { Label } from "../components/ui";
+import { Avatar, AvatarFallback, AvatarImage } from "../components/ui";
+import { useState } from "react";
+import {
+  Card,
+  CardHeader,
+  CardFooter,
+  CardTitle,
+  CardDescription,
+  CardContent,
+} from "../components";
+import { Button } from "../components/ui";
 
-import { Switch } from "@/components/ui/switch"
+import { Tabs, TabsList, TabsTrigger, TabsContent } from "../components/ui";
 
-import { Textarea } from "@/components/ui/textarea"
-
-import { SelectItem } from "@/components/ui/select"
-
-import { SelectContent } from "@/components/ui/select"
-
-import { SelectValue } from "@/components/ui/select"
-
-import { SelectTrigger } from "@/components/ui/select"
-
-import { Select } from "@/components/ui/select"
-
-import { Input } from "@/components/ui/input"
-
-import { Label } from "@/components/ui/label"
-
-import { AvatarFallback } from "@/components/ui/avatar"
-
-import { AvatarImage } from "@/components/ui/avatar"
-
-import { Avatar } from "@/components/ui/avatar"
-
-import { useState } from "react"
-import { Card, CardHeader, CardFooter, CardTitle, CardDescription, CardContent } from "../components/ui/card"
-import Button from "../components/ui/Button"
-
-import { Tabs, TabsList, TabsTrigger, TabsContent } from "../components/ui/Tabs"
-
-import { User, Bell, Shield, Key } from "lucide-react"
+import { User, Bell, Shield, Key } from "lucide-react";
 
 const Lecturersettings = () => {
   const [profile, setProfile] = useState({
@@ -39,7 +32,7 @@ const Lecturersettings = () => {
     title: "Associate Professor",
     department: "Computer Science",
     avatar: "/placeholder.svg?height=100&width=100",
-  })
+  });
 
   const [notifications, setNotifications] = useState({
     email: true,
@@ -48,22 +41,18 @@ const Lecturersettings = () => {
     issueAssigned: true,
     issueUpdated: true,
     systemUpdates: false,
-  })
+  });
 
   const handleProfileChange = (field, value) => {
-    setProfile((prev) => ({ ...prev, [field]: value }))
-  }
+    setProfile((prev) => ({ ...prev, [field]: value }));
+  };
 
   const handleNotificationChange = (field, value) => {
-    setNotifications((prev) => ({ ...prev, [field]: value }))
-  }
+    setNotifications((prev) => ({ ...prev, [field]: value }));
+  };
 
   return (
-    <div className="space-y-6">
-      <div className="flex justify-between items-center">
-        <h2 className="text-2xl font-bold text-gray-900">Settings and Profile</h2>
-      </div>
-
+    <div className="p-4">
       <Tabs defaultValue="profile" className="w-full">
         <TabsList className="mb-4">
           <TabsTrigger value="profile">
@@ -84,7 +73,9 @@ const Lecturersettings = () => {
           <Card>
             <CardHeader>
               <CardTitle>Profile Information</CardTitle>
-              <CardDescription>Update your personal information and preferences</CardDescription>
+              <CardDescription>
+                Update your personal information and preferences
+              </CardDescription>
             </CardHeader>
             <CardContent className="space-y-6">
               <div className="flex flex-col md:flex-row gap-6">
@@ -109,7 +100,9 @@ const Lecturersettings = () => {
                       <Input
                         id="name"
                         value={profile.name}
-                        onChange={(e) => handleProfileChange("name", e.target.value)}
+                        onChange={(e) =>
+                          handleProfileChange("name", e.target.value)
+                        }
                       />
                     </div>
                     <div className="space-y-2">
@@ -118,7 +111,9 @@ const Lecturersettings = () => {
                         id="email"
                         type="email"
                         value={profile.email}
-                        onChange={(e) => handleProfileChange("email", e.target.value)}
+                        onChange={(e) =>
+                          handleProfileChange("email", e.target.value)
+                        }
                       />
                     </div>
                     <div className="space-y-2">
@@ -126,22 +121,32 @@ const Lecturersettings = () => {
                       <Input
                         id="title"
                         value={profile.title}
-                        onChange={(e) => handleProfileChange("title", e.target.value)}
+                        onChange={(e) =>
+                          handleProfileChange("title", e.target.value)
+                        }
                       />
                     </div>
                     <div className="space-y-2">
                       <Label htmlFor="department">Department</Label>
                       <Select
                         defaultValue={profile.department}
-                        onValueChange={(value) => handleProfileChange("department", value)}
+                        onValueChange={(value) =>
+                          handleProfileChange("department", value)
+                        }
                       >
                         <SelectTrigger id="department">
                           <SelectValue placeholder="Select department" />
                         </SelectTrigger>
                         <SelectContent>
-                          <SelectItem value="Computer Science">Computer Science</SelectItem>
-                          <SelectItem value="Mathematics">Mathematics</SelectItem>
-                          <SelectItem value="Engineering">Engineering</SelectItem>
+                          <SelectItem value="Computer Science">
+                            Computer Science
+                          </SelectItem>
+                          <SelectItem value="Mathematics">
+                            Mathematics
+                          </SelectItem>
+                          <SelectItem value="Engineering">
+                            Engineering
+                          </SelectItem>
                           <SelectItem value="Physics">Physics</SelectItem>
                           <SelectItem value="Business">Business</SelectItem>
                         </SelectContent>
@@ -150,7 +155,11 @@ const Lecturersettings = () => {
                   </div>
                   <div className="space-y-2">
                     <Label htmlFor="bio">Bio</Label>
-                    <Textarea id="bio" placeholder="Write a short bio about yourself" className="min-h-[100px]" />
+                    <Textarea
+                      id="bio"
+                      placeholder="Write a short bio about yourself"
+                      className="min-h-[100px]"
+                    />
                   </div>
                 </div>
               </div>
@@ -166,7 +175,9 @@ const Lecturersettings = () => {
           <Card>
             <CardHeader>
               <CardTitle>Notification Preferences</CardTitle>
-              <CardDescription>Configure how and when you receive notifications</CardDescription>
+              <CardDescription>
+                Configure how and when you receive notifications
+              </CardDescription>
             </CardHeader>
             <CardContent className="space-y-6">
               <div className="space-y-4">
@@ -174,35 +185,53 @@ const Lecturersettings = () => {
                 <div className="space-y-3">
                   <div className="flex items-center justify-between">
                     <div className="space-y-0.5">
-                      <Label htmlFor="email-notifications">Email Notifications</Label>
-                      <p className="text-sm text-gray-500">Receive notifications via email</p>
+                      <Label htmlFor="email-notifications">
+                        Email Notifications
+                      </Label>
+                      <p className="text-sm text-gray-500">
+                        Receive notifications via email
+                      </p>
                     </div>
                     <Switch
                       id="email-notifications"
                       checked={notifications.email}
-                      onCheckedChange={(checked) => handleNotificationChange("email", checked)}
+                      onCheckedChange={(checked) =>
+                        handleNotificationChange("email", checked)
+                      }
                     />
                   </div>
                   <div className="flex items-center justify-between">
                     <div className="space-y-0.5">
-                      <Label htmlFor="browser-notifications">Browser Notifications</Label>
-                      <p className="text-sm text-gray-500">Receive notifications in your browser</p>
+                      <Label htmlFor="browser-notifications">
+                        Browser Notifications
+                      </Label>
+                      <p className="text-sm text-gray-500">
+                        Receive notifications in your browser
+                      </p>
                     </div>
                     <Switch
                       id="browser-notifications"
                       checked={notifications.browser}
-                      onCheckedChange={(checked) => handleNotificationChange("browser", checked)}
+                      onCheckedChange={(checked) =>
+                        handleNotificationChange("browser", checked)
+                      }
                     />
                   </div>
                   <div className="flex items-center justify-between">
                     <div className="space-y-0.5">
-                      <Label htmlFor="mobile-notifications">Mobile Notifications</Label>
-                      <p className="text-sm text-gray-500">Receive notifications on your mobile device</p>
+                      <Label htmlFor="mobile-notifications">
+                        Mobile Notifications
+                      </Label>
+                      <p className="text-sm text-gray-500">
+                        Receive notifications on your mobile device
+                      </p>
                     </div>
                     <Switch
                       id="mobile-notifications"
                       checked={notifications.mobile}
-                      onCheckedChange={(checked) => handleNotificationChange("mobile", checked)}
+                      onCheckedChange={(checked) =>
+                        handleNotificationChange("mobile", checked)
+                      }
                     />
                   </div>
                 </div>
@@ -214,34 +243,46 @@ const Lecturersettings = () => {
                   <div className="flex items-center justify-between">
                     <div className="space-y-0.5">
                       <Label htmlFor="issue-assigned">Issue Assigned</Label>
-                      <p className="text-sm text-gray-500">When a new issue is assigned to you</p>
+                      <p className="text-sm text-gray-500">
+                        When a new issue is assigned to you
+                      </p>
                     </div>
                     <Switch
                       id="issue-assigned"
                       checked={notifications.issueAssigned}
-                      onCheckedChange={(checked) => handleNotificationChange("issueAssigned", checked)}
+                      onCheckedChange={(checked) =>
+                        handleNotificationChange("issueAssigned", checked)
+                      }
                     />
                   </div>
                   <div className="flex items-center justify-between">
                     <div className="space-y-0.5">
                       <Label htmlFor="issue-updated">Issue Updated</Label>
-                      <p className="text-sm text-gray-500">When there are updates to your assigned issues</p>
+                      <p className="text-sm text-gray-500">
+                        When there are updates to your assigned issues
+                      </p>
                     </div>
                     <Switch
                       id="issue-updated"
                       checked={notifications.issueUpdated}
-                      onCheckedChange={(checked) => handleNotificationChange("issueUpdated", checked)}
+                      onCheckedChange={(checked) =>
+                        handleNotificationChange("issueUpdated", checked)
+                      }
                     />
                   </div>
                   <div className="flex items-center justify-between">
                     <div className="space-y-0.5">
                       <Label htmlFor="system-updates">System Updates</Label>
-                      <p className="text-sm text-gray-500">Notifications about system maintenance and updates</p>
+                      <p className="text-sm text-gray-500">
+                        Notifications about system maintenance and updates
+                      </p>
                     </div>
                     <Switch
                       id="system-updates"
                       checked={notifications.systemUpdates}
-                      onCheckedChange={(checked) => handleNotificationChange("systemUpdates", checked)}
+                      onCheckedChange={(checked) =>
+                        handleNotificationChange("systemUpdates", checked)
+                      }
                     />
                   </div>
                 </div>
@@ -258,7 +299,9 @@ const Lecturersettings = () => {
           <Card>
             <CardHeader>
               <CardTitle>Security Settings</CardTitle>
-              <CardDescription>Manage your account security and authentication methods</CardDescription>
+              <CardDescription>
+                Manage your account security and authentication methods
+              </CardDescription>
             </CardHeader>
             <CardContent className="space-y-6">
               <div className="space-y-4">
@@ -273,7 +316,9 @@ const Lecturersettings = () => {
                     <Input id="new-password" type="password" />
                   </div>
                   <div className="space-y-2">
-                    <Label htmlFor="confirm-password">Confirm New Password</Label>
+                    <Label htmlFor="confirm-password">
+                      Confirm New Password
+                    </Label>
                     <Input id="confirm-password" type="password" />
                   </div>
                   <Button className="mt-2">Update Password</Button>
@@ -281,12 +326,16 @@ const Lecturersettings = () => {
               </div>
 
               <div className="space-y-4">
-                <h3 className="text-lg font-medium">Two-Factor Authentication</h3>
+                <h3 className="text-lg font-medium">
+                  Two-Factor Authentication
+                </h3>
                 <div className="space-y-3">
                   <div className="flex items-center justify-between">
                     <div className="space-y-0.5">
                       <Label>Two-Factor Authentication</Label>
-                      <p className="text-sm text-gray-500">Add an extra layer of security to your account</p>
+                      <p className="text-sm text-gray-500">
+                        Add an extra layer of security to your account
+                      </p>
                     </div>
                     <Button variant="outline">
                       <Key className="h-4 w-4 mr-2" />
@@ -302,7 +351,9 @@ const Lecturersettings = () => {
                   <div className="flex items-center justify-between">
                     <div className="space-y-0.5">
                       <Label>Active Sessions</Label>
-                      <p className="text-sm text-gray-500">Manage your active login sessions</p>
+                      <p className="text-sm text-gray-500">
+                        Manage your active login sessions
+                      </p>
                     </div>
                     <Button variant="outline">View Sessions</Button>
                   </div>
@@ -313,7 +364,6 @@ const Lecturersettings = () => {
         </TabsContent>
       </Tabs>
     </div>
-  )
-}
-export default Lecturersettings
-
+  );
+};
+export default Lecturersettings;

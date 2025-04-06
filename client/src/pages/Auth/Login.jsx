@@ -1,21 +1,22 @@
-
-import API from '../../utils/axiosInstance';
-import { useState } from "react"
-import { Link, useNavigate, useLocation } from "react-router-dom"
+import { Title } from "@radix-ui/react-dialog";
+import API from "../../utils/axiosInstance";
+import { useState } from "react";
+import { Link, useNavigate, useLocation } from "react-router-dom";
+import Swal from "sweetalert2";
 
 const Login = () => {
-  const [formData, setFormData] = useState({ username: "", password: "" })
-  const [loading, setLoading] = useState(false)
-  const [error, setError] = useState("")
-  const navigate = useNavigate()
-  const location = useLocation()
+  const [formData, setFormData] = useState({ username: "", password: "" });
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
+  const navigate = useNavigate();
+  const location = useLocation();
 
   // Get the page user was trying to access before being redirected to login
-  const from = location.state?.from?.pathname || "/"
+  const from = location.state?.from?.pathname || "/";
 
   const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value })
-  }
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -23,54 +24,78 @@ const Login = () => {
     setLoading(true);
 
     try {
-        const response = await API.post("login/", formData);
+      // Send login request to the server
+      const response = await API.post("login/", formData);
 
-        if (response.status === 200) {
-            const { access, refresh, username, role } = response.data; 
+      if (response.status === 200) {
+        const { access, refresh, username, role, course, student_number } =
+          response.data;
 
-            // Store tokens in local storage
-            localStorage.setItem("accessToken", access);
-            localStorage.setItem("refreshToken", refresh);
-            localStorage.setItem("username", username);
-            localStorage.setItem("role", role);  // Store role correctly
+        // Store tokens and user info in local storage
+        localStorage.setItem("accessToken", access);
+        localStorage.setItem("refreshToken", refresh);
+        localStorage.setItem("username", username);
+        localStorage.setItem("role", role);
+        localStorage.setItem("course", course);
+        localStorage.setItem("student_number", student_number);
 
-            console.log(`Login successful - Role: ${role}`);
+        console.log(`Login successful - Role: ${role}`);
 
-            // Role-based redirection
-            const roleRedirects = {
-                admin: "/admin-dashboard",
-                student: "/studentdashboard",
-                lecturer: "/lecturer-dashboard",
-                academic_registrar: "/registrar-dashboard",
-            };
+        Swal.fire({
+          icon: "success",
+          title: "Login Successful",
+          text: `Welcome ${username}!`,
+        });
 
-            navigate(roleRedirects[role] || "/", { replace: true });
+        // Role-based redirection
+        const roleRedirects = {
+          admin: "/admin-dashboard",
+          student: "/student-dashboard",
+          lecturer: "/lecturer-dashboard",
+          academic_registrar: "/registrar-dashboard",
+        };
 
+        if (roleRedirects[role]) {
+          navigate(roleRedirects[role], { replace: true });
         } else {
-            setError("Invalid credentials. Please try again.");
+          setError("Invalid role. Please contact support.");
         }
+      } else {
+        setError("Invalid credentials. Please try again.");
+      }
     } catch (error) {
-        console.error("Login error:", error.response?.data);
-        const errorMessage = error.response?.data?.error || "Login failed. Please check your credentials.";
-        setError(errorMessage);
-    } finally {
-        setLoading(false);
-    }
-};
+      console.error("Login error:", error.response?.data);
+      const errorMessage =
+        error.response?.data?.error ||
+        "Login failed. Please check your credentials.";
+      setError(errorMessage);
 
-  
+      Swal.fire({
+        icon: "error",
+        title: "Login Failed",
+        text: errorMessage,
+      });
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
     <div className="flex flex-col min-h-screen items-center justify-center bg-gray-50">
       <div className="w-full max-w-md bg-white p-8 rounded-lg shadow-lg">
         <h2 className="text-2xl font-bold text-center">Login to AITS</h2>
-        <p className="text-center text-gray-600 mt-2">Academic Issue Tracking System</p>
+        <p className="text-center text-gray-600 mt-2">
+          Academic Issue Tracking System
+        </p>
 
         {error && <p className="text-red-500 text-sm mt-2">{error}</p>}
 
         <form className="space-y-4 mt-4" onSubmit={handleSubmit}>
           <div>
-            <label htmlFor="username" className="block text-sm font-medium text-gray-700">
+            <label
+              htmlFor="username"
+              className="block text-sm font-medium text-gray-700"
+            >
               Username
             </label>
             <input
@@ -83,11 +108,13 @@ const Login = () => {
               required
               autoComplete="username"
             />
-            <p className="text-xs text-gray-500 mt-1">Try: student1, lecturer1, admin1, or registrar1</p>
           </div>
 
           <div>
-            <label htmlFor="password" className="block text-sm font-medium text-gray-700">
+            <label
+              htmlFor="password"
+              className="block text-sm font-medium text-gray-700"
+            >
               Password
             </label>
             <input
@@ -100,7 +127,6 @@ const Login = () => {
               required
               autoComplete="current-password"
             />
-            <p className="text-xs text-gray-500 mt-1">Any password will work for this demo</p>
           </div>
 
           <button
@@ -117,8 +143,7 @@ const Login = () => {
         </p>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default Login
-
+export default Login;

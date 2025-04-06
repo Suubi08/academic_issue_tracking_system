@@ -1,10 +1,20 @@
-import Dashboard from "./Dashboard"
-import Issues from "./Issues"
-import Reports from "./StudentDashboard/Reports"
-import Settings from "./StudentDashboard/Settings"
-import Resolved from "./Resolved"
-import Studentdashboard from "./StudentDashboard/Studentdashboard"
-import Issuereport from "./StudentDashboard/Issuereport"
+import AdminDashboard from "./AdminDashboard";
+import Dashboard from "./Dashboard";
+import IssueTracking from "./IssueTracking";
+import LecturerDashboard from "./LecturerDashboard";
+//import PageNotFound from "./PageNotFound";
+import QuickActions from "./QuickActions";
+import RecentActivity from "./RecentActivity";
+import Studentdashboard from "./Studentdashboard";
+import Studentsubmitissue from "./Studentsubmitissue";
 
-export { Dashboard, Issues, Reports, Settings, Resolved, Studentdashboard, Issuereport }
-
+export {
+  AdminDashboard,
+  Dashboard,
+  IssueTracking,
+  LecturerDashboard,
+  QuickActions,
+  RecentActivity,
+  Studentdashboard,
+  Studentsubmitissue,
+};
