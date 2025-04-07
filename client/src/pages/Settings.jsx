@@ -18,7 +18,7 @@ const Settings = () => {
           <select
             id="options"
             value={selectedOption} // Controlled component
-            onChange={handleSelectChange} // Added onChange handler
+            onChange={handleSelectChange} // Added to onChange handler
           >
             <option value="">Select an option</option>
             <option value="option1">Option 1</option>
