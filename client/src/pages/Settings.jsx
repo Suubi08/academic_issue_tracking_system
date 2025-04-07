@@ -3,7 +3,7 @@
 import { useState } from "react"
 
 const Settings = () => {
-  const [selectedOption, setSelectedOption] = useState("") // State to maage the selected value
+  const [selectedOption, setSelectedOption] = useState("") // State to manage the selected value
 
   const handleSelectChange = (event) => {
     setSelectedOption(event.target.value) // Update state on change
