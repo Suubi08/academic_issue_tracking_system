@@ -15,7 +15,8 @@ const Issues = () => {
       title: "Course registration error",
       status: "Pending",
       lastUpdate: "Feb 15, 2025",
-      priority: "High",
+      priority: "High",    
+      // as gooff
       category: "Registration",
     },
     {
