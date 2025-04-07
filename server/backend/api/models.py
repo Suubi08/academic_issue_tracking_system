@@ -68,7 +68,9 @@ class Issue(models.Model):
     category = models.CharField(max_length=100)
     #date when issue is experienced
     date_of_issue = models.DateField()
+    #course unit where the is 
     course_unit = models.CharField(max_length=200)
+    #connects the issue to the lecturer responsible
     assigned_to = models.ForeignKey(
         User, 
         on_delete=models.SET_NULL, 
