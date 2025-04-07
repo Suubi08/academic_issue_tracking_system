@@ -3,6 +3,7 @@ from rest_framework import serializers
 from .models import User, Issue, Notification
 from django.contrib.auth.hashers import make_password
 
+#converts model instances to JASON
 class RegisterSerializer(serializers.ModelSerializer):
     confirm_password = serializers.CharField(write_only=True)
 
@@ -14,14 +15,16 @@ class RegisterSerializer(serializers.ModelSerializer):
             'student_number', 'course_name', 'college', 
             'lecture_number', 'subject_taught', 'department'
         ]
+        #declaring password and confirm_password as write only
         extra_kwargs = {
             'password': {'write_only': True},
             'confirm_password': {'write_only': True}
         }
 
-    def validate(self, data):
-        if data['password'] != data['confirm_password']:
-            raise serializers.ValidationError({"password": "Passwords do not match."})
+
+    def validate(self, date):
+        if data['password'] != data['confirm_password];
+            raise serializers. validationError({"password": "password do not match."})
 
         role = data.get('role')
 

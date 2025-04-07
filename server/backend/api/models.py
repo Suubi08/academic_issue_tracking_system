@@ -5,7 +5,7 @@ from django.contrib.auth.models import AbstractUser, Group, Permission
 from django.contrib.auth.models import AbstractUser, Group, Permission
 from django.db import models
 
-#creating abstract user
+#creating abstract user with rolse based access
 class User(AbstractUser):
     ROLE_CHOICES = [
         ('student', 'Student'),
@@ -90,7 +90,6 @@ class Notification(models.Model):
     message = models.TextField()
     status = models.BooleanField(default=False)
     created_at = models.DateTimeField(auto_now_add=True)
-
     def _str_(self):
         return f"Notification for {self.user.username}"
 
@@ -100,7 +99,6 @@ class Comments(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     message = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)
-    
     def __str__(self):
         return f"Comment by {self.user.username} on {self.issue}"
 
