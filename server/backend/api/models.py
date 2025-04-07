@@ -24,7 +24,8 @@ class User(AbstractUser):
     # Lecturer-specific fields
     lecture_number = models.CharField(max_length=20, blank=True, null=True)
     subject_taught = models.TextField(blank=True, null=True)
-
+    
+    #shared field
     department = models.CharField(max_length=100, blank=True, null=True) 
 
     # Fix groups and user_permissions
@@ -32,7 +33,7 @@ class User(AbstractUser):
     user_permissions = models.ManyToManyField("auth.Permission", related_name="custom_user_permissions", blank=True)
 
     def save(self, *args, **kwargs):
-        """Ensure only role-specific fields are filled"""
+        """Ensure only role-specific fields are filled for the right roles"""
         if self.role == 'student':
             self.lecture_number = None
             self.subject_taught = None
