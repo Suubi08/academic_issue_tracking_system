@@ -20,7 +20,7 @@ from django.http import HttpResponse
 
 def home(request):
     return HttpResponse("Welcome to the academic Issue Tracking System (AITS)!")
-
+#system calls 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/', include('api.urls')),
