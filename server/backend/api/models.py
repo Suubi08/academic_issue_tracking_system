@@ -5,6 +5,7 @@ from django.contrib.auth.models import AbstractUser, Group, Permission
 from django.contrib.auth.models import AbstractUser, Group, Permission
 from django.db import models
 
+#creating abstract user
 class User(AbstractUser):
     ROLE_CHOICES = [
         ('student', 'Student'),
