@@ -26,7 +26,7 @@ import { Popover, PopoverTrigger, PopoverContent } from "./ui/Popover";
 import { Badge, badgeVariants } from "./ui/Badge";
 
 export {
-  Loading,
+  
   Maincontent,
   Navbar,
   Sidebar,
