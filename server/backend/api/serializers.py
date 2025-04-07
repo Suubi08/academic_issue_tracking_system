@@ -22,9 +22,9 @@ class RegisterSerializer(serializers.ModelSerializer):
         }
 
 
-    def validate(self, date):
-        if data['password'] != data['confirm_password'];
-            raise serializers. ValidationError({"password": "Password do not match."})
+    def validate(self, data):
+        if data['password'] != data['confirm_password']:
+            raise serializers.ValidationError({"password": "Password do not match."})
 
         role = data.get('role')
 
