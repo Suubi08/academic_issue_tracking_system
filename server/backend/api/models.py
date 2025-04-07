@@ -70,7 +70,7 @@ class Issue(models.Model):
     date_of_issue = models.DateField()
     #course unit where the is 
     course_unit = models.CharField(max_length=200)
-    #connects the issue to the lecturer responsible
+    #connects to the lecturer handling the issue
     assigned_to = models.ForeignKey(
         User, 
         on_delete=models.SET_NULL, 
