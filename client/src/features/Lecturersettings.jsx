@@ -1,3 +1,5 @@
+"use client";
+
 import { Switch } from "../components/ui";
 import { Textarea } from "../components/ui";
 import {

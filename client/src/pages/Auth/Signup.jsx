@@ -19,6 +19,7 @@ const Signup = () => {
     college: "",
     department: "",
     lecture_number: "",
+
   });
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
@@ -46,6 +47,8 @@ const Signup = () => {
         localStorage.setItem("refreshToken", refresh);
         localStorage.setItem("username", username);
         localStorage.setItem("role", role);
+        localStorage.setItem("id",id)
+
 
         console.log(`Registration successful - Role: ${role}`);
         Swal.fire({

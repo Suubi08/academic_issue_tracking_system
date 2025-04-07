@@ -28,7 +28,7 @@ const Login = () => {
       const response = await API.post("login/", formData);
 
       if (response.status === 200) {
-        const { access, refresh, username, role, course, student_number } =
+        const { access, refresh, username, role, course, student_number,id } =
           response.data;
 
         // Store tokens and user info in local storage
@@ -38,6 +38,8 @@ const Login = () => {
         localStorage.setItem("role", role);
         localStorage.setItem("course", course);
         localStorage.setItem("student_number", student_number);
+        localStorage.setItem("id",id)
+      
 
         console.log(`Login successful - Role: ${role}`);
 

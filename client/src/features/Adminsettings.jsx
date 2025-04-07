@@ -1,6 +1,6 @@
-"use client"
+"use client";
 
-import { useState } from "react"
+import { useState } from "react";
 
 const Adminsettings = () => {
   const [formData, setFormData] = useState({
@@ -10,21 +10,21 @@ const Adminsettings = () => {
     maintenanceMode: false,
     allowRegistration: true,
     requireEmailVerification: true,
-  })
+  });
 
   const handleChange = (e) => {
-    const { name, value, type, checked } = e.target
+    const { name, value, type, checked } = e.target;
     setFormData((prev) => ({
       ...prev,
       [name]: type === "checkbox" ? checked : value,
-    }))
-  }
+    }));
+  };
 
   const handleSubmit = (e) => {
-    e.preventDefault()
+    e.preventDefault();
     // In a real app, you would save the settings here
-    alert("System settings saved successfully!")
-  }
+    alert("System settings saved successfully!");
+  };
 
   return (
     <div className="space-y-6">
@@ -34,7 +34,10 @@ const Adminsettings = () => {
         <form onSubmit={handleSubmit}>
           <div className="grid gap-6 md:grid-cols-2">
             <div>
-              <label htmlFor="siteName" className="block text-sm font-medium text-gray-700">
+              <label
+                htmlFor="siteName"
+                className="block text-sm font-medium text-gray-700"
+              >
                 Site Name
               </label>
               <input
@@ -48,7 +51,10 @@ const Adminsettings = () => {
             </div>
 
             <div>
-              <label htmlFor="supportEmail" className="block text-sm font-medium text-gray-700">
+              <label
+                htmlFor="supportEmail"
+                className="block text-sm font-medium text-gray-700"
+              >
                 Support Email
               </label>
               <input
@@ -62,7 +68,10 @@ const Adminsettings = () => {
             </div>
 
             <div>
-              <label htmlFor="maxFileSize" className="block text-sm font-medium text-gray-700">
+              <label
+                htmlFor="maxFileSize"
+                className="block text-sm font-medium text-gray-700"
+              >
                 Maximum File Upload Size (MB)
               </label>
               <input
@@ -79,7 +88,9 @@ const Adminsettings = () => {
           </div>
 
           <div className="mt-6">
-            <h3 className="text-sm font-medium text-gray-700">System Options</h3>
+            <h3 className="text-sm font-medium text-gray-700">
+              System Options
+            </h3>
             <div className="mt-2 space-y-4">
               <div className="flex items-start">
                 <div className="flex h-5 items-center">
@@ -93,10 +104,15 @@ const Adminsettings = () => {
                   />
                 </div>
                 <div className="ml-3 text-sm">
-                  <label htmlFor="maintenanceMode" className="font-medium text-gray-700">
+                  <label
+                    htmlFor="maintenanceMode"
+                    className="font-medium text-gray-700"
+                  >
                     Maintenance Mode
                   </label>
-                  <p className="text-gray-500">Put the system in maintenance mode (only admins can access)</p>
+                  <p className="text-gray-500">
+                    Put the system in maintenance mode (only admins can access)
+                  </p>
                 </div>
               </div>
 
@@ -112,10 +128,15 @@ const Adminsettings = () => {
                   />
                 </div>
                 <div className="ml-3 text-sm">
-                  <label htmlFor="allowRegistration" className="font-medium text-gray-700">
+                  <label
+                    htmlFor="allowRegistration"
+                    className="font-medium text-gray-700"
+                  >
                     Allow Registration
                   </label>
-                  <p className="text-gray-500">Allow new users to register accounts</p>
+                  <p className="text-gray-500">
+                    Allow new users to register accounts
+                  </p>
                 </div>
               </div>
 
@@ -131,11 +152,15 @@ const Adminsettings = () => {
                   />
                 </div>
                 <div className="ml-3 text-sm">
-                  <label htmlFor="requireEmailVerification" className="font-medium text-gray-700">
+                  <label
+                    htmlFor="requireEmailVerification"
+                    className="font-medium text-gray-700"
+                  >
                     Require Email Verification
                   </label>
                   <p className="text-gray-500">
-                    Require users to verify their email address before accessing the system
+                    Require users to verify their email address before accessing
+                    the system
                   </p>
                 </div>
               </div>
@@ -159,8 +184,7 @@ const Adminsettings = () => {
         </form>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default Adminsettings
-
+export default Adminsettings;

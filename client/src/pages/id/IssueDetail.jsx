@@ -1,4 +1,5 @@
 
+
 import { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { Card, CardHeader, CardTitle, CardContent } from "../../components";
@@ -14,15 +15,14 @@ import {
   SelectItem,
 } from "../../components/ui/select";
 import LoadingSpinner from "../../components/loading-spinner";
+import axios from "axios";
 
 function IssueDetail() {
   const { id } = useParams();
   const navigate = useNavigate();
-  const [issue, setIssue] = useState(null);
-  const [comments, setComments] = useState([]);
+  const [issue, setIssue] = useState({});
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [newComment, setNewComment] = useState("");
   const [statusUpdate, setStatusUpdate] = useState("");
   const [submitting, setSubmitting] = useState(false);
 
@@ -30,8 +30,6 @@ function IssueDetail() {
     navigate("/studentissues"); 
   };
 
-  // Removed duplicate declaration of id
-  // Add authentication check
   useEffect(() => {
     const token = localStorage.getItem("accessToken");
     if (!token) {
@@ -45,43 +43,12 @@ function IssueDetail() {
   const fetchIssueAndComments = async () => {
     try {
       setLoading(true);
+      
+      const issueResponse = await axios.get(`http://localhost:8000/api/issues/${id}`);
+    
+      setIssue(issueResponse.data);
+      console.log(issueResponse.data)
 
-      // Mock data for demo purposes
-      const mockIssue = {
-        id:id,
-        title: "Missing marks for Operating Systems",
-        status: "Open",
-        priority: "High",
-        reported_by: "John Doe",
-        created_at: new Date().toISOString(),
-        description:
-          "I cannot see my marks for the Operating Systems course in the portal. I attended all tests and exams.",
-        course: "Operating Systems",
-        lecturer: "Dr. Smith",
-      };
-
-      setIssue(mockIssue);
-      setStatusUpdate(mockIssue.status);
-
-      // Mock comments
-      const mockComments = [
-        {
-          id: 1,
-          author: "John Doe",
-          role: "student",
-          content: "Any update on this issue?",
-          created_at: new Date(Date.now() - 172800000).toISOString(),
-        },
-        {
-          id: 2,
-          author: "Dr. Smith",
-          role: "lecturer",
-          content: "I'm looking into it. Will update you soon.",
-          created_at: new Date(Date.now() - 86400000).toISOString(),
-        },
-      ];
-
-      setComments(mockComments);
     } catch (err) {
       console.error("Error fetching issue details:", err);
       setError("Failed to fetch issue details. Please try again.");
@@ -90,83 +57,37 @@ function IssueDetail() {
     }
   };
 
-  const handleAddComment = async (e) => {
-    e.preventDefault();
-    if (!newComment.trim()) return;
-
-    try {
-      setSubmitting(true);
-
-      // Mock adding a comment
-      const username = localStorage.getItem("username") || "User";
-      const role = localStorage.getItem("role") || "student";
-
-      const newCommentObj = {
-        id: Date.now(),
-        author: username,
-        role: role,
-        content: newComment,
-        created_at: new Date().toISOString(),
-      };
-
-      setComments([...comments, newCommentObj]);
-      setNewComment("");
-    } catch (err) {
-      setError("Failed to add comment. Please try again.");
-    } finally {
-      setSubmitting(false);
-    }
-  };
-
-  const handleStatusUpdate = async (e) => {
-    e.preventDefault();
-
-    try {
-      setSubmitting(true);
-      // Mock updating status
-      setIssue({ ...issue, status: statusUpdate });
-
-      // Show success message
-      setTimeout(() => {
-        alert("Status updated successfully!");
-      }, 500);
-    } catch (err) {
-      setError("Failed to update status. Please try again.");
-    } finally {
-      setSubmitting(false);
-    }
-  };
-
-  const getStatusBadge = (status) => {
-    switch (status.toLowerCase()) {
-      case "open":
-        return (
-          <Badge className="bg-yellow-100 text-yellow-800 border-yellow-200">
-            Open
-          </Badge>
-        );
-      case "in progress":
-        return (
-          <Badge className="bg-blue-100 text-blue-800 border-blue-200">
-            In Progress
-          </Badge>
-        );
-      case "resolved":
-        return (
-          <Badge className="bg-green-100 text-green-800 border-green-200">
-            Resolved
-          </Badge>
-        );
-      case "closed":
-        return (
-          <Badge className="bg-gray-100 text-gray-800 border-gray-200">
-            Closed
-          </Badge>
-        );
-      default:
-        return <Badge>{status}</Badge>;
-    }
-  };
+  
+const getStatusBadge = (status) => {
+  switch (status.toLowerCase()) {
+    case "open":
+      return (
+        <Badge className="bg-yellow-100 text-yellow-800 border-yellow-200">
+          Open
+        </Badge>
+      );
+    case "in progress":
+      return (
+        <Badge className="bg-blue-100 text-blue-800 border-blue-200">
+          In Progress
+        </Badge>
+      );
+    case "resolved":
+      return (
+        <Badge className="bg-green-100 text-green-800 border-green-200">
+          Resolved
+        </Badge>
+      );
+    case "closed":
+      return (
+        <Badge className="bg-gray-100 text-gray-800 border-gray-200">
+          Closed
+        </Badge>
+      );
+    default:
+      return <Badge>{status}</Badge>;
+  }
+};
 
   const getPriorityBadge = (priority) => {
     switch (priority.toLowerCase()) {

@@ -1,3 +1,5 @@
+"use client"
+
 import { useState, useEffect } from "react"
 import { Card, CardContent, CardHeader, CardTitle } from "./ui/Card"
 import { Search, Filter, X } from "lucide-react"
@@ -82,7 +84,7 @@ const IssueTracking = () => {
       <CardHeader>
         <div className="flex justify-between items-center">
           <CardTitle>
-            Issue Tracking
+            <h2 className="text-xl font-semibold">Issue Tracking</h2>
           </CardTitle>
           <div className="flex items-center gap-2">
             <div className="relative">

@@ -1,6 +1,5 @@
 const Adminusermanagement = () => {
-  return <div>Adminusermanagement</div>
-}
+  return <div>Adminusermanagement</div>;
+};
 
-export default Adminusermanagement
-
+export default Adminusermanagement;
