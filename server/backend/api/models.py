@@ -5,6 +5,7 @@ from django.contrib.auth.models import AbstractUser, Group, Permission
 from django.contrib.auth.models import AbstractUser, Group, Permission
 from django.db import models
 
+#creating abstract user
 class User(AbstractUser):
     ROLE_CHOICES = [
         ('student', 'Student'),
@@ -100,7 +101,7 @@ class Comments(models.Model):
     message = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)
 
-# Attachment modle
+# Attachment model
 class Attachment(models.Model):
     issue = models.ForeignKey(Issue, on_delete=models.CASCADE, related_name='attachments')
     file = models.FileField(upload_to='attachments/')
