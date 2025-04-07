@@ -64,7 +64,9 @@ class Issue(models.Model):
         ('closed', 'Closed'),
     ]
 
+    #type of the issue to be submitted
     category = models.CharField(max_length=100)
+    #date when issue is experienced
     date_of_issue = models.DateField()
     course_unit = models.CharField(max_length=200)
     assigned_to = models.ForeignKey(
