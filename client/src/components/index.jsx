@@ -19,7 +19,7 @@ import {
   CardFooter,
   CardTitle,
   CardDescription,
-  CardContent,
+  CardCo,
 } from "./ui/Card";
 
 import { Popover, PopoverTrigger, PopoverContent } from "./ui/Popover";
