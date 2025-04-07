@@ -109,5 +109,6 @@ class Attachment(models.Model):
     issue = models.ForeignKey(Issue, on_delete=models.CASCADE, related_name='attachments')
     file = models.FileField(upload_to='attachments/')
     uploaded_at = models.DateTimeField(auto_now_add=True)
+    
     def __str__(self):
         return f"Attachment for issue {self.issue.id}"
