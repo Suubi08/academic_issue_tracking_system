@@ -86,7 +86,14 @@ const AdminNotifications = () => {
           <TabsTrigger value="assignments">Assignments</TabsTrigger>
           <TabsTrigger value="reminders">Reminders</TabsTrigger>
         </TabsList>
-
+ <TabsContent value="all" className="mt-0">
+<Card>
+  <CardHeader className="pb-2">
+    <CardTitle>All Notifications</CardTitle>
+  </CardHeader>
+</Card>
+   
+ </TabsContent>
 
 
 
