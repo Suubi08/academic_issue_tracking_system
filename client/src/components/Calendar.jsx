@@ -11,3 +11,13 @@ const Calendar = ({ issues = [], isLoading }) => {
   useEffect(() => {
     setFilteredIssues(issues)
   }, [issues])
+const daysOfWeek = ["Mon", "Tue", "Wed", "Thur", "Fri", "Sat", "Sun"]
+
+  const getDaysInMonth = (year, month) => {
+    return new Date(year, month + 1, 0).getDate()
+  }
+
+  const getFirstDayOfMonth = (year, month) => {
+    const firstDay = new Date(year, month, 1).getDay()
+    return firstDay === 0 ? 6 : firstDay - 1
+  }
