@@ -191,7 +191,16 @@ const AdminNotifications = () => {
         </CardContent>
       </TabsContent>
 
-
+<TabContent value="reminders" className="mt-0">
+  <Card>
+    <CardHeader>
+      <CardTitle>Reminder Notifications</CardTitle>
+    </CardHeader>
+    <CardContent>
+      
+    </CardContent>
+  </Card>
+</TabContent>
 
 
         
