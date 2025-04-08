@@ -197,7 +197,20 @@ const AdminNotifications = () => {
       <CardTitle>Reminder Notifications</CardTitle>
     </CardHeader>
     <CardContent>
-      
+      <div className="space-y-4">
+                {activeNotifications.filter((n) => n.type === "reminder").length > 0 ? (
+                  activeNotifications
+                    .filter((n) => n.type === "reminder")
+                    .map((notification) => (
+                      <div
+                        key={notification.id}
+                        className={`p-4 border rounded-lg ${notification.read ? "bg-white" : "bg-blue-50 border-blue-100"}`}
+                      >
+                        <div className="flex items-start">
+                          <div className="p-2 rounded-full mr-4 bg-yellow-100 text-yellow-600">
+                            <Clock className="h-5 w-5" />
+                          </div>
+                          </div>
     </CardContent>
   </Card>
 </TabContent>
