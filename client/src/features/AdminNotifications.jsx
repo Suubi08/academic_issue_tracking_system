@@ -85,6 +85,7 @@ export default function NotificationsPage() {
           <TabsTrigger value="reminders">Reminders</TabsTrigger>
         </TabsList>
 
+        {/* All Notifications Tab */}
         <TabsContent value="all" className="mt-0">
           <Card>
             <CardHeader className="pb-2">
@@ -148,6 +149,126 @@ export default function NotificationsPage() {
             </CardContent>
           </Card>
         </TabsContent>
+
+        {/* Unread Notifications Tab */}
+        <TabsContent value="unread" className="mt-0">
+          <Card>
+            <CardHeader>
+              <CardTitle>Unread Notifications</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <div className="space-y-4">
+                {notifications.filter((n) => !n.read).length > 0 ? (
+                  notifications
+                    .filter((n) => !n.read)
+                    .map((notification) => (
+                      <div key={notification.id} className="p-4 border rounded-lg bg-blue-50 border-blue-100">
+                        <div className="flex items-start">
+                          <div className="p-2 rounded-full mr-4 bg-blue-100 text-blue-600">
+                            <Bell className="h-5 w-5" />
+                          </div>
+                          <div className="flex-1">
+                            <h3 className="font-medium">{notification.title}</h3>
+                            <p className="text-sm text-gray-600 mt-1">{notification.description}</p>
+                            <p className="text-xs text-gray-500 mt-2">{notification.time}</p>
+                          </div>
+                        </div>
+                        <div className="flex justify-end mt-2">
+                          <Button variant="ghost" size="sm" onClick={() => markAsRead(notification.id)}>
+                            <CheckCircle className="h-4 w-4 mr-1" />
+                            Mark as read
+                          </Button>
+                        </div>
+                      </div>
+                    ))
+                ) : (
+                  <div className="text-center py-8">
+                    <CheckCircle className="h-12 w-12 text-green-500 mx-auto mb-4" />
+                    <h3 className="text-lg font-medium text-gray-900 mb-2">All caught up!</h3>
+                    <p className="text-gray-500">You have no unread notifications</p>
+                  </div>
+                )}
+              </div>
+            </CardContent>
+          </Card>
+        </TabsContent>
+
+        {/* Assignment Notifications Tab */}
+        <TabsContent value="assignments" className="mt-0">
+          <Card>
+            <CardHeader>
+              <CardTitle>Assignment Notifications</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <div className="space-y-4">
+                {notifications.filter((n) => n.type === "assignment").length > 0 ? (
+                  notifications
+                    .filter((n) => n.type === "assignment")
+                    .map((notification) => (
+                      <div
+                        key={notification.id}
+                        className={`p-4 border rounded-lg ${notification.read ? "bg-white" : "bg-blue-50 border-blue-100"}`}
+                      >
+                        <div className="flex items-start">
+                          <div className="p-2 rounded-full mr-4 bg-purple-100 text-purple-600">
+                            <Bell className="h-5 w-5" />
+                          </div>
+                          <div className="flex-1">
+                            <h3 className="font-medium">{notification.title}</h3>
+                            <p className="text-sm text-gray-600 mt-1">{notification.description}</p>
+                            <p className="text-xs text-gray-500 mt-2">{notification.time}</p>
+                          </div>
+                        </div>
+                      </div>
+                    ))
+                ) : (
+                  <div className="text-center py-8">
+                    <p className="text-gray-500">No assignment notifications</p>
+                  </div>
+                )}
+              </div>
+            </CardContent>
+          </Card>
+        </TabsContent>
+
+        {/* Reminder Notifications Tab */}
+        <TabsContent value="reminders" className="mt-0">
+          <Card>
+            <CardHeader>
+              <CardTitle>Reminder Notifications</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <div className="space-y-4">
+                {notifications.filter((n) => n.type === "reminder").length > 0 ? (
+                  notifications
+                    .filter((n) => n.type === "reminder")
+                    .map((notification) => (
+                      <div
+                        key={notification.id}
+                        className={`p-4 border rounded-lg ${notification.read ? "bg-white" : "bg-blue-50 border-blue-100"}`}
+                      >
+                        <div className="flex items-start">
+                          <div className="p-2 rounded-full mr-4 bg-yellow-100 text-yellow-600">
+                            <Clock className="h-5 w-5" />
+                          </div>
+                          <div className="flex-1">
+                            <h3 className="font-medium">{notification.title}</h3>
+                            <p className="text-sm text-gray-600 mt-1">{notification.description}</p>
+                            <p className="text-xs text-gray-500 mt-2">{notification.time}</p>
+                          </div>
+                        </div>
+                      </div>
+                    ))
+                ) : (
+                  <div className="text-center py-8">
+                    <p className="text-gray-500">No reminder notifications</p>
+                  </div>
+                )}
+              </div>
+            </CardContent>
+          </Card>
+        </TabsContent>
+      </Tabs>
     </div>
   )
 }
