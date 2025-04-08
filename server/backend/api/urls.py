@@ -3,6 +3,7 @@ from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
 from .views import RegisterView, LoginView, RefreshTokenView
 from .views import UserListView, IssueListView, LecturerListView, IssueDetailView, NotificationListView
 
+#mapping urls to views
 urlpatterns = [
     path('users/', UserListView.as_view(), name='user-list'),
     path('issues/', IssueListView.as_view(), name='issue-list'),
