@@ -46,9 +46,9 @@ class RegisterView(APIView):
                 "message": "User registered successfully",
             }
 
-            return Response(response_data, status=status.HTTP_201_CREATED)
-
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+            return Response(response_data, status+status.HTTP_201_CREATED)
+            
+            return Response(response_data, status=status.HTTP_400_BAD_REQUEST)
     
 # Login and get JWT Token
 class LoginView(APIView):
