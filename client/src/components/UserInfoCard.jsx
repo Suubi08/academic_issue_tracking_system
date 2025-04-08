@@ -1,5 +1,8 @@
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> 679ab1e77e93b640d699c9368a90263716fe8a5e
 import { useState, useEffect } from "react";
 import { Copy, Check, User } from "lucide-react";
 import { Card, CardContent, CardHeader } from "./ui/Card";

@@ -1,6 +1,6 @@
-"use client"
 
-import { useState } from "react"
+
+mport { useState } from "react"
 import { X, Paperclip, Send } from "lucide-react"
 import { useIssueContext } from "../context/IssueContext"
 
@@ -12,7 +12,7 @@ const IssueDetails = ({ issue, isOpen, onClose }) => {
   const handleSubmit = (e) => {
     e.preventDefault()
     if (comment.trim()) {
-      addComment(issue.id, comment, file)
+      adidComment(issue.id, comment, file)
       setComment("")
       setFile(null)
     }

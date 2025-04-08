@@ -1,9 +1,20 @@
+<<<<<<< HEAD
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Menu, X, ChevronLeft, Bell, User, LogOut } from "lucide-react";
 import { logout } from "../utils/authService";
 import { Avatar, AvatarFallback, AvatarImage } from "./ui/Avatar";
 
+=======
+"use client";
+
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { Menu, X, ChevronLeft, Bell, User, LogOut } from "lucide-react";
+import { logout } from "../utils/authService";
+import { Avatar, AvatarFallback, AvatarImage } from "./ui/Avatar";
+
+>>>>>>> 679ab1e77e93b640d699c9368a90263716fe8a5e
 const Navbar = ({
   setSidebarOpen,
   sidebarOpen,

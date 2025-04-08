@@ -14,9 +14,9 @@ from rest_framework_simplejwt.tokens import RefreshToken
 from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
 from django.http import JsonResponse
-from django.contrib.auth.decorators import login_required
+#from django.contrib.auth.decorators import login_required
 from rest_framework.permissions import IsAuthenticated
-from django.http import JsonResponse
+#from django.http import JsonResponse
 import json  # Ensure JSON is imported for `json.loads(request.body)`
 
 # from rest_framework import generics, status
@@ -49,9 +49,9 @@ class RegisterView(APIView):
                 "message": "User registered successfully",
             }
 
-            return Response(response_data, status=status.HTTP_201_CREATED)
-
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+            return Response(response_data, status+status.HTTP_201_CREATED)
+            
+            return Response(response_data, status=status.HTTP_400_BAD_REQUEST)
     
 # Login and get JWT Token
 class LoginView(APIView):
@@ -100,6 +100,7 @@ class IssueCreateView(generics.CreateAPIView):
     def perform_create(self, serializer):
         serializer.save(created_by=self.request.user)
   # Set the user automatically
+        serializer.save(created_by=self.request.user)  # Sets logged in user as issue_created by
 
 class LecturerListView(ListAPIView):
     serializer_class = UserSerializer
@@ -124,6 +125,7 @@ class IssueDetailView(RetrieveUpdateDestroyAPIView):
 class NotificationListView(ListCreateAPIView):
     queryset = Notification.objects.all()
     serializer_class = NotificationSerializer
+    
 
 
 @login_required

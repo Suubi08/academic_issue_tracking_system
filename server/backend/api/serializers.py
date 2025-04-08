@@ -1,8 +1,9 @@
-from django.contrib.auth.models import User
+#from django.contrib.auth.models import User
 from rest_framework import serializers
 from .models import User, Issue, Notification
-from django.contrib.auth.hashers import make_password
+from django.contrib.auth.hashers import make_password #safely encrypting passwords
 
+#converts model instances to JASON format
 class RegisterSerializer(serializers.ModelSerializer):
     confirm_password = serializers.CharField(write_only=True)
 
@@ -14,14 +15,16 @@ class RegisterSerializer(serializers.ModelSerializer):
             'student_number', 'course_name', 'college', 
             'lecture_number', 'subject_taught', 'department'
         ]
+        #declaring password and confirm_password as write only (important for security)
         extra_kwargs = {
             'password': {'write_only': True},
             'confirm_password': {'write_only': True}
         }
 
+#Data validation (data entered matches)
     def validate(self, data):
         if data['password'] != data['confirm_password']:
-            raise serializers.ValidationError({"password": "Passwords do not match."})
+            raise serializers.ValidationError({"password": "Password do not match."})
 
         role = data.get('role')
 
@@ -71,7 +74,7 @@ class RegisterSerializer(serializers.ModelSerializer):
         )
 
         return user
-    
+#displaying user info
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User

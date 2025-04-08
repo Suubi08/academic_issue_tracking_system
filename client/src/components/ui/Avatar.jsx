@@ -1,4 +1,4 @@
-"use client"
+
 import * as AvatarPrimitive from "@radix-ui/react-avatar"
 import { cn } from "../../utils/utils" // Assuming you have a utility function to combine classes
 
