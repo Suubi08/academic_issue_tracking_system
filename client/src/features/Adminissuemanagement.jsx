@@ -6,7 +6,7 @@ import {
   CardTitle,
   CardDescription,
   CardContent,
-} from "../components";
+} from "../components/ui"
 import {
   Tabs,
   TabsList,
