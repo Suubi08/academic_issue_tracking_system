@@ -2,9 +2,9 @@ import React, { useState, useEffect } from "react";
 import {
   Card,
   CardHeader,
-  CardFooter,
+ 
   CardTitle,
-  CardDescription,
+ 
   CardContent,
 } from "../components/ui"
 import {
