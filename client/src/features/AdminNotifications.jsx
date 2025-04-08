@@ -92,6 +92,14 @@ const AdminNotifications = () => {
     <CardTitle>All Notifications</CardTitle>
   </CardHeader>
 </Card>
+   <CardContent>
+     <div className="space-y-4">
+                {activeNotifications.map((notification) => (
+                  <div
+                    key={notification.id}
+                    className={`p-4 border rounded-lg ${notification.read ? "bg-white" : "bg-blue-50 border-blue-100"}`}
+                  >
+   </CardContent>
    
  </TabsContent>
 
