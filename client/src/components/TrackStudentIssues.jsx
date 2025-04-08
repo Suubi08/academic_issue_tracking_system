@@ -1,3 +1,4 @@
+"use client";
 
 import { useState, useEffect } from "react";
 import {
@@ -259,10 +260,10 @@ const TrackStudentIssues = () => {
                 <div className="flex items-center space-x-4">
                   <div className="flex flex-col items-center justify-center w-14 h-14 bg-gray-100 rounded-lg">
                     <span className="text-lg font-semibold">
-                      {new Date(issue.lastUpdate).getDate()}
+                      {new Date(issue.date_of_issue).getDate()}
                     </span>
                     <span className="text-sm text-gray-500">
-                      {new Date(issue.lastUpdate).toLocaleDateString("en-US", {
+                      {new Date(issue.date_of_issue).toLocaleDateString("en-US", {
                         weekday: "short",
                       })}
                     </span>
