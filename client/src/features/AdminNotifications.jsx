@@ -91,7 +91,7 @@ const AdminNotifications = () => {
   <CardHeader className="pb-2">
     <CardTitle>All Notifications</CardTitle>
   </CardHeader>
-</Card>
+
    <CardContent>
      <div className="space-y-4">
                 {activeNotifications.map((notification) => (
@@ -147,8 +147,15 @@ const AdminNotifications = () => {
                 ))}
               </div>
    </CardContent>
-   
+  </Card>
  </TabsContent>
+      <TabsContent value="unread" className="mt-0"> 
+        <Card>
+          <CardHeader>
+              <CardTitle>Unread Notifications</CardTitle>
+            </CardHeader>
+        </Card>
+      </TabsContent>
 
 
 
