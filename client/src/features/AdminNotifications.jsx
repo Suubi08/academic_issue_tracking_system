@@ -59,8 +59,7 @@ const AdminNotifications = () => {
             Mark All Read
           </Button>
         </div>
-      </div>
-      <div className="mb-6">
+         <div className="mb-6">
         <p className="text-gray-500 mb-4">
           Receive updates on your assigned issues. Stay informed about new assignments, comments, and status changes.
         </p>
@@ -73,7 +72,13 @@ const AdminNotifications = () => {
             All Types
           </Button>
         </div>
+        <div className="text-sm text-gray-500">
+          <span className="font-medium text-blue-600">{activeNotifications.filter((n) => !n.read).length}</span> unread
+          notifications
+        </div>
       </div>
+      </div>
+     
   );
 };
 
