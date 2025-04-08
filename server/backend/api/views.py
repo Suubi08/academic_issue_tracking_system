@@ -117,10 +117,6 @@ class IssueDetailView(RetrieveUpdateDestroyAPIView):
 class NotificationListView(ListCreateAPIView):
     queryset = Notification.objects.all()
     serializer_class = NotificationSerializer
-
-class NotificationListView(ListCreateAPIView):
-    queryset = Notification.objects.all()
-    serializer_class = NotificationSerializer
     
 
 
