@@ -92,7 +92,7 @@ class IssueCreateView(generics.CreateAPIView):
     parser_classes = (MultiPartParser, FormParser)  # Support file uploads
 
     def perform_create(self, serializer):
-        serializer.save(created_by=self.request.user)  # Set the user automatically
+        serializer.save(created_by=self.request.user)  # Sets logged in user as issue_created by
 
 class LecturerListView(ListAPIView):
     serializer_class = UserSerializer
