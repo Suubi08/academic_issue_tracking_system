@@ -112,7 +112,17 @@ const AdminNotifications = () => {
                                   ? "bg-blue-100 text-blue-600"
                                   : "bg-gray-100 text-gray-600"
                         }`}
-                      >
+                      >{notification.type === "assignment" ? (
+                          <Bell className="h-5 w-5" />
+                        ) : notification.type === "reminder" ? (
+                          <Clock className="h-5 w-5" />
+                        ) : notification.type === "comment" ? (
+                          <MessageSquare className="h-5 w-5" />
+                        ) : notification.type === "resolution" ? (
+                          <CheckCircle className="h-5 w-5" />
+                        ) : (
+                          <AlertCircle className="h-5 w-5" />
+                        )}
    </CardContent>
    
  </TabsContent>
