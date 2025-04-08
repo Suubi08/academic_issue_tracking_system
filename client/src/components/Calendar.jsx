@@ -11,7 +11,8 @@ const Calendar = ({ issues = [], isLoading }) => {
   useEffect(() => {
     setFilteredIssues(issues)
   }, [issues])
-const daysOfWeek = ["Mon", "Tue", "Wed", "Thur", "Fri", "Sat", "Sun"]
+
+  const daysOfWeek = ["Mon", "Tue", "Wed", "Thur", "Fri", "Sat", "Sun"]
 
   const getDaysInMonth = (year, month) => {
     return new Date(year, month + 1, 0).getDate()
@@ -21,7 +22,8 @@ const daysOfWeek = ["Mon", "Tue", "Wed", "Thur", "Fri", "Sat", "Sun"]
     const firstDay = new Date(year, month, 1).getDay()
     return firstDay === 0 ? 6 : firstDay - 1
   }
-   const year = currentMonth.getFullYear()
+
+  const year = currentMonth.getFullYear()
   const month = currentMonth.getMonth()
   const daysInMonth = getDaysInMonth(year, month)
   const firstDayOfMonth = getFirstDayOfMonth(year, month)
@@ -30,7 +32,8 @@ const daysOfWeek = ["Mon", "Tue", "Wed", "Thur", "Fri", "Sat", "Sun"]
   const daysFromNextMonth = totalDays - (daysInMonth + daysFromPrevMonth)
 
   const calendarDays = []
-     const prevMonthDays = getDaysInMonth(year, month - 1)
+
+  const prevMonthDays = getDaysInMonth(year, month - 1)
   for (let i = 0; i < daysFromPrevMonth; i++) {
     calendarDays.push({
       day: prevMonthDays - daysFromPrevMonth + i + 1,
@@ -53,8 +56,7 @@ const daysOfWeek = ["Mon", "Tue", "Wed", "Thur", "Fri", "Sat", "Sun"]
       isCurrentMonth: false,
       date: new Date(year, month + 1, i),
     })
-
-      }
+  }
 
   const monthName = currentMonth.toLocaleString("default", { month: "long" })
 
@@ -78,7 +80,8 @@ const daysOfWeek = ["Mon", "Tue", "Wed", "Thur", "Fri", "Sat", "Sun"]
       const statuses = [...new Set(issuesOnDay.map((i) => i.status.toLowerCase()))]
       return { hasIssue: true, statuses }
     }
-  return { hasIssue: false, statuses: [] }
+
+    return { hasIssue: false, statuses: [] }
   }
 
   return (
@@ -111,8 +114,7 @@ const daysOfWeek = ["Mon", "Tue", "Wed", "Thur", "Fri", "Sat", "Sun"]
               <div className="h-8 w-full bg-gray-200 dark:bg-gray-700 rounded animate-pulse" />
               <div className="h-64 w-full bg-gray-200 dark:bg-gray-700 rounded animate-pulse" />
             </div>
-          ) :
-    (
+          ) : (
             <>
               <div className="text-center mb-4">
                 <h3 className="text-lg font-medium">
@@ -183,4 +185,3 @@ const daysOfWeek = ["Mon", "Tue", "Wed", "Thur", "Fri", "Sat", "Sun"]
 }
 
 export default Calendar
-
