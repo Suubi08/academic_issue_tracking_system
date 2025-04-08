@@ -118,6 +118,11 @@ class NotificationListView(ListCreateAPIView):
     queryset = Notification.objects.all()
     serializer_class = NotificationSerializer
 
+class NotificationListView(ListCreateAPIView):
+    queryset = Notification.objects.all()
+    serializer_class = NotificationSerializer
+    
+
 
 @login_required
 def create_issue(request):
