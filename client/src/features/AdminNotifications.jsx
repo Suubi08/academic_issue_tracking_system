@@ -155,6 +155,19 @@ const AdminNotifications = () => {
               <CardTitle>Unread Notifications</CardTitle>
             </CardHeader>
         </Card>
+        <CardContent>
+           <div className="space-y-4">
+                {activeNotifications.filter((n) => !n.read).length > 0 ? (
+                  activeNotifications
+                    .filter((n) => !n.read)
+                    .map((notification) => (
+                      <div key={notification.id} className="p-4 border rounded-lg bg-blue-50 border-blue-100">
+                        <div className="flex items-start">
+                          <div className="p-2 rounded-full mr-4 bg-blue-100 text-blue-600">
+                            <Bell className="h-5 w-5" />
+                          </div>
+                          </div>
+        </CardContent>
       </TabsContent>
 
 
