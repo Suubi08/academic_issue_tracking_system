@@ -227,6 +227,7 @@ const AdminNotifications = () => {
     </CardContent>
   </Card>
 </TabContent>
+     </Tabs>
 
 
         
