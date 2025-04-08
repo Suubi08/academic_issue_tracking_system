@@ -21,3 +21,12 @@ const daysOfWeek = ["Mon", "Tue", "Wed", "Thur", "Fri", "Sat", "Sun"]
     const firstDay = new Date(year, month, 1).getDay()
     return firstDay === 0 ? 6 : firstDay - 1
   }
+   const year = currentMonth.getFullYear()
+  const month = currentMonth.getMonth()
+  const daysInMonth = getDaysInMonth(year, month)
+  const firstDayOfMonth = getFirstDayOfMonth(year, month)
+  const daysFromPrevMonth = firstDayOfMonth
+  const totalDays = Math.ceil((daysInMonth + daysFromPrevMonth) / 7) * 7
+  const daysFromNextMonth = totalDays - (daysInMonth + daysFromPrevMonth)
+
+  const calendarDays = []
