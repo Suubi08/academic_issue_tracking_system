@@ -123,6 +123,18 @@ const AdminNotifications = () => {
                         ) : (
                           <AlertCircle className="h-5 w-5" />
                         )}
+                         </div>
+                      <div className="flex-1">
+                        <div className="flex justify-between">
+                          <h3 className="font-medium">{notification.title}</h3>
+                          <span className="text-xs text-gray-500 flex items-center">
+                            <Clock className="h-3 w-3 mr-1" />
+                            {notification.time}
+                          </span>
+                        </div>
+                        <p className="text-sm text-gray-600 mt-1">{notification.description}</p>
+                      </div>
+                    </div>
    </CardContent>
    
  </TabsContent>
