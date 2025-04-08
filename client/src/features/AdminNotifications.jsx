@@ -172,6 +172,15 @@ const AdminNotifications = () => {
                             <p className="text-xs text-gray-500 mt-2">{notification.time}</p>
                           </div>
                           </div>
+                        <div className="flex justify-end mt-2">
+                          <Button variant="ghost" size="sm" onClick={() => markAsRead(notification.id)}>
+                            <CheckCircle className="h-4 w-4 mr-1" />
+                            Mark as read
+                          </Button>
+                        </div>
+                      </div>
+                    ))
+                ) : (
                         </div>
         </CardContent>
       </TabsContent>
