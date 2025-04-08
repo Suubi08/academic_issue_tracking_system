@@ -166,7 +166,13 @@ const AdminNotifications = () => {
                           <div className="p-2 rounded-full mr-4 bg-blue-100 text-blue-600">
                             <Bell className="h-5 w-5" />
                           </div>
+                          <div className="flex-1">
+                            <h3 className="font-medium">{notification.title}</h3>
+                            <p className="text-sm text-gray-600 mt-1">{notification.description}</p>
+                            <p className="text-xs text-gray-500 mt-2">{notification.time}</p>
                           </div>
+                          </div>
+                        </div>
         </CardContent>
       </TabsContent>
 
