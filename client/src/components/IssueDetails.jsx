@@ -1,4 +1,4 @@
-"use client"
+
 
 mport { useState } from "react"
 import { X, Paperclip, Send } from "lucide-react"
