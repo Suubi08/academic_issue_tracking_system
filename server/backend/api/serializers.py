@@ -1,7 +1,7 @@
 from django.contrib.auth.models import User
 from rest_framework import serializers
 from .models import User, Issue, Notification
-from django.contrib.auth.hashers import make_password
+from django.contrib.auth.hashers import make_password #safely encrypting passwords
 
 #converts model instances to JASON format
 class RegisterSerializer(serializers.ModelSerializer):
