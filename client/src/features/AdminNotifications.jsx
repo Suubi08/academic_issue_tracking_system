@@ -1,3 +1,7 @@
+import {useState} from "react"
+import {Card,CardContent,CardHeader, CardTitle} from "../components"
+import {Button} from "../components/ui/button"
+import { Bell, CheckCircle, Clock, AlertCircle, Filter } from "lucide-react"
 const AdminNotifications = () => {
   const notifications = [
     {
@@ -42,9 +46,20 @@ const AdminNotifications = () => {
     },
   ];
   return (
-    <div className="bg-green-500 text-center text-3xl font-bold">
-      Notifications
-    </div>
+    <div className="p-6">
+      <div className="flex justify-between items-center mb-6">
+        <h1 className="text-2xl font-bold">Notifications & Alerts</h1>
+        <div className="flex space-x-2">
+          <Button variant="outline" size="sm">
+            <Bell className="h-4 w-4 mr-2" />
+            Mute All
+          </Button>
+          <Button variant="outline" size="sm" onClick={markAllAsRead}>
+            <CheckCircle className="h-4 w-4 mr-2" />
+            Mark All Read
+          </Button>
+        </div>
+      </div>
   );
 };
 
