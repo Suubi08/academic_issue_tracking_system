@@ -53,3 +53,30 @@ const daysOfWeek = ["Mon", "Tue", "Wed", "Thur", "Fri", "Sat", "Sun"]
       isCurrentMonth: false,
       date: new Date(year, month + 1, i),
     })
+
+      }
+
+  const monthName = currentMonth.toLocaleString("default", { month: "long" })
+
+  const prevMonth = () => {
+    setCurrentMonth(new Date(year, month - 1, 1))
+  }
+
+  const nextMonth = () => {
+    setCurrentMonth(new Date(year, month + 1, 1))
+  }
+
+  const getDayIssues = (date) => {
+    const dateStr = date.toISOString().split("T")[0]
+
+    const issuesOnDay = filteredIssues.filter((issue) => {
+      const issueDate = new Date(issue.date_of_issue).toISOString().split("T")[0]
+      return issueDate === dateStr
+    })
+
+    if (issuesOnDay.length > 0) {
+      const statuses = [...new Set(issuesOnDay.map((i) => i.status.toLowerCase()))]
+      return { hasIssue: true, statuses }
+    }
+
+    
