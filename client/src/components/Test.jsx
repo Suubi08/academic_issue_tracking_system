@@ -8,7 +8,7 @@ import image2 from "../assets/2.jpg"
 import image3 from "../assets/3.jpg"
 
 const Test = () => {
-  const images = [image1, image2, image]
+  const images = [image1, image2, image3]
 
   const [loading, setloading] = useState(true)
   const [user, setUser] = useState({
