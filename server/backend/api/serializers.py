@@ -15,7 +15,7 @@ class RegisterSerializer(serializers.ModelSerializer):
             'student_number', 'course_name', 'college', 
             'lecture_number', 'subject_taught', 'department'
         ]
-        #declaring password and confirm_password as write only important for security
+        #declaring password and confirm_password as write only (important for security)
         extra_kwargs = {
             'password': {'write_only': True},
             'confirm_password': {'write_only': True}
