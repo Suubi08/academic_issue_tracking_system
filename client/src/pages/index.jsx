@@ -6,7 +6,7 @@ import LecturerDashboard from "./LecturerDashboard";
 import QuickActions from "./QuickActions";
 import RecentActivity from "./RecentActivity";
 import Studentdashboard from "./Studentdashboard";
-import Studentsubmitissue from "./Studentsubmitissue";
+//import Studentsubmitissue from "./Studentsubmitissue";
 
 export {
   AdminDashboard,
@@ -16,5 +16,5 @@ export {
   QuickActions,
   RecentActivity,
   Studentdashboard,
-  Studentsubmitissue,
+  
 };

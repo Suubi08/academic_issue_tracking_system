@@ -41,6 +41,9 @@ class RegisterView(APIView):
             response_data = {
                 "username": user.username,
                 "role": user.role,
+                "id": user.id,
+                "course": user.course_name,
+                "student_number": user.student_number,
                 "access": access,
                 "refresh": str(refresh),
                 "message": "User registered successfully",
@@ -67,7 +70,10 @@ class LoginView(APIView):
                 "refresh": str(refresh),
                 "access": str(refresh.access_token),
                 "username": user.username,  # Include this field
-                "role": user.role
+                "role": user.role,
+                "course":user.course_name,
+                "student_number": user.student_number,
+                "id":user.id,
             }, status=status.HTTP_200_OK)
 
         return Response({"error": "Invalid credentials"}, status=status.HTTP_401_UNAUTHORIZED)
@@ -92,7 +98,8 @@ class IssueCreateView(generics.CreateAPIView):
     parser_classes = (MultiPartParser, FormParser)  # Support file uploads
 
     def perform_create(self, serializer):
-        serializer.save(created_by=self.request.user)  # Set the user automatically
+        serializer.save(created_by=self.request.user)
+  # Set the user automatically
 
 class LecturerListView(ListAPIView):
     serializer_class = UserSerializer

@@ -19,6 +19,7 @@ const Signup = () => {
     college: "",
     department: "",
     lecture_number: "",
+
   });
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
@@ -39,13 +40,17 @@ const Signup = () => {
       const response = await API.post("register/", formData);
 
       if (response.status === 201) {
-        const { access, refresh, username, role } = response.data;
+        const { access, refresh, username, role, course, student_number,id } =
+          response.data;
 
-        // Store tokens in local storage
+        // Store tokens and user info in local storage
         localStorage.setItem("accessToken", access);
         localStorage.setItem("refreshToken", refresh);
         localStorage.setItem("username", username);
         localStorage.setItem("role", role);
+        localStorage.setItem("course", course);
+        localStorage.setItem("student_number", student_number);
+        localStorage.setItem("id",id)
 
         console.log(`Registration successful - Role: ${role}`);
         Swal.fire({

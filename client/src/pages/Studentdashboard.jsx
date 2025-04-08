@@ -1,3 +1,4 @@
+"use client";
 
 import { useState, useEffect } from "react";
 import image1 from "../assets/1.jpg";

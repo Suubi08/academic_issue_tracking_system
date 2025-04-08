@@ -25,33 +25,35 @@ def assign_user_group(sender, instance, created, **kwargs):
 @receiver(post_save, sender=Issue)
 def send_assignment_email(sender, instance, created, **kwargs):
     """
-    Code to send an email notification when an issue is assigned to a user.
+    Send an email when an issue is assigned to a user.
     """
-    if instance.assigned_to: # Check if an issue is assigned
-        subject = f"New Issue Assigned: {instance.title}"
+    if instance.assigned_to:  # Only send if someone is assigned
+
+        subject = "New Issue Assigned"
+
         message = f"""
         Hello {instance.assigned_to.first_name},
 
         A new issue has been assigned to you on the Academic Issue Tracking System.
 
-        **Title:** {instance.title}
-        **Description:** {instance.description}
-        **Priority:** {instance.priority.capitalize()}
-        **Status:** {instance.status.capitalize()}
-        **Created By:** {instance.created_by.username}
+        Category: {instance.category}
+        Description: {instance.description}
+        Status: {instance.status.capitalize()}
+        Created By: {instance.created_by.username}
 
         Please log into your dashboard to take action.
 
         Regards,
         AITS Team
         """
+
         recipient_email = instance.assigned_to.email
 
-        #Send the email
+        # Send the email
         send_mail(subject, message, settings.DEFAULT_FROM_EMAIL, [recipient_email])
 
-        #Create a Notification for the user (Dashboard alert)
+        # Create a dashboard notification
         Notification.objects.create(
-            user=instance.assigned_to, 
-            message=f"You have been assigned a new issue: {instance.title}"
+            user=instance.assigned_to,
+            message=f"You have been assigned a new issue."
         )

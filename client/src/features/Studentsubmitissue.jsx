@@ -71,15 +71,15 @@ const Studentsubmitissue = () => {
     }
   };
 
-  const handleSelectChange = (e, id) => {
-    const { value } = e.target;
-
-    setFormData((prev) => ({
-      ...prev, // Keep existing properties
-      [id]: value || "", // Ensure it's never undefined
+  const handleLecturerSelect = (lecturer) => {
+    setFormData((prevFormData) => ({
+      ...prevFormData,
+      assigned_to: lecturer.id,
     }));
+    setSearchTerm(lecturer.username);
+    setLecturers([]);
   };
-
+  
 
   const handleFileChange = (e) => {
     const file = e.target.files[0] || null; // Ensure it never becomes undefined
@@ -94,6 +94,15 @@ const Studentsubmitissue = () => {
       attachment: file, // Always set it
     }));
     setErrors((prev) => ({ ...prev, attachment: null }));
+  };
+
+  const handleSelectChange = (e, id) => {
+    const { value } = e.target;
+
+    setFormData((prev) => ({
+      ...prev, // Keep existing properties
+      [id]: value || "", // Ensure it's never undefined
+    }));
   };
 
   const handleSubmit = async (e) => {
@@ -116,7 +125,8 @@ const Studentsubmitissue = () => {
     data.append("description", formData.description || "");
     data.append("semester", formData.semester || "");
     data.append("assigned_to", formData.assigned_to || "");
-    data.append("year_of_study", formData.year_of_study || "");  // Make sure this is not empty
+    data.append("year_of_study", formData.year_of_study || "");
+    data.append("created_by", localStorage.getItem('id'));
     if (formData.attachment) {
       data.append("attachment", formData.attachment);
     }
@@ -136,7 +146,7 @@ const Studentsubmitissue = () => {
       if (response.status === 201) {
         setSuccessMessage("Issue reported successfully!");
         setTimeout(() => {
-          navigate("/studentdashboard");
+          navigate("/studentissues");
         }, 2000);
       } else {
         setErrors("Issue submission failed. Please try again.");
@@ -152,17 +162,6 @@ const Studentsubmitissue = () => {
   const handleCancel = () => {
     navigate("/studentdashboard");
   };
-
-  const handleLecturerSelect = (lecturer) => {
-    setFormData((prevFormData) => ({
-      ...prevFormData,
-      assigned_to: lecturer.id,
-    }));
-    setSearchTerm(lecturer.username);
-    setShowDropdown(false); // ✅ Hide dropdown after selection
-  };
-
-
 
 
   useEffect(() => {
@@ -321,46 +320,33 @@ const Studentsubmitissue = () => {
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              <div className="space-y-2">
-                <label htmlFor="attachment" className="block">
-                  Attachment
-                </label>
-                <div className="flex items-center gap-2">
-                  <button
-                    type="button"
-                    className="w-full p-2 border border-gray-300 rounded"
-                    onClick={() =>
-                      document.getElementById("attachment").click()
-                    }
-                  >
-                    <Paperclip className="mr-2 h-4 w-4" />
-                    {formData.attachment
-                      ? formData.attachment.name
-                      : "Upload File"}
-                  </button>
+            <div className="space-y-2">
+                <label htmlFor="attachment" className="block">Attachment</label>
+                <div className="flex items-center space-x-2">
                   <input
-                    id="attachment"
                     type="file"
-                    className="hidden"
+                    id="attachment"
                     onChange={handleFileChange}
+                    className="hidden"
                   />
+                  <label htmlFor="attachment" className="cursor-pointer text-blue-500">
+                    <Paperclip size={16} />
+                    {formData.attachment ? formData.attachment.name : "Attach a file"}
+                  </label>
                 </div>
                 {errors.attachment && (
                   <p className="text-red-600 text-sm">{errors.attachment}</p>
                 )}
               </div>
               <div className="space-y-2">
-                <label htmlFor="yearOfStudy" className="block">
-                  Year of Study
-                </label>
+                <label htmlFor="year_of_study" className="block">Year of Study</label>
                 <select
-                  id="year_of_study"  // ✅ Use correct ID
+                  id="year_of_study"
                   value={formData.year_of_study}
-                  onChange={(e) => handleSelectChange(e, "year_of_study")}  // ✅ Matches backend
+                  onChange={(e) => handleSelectChange(e, "year_of_study")}
                   className="w-full p-2 border border-gray-300 rounded"
                 >
-
-                  <option value="">Select academic year</option>
+                  <option value="">Select Year of Study</option>
                   {years_of_Study.map((option) => (
                     <option key={option.value} value={option.value}>
                       {option.label}
@@ -389,15 +375,21 @@ const Studentsubmitissue = () => {
             </div>
           </div>
 
-          <div className="flex justify-end gap-4 pt-4">
+          <div className="flex justify-end space-x-4">
             <button
               type="button"
-              className="w-32 p-2 border border-gray-300 rounded"
               onClick={handleCancel}
+              className="px-6 py-2 bg-gray-300 text-gray-700 rounded-lg"
             >
               Cancel
             </button>
-            <button type="submit">Submit Issue</button>
+            <button
+              type="submit"
+              disabled={loading}
+              className="px-6 py-2 bg-blue-600 text-white rounded-lg"
+            >
+              {loading ? "Submitting..." : "Submit Issue"}
+            </button>
           </div>
         </form>
       </div>

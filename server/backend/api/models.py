@@ -62,7 +62,7 @@ class Issue(models.Model):
         ('closed', 'Closed'),
     ]
 
-    category = models.CharField(max_length=100)
+    category = models.CharField(max_length=120)
     date_of_issue = models.DateField()
     course_unit = models.CharField(max_length=200)
     assigned_to = models.ForeignKey(
