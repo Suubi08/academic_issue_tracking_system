@@ -1,4 +1,4 @@
-from django.contrib.auth.models import User
+#from django.contrib.auth.models import User
 from rest_framework import serializers
 from .models import User, Issue, Notification
 from django.contrib.auth.hashers import make_password #safely encrypting passwords
