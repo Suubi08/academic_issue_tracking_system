@@ -1,7 +1,8 @@
 import {useState} from "react"
-import {Card,CardContent,CardHeader, CardTitle} from "../components"
+import {Card,CardContent,CardHeader, CardTitle} from "../components/ui"
 import {Button} from "../components/ui/button"
 import { Bell, CheckCircle, Clock, AlertCircle, Filter } from "lucide-react"
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "../components/ui"
 const AdminNotifications = () => {
   const notifications = [
     {
@@ -77,6 +78,20 @@ const AdminNotifications = () => {
           notifications
         </div>
       </div>
+
+     <Tabs defaultValue="all">
+        <TabsList className="mb-4">
+          <TabsTrigger value="all">All Notifications</TabsTrigger>
+          <TabsTrigger value="unread">Unread</TabsTrigger>
+          <TabsTrigger value="assignments">Assignments</TabsTrigger>
+          <TabsTrigger value="reminders">Reminders</TabsTrigger>
+        </TabsList>
+
+
+
+
+
+        
       </div>
      
   );
