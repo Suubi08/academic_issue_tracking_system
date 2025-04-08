@@ -112,4 +112,75 @@ const daysOfWeek = ["Mon", "Tue", "Wed", "Thur", "Fri", "Sat", "Sun"]
               <div className="h-64 w-full bg-gray-200 dark:bg-gray-700 rounded animate-pulse" />
             </div>
           ) :
-    
+    (
+            <>
+              <div className="text-center mb-4">
+                <h3 className="text-lg font-medium">
+                  {monthName} {year}
+                </h3>
+              </div>
+              <div className="grid grid-cols-7 gap-1">
+                {daysOfWeek.map((day) => (
+                  <div key={day} className="text-center text-xs font-medium text-gray-500 py-1">
+                    {day}
+                  </div>
+                ))}
+                {calendarDays.map((day, index) => {
+                  const dayIssue = getDayIssues(day.date)
+                  return (
+                    <div
+                      key={index}
+                      className={`text-center p-1 relative min-h-[40px] flex flex-col items-center justify-center
+                        ${!day.isCurrentMonth ? "text-gray-400" : ""}
+                        ${
+                          day.isCurrentMonth && new Date().toDateString() === day.date.toDateString()
+                            ? "bg-primary/10 rounded-md font-bold"
+                            : ""
+                        }
+                      `}
+                    >
+                      <span>{day.day}</span>
+                      {dayIssue.hasIssue && (
+                        <div className="flex space-x-0.5 mt-1">
+                          {dayIssue.statuses.map((status, idx) => (
+                            <span
+                              key={idx}
+                              className={`w-2 h-2 rounded-full ${
+                                status === "resolved"
+                                  ? "bg-green-500"
+                                  : status === "pending"
+                                  ? "bg-red-800"
+                                  : "bg-yellow-500"
+                              }`}
+                            />
+                          ))}
+                        </div>
+                      )}
+                    </div>
+                  )
+                })}
+              </div>
+              <div className="mt-4 flex items-center justify-center space-x-4 text-xs">
+                <div className="flex items-center">
+                  <span className="w-2 h-2 rounded-full bg-red-800 mr-1"></span>
+                  <span>pending</span>
+                </div>
+                <div className="flex items-center">
+                  <span className="w-2 h-2 rounded-full bg-yellow-500 mr-1"></span>
+                  <span>in progress</span>
+                </div>
+                <div className="flex items-center">
+                  <span className="w-2 h-2 rounded-full bg-green-500 mr-1"></span>
+                  <span>resolved</span>
+                </div>
+              </div>
+            </>
+          )}
+        </div>
+      </CardContent>
+    </Card>
+  )
+}
+
+export default Calendar
+
