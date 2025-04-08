@@ -30,3 +30,26 @@ const daysOfWeek = ["Mon", "Tue", "Wed", "Thur", "Fri", "Sat", "Sun"]
   const daysFromNextMonth = totalDays - (daysInMonth + daysFromPrevMonth)
 
   const calendarDays = []
+     const prevMonthDays = getDaysInMonth(year, month - 1)
+  for (let i = 0; i < daysFromPrevMonth; i++) {
+    calendarDays.push({
+      day: prevMonthDays - daysFromPrevMonth + i + 1,
+      isCurrentMonth: false,
+      date: new Date(year, month - 1, prevMonthDays - daysFromPrevMonth + i + 1),
+    })
+  }
+
+  for (let i = 1; i <= daysInMonth; i++) {
+    calendarDays.push({
+      day: i,
+      isCurrentMonth: true,
+      date: new Date(year, month, i),
+    })
+  }
+
+  for (let i = 1; i <= daysFromNextMonth; i++) {
+    calendarDays.push({
+      day: i,
+      isCurrentMonth: false,
+      date: new Date(year, month + 1, i),
+    })
