@@ -74,7 +74,7 @@ class RegisterSerializer(serializers.ModelSerializer):
         )
 
         return user
-    
+#displaying user info
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
