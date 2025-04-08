@@ -60,6 +60,12 @@ const AdminNotifications = () => {
           </Button>
         </div>
       </div>
+      <div className="mb-6">
+        <p className="text-gray-500 mb-4">
+          Receive updates on your assigned issues. Stay informed about new assignments, comments, and status changes.
+        </p>
+      </div>
+      </div>
   );
 };
 
