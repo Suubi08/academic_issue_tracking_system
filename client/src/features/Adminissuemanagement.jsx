@@ -1,5 +1,4 @@
-import React from "react";
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import {
   Card,
   CardHeader,
@@ -18,48 +17,26 @@ import {
 import { Download, Eye, Filter, Plus, Search } from "lucide-react";
 
 const Adminissuemanagement = () => {
-  const issues = [
-    {
-      id: 1,
-      title: "Assignment submission Error",
-      category: "Technical",
-      priority: "High",
-      assignee: "Dr. Kalema",
-      status: "Open",
-      date: "2023-10-01",
-    },
-    {
-      id: 2,
-      title: "Assignment submission Error",
-      category: "Administrative",
-      priority: "Medium",
-      assignee: "Dr. Nsamba",
-      status: "In Progress",
-      date: "2023-10-01",
-    },
-    {
-      id: 3,
-      title: "Exam Schedule Conflict",
-      category: "Academic",
-      priority: "High",
-      assignee: "Dr. Williams",
-      status: "Open",
-      date: "2023-10-01",
-    },
-    {
-      id: 4,
-      title: "Missing Course Materials",
-      category: "Content",
-      priority: "Low",
-      assignee: "Dr. Katongole",
-      status: "Resolved",
-      date: "2023-10-01",
-    },
-  ];
-  const [Issues, setIssues] = useState(issues);
+  const [issues, setIssues] = useState([]); // Empty array initially
   const [searchTerm, setSearchTerm] = useState("");
   const [statusFilter, setStatusFilter] = useState("all");
   const [showFilters, setShowFilters] = useState(false);
+
+  // Fetch issues from backend
+  useEffect(() => {
+    // Example API endpoint (replace with actual endpoint)
+    const fetchIssues = async () => {
+      try {
+        const response = await fetch("/api/issues"); // Adjust the API URL
+        const data = await response.json();
+        setIssues(data); // Set the fetched issues to the state
+      } catch (error) {
+        console.error("Error fetching issues:", error);
+      }
+    };
+
+    fetchIssues();
+  }, []);
 
   useEffect(() => {
     let filteredIssues = [...issues];
@@ -79,7 +56,7 @@ const Adminissuemanagement = () => {
     }
 
     setIssues(filteredIssues);
-  }, [searchTerm, statusFilter]);
+  }, [searchTerm, statusFilter, issues]);
 
   const clearFilters = () => {
     setSearchTerm("");
