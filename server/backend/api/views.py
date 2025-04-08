@@ -14,9 +14,9 @@ from rest_framework_simplejwt.tokens import RefreshToken
 from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
 from django.http import JsonResponse
-from django.contrib.auth.decorators import login_required
+#from django.contrib.auth.decorators import login_required
 from rest_framework.permissions import IsAuthenticated
-from django.http import JsonResponse
+#from django.http import JsonResponse
 import json  # Ensure JSON is imported for `json.loads(request.body)`
 
 # from rest_framework import generics, status
