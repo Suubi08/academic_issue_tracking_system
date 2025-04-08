@@ -99,6 +99,20 @@ const AdminNotifications = () => {
                     key={notification.id}
                     className={`p-4 border rounded-lg ${notification.read ? "bg-white" : "bg-blue-50 border-blue-100"}`}
                   >
+                    <div className="flex items-start">
+                      <div
+                        className={`p-2 rounded-full mr-4 ${
+                          notification.type === "assignment"
+                            ? "bg-purple-100 text-purple-600"
+                            : notification.type === "reminder"
+                              ? "bg-yellow-100 text-yellow-600"
+                              : notification.type === "comment"
+                                ? "bg-green-100 text-green-600"
+                                : notification.type === "resolution"
+                                  ? "bg-blue-100 text-blue-600"
+                                  : "bg-gray-100 text-gray-600"
+                        }`}
+                      >
    </CardContent>
    
  </TabsContent>
