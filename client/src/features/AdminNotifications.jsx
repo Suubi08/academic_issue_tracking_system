@@ -65,6 +65,14 @@ const AdminNotifications = () => {
           Receive updates on your assigned issues. Stay informed about new assignments, comments, and status changes.
         </p>
       </div>
+      <div className="flex justify-between items-center mb-4">
+        <div className="flex items-center space-x-2">
+          <span className="text-sm font-medium">Filter:</span>
+          <Button variant="outline" size="sm">
+            <Filter className="h-4 w-4 mr-2" />
+            All Types
+          </Button>
+        </div>
       </div>
   );
 };
