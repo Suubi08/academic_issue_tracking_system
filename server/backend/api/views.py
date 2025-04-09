@@ -1,38 +1,27 @@
-
+from django.shortcuts import render, redirect
+from django.contrib.auth.models import update_last_login
+from rest_framework.views import APIView
+from django.contrib.auth import authenticate
+from django.contrib.auth.decorators import login_required
+from django.contrib import messages
+from rest_framework.filters import SearchFilter
+from rest_framework.generics import ListAPIView, ListCreateAPIView, RetrieveUpdateDestroyAPIView, CreateAPIView
+from .models import User, Issue, Notification
+from rest_framework import generics, status
+from rest_framework.parsers import MultiPartParser, FormParser
+from .serializers import UserSerializer, IssueSerializer, NotificationSerializer, RegisterSerializer
+from rest_framework_simplejwt.tokens import RefreshToken
+from rest_framework.permissions import AllowAny
+from rest_framework.response import Response
+from django.http import JsonResponse
+#from django.contrib.auth.decorators import login_required
+from rest_framework.permissions import IsAuthenticated
+#from django.http import JsonResponse
+import json  # Ensure JSON is imported for `json.loads(request.body)`
 
 # from rest_framework import generics, status
 
-# Register User
-class RegisterView(APIView):
-    permission_classes = [AllowAny]
-    
-    def post(self, request):
-        print("Incoming Data from React:", request.data)
-        serializer = RegisterSerializer(data=request.data)
 
-        if serializer.is_valid():
-            # Save the user
-            user = serializer.save()
-
-            # Generate JWT tokens
-            refresh = RefreshToken.for_user(user)
-            access = str(refresh.access_token)
-
-            # Prepare response data
-            response_data = {
-                "username": user.username,
-                "role": user.role,
-                "id": user.id,
-                "course": user.course_name,
-                "student_number": user.student_number,
-                "access": access,
-                "refresh": str(refresh),
-                "message": "User registered successfully",
-            }
-
-            return Response(response_data, status+status.HTTP_201_CREATED)
-            
-            return Response(response_data, status=status.HTTP_400_BAD_REQUEST)
     
 # Login and get JWT Token
 class LoginView(APIView):
