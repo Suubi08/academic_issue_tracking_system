@@ -104,6 +104,37 @@ const Adminusermanagement = ({ children }) => {
           "md:static md:h-screen",
         )}
       >
+        <div className="flex flex-col h-[calc(100%-4rem)] justify-between">
+          <nav className="mt-5 px-2 space-y-1 overflow-y-auto flex-grow">
+            {navigation.map((item) => {
+              const isActive = pathname === item.href
+              return (
+                <Link
+                  key={item.name}
+                  href={item.href}
+                  className={cn(
+                    "group flex items-center px-4 py-3 text-sm font-medium rounded-md transition-colors",
+                    isActive
+                      ? "bg-indigo-800 dark:bg-indigo-900 text-white"
+                      : "text-indigo-100 hover:bg-indigo-800 dark:hover:bg-indigo-900",
+                  )}
+                  title={item.description}
+                > <div className="flex flex-col h-[calc(100%-4rem)] justify-between">
+          <nav className="mt-5 px-2 space-y-1 overflow-y-auto flex-grow">
+            {navigation.map((item) => {
+              const isActive = pathname === item.href
+              return (
+                <Link
+                  key={item.name}
+                  href={item.href}
+                  className={cn(
+                    "group flex items-center px-4 py-3 text-sm font-medium rounded-md transition-colors",
+                    isActive
+                      ? "bg-indigo-800 dark:bg-indigo-900 text-white"
+                      : "text-indigo-100 hover:bg-indigo-800 dark:hover:bg-indigo-900",
+                  )}
+                  title={item.description}
+                >
   </div>;
 };
 
