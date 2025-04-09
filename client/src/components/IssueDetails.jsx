@@ -1,6 +1,6 @@
 
 
-mport { useState } from "react"
+import { useState } from "react"
 import { X, Paperclip, Send } from "lucide-react"
 import { useIssueContext } from "../context/IssueContext"
 
@@ -12,7 +12,7 @@ const IssueDetails = ({ issue, isOpen, onClose }) => {
   const handleSubmit = (e) => {
     e.preventDefault()
     if (comment.trim()) {
-      adidComment(issue.id, comment, file)
+      addComment(issue.id, comment, file)
       setComment("")
       setFile(null)
     }
@@ -31,7 +31,7 @@ const IssueDetails = ({ issue, isOpen, onClose }) => {
       <div className="relative h-full w-full max-w-3xl overflow-hidden rounded-lg bg-white shadow-xl md:h-auto md:max-h-[80vh]">
         {/* Header */}
         <div className="flex items-center justify-between border-b p-4">
-          <h2 className="text-lg font-semibold text-gray-800">{issue.title}</h2>
+          <h2 className="text-lg font-semibold text-gray-800">{issue.category}</h2>
           <button onClick={onClose} className="rounded-md p-1 text-gray-500 hover:bg-gray-100">
             <X className="h-5 w-5" />
           </button>

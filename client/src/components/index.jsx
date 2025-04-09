@@ -22,8 +22,6 @@ import {
   CardContent,
 } from "./ui/Card";
 
-// this is usd to import the modules
-
 import { Popover, PopoverTrigger, PopoverContent } from "./ui/Popover";
 import { Badge, badgeVariants } from "./ui/Badge";
 

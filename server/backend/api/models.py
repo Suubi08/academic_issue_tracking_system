@@ -5,7 +5,6 @@ from django.contrib.auth.models import AbstractUser, Group, Permission
 from django.contrib.auth.models import AbstractUser, Group, Permission
 from django.db import models
 
-#creating abstract user with rolse based access.
 class User(AbstractUser):
     ROLE_CHOICES = [
         ('student', 'Student'),
@@ -24,16 +23,15 @@ class User(AbstractUser):
     # Lecturer-specific fields
     lecture_number = models.CharField(max_length=20, blank=True, null=True)
     subject_taught = models.TextField(blank=True, null=True)
-    
-    #shared field
+
     department = models.CharField(max_length=100, blank=True, null=True) 
 
-    # Fix groups and user_permissions.
+    # Fix groups and user_permissions
     groups = models.ManyToManyField("auth.Group", related_name="custom_user_groups", blank=True)
     user_permissions = models.ManyToManyField("auth.Permission", related_name="custom_user_permissions", blank=True)
 
     def save(self, *args, **kwargs):
-        """Ensure only role-specific fields are filled for the right roles"""
+        """Ensure only role-specific fields are filled"""
         if self.role == 'student':
             self.lecture_number = None
             self.subject_taught = None
@@ -65,13 +63,8 @@ class Issue(models.Model):
     ]
 
     category = models.CharField(max_length=120)
-    #type of the issue to be submitted
-    category = models.CharField(max_length=100)
-    #date when issue is experienced
     date_of_issue = models.DateField()
-    #course unit where the is 
     course_unit = models.CharField(max_length=200)
-    #connects to the lecturer handling the issue
     assigned_to = models.ForeignKey(
         User, 
         on_delete=models.SET_NULL, 
@@ -96,6 +89,7 @@ class Notification(models.Model):
     message = models.TextField()
     status = models.BooleanField(default=False)
     created_at = models.DateTimeField(auto_now_add=True)
+
     def _str_(self):
         return f"Notification for {self.user.username}"
 
@@ -105,13 +99,9 @@ class Comments(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     message = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)
-    def __str__(self):
-        return f"Comment by {self.user.username} on {self.issue}"
 
-# Attachment model
+# Attachment modle
 class Attachment(models.Model):
     issue = models.ForeignKey(Issue, on_delete=models.CASCADE, related_name='attachments')
     file = models.FileField(upload_to='attachments/')
     uploaded_at = models.DateTimeField(auto_now_add=True)
-    def __str__(self):
-        return f"Attachment for issue {self.issue.id}"

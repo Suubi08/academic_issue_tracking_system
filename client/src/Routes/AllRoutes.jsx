@@ -16,7 +16,7 @@ import ProtectedRoute from "../components/ProtectedRoute";
 import {
   AdminDashboard,
   LecturerDashboard,
-  PageNotFound,
+  // PageNotFound,
   Studentdashboard,
 } from "../pages";
 
@@ -103,7 +103,7 @@ const AllRoutes = () => {
       </Route> */}
 
       {/* Catch-all 404 route */}
-      <Route path="*" element={<PageNotFound />} />
+      {/* <Route path="*" element={<PageNotFound />} /> */}
     </Routes>
   );
 };

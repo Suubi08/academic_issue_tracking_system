@@ -4,6 +4,7 @@ from rest_framework.views import APIView
 from django.contrib.auth import authenticate
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
+from rest_framework import filters
 from rest_framework.filters import SearchFilter
 from rest_framework.generics import ListAPIView, ListCreateAPIView, RetrieveUpdateDestroyAPIView, CreateAPIView
 from .models import User, Issue, Notification
@@ -14,9 +15,9 @@ from rest_framework_simplejwt.tokens import RefreshToken
 from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
 from django.http import JsonResponse
-#from django.contrib.auth.decorators import login_required
+from django.contrib.auth.decorators import login_required
 from rest_framework.permissions import IsAuthenticated
-#from django.http import JsonResponse
+from django.http import JsonResponse
 import json  # Ensure JSON is imported for `json.loads(request.body)`
 
 # from rest_framework import generics, status
@@ -49,9 +50,9 @@ class RegisterView(APIView):
                 "message": "User registered successfully",
             }
 
-            return Response(response_data, status+status.HTTP_201_CREATED)
-            
-            return Response(response_data, status=status.HTTP_400_BAD_REQUEST)
+            return Response(response_data, status=status.HTTP_201_CREATED)
+
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
     
 # Login and get JWT Token
 class LoginView(APIView):
@@ -100,7 +101,6 @@ class IssueCreateView(generics.CreateAPIView):
     def perform_create(self, serializer):
         serializer.save(created_by=self.request.user)
   # Set the user automatically
-        serializer.save(created_by=self.request.user)  # Sets logged in user as issue_created by
 
 class LecturerListView(ListAPIView):
     serializer_class = UserSerializer
@@ -115,8 +115,15 @@ class UserListView(ListCreateAPIView):
     serializer_class = UserSerializer
 
 class IssueListView(ListCreateAPIView):
-    queryset = Issue.objects.all()
     serializer_class = IssueSerializer
+    filter_backends = [filters.SearchFilter]
+    permission_classes = [IsAuthenticated]
+    search_fields = ['category', 'course_unit', 'description']
+
+    def get_queryset(self):
+        user = self.request.user
+        return Issue.objects.filter(created_by=user)
+
 
 class IssueDetailView(RetrieveUpdateDestroyAPIView):
     queryset = Issue.objects.all()
@@ -125,7 +132,6 @@ class IssueDetailView(RetrieveUpdateDestroyAPIView):
 class NotificationListView(ListCreateAPIView):
     queryset = Notification.objects.all()
     serializer_class = NotificationSerializer
-    
 
 
 @login_required

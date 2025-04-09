@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from "react";
 import { Paperclip } from "lucide-react";
 import API from '../utils/axiosInstance';
@@ -17,6 +16,7 @@ const course_units = [
   { value: "SD", label: "Software Development" },
   { value: "PS", label: "Probability and Statistics" },
 ];
+
 
 const years_of_Study = [
   { value: "2025/2026", label: "2025/2026" },
@@ -42,9 +42,6 @@ const Studentsubmitissue = () => {
     attachment: null,
     year_of_study: "",
     semester: "",
-    created_by:localStorage.getItem('id'),
-    status:"pending",
-    
   });
 
   const [errors, setErrors] = useState({});
@@ -133,10 +130,6 @@ const Studentsubmitissue = () => {
     if (formData.attachment) {
       data.append("attachment", formData.attachment);
     }
-
-    for (let pair of data.entries()) {
-      console.log(`${pair[0]}: ${pair[1]}`);
-    }  
   
     try {
       const response = await API.post("issues/", data, {
@@ -148,7 +141,6 @@ const Studentsubmitissue = () => {
   
       if (response.status === 201) {
         setSuccessMessage("Issue reported successfully!");
-        sweetAlert()
         setTimeout(() => {
           navigate("/studentissues");
         }, 2000);
@@ -394,7 +386,6 @@ const Studentsubmitissue = () => {
             >
               {loading ? "Submitting..." : "Submit Issue"}
             </button>
-            <button type="submit" className="bg-green-700 rounded-md hover:bg-green-900 text-white p-2" >Submit Issue</button>
           </div>
         </form>
       </div>

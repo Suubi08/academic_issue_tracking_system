@@ -27,9 +27,7 @@ const AdminReports = () => {
         <div className="rounded-lg border bg-white p-6 shadow">
           <h3 className="mb-4 text-base font-medium">System Performance</h3>
           <div className="h-60 bg-gray-100 flex items-center justify-center">
-            <p className="text-gray-500">
-              System performance chart placeholder
-            </p>
+            <p className="text-gray-500">System performance chart placeholder</p>
           </div>
           <div className="mt-4 text-sm text-gray-500">
             <p>Monitors system response times and resource usage.</p>
@@ -47,7 +45,8 @@ const AdminReports = () => {
         </div>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default AdminReports;
+export default AdminReports
+

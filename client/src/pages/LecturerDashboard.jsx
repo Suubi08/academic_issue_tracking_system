@@ -1,4 +1,4 @@
-
+"use client";
 
 import { Calendar, FileText, FileTextIcon, MessageSquare } from "lucide-react";
 import { useEffect } from "react";
