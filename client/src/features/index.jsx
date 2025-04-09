@@ -11,7 +11,7 @@ import Studentresolvedissues from "./Studentresolvedissues"
 import Studentsubmitissue from "./Studentsubmitissue"
 import Studentsettings from "./Studentsettings"
 import Studentissues from "./Studentissues"
-import LecturerNotifications from "./Lecturernotifications"
+//import LecturerNotifications from "./Lecturernotifications"
 
 export {
   LecturerNotifications,
