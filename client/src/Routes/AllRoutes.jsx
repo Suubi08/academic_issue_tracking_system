@@ -75,5 +75,22 @@ const AllRoutes = () => {
           <Route path="/lecturersettings" element={<Lecturersettings />} />
         </Route>
       </Route>
+    {/* Admin Routes */}
+      <Route element={<ProtectedRoute allowedRoles={["admin"]} />}>
+        <Route element={<Layout />}>
+          <Route path="/admin-dashboard" element={<AdminDashboard />} />
+          <Route
+            path="/adminissuemanagement"
+            element={<Adminissuemanagement />}
+          />
+          <Route
+            path="/adminusermanagement"
+            element={<Adminusermanagement />}
+          />
+          <Route path="/adminNotifications" element={<AdminNotifications />} />
+          <Route path="/adminreports" element={<AdminReports />} />
+          <Route path="/adminsettings" element={<Adminsettings />} />
+        </Route>
+      </Route>
 
 
