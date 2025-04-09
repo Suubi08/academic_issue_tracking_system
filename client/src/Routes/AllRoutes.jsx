@@ -48,7 +48,8 @@ const AllRoutes = () => {
 
       {/* Redirect root to login if not authenticated */}
       <Route path="/" element={<Navigate to="/login" replace />} />
- {/* Student Routes */}
+
+      {/* Student Routes */}
       <Route element={<ProtectedRoute allowedRoles={["student"]} />}>
         <Route element={<Layout />}>
           <Route path="/student-dashboard" element={<Studentdashboard />} />
@@ -59,7 +60,8 @@ const AllRoutes = () => {
           <Route path="/studentsettings" element={<Studentsettings />} />
         </Route>
       </Route>
-       {/* Lecturer Routes */}
+
+      {/* Lecturer Routes */}
       <Route element={<ProtectedRoute allowedRoles={["lecturer"]} />}>
         <Route element={<Layout />}>
           <Route path="/lecturer-dashboard" element={<LecturerDashboard />} />
@@ -75,7 +77,8 @@ const AllRoutes = () => {
           <Route path="/lecturersettings" element={<Lecturersettings />} />
         </Route>
       </Route>
-    {/* Admin Routes */}
+
+      {/* Admin Routes */}
       <Route element={<ProtectedRoute allowedRoles={["admin"]} />}>
         <Route element={<Layout />}>
           <Route path="/admin-dashboard" element={<AdminDashboard />} />
@@ -92,7 +95,8 @@ const AllRoutes = () => {
           <Route path="/adminsettings" element={<Adminsettings />} />
         </Route>
       </Route>
-       {/* Academic Registrar Routes */}
+
+      {/* Academic Registrar Routes */}
       <Route element={<ProtectedRoute allowedRoles={["academic_registrar"]} />}>
         <Route element={<Layout />}>
           <Route path="/registrar-dashboard" element={<RegistrarDashboard/>} />
@@ -104,9 +108,7 @@ const AllRoutes = () => {
       {/* Catch-all 404 route */}
       <Route path="*" element={<PageNotFound />} />
     </Routes>
-
   );
 };
 
 export default AllRoutes;
-
