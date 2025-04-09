@@ -1,23 +1,4 @@
-from django.shortcuts import render, redirect
-from django.contrib.auth.models import update_last_login
-from rest_framework.views import APIView
-from django.contrib.auth import authenticate
-from django.contrib.auth.decorators import login_required
-from django.contrib import messages
-from rest_framework.filters import SearchFilter
-from rest_framework.generics import ListAPIView, ListCreateAPIView, RetrieveUpdateDestroyAPIView, CreateAPIView
-from .models import User, Issue, Notification
-from rest_framework import generics, status
-from rest_framework.parsers import MultiPartParser, FormParser
-from .serializers import UserSerializer, IssueSerializer, NotificationSerializer, RegisterSerializer
-from rest_framework_simplejwt.tokens import RefreshToken
-from rest_framework.permissions import AllowAny
-from rest_framework.response import Response
-from django.http import JsonResponse
-#from django.contrib.auth.decorators import login_required
-from rest_framework.permissions import IsAuthenticated
-#from django.http import JsonResponse
-import json  # Ensure JSON is imported for `json.loads(request.body)`
+
 
 # from rest_framework import generics, status
 
