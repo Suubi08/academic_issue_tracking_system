@@ -75,22 +75,18 @@ const AdminUserManagement = ({ children }) => {
           sidebarOpen ? "translate-x-0" : "-translate-x-full"
         )}
       >
-        <nav className="mt-5 px-2 space-y-1 overflow-y-auto flex-grow">
+<nav className="px-2 mt-5 space-y-1">
           {navigation.map((item) => {
             const isActive = pathname === item.href
             return (
               <Link
                 key={item.name}
-                href={item.href}
-                className={cn(
-                  "group flex items-center px-4 py-3 text-sm font-medium rounded-md transition-colors",
-                  isActive
-                    ? "bg-indigo-800 text-white"
-                    : "text-indigo-100 hover:bg-indigo-800"
-                )}
-                title={item.description}
+                to={item.href} // Updated for React Router
+                className={`group flex items-center px-4 py-3 text-sm rounded-md ${
+                  isActive ? "bg-indigo-800 text-white" : "text-indigo-100 hover:bg-indigo-800"
+                }`}
               >
-                <item.icon className="mr-3 h-5 w-5" />
+                <item.icon className="w-5 h-5 mr-3" />
                 {item.name}
               </Link>
             )
