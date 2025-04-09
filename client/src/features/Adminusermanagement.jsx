@@ -135,6 +135,12 @@ const Adminusermanagement = ({ children }) => {
                   )}
                   title={item.description}
                 >
+                  <item.icon className="mr-3 h-5 w-5" />
+                  {item.name}
+                </Link>
+              )
+            })}
+          </nav>
   </div>;
 };
 
