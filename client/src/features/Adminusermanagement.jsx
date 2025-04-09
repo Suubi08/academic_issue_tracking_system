@@ -151,6 +151,17 @@ const Adminusermanagement = ({ children }) => {
                 <p className="text-sm font-medium text-white truncate">Admin User</p>
                 <p className="text-xs text-indigo-300 truncate">admin@university.edu</p>
               </div>
+              <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                  <Button
+                    variant="ghost"
+                    size="icon"
+                    className="h-8 w-8 text-white hover:bg-indigo-800 dark:hover:bg-indigo-900"
+                  >
+                    <User className="h-4 w-4" />
+                    <span className="sr-only">User menu</span>
+                  </Button>
+                </DropdownMenuTrigger>
   </div>;
 };
 
