@@ -92,6 +92,27 @@ class RefreshTokenView(generics.GenericAPIView):
                 return Response({"error": "Invalid refresh token"}, status=status.HTTP_401_UNAUTHORIZED)
         return Response({"error": "Refresh token required"}, status=status.HTTP_400_BAD_REQUEST)
         
+class IssueCreateView(generics.CreateAPIView):
+    queryset = Issue.objects.all()
+    serializer_class = IssueSerializer
+    parser_classes = (MultiPartParser, FormParser)  # Support file uploads
+
+    def perform_create(self, serializer):
+        serializer.save(created_by=self.request.user)
+  # Set the user automatically
+        serializer.save(created_by=self.request.user)  # Sets logged in user as issue_created by
+
+class LecturerListView(ListAPIView):
+    serializer_class = UserSerializer
+    filter_backends = [SearchFilter]
+    search_fields = ['first_name', 'last_name']
+
+    def get_queryset(self):
+        return User.objects.filter(role="lecturer")  # Ensure only lecturers are returned
+
+class UserListView(ListCreateAPIView):
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
 
 class IssueListView(ListCreateAPIView):
     queryset = Issue.objects.all()
