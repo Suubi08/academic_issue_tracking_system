@@ -83,6 +83,44 @@ function IssueDetail() {
       return <Badge>{status}</Badge>;
   }
 };
+const getPriorityBadge = (priority) => {
+    switch (priority.toLowerCase()) {
+      case "high":
+        return (
+          <Badge className="bg-red-100 text-red-800 border-red-200">High</Badge>
+        );
+      case "medium":
+        return (
+          <Badge className="bg-orange-100 text-orange-800 border-orange-200">
+            Medium
+          </Badge>
+        );
+      case "low":
+        return (
+          <Badge className="bg-green-100 text-green-800 border-green-200">
+            Low
+          </Badge>
+        );
+      default:
+        return <Badge>Normal</Badge>;
+    }
+  };
+
+  if (loading) {
+    return <LoadingSpinner message="Loading issue details..." />;
+  }
+
+  if (error) {
+    return (
+      <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded">
+        <p className="font-bold">Error</p>
+        <p>{error}</p>
+        <Button className="mt-4" onClick={() => navigate("/studentissues")}>
+          Back to Issues
+        </Button>
+      </div>
+    );
+  }
 
 
 
