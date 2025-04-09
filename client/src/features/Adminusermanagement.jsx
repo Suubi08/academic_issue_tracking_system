@@ -63,6 +63,22 @@ const Adminusermanagement = () => {
       description: "Adjust preferences and monitor cloud deployment",
     },
   ]
+   // Handle theme toggle
+  useEffect(() => {
+    setMounted(true)
+  }, [])
+
+  // Get current date in formatted string
+  const getCurrentDate = () => {
+    const date = new Date()
+    const options = {
+      weekday: "short",
+      day: "numeric",
+      month: "long",
+      year: "numeric",
+    }
+    return date.toLocaleDateString("en-US", options)
+  }
 
   return <div  className="flex h-screen bg-gray-50 dark:bg-gray-900">
     {/* Mobile sidebar backdrop */}
