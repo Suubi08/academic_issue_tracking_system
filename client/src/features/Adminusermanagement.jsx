@@ -20,6 +20,10 @@ import { cn } from "@/lib/utils"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 const Adminusermanagement = () => {
+  const [sidebarOpen, setSidebarOpen] = useState(false)
+  const [mounted, setMounted] = useState(false)
+  const pathname = usePathname()
+  const { theme, setTheme } = useTheme()
   return <div  className="flex h-screen bg-gray-50 dark:bg-gray-900">
     {/* Mobile sidebar backdrop */}
       {sidebarOpen && (
