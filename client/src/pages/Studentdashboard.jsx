@@ -1,4 +1,4 @@
-
+"use client";
 
 import { useState, useEffect } from "react";
 import image1 from "../assets/1.jpg";
@@ -12,6 +12,7 @@ import {
   UserInfoCard,
 } from "../components";
 import IssueTracking from "../components/IssueTracking";
+import axios from "axios";
 
 const Studentdashboard = () => {
   const images = [image1, image2, image3];
@@ -21,54 +22,74 @@ const Studentdashboard = () => {
   const [statusFilter, setStatusFilter] = useState("all");
 
   const [user, setUser] = useState({
-    username: "USERNAME",
+    username: "",
     regNo: "REG NO",
     semester: "II",
-    course: "Computer Science",
-    year: "2024",
+    course: "",
+    year: "2025",
     profilePic: false,
   });
 
-  const allIssues = [
-    {
-      id: "1",
-      title: "Course registration error",
-      status: "Pending",
-      lastUpdate: "Feb 15, 2025",
-    },
-    {
-      id: "2",
-      title: "Course registration error",
-      status: "Pending",
-      lastUpdate: "Feb 15, 2025",
-    },
-    {
-      id: "3",
-      title: "Missing marks",
-      status: "In Progress",
-      lastUpdate: "Feb 15, 2025",
-    },
-    {
-      id: "4",
-      title: "Results error",
-      status: "Resolved",
-      lastUpdate: "Feb 15, 2025",
-    },
-    {
-      id: "5",
-      title: "Software development issue",
-      status: "Resolved",
-      lastUpdate: "Feb 15, 2025",
-    },
-    {
-      id: "6",
-      title: "Data structures",
-      status: "Pending",
-      lastUpdate: "Feb 15, 2028",
-    },
-  ];
-
+  const [allIssues,setAllIssues]=useState([])
   const [issues, setIssues] = useState(allIssues);
+  useEffect(() => {
+    const fetchIssues = async () => {
+      try {
+        const response = await axios.get("http://localhost:8000/api/issues/");
+        setAllIssues(response.data);
+        setIssues(response.data);
+        console.log(response.data)
+      } catch (error) {
+        console.error("Error fetching issues:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+  
+    fetchIssues();
+  }, []);
+  // const allIssues = [
+  //   {
+  //     id: "1",
+  //     title: "Course registration error",
+  //     status: "Pending",
+  //     lastUpdate: "Feb 15, 2025",
+  //   },
+  //   {
+  //     id: "2",
+  //     title: "Course registration error",
+  //     status: "Pending",
+  //     lastUpdate: "Feb 15, 2025",
+  //   },
+  //   {
+  //     id: "3",
+  //     title: "Missing marks",
+  //     status: "In Progress",
+  //     lastUpdate: "Feb 15, 2025",
+  //   },
+  //   {
+  //     id: "4",
+  //     title: "Results error",
+  //     status: "Resolved",
+  //     lastUpdate: "Feb 15, 2025",
+  //   },
+  //   {
+  //     id: "5",
+  //     title: "Software development issue",
+  //     status: "Resolved",
+  //     lastUpdate: "Feb 15, 2025",
+  //   },
+  //   {
+  //     id: "6",
+  //     title: "Data structures",
+  //     status: "Pending",
+  //     lastUpdate: "Feb 15, 2028",
+  //   },
+  // ];
+
+
+
+ 
 
   // Apply filters when search term or status filter changes
   useEffect(() => {
@@ -95,13 +116,13 @@ const Studentdashboard = () => {
   // Calculate statistics based on filtered issues
   const totalIssues = issues.length;
   const resolvedIssues = issues.filter(
-    (issue) => issue.status === "Resolved"
+    (issue) => issue.status === "resolved"
   ).length;
   const inProgressIssues = issues.filter(
     (issue) => issue.status === "In Progress"
   ).length;
   const pendingIssues = issues.filter(
-    (issue) => issue.status === "Pending"
+    (issue) => issue.status === "pending"
   ).length;
 
   // Handle search and filter changes
