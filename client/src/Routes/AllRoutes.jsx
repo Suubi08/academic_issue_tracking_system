@@ -48,4 +48,15 @@ const AllRoutes = () => {
 
       {/* Redirect root to login if not authenticated */}
       <Route path="/" element={<Navigate to="/login" replace />} />
+ {/* Student Routes */}
+      <Route element={<ProtectedRoute allowedRoles={["student"]} />}>
+        <Route element={<Layout />}>
+          <Route path="/student-dashboard" element={<Studentdashboard />} />
+          <Route path="/studentissues" element={<Studentissues />} />
+          <Route path="/submitissue" element={<Studentsubmitissue />} />
+          <Route path="/viewissue/:id" element={<IssueDetail />} />
+          {/* <Route path="/studentissuereport" element={<Studentissuereport />} /> */}
+          <Route path="/studentsettings" element={<Studentsettings />} />
+        </Route>
+      </Route>
 
