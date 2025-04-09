@@ -49,7 +49,7 @@ def send_assignment_email(sender, instance, created, **kwargs):
 
         recipient_email = instance.assigned_to.email
 
-        # Send the email
+        # Send the email notification
         send_mail(subject, message, settings.DEFAULT_FROM_EMAIL, [recipient_email])
 
         # Create a dashboard notification
