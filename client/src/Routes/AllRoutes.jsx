@@ -59,4 +59,21 @@ const AllRoutes = () => {
           <Route path="/studentsettings" element={<Studentsettings />} />
         </Route>
       </Route>
+       {/* Lecturer Routes */}
+      <Route element={<ProtectedRoute allowedRoles={["lecturer"]} />}>
+        <Route element={<Layout />}>
+          <Route path="/lecturer-dashboard" element={<LecturerDashboard />} />
+          <Route
+            path="/issuemanagement"
+            element={<Lecturerissuemanagement />}
+          />
+          <Route path="/status-update" element={<Lecturerstatusupdates />} />
+          <Route
+            path="/lecturernotifications"
+            element={<LecturerNotifications />}
+          />
+          <Route path="/lecturersettings" element={<Lecturersettings />} />
+        </Route>
+      </Route>
+
 
