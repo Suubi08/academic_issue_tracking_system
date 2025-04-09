@@ -100,7 +100,7 @@ class Comments(models.Model):
     message = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)
 
-# Attachment modle
+# Attachment model
 class Attachment(models.Model):
     issue = models.ForeignKey(Issue, on_delete=models.CASCADE, related_name='attachments')
     file = models.FileField(upload_to='attachments/')
