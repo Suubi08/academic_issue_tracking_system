@@ -91,6 +91,12 @@ const Adminusermanagement = ({ children }) => {
   }
 
   return <div  className="flex h-screen bg-gray-50 dark:bg-gray-900">
+    <div className="flex flex-col flex-grow md:ml-64">
+  <header className="p-4">{getCurrentDate()}</header>
+  <main className="flex-grow overflow-y-auto p-4">
+    {children}
+  </main>
+</div>
     {/* Mobile sidebar backdrop */}
       {sidebarOpen && (
         <div className="fixed inset-0 z-40 bg-gray-600 bg-opacity-75 md:hidden" onClick={() => setSidebarOpen(false)} />
