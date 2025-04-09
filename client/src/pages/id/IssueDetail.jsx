@@ -27,4 +27,31 @@ function IssueDetail() {
   const handleClick_1 = () => {
     navigate("/studentissues"); 
   };
+  useEffect(() => {
+    const token = localStorage.getItem("accessToken");
+    if (!token) {
+      navigate("/login");
+      return;
+    }
+
+    fetchIssueAndComments();
+  }, [id, navigate]);
+
+  const fetchIssueAndComments = async () => {
+    try {
+      setLoading(true);
+      
+      const issueResponse = await axios.get(`http://localhost:8000/api/issues/${id}`);
+    
+      setIssue(issueResponse.data);
+      console.log(issueResponse.data)
+
+    } catch (err) {
+      console.error("Error fetching issue details:", err);
+      setError("Failed to fetch issue details. Please try again.");
+    } finally {
+      setLoading(false);
+    }
+  };
+
 
