@@ -1,9 +1,4 @@
-from django.db.models.signals import post_save
-from django.contrib.auth.models import Group
-from django.dispatch import receiver
-from django.core.mail import send_mail
-from django.conf import settings
-from .models import User, Issue, Notification
+
 
 @receiver(post_save, sender=User)
 def assign_user_group(sender, instance, created, **kwargs):
