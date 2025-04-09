@@ -24,6 +24,46 @@ const Adminusermanagement = () => {
   const [mounted, setMounted] = useState(false)
   const pathname = usePathname()
   const { theme, setTheme } = useTheme()
+  // Navigation items
+  const navigation = [
+    {
+      name: "Admin Dashboard",
+      href: "/",
+      icon: LayoutDashboard,
+      description: "Overview of all system activities and metrics",
+    },
+    {
+      name: "Issue Management",
+      href: "/issue-management",
+      icon: AlertCircle,
+      description: "View, assign, and track academic issues with filters and search",
+    },
+    {
+      name: "Notifications & Alerts",
+      href: "/notifications",
+      icon: Bell,
+      description: "Receive updates on pending and resolved issues",
+    },
+    {
+      name: "Reports & Analytics",
+      href: "/reports",
+      icon: BarChart3,
+      description: "Generate insights on issue resolution and lecturer performance",
+    },
+    {
+      name: "User Management",
+      href: "/users",
+      icon: Users,
+      description: "Manage students, lecturers, and permissions",
+    },
+    {
+      name: "System Settings",
+      href: "/settings",
+      icon: Settings,
+      description: "Adjust preferences and monitor cloud deployment",
+    },
+  ]
+
   return <div  className="flex h-screen bg-gray-50 dark:bg-gray-900">
     {/* Mobile sidebar backdrop */}
       {sidebarOpen && (
