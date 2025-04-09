@@ -53,5 +53,37 @@ function IssueDetail() {
       setLoading(false);
     }
   };
+  const getStatusBadge = (status) => {
+  switch (status.toLowerCase()) {
+    case "open":
+      return (
+        <Badge className="bg-yellow-100 text-yellow-800 border-yellow-200">
+          Open
+        </Badge>
+      );
+    case "in progress":
+      return (
+        <Badge className="bg-blue-100 text-blue-800 border-blue-200">
+          In Progress
+        </Badge>
+      );
+    case "resolved":
+      return (
+        <Badge className="bg-green-100 text-green-800 border-green-200">
+          Resolved
+        </Badge>
+      );
+    case "closed":
+      return (
+        <Badge className="bg-gray-100 text-gray-800 border-gray-200">
+          Closed
+        </Badge>
+      );
+    default:
+      return <Badge>{status}</Badge>;
+  }
+};
+
+
 
 
