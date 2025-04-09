@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react"
 import { usePathname } from "next/navigation"
-import Link from "react-router-dom"
+import Link from "next/link"
 import {
   LayoutDashboard,
   AlertCircle,
@@ -8,17 +8,12 @@ import {
   BarChart3,
   Users,
   Settings,
-  Menu,
-  Search,
   User,
   LogOut,
   HelpCircle,
-  Sun,
-  Moon,
 } from "lucide-react"
 import { cn } from "@/lib/utils"
 import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -29,56 +24,17 @@ import {
 } from "@/components/ui/dropdown-menu"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { useTheme } from "next-themes"
-const Adminusermanagement = ({ children }) => {
+
+const AdminUserManagement = ({ children }) => {
   const [sidebarOpen, setSidebarOpen] = useState(false)
   const [mounted, setMounted] = useState(false)
   const pathname = usePathname()
   const { theme, setTheme } = useTheme()
-  // Navigation items
-  const navigation = [
-    {
-      name: "Admin Dashboard",
-      href: "/",
-      icon: LayoutDashboard,
-      description: "Overview of all system activities and metrics",
-    },
-    {
-      name: "Issue Management",
-      href: "/issue-management",
-      icon: AlertCircle,
-      description: "View, assign, and track academic issues with filters and search",
-    },
-    {
-      name: "Notifications & Alerts",
-      href: "/notifications",
-      icon: Bell,
-      description: "Receive updates on pending and resolved issues",
-    },
-    {
-      name: "Reports & Analytics",
-      href: "/reports",
-      icon: BarChart3,
-      description: "Generate insights on issue resolution and lecturer performance",
-    },
-    {
-      name: "User Management",
-      href: "/users",
-      icon: Users,
-      description: "Manage students, lecturers, and permissions",
-    },
-    {
-      name: "System Settings",
-      href: "/settings",
-      icon: Settings,
-      description: "Adjust preferences and monitor cloud deployment",
-    },
-  ]
-   // Handle theme toggle
+
   useEffect(() => {
     setMounted(true)
   }, [])
 
-  // Get current date in formatted string
   const getCurrentDate = () => {
     const date = new Date()
     const options = {
@@ -90,111 +46,100 @@ const Adminusermanagement = ({ children }) => {
     return date.toLocaleDateString("en-US", options)
   }
 
-  return <div  className="flex h-screen bg-gray-50 dark:bg-gray-900">
-    <div className="flex flex-col flex-grow md:ml-64">
-  <header className="p-4">{getCurrentDate()}</header>
-  <main className="flex-grow overflow-y-auto p-4">
-    {children}
-  </main>
-</div>
-    {/* Mobile sidebar backdrop */}
+  const navigation = [
+    { name: "Admin Dashboard", href: "/", icon: LayoutDashboard, description: "Overview of system activities" },
+    { name: "Issue Management", href: "/issue-management", icon: AlertCircle, description: "Manage academic issues" },
+    { name: "Notifications", href: "/notifications", icon: Bell, description: "View alerts and updates" },
+    { name: "Reports", href: "/reports", icon: BarChart3, description: "Generate analytics and insights" },
+    { name: "User Management", href: "/users", icon: Users, description: "Manage users and permissions" },
+    { name: "Settings", href: "/settings", icon: Settings, description: "System preferences" },
+  ]
+
+  return (
+    <div className="flex h-screen bg-gray-50 dark:bg-gray-900">
+      <div className="flex flex-col flex-grow md:ml-64">
+        <header className="p-4">{getCurrentDate()}</header>
+        <main className="flex-grow overflow-y-auto p-4">{children}</main>
+      </div>
+
       {sidebarOpen && (
-        <div className="fixed inset-0 z-40 bg-gray-600 bg-opacity-75 md:hidden" onClick={() => setSidebarOpen(false)} />
+        <div
+          className="fixed inset-0 z-40 bg-gray-600 bg-opacity-75 md:hidden"
+          onClick={() => setSidebarOpen(false)}
+        />
       )}
 
-      {/* Sidebar */}
       <div
         className={cn(
-          "fixed inset-y-0 left-0 z-50 w-64 bg-indigo-900 dark:bg-indigo-950 text-white transform transition-transform duration-300 ease-in-out md:translate-x-0",
-          sidebarOpen ? "translate-x-0" : "-translate-x-full",
-          "md:static md:h-screen",
+          "fixed inset-y-0 left-0 z-50 w-64 bg-indigo-900 text-white transform transition-transform duration-300 ease-in-out md:translate-x-0",
+          sidebarOpen ? "translate-x-0" : "-translate-x-full"
         )}
       >
-        <div className="flex flex-col h-[calc(100%-4rem)] justify-between">
-          <nav className="mt-5 px-2 space-y-1 overflow-y-auto flex-grow">
-            {navigation.map((item) => {
-              const isActive = pathname === item.href
-              return (
-                <Link
-                  key={item.name}
-                  href={item.href}
-                  className={cn(
-                    "group flex items-center px-4 py-3 text-sm font-medium rounded-md transition-colors",
-                    isActive
-                      ? "bg-indigo-800 dark:bg-indigo-900 text-white"
-                      : "text-indigo-100 hover:bg-indigo-800 dark:hover:bg-indigo-900",
-                  )}
-                  title={item.description}
-                > <div className="flex flex-col h-[calc(100%-4rem)] justify-between">
-          <nav className="mt-5 px-2 space-y-1 overflow-y-auto flex-grow">
-            {navigation.map((item) => {
-              const isActive = pathname === item.href
-              return (
-                <Link
-                  key={item.name}
-                  href={item.href}
-                  className={cn(
-                    "group flex items-center px-4 py-3 text-sm font-medium rounded-md transition-colors",
-                    isActive
-                      ? "bg-indigo-800 dark:bg-indigo-900 text-white"
-                      : "text-indigo-100 hover:bg-indigo-800 dark:hover:bg-indigo-900",
-                  )}
-                  title={item.description}
-                >
-                  <item.icon className="mr-3 h-5 w-5" />
-                  {item.name}
-                </Link>
-              )
-            })}
-          </nav>
-          <div className="p-4 border-t border-indigo-800 dark:border-indigo-900">
-            <div className="flex items-center">
-              <Avatar className="h-8 w-8 mr-2">
-                <AvatarImage src="/placeholder.svg?height=32&width=32" alt="Admin User" />
-                <AvatarFallback>AU</AvatarFallback>
-              </Avatar>
-              <div className="flex-1 min-w-0">
-                <p className="text-sm font-medium text-white truncate">Admin User</p>
-                <p className="text-xs text-indigo-300 truncate">admin@university.edu</p>
-              </div>
-              <DropdownMenu>
-                <DropdownMenuTrigger asChild>
-                  <Button
-                    variant="ghost"
-                    size="icon"
-                    className="h-8 w-8 text-white hover:bg-indigo-800 dark:hover:bg-indigo-900"
-                  >
-                    <User className="h-4 w-4" />
-                    <span className="sr-only">User menu</span>
-                  </Button>
-                </DropdownMenuTrigger>
-                <DropdownMenuContent align="end">
-                  <DropdownMenuLabel>My Account</DropdownMenuLabel>
-                  <DropdownMenuSeparator />
-                  <DropdownMenuItem>
-                    <User className="mr-2 h-4 w-4" />
-                    <span>Profile</span>
-                  </DropdownMenuItem>
-                  <DropdownMenuItem>
-                    <Settings className="mr-2 h-4 w-4" />
-                    <span>Settings</span>
-                  </DropdownMenuItem>
-                  <DropdownMenuItem>
-                    <HelpCircle className="mr-2 h-4 w-4" />
-                    <span>Help</span>
-                  </DropdownMenuItem>
-                  <DropdownMenuSeparator />
-                  <DropdownMenuItem>
-                    <LogOut className="mr-2 h-4 w-4" />
-                    <span>Log out</span>
-                  </DropdownMenuItem>
-                </DropdownMenuContent>
-              </DropdownMenu>
+        <nav className="mt-5 px-2 space-y-1 overflow-y-auto flex-grow">
+          {navigation.map((item) => {
+            const isActive = pathname === item.href
+            return (
+              <Link
+                key={item.name}
+                href={item.href}
+                className={cn(
+                  "group flex items-center px-4 py-3 text-sm font-medium rounded-md transition-colors",
+                  isActive
+                    ? "bg-indigo-800 text-white"
+                    : "text-indigo-100 hover:bg-indigo-800"
+                )}
+                title={item.description}
+              >
+                <item.icon className="mr-3 h-5 w-5" />
+                {item.name}
+              </Link>
+            )
+          })}
+        </nav>
+        <div className="p-4 border-t border-indigo-800">
+          <div className="flex items-center">
+            <Avatar className="h-8 w-8 mr-2">
+              <AvatarImage src="/placeholder.svg?height=32&width=32" alt="Admin User" />
+              <AvatarFallback>AU</AvatarFallback>
+            </Avatar>
+            <div className="flex-1 min-w-0">
+              <p className="text-sm font-medium text-white truncate">Admin User</p>
+              <p className="text-xs text-indigo-300 truncate">admin@university.edu</p>
             </div>
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <Button variant="ghost" size="icon" className="h-8 w-8 text-white">
+                  <User className="h-4 w-4" />
+                  <span className="sr-only">User menu</span>
+                </Button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent align="end">
+                <DropdownMenuLabel>My Account</DropdownMenuLabel>
+                <DropdownMenuSeparator />
+                <DropdownMenuItem>
+                  <User className="mr-2 h-4 w-4" />
+                  <span>Profile</span>
+                </DropdownMenuItem>
+                <DropdownMenuItem>
+                  <Settings className="mr-2 h-4 w-4" />
+                  <span>Settings</span>
+                </DropdownMenuItem>
+                <DropdownMenuItem>
+                  <HelpCircle className="mr-2 h-4 w-4" />
+                  <span>Help</span>
+                </DropdownMenuItem>
+                <DropdownMenuSeparator />
+                <DropdownMenuItem>
+                  <LogOut className="mr-2 h-4 w-4" />
+                  <span>Log out</span>
+                </DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
           </div>
         </div>
       </div>
-  </div>;
-};
+    </div>
+  )
+}
 
-export default Adminusermanagement;
+export default AdminUserManagement
