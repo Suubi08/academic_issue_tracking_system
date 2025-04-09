@@ -141,6 +141,12 @@ const Adminusermanagement = ({ children }) => {
               )
             })}
           </nav>
+          <div className="p-4 border-t border-indigo-800 dark:border-indigo-900">
+            <div className="flex items-center">
+              <Avatar className="h-8 w-8 mr-2">
+                <AvatarImage src="/placeholder.svg?height=32&width=32" alt="Admin User" />
+                <AvatarFallback>AU</AvatarFallback>
+              </Avatar>
   </div>;
 };
 
