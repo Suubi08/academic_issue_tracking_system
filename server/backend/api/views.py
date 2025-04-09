@@ -92,7 +92,7 @@ class RefreshTokenView(generics.GenericAPIView):
             except Exception:
                 return Response({"error": "Invalid refresh token"}, status=status.HTTP_401_UNAUTHORIZED)
         return Response({"error": "Refresh token required"}, status=status.HTTP_400_BAD_REQUEST)
-
+        
 class IssueCreateView(generics.CreateAPIView):
     queryset = Issue.objects.all()
     serializer_class = IssueSerializer
@@ -132,8 +132,7 @@ class IssueDetailView(RetrieveUpdateDestroyAPIView):
 class NotificationListView(ListCreateAPIView):
     queryset = Notification.objects.all()
     serializer_class = NotificationSerializer
-
-
+    
 @login_required
 def create_issue(request):
     if request.method == "POST":

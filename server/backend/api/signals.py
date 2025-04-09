@@ -20,8 +20,6 @@ def assign_user_group(sender, instance, created, **kwargs):
             return   #Skip if no valid role
 
             instance.groups.add(group) #Assign the user to the correct group
-
-
 @receiver(post_save, sender=Issue)
 def send_assignment_email(sender, instance, created, **kwargs):
     """
@@ -49,7 +47,7 @@ def send_assignment_email(sender, instance, created, **kwargs):
 
         recipient_email = instance.assigned_to.email
 
-        # Send the email
+        # Send the email notification
         send_mail(subject, message, settings.DEFAULT_FROM_EMAIL, [recipient_email])
 
         # Create a dashboard notification
@@ -57,3 +55,4 @@ def send_assignment_email(sender, instance, created, **kwargs):
             user=instance.assigned_to,
             message=f"You have been assigned a new issue."
         )
+
