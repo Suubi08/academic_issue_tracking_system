@@ -53,7 +53,30 @@ class RegisterView(APIView):
             
             return Response(response_data, status=status.HTTP_400_BAD_REQUEST)
     
+# Login and get JWT Token
+class LoginView(APIView):
+    permission_classes = [AllowAny]
 
+    def post(self, request):
+        username = request.data.get("username")
+        password = request.data.get("password")
+        user = authenticate(username=username, password=password)
+
+        if user:
+            refresh = RefreshToken.for_user(user)
+            update_last_login(None, user)
+
+            return Response({
+                "refresh": str(refresh),
+                "access": str(refresh.access_token),
+                "username": user.username,  # Include this field
+                "role": user.role,
+                "course":user.course_name,
+                "student_number": user.student_number,
+                "id":user.id,
+            }, status=status.HTTP_200_OK)
+
+        return Response({"error": "Invalid credentials"}, status=status.HTTP_401_UNAUTHORIZED)
     
 # Refresh Token View
 class RefreshTokenView(generics.GenericAPIView):
