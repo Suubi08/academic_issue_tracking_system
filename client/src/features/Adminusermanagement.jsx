@@ -147,6 +147,10 @@ const Adminusermanagement = ({ children }) => {
                 <AvatarImage src="/placeholder.svg?height=32&width=32" alt="Admin User" />
                 <AvatarFallback>AU</AvatarFallback>
               </Avatar>
+              <div className="flex-1 min-w-0">
+                <p className="text-sm font-medium text-white truncate">Admin User</p>
+                <p className="text-xs text-indigo-300 truncate">admin@university.edu</p>
+              </div>
   </div>;
 };
 
