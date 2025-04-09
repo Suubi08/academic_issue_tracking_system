@@ -1,3 +1,5 @@
+
+
 import { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { Card, CardHeader, CardTitle, CardContent } from "../../components";
@@ -27,6 +29,7 @@ function IssueDetail() {
   const handleClick_1 = () => {
     navigate("/studentissues"); 
   };
+
   useEffect(() => {
     const token = localStorage.getItem("accessToken");
     if (!token) {
@@ -53,7 +56,9 @@ function IssueDetail() {
       setLoading(false);
     }
   };
-  const getStatusBadge = (status) => {
+
+  
+const getStatusBadge = (status) => {
   switch (status.toLowerCase()) {
     case "open":
       return (
@@ -83,7 +88,8 @@ function IssueDetail() {
       return <Badge>{status}</Badge>;
   }
 };
-const getPriorityBadge = (priority) => {
+
+  const getPriorityBadge = (priority) => {
     switch (priority.toLowerCase()) {
       case "high":
         return (
@@ -121,7 +127,19 @@ const getPriorityBadge = (priority) => {
       </div>
     );
   }
-return (
+
+  if (!issue) {
+    return (
+      <div className="text-center py-8">
+        <p className="text-gray-500">Issue not found</p>
+        <Button className="mt-4" onClick={() => navigate("/issues")}>
+          Back to Issues
+        </Button>
+      </div>
+    );
+  }
+
+  return (
     <div className="space-y-6">
       <Button
         variant="ghost"
@@ -186,7 +204,3 @@ return (
 }
 
 export default IssueDetail;
-
-
-
-
