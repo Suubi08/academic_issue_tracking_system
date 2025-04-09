@@ -105,4 +105,8 @@ const AllRoutes = () => {
       <Route path="*" element={<PageNotFound />} />
     </Routes>
 
+  );
+};
+
+export default AllRoutes;
 
