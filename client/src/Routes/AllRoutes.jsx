@@ -92,5 +92,17 @@ const AllRoutes = () => {
           <Route path="/adminsettings" element={<Adminsettings />} />
         </Route>
       </Route>
+       {/* Academic Registrar Routes */}
+      <Route element={<ProtectedRoute allowedRoles={["academic_registrar"]} />}>
+        <Route element={<Layout />}>
+          <Route path="/registrar-dashboard" element={<RegistrarDashboard/>} />
+          <Route path="/RegistrarSettings" element={<RegistrarSettings />} />
+          <Route path="/RegistrarNotifications" element={<RegistrarNotifications />} />
+        </Route>
+      </Route>
+
+      {/* Catch-all 404 route */}
+      <Route path="*" element={<PageNotFound />} />
+    </Routes>
 
 
