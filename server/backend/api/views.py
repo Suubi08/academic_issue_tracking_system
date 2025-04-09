@@ -21,7 +21,37 @@ import json  # Ensure JSON is imported for `json.loads(request.body)`
 
 # from rest_framework import generics, status
 
+# Register User
+class RegisterView(APIView):
+    permission_classes = [AllowAny]
+    
+    def post(self, request):
+        print("Incoming Data from React:", request.data)
+        serializer = RegisterSerializer(data=request.data)
 
+        if serializer.is_valid():
+            # Save the user
+            user = serializer.save()
+
+            # Generate JWT tokens
+            refresh = RefreshToken.for_user(user)
+            access = str(refresh.access_token)
+
+            # Prepare response data
+            response_data = {
+                "username": user.username,
+                "role": user.role,
+                "id": user.id,
+                "course": user.course_name,
+                "student_number": user.student_number,
+                "access": access,
+                "refresh": str(refresh),
+                "message": "User registered successfully",
+            }
+
+            return Response(response_data, status+status.HTTP_201_CREATED)
+            
+            return Response(response_data, status=status.HTTP_400_BAD_REQUEST)
     
 # Login and get JWT Token
 class LoginView(APIView):
