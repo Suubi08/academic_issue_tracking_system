@@ -132,26 +132,4 @@ class IssueDetailView(RetrieveUpdateDestroyAPIView):
 class NotificationListView(ListCreateAPIView):
     queryset = Notification.objects.all()
     serializer_class = NotificationSerializer
-    
-@login_required
-def create_issue(request):
-    if request.method == "POST":
-        data = json.loads(request.body)
-        
-        # Get the logged-in user
-        data["created_by"] = request.user.id
-
-        # Convert lecturer username to user ID if necessary
-        if "assigned_to" in data:
-            try:
-                lecturer = User.objects.get(username=data["assigned_to"])
-                data["assigned_to"] = lecturer.id
-            except User.DoesNotExist:
-                return JsonResponse({"assigned_to": ["Lecturer not found."]}, status=400)
-
-        serializer = IssueSerializer(data=data)
-        if serializer.is_valid():
-            serializer.save()
-            return JsonResponse(serializer.data, status=201)
-        return JsonResponse(serializer.errors, status=400)
 
