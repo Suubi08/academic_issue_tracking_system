@@ -155,3 +155,8 @@ def create_issue(request):
             return JsonResponse(serializer.data, status=201)
         return JsonResponse(serializer.errors, status=400)
 
+ # serializer = IssueSerializer(data=data)
+ #        if serializer.is_valid():
+ #            serializer.save()
+ #            return JsonResponse(serializer.data, status=201)
+ #        return JsonResponse(serializer.errors, status=400)
