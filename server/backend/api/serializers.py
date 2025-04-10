@@ -66,7 +66,7 @@ class RegisterSerializer(serializers.ModelSerializer):
             student_number=validated_data.get('student_number'),
             course_name=validated_data.get('course_name'),
             college=validated_data.get('college'),
-            lecture_number=validated_data.get('lecture_number'),
+            lecturer_number=validated_data.get('lecture_number'),
             subject_taught=validated_data.get('subject_taught'),
             department=validated_data.get('department')
         )
