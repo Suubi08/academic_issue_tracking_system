@@ -14,14 +14,11 @@ class RegisterSerializer(serializers.ModelSerializer):
             'student_number', 'course_name', 'college', 
             'lecture_number', 'subject_taught', 'department'
         ]
-        extre_kwargs = {
+                                             
+        extra_kwargs = {
             'password': {'write_only': True},
-            'confirm_password': {'write_only": True)
-            }                                        
-        # extra_kwargs = {
-        #     'password': {'write_only': True},
-        #     'confirm_password': {'write_only': True}
-        # }
+            'confirm_password': {'write_only': True}
+        }
 
     def validate(self, data):
         if data['password'] != data['confirm_password']:
