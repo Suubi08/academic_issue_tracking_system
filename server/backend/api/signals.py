@@ -51,8 +51,8 @@ def send_assignment_email(sender, instance, created, **kwargs):
         send_mail(subject, message, settings.DEFAULT_FROM_EMAIL, [recipient_email])
 
         # Create a dashboard notification
-        Notification.objects.create(
-            user=instance.assigned_to,
-            message=f"You have been assigned a new issue."
-        )
+        # Notification.objects.create(
+        #     user=instance.assigned_to,
+        #     message=f"You have been assigned a new issue."
+        # )
 
