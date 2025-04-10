@@ -93,10 +93,10 @@ class RefreshTokenView(generics.GenericAPIView):
                 return Response({"error": "Invalid refresh token"}, status=status.HTTP_401_UNAUTHORIZED)
         return Response({"error": "Refresh token required"}, status=status.HTTP_400_BAD_REQUEST)
         
-class IssueCreateView(generics.CreateAPIView):
-    queryset = Issue.objects.all()
-    serializer_class = IssueSerializer
-    parser_classes = (MultiPartParser, FormParser)  # Support file uploads
+# class IssueCreateView(generics.CreateAPIView):
+#     queryset = Issue.objects.all()
+#     serializer_class = IssueSerializer
+#     parser_classes = (MultiPartParser, FormParser)  # Support file uploads
 
     def perform_create(self, serializer):
         serializer.save(created_by=self.request.user)
