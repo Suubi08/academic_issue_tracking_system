@@ -32,12 +32,17 @@ class User(AbstractUser):
 
     def save(self, *args, **kwargs):
         """Ensure only role-specific fields are filled"""
+     if self.role == 'student':
+        if not self.student_number or not self.course_name or not self.college:
+            raise ValueError("Student-specific fields must be filled.")
         if self.role == 'student':
             self.lecture_number = None
             self.subject_taught = None
             self.department = None
 
         elif self.role == 'lecturer':
+            if not self.lecture_number or not self.subject_taught or not self.department:
+            raise ValueError("Lecturer-specific fields must be filled.")
             self.student_number = None
             self.course_name = None
             self.college = None
