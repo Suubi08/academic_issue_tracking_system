@@ -21,6 +21,10 @@ class RegisterSerializer(serializers.ModelSerializer):
         }
 
     def validate(self, data):
+        # Validate password strength
+        validate_password(data['password'])
+
+        # Ensure passwords match
         if data['password'] != data['confirm_password']:
             raise serializers.ValidationError({"password": "Passwords do not match."})
 
