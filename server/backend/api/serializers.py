@@ -6,14 +6,14 @@ from django.contrib.auth.hashers import make_password
 class RegisterSerializer(serializers.ModelSerializer):
     confirm_password = serializers.CharField(write_only=True)
 
-    class Meta:
-        model = User
-        fields = [
-            'first_name', 'last_name', 'username', 'email', 
-            'password', 'confirm_password', 'role', 
-            'student_number', 'course_name', 'college', 
-            'lecture_number', 'subject_taught', 'department'
-        ]
+    # class Meta:
+    #     model = User
+    #     fields = [
+    #         'first_name', 'last_name', 'username', 'email', 
+    #         'password', 'confirm_password', 'role', 
+    #         'student_number', 'course_name', 'college', 
+    #         'lecture_number', 'subject_taught', 'department'
+    #     ]
                                              
         extra_kwargs = {
             'password': {'write_only': True},
