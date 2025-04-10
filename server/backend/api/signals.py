@@ -7,6 +7,9 @@ from .models import User, Issue, Notification
 
 @receiver(post_save, sender=User)
 def assign_user_group(sender, instance, created, **kwargs):
+     """
+    Automatically assign a user to a group based on their role when a new user is created.
+    """
     if created: #Only assign groups when a new user is created
         if instance.role == "student":
             group, _ = Group.objects.get_or_create(name='Student')
