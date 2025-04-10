@@ -4,41 +4,31 @@ import { Card, CardContent, CardHeader, CardTitle } from "./ui/Card"
 
 const Calendar = ({ issues = [], isLoading }) => {
   const [currentMonth, setCurrentMonth] = useState(new Date())
-  const [filteredIssues, setFilteredIssues] = useState(issues)
+  const [filteredIssues, setFilteredIssues] = useState([])
 
-  // Update filtered issues when issues prop changes
   useEffect(() => {
     setFilteredIssues(issues)
   }, [issues])
 
   const daysOfWeek = ["Mon", "Tue", "Wed", "Thur", "Fri", "Sat", "Sun"]
 
-  // Get days in month
   const getDaysInMonth = (year, month) => {
     return new Date(year, month + 1, 0).getDate()
   }
 
-  // Get first day of month (0 = Sunday, 1 = Monday, etc.)
   const getFirstDayOfMonth = (year, month) => {
     const firstDay = new Date(year, month, 1).getDay()
-    return firstDay === 0 ? 6 : firstDay - 1 // Adjust to make Monday = 0
+    return firstDay === 0 ? 6 : firstDay - 1
   }
 
   const year = currentMonth.getFullYear()
   const month = currentMonth.getMonth()
   const daysInMonth = getDaysInMonth(year, month)
   const firstDayOfMonth = getFirstDayOfMonth(year, month)
-
-  // Get days from previous month to fill first week
   const daysFromPrevMonth = firstDayOfMonth
-
-  // Get total number of days to display (including days from prev/next month)
   const totalDays = Math.ceil((daysInMonth + daysFromPrevMonth) / 7) * 7
-
-  // Get days from next month to fill last week
   const daysFromNextMonth = totalDays - (daysInMonth + daysFromPrevMonth)
 
-  // Generate calendar days
   const calendarDays = []
 
   // Previous month days
@@ -69,10 +59,8 @@ const Calendar = ({ issues = [], isLoading }) => {
     })
   }
 
-  // Format month name
   const monthName = currentMonth.toLocaleString("default", { month: "long" })
 
-  // Navigate to previous/next month
   const prevMonth = () => {
     setCurrentMonth(new Date(year, month - 1, 1))
   }
@@ -81,30 +69,30 @@ const Calendar = ({ issues = [], isLoading }) => {
     setCurrentMonth(new Date(year, month + 1, 1))
   }
 
-  // Check if a day has issues
   const getDayIssues = (date) => {
-    // Convert date to string format for comparison (YYYY-MM-DD)
     const dateStr = date.toISOString().split("T")[0]
-
-    // Check if any issues fall on this date
-    // This is a simplified example - in a real app, you'd compare with actual issue dates
+  
     const issuesOnDay = filteredIssues.filter((issue) => {
-      const issueDate = new Date(issue.lastUpdate).toISOString().split("T")[0]
-      return issueDate === dateStr
+      if (!issue.date_of_issue) return false
+  
+      const issueDate = new Date(issue.date_of_issue)
+      if (isNaN(issueDate)) return false
+  
+      const issueDateStr = issueDate.toISOString().split("T")[0]
+      return issueDateStr === dateStr
     })
-
+  
     if (issuesOnDay.length > 0) {
-      // Determine status based on the first issue (you could enhance this logic)
-      return { hasIssue: true, status: issuesOnDay[0].status }
+      let status = "Resolved"
+      if (issuesOnDay.some(issue => issue.status === "In Progress")) status = "In Progress"
+      else if (issuesOnDay.some(issue => issue.status === "Pending")) status = "Pending"
+  
+      return { hasIssue: true, status }
     }
-
-    // Fallback to the random assignment for demo purposes
-    const day = date.getDate()
-    if (day % 5 === 0) return { hasIssue: true, status: "Resolved" }
-    if (day % 7 === 0) return { hasIssue: true, status: "Pending" }
-    if (day % 3 === 0) return { hasIssue: true, status: "In Progress" }
+  
     return { hasIssue: false }
   }
+  
 
   return (
     <Card className="dark:bg-gray-800 mt-4 shadow-md">
@@ -154,29 +142,29 @@ const Calendar = ({ issues = [], isLoading }) => {
                   return (
                     <div
                       key={index}
-                      className={`
-                      text-center p-1 relative min-h-[40px] flex flex-col items-center justify-center
-                      ${!day.isCurrentMonth ? "text-gray-400" : ""}
-                      ${
-                        day.isCurrentMonth && new Date().toDateString() === day.date.toDateString()
-                          ? "bg-primary/10 rounded-md font-bold"
-                          : ""
-                      }
-                    `}
+                      className={`text-center p-1 relative min-h-[40px] flex flex-col items-center justify-center
+                        ${!day.isCurrentMonth ? "text-gray-400" : ""}
+                        ${
+                          day.isCurrentMonth &&
+                          new Date().toDateString() === day.date.toDateString()
+                            ? "bg-blue-100 dark:bg-blue-900 rounded-md font-bold"
+                            : ""
+                        }
+                      `}
                     >
                       <span>{day.day}</span>
                       {dayIssue.hasIssue && (
                         <span
                           className={`
-                          w-2 h-2 rounded-full mt-1
-                          ${
-                            dayIssue.status === "Resolved"
-                              ? "bg-green-500"
-                              : dayIssue.status === "In Progress"
+                            w-2 h-2 rounded-full mt-1
+                            ${
+                              dayIssue.status === "Resolved"
+                                ? "bg-green-500"
+                                : dayIssue.status === "In Progress"
                                 ? "bg-red-800"
                                 : "bg-yellow-500"
-                          }
-                        `}
+                            }
+                          `}
                         />
                       )}
                     </div>
@@ -206,4 +194,3 @@ const Calendar = ({ issues = [], isLoading }) => {
 }
 
 export default Calendar
-

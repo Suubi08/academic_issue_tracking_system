@@ -18,7 +18,6 @@ import {
   LecturerDashboard,
   // PageNotFound,
   Studentdashboard,
-  RegistrarDashboard
 } from "../pages";
 
 import {
@@ -34,10 +33,7 @@ import {
   Studentissues,
   Studentsubmitissue,
   Studentsettings,
-  RegistrarNotifications,
-  RegistrarSettings,
 } from "../features";
-
 
 const AllRoutes = () => {
   return (
@@ -96,14 +92,15 @@ const AllRoutes = () => {
         </Route>
       </Route>
 
-      {/* Academic Registrar Routes */}
+      {/* Academic Registrar Routes
       <Route element={<ProtectedRoute allowedRoles={["academic_registrar"]} />}>
         <Route element={<Layout />}>
-          <Route path="/registrar-dashboard" element={<RegistrarDashboard/>} />
-          <Route path="/RegistrarSettings" element={<RegistrarSettings />} />
-          <Route path="/RegistrarNotifications" element={<RegistrarNotifications />} />
+          <Route path="/registrar-dashboard" element={<AdminDashboard />} />
+          <Route path="/issues" element={<Issues />} />
+          <Route path="/reports" element={<Reports />} />
+          <Route path="/settings" element={<Settings />} />
         </Route>
-      </Route>
+      </Route> */}
 
       {/* Catch-all 404 route */}
       {/* <Route path="*" element={<PageNotFound />} /> */}

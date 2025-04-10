@@ -1,3 +1,4 @@
+
 import { useState, useEffect } from "react";
 import {
   Tabs,
@@ -26,9 +27,77 @@ import {
 } from "lucide-react";
 import { Badge } from "../components/ui/Badge";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
-// importing axios
+
 const Studentissues = () => {
+  // Sample data
+  const allIssues = [
+    {
+      id: "1",
+      title: "Course registration error",
+      status: "Pending",
+      lastUpdate: "Feb 15, 2025",
+      priority: "High",
+      category: "Registration",
+    },
+    {
+      id: "2",
+      title: "Missing course materials",
+      status: "Pending",
+      lastUpdate: "Feb 16, 2025",
+      priority: "Medium",
+      category: "Resources",
+    },
+    {
+      id: "3",
+      title: "Missing marks for Data Structures",
+      status: "In Progress",
+      lastUpdate: "Feb 15, 2025",
+      priority: "High",
+      category: "Marks",
+    },
+    {
+      id: "4",
+      title: "Results error in Programming exam",
+      status: "Resolved",
+      lastUpdate: "Feb 10, 2025",
+      priority: "Medium",
+      category: "Marks",
+    },
+    {
+      id: "5",
+      title: "Software development project submission",
+      status: "Resolved",
+      lastUpdate: "Feb 5, 2025",
+      priority: "Low",
+      category: "Submission",
+    },
+    {
+      id: "6",
+      title: "Data structures assignment grading",
+      status: "Pending",
+      lastUpdate: "Feb 18, 2025",
+      priority: "Medium",
+      category: "Marks",
+    },
+    {
+      id: "7",
+      title: "Timetable clash for Database class",
+      status: "In Progress",
+      lastUpdate: "Feb 12, 2025",
+      priority: "High",
+      category: "Scheduling",
+    },
+    {
+      id: "8",
+      title: "Library access issue",
+      status: "Resolved",
+      lastUpdate: "Jan 28, 2025",
+      priority: "Low",
+      category: "Resources",
+    },
+  ];
+
+  const [issues, setIssues] = useState(allIssues);
   const [searchTerm, setSearchTerm] = useState("");
   const [statusFilter, setStatusFilter] = useState("all");
   const [categoryFilter, setCategoryFilter] = useState("all");
@@ -36,59 +105,21 @@ const Studentissues = () => {
   const [sortOrder, setSortOrder] = useState("newest");
   const [showFilters, setShowFilters] = useState(false);
   const [activeTab, setActiveTab] = useState("all");
-  const [allIssues, setAllIssues] = useState([]);
-  const [issues, setIssues] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
 
-  const navigate = useNavigate();
+  const navigate= useNavigate();
 
+  // Function to get the status styles
+  // Apply filters when search term, status filter, or sort changes
   useEffect(() => {
-    const fetchIssues = async () => {
-      try {
-        setLoading(true);
-        setError(null);
-        const response = await axios.get("http://localhost:8000/api/issues/");
-        
-        // Transform API data to ensure consistent structure
-        const formattedIssues = response.data.map(issue => ({
-          id: issue.id || '',
-          title: issue.course_unit || 'No title',
-          status: (issue.status || 'pending').toLowerCase(),
-          date_of_Issue: issue.date_of_issue || new Date().toISOString(),
-          priority: issue.priority || 'medium',
-          category: issue.category || 'general'
-        }));
-        
-        setAllIssues(formattedIssues);
-        setIssues(formattedIssues);
-      } catch (err) {
-        setError("Failed to fetch issues. Please try again later.");
-        console.error("Error fetching issues:", err);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchIssues();
-  }, []);
-
-  useEffect(() => {
-    if (allIssues.length === 0) return;
-
     let filteredIssues = [...allIssues];
 
-    // Apply search filter with null checks
+    // Apply search filter
     if (searchTerm) {
-      const searchLower = searchTerm.toLowerCase();
-      filteredIssues = filteredIssues.filter((issue) => {
-        const title = issue.title || '';
-        const category = issue.category || '';
-        return (
-          title.toLowerCase().includes(searchLower) ||
-          category.toLowerCase().includes(searchLower)
-        );
-      });
+      filteredIssues = filteredIssues.filter(
+        (issue) =>
+          issue.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+          issue.category.toLowerCase().includes(searchTerm.toLowerCase())
+      );
     }
 
     // Apply tab filter
@@ -101,34 +132,45 @@ const Studentissues = () => {
     // Apply status filter
     if (statusFilter !== "all") {
       filteredIssues = filteredIssues.filter(
-        (issue) => issue.status.toLowerCase() === statusFilter.toLowerCase()
+        (issue) => issue.status === statusFilter
       );
     }
 
     // Apply category filter
     if (categoryFilter !== "all") {
       filteredIssues = filteredIssues.filter(
-        (issue) => issue.category.toLowerCase() === categoryFilter.toLowerCase()
+        (issue) => issue.category === categoryFilter
       );
     }
 
     // Apply priority filter
     if (priorityFilter !== "all") {
       filteredIssues = filteredIssues.filter(
-        (issue) => issue.priority.toLowerCase() === priorityFilter.toLowerCase()
+        (issue) => issue.priority === priorityFilter
       );
     }
 
     // Apply sorting
     filteredIssues.sort((a, b) => {
-      const dateA = new Date(a.date_of_Issue || new Date());
-      const dateB = new Date(b.date_of_Issue || new Date());
+      const dateA = new Date(a.lastUpdate);
+      const dateB = new Date(b.lastUpdate);
 
-      return sortOrder === "newest" ? dateB - dateA : dateA - dateB;
+      if (sortOrder === "newest") {
+        return dateB - dateA;
+      } else {
+        return dateA - dateB;
+      }
     });
 
     setIssues(filteredIssues);
-  }, [searchTerm, statusFilter, categoryFilter, priorityFilter, sortOrder, activeTab, allIssues]);
+  }, [
+    searchTerm,
+    statusFilter,
+    categoryFilter,
+    priorityFilter,
+    sortOrder,
+    activeTab,
+  ]);
 
   const clearFilters = () => {
     setSearchTerm("");
@@ -148,13 +190,12 @@ const Studentissues = () => {
   };
 
   const getStatusStyles = (status) => {
-    const statusLower = (status || '').toLowerCase();
-    switch (statusLower) {
-      case "resolved":
+    switch (status) {
+      case "Resolved":
         return "bg-green-100 text-green-800 border-green-200";
-      case "in progress":
+      case "In Progress":
         return "bg-yellow-100 text-yellow-800 border-yellow-200";
-      case "pending":
+      case "Pending":
         return "bg-red-100 text-red-800 border-red-200";
       default:
         return "bg-gray-100 text-gray-800 border-gray-200";
@@ -162,13 +203,12 @@ const Studentissues = () => {
   };
 
   const getPriorityStyles = (priority) => {
-    const priorityLower = (priority || '').toLowerCase();
-    switch (priorityLower) {
-      case "high":
+    switch (priority) {
+      case "High":
         return "bg-red-100 text-red-800 border-red-200";
-      case "medium":
+      case "Medium":
         return "bg-yellow-100 text-yellow-800 border-yellow-200";
-      case "low":
+      case "Low":
         return "bg-green-100 text-green-800 border-green-200";
       default:
         return "bg-gray-100 text-gray-800 border-gray-200";
@@ -178,116 +218,20 @@ const Studentissues = () => {
   // Calculate statistics
   const totalIssues = allIssues.length;
   const pendingIssues = allIssues.filter(
-    (issue) => issue.status === "pending"
+    (issue) => issue.status === "Pending"
   ).length;
   const inProgressIssues = allIssues.filter(
-    (issue) => issue.status === "in progress"
+    (issue) => issue.status === "In Progress"
   ).length;
   const resolvedIssues = allIssues.filter(
-    (issue) => issue.status === "resolved"
+    (issue) => issue.status === "Resolved"
   ).length;
 
   // Get unique categories
   const categories = [
     "all",
-    ...new Set(allIssues.map((issue) => issue.category).filter(Boolean)),
+    ...new Set(allIssues.map((issue) => issue.category)),
   ];
-
-  const renderIssuesList = (issues) => {
-    if (loading) {
-      return (
-        <div className="text-center py-8">
-          <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-gray-900 mx-auto"></div>
-          <p className="mt-2 text-gray-500">Loading issues...</p>
-        </div>
-      );
-    }
-
-    if (error) {
-      return (
-        <div className="text-center py-8">
-          <p className="text-red-500">{error}</p>
-          <button 
-            onClick={() => window.location.reload()}
-            className="mt-2 text-blue-600 text-sm"
-          >
-            Refresh page
-          </button>
-        </div>
-      );
-    }
-
-    if (issues.length === 0) {
-      return (
-        <div className="text-center py-8">
-          <p className="text-gray-500">
-            No issues found matching your filters.
-          </p>
-          <button onClick={clearFilters} className="mt-2 text-blue-600 text-sm">
-            Clear filters
-          </button>
-        </div>
-      );
-    }
-
-    return (
-      <div className="space-y-4">
-        {issues.map((issue) => (
-          <div
-            key={issue.id}
-            className="flex flex-col md:flex-row md:items-center justify-between p-4 border border-gray-200 rounded-md hover:bg-gray-50 transition-colors"
-          >
-            <div className="flex items-start gap-4 mb-3 md:mb-0">
-              <div className="flex flex-col items-center justify-center w-12 h-12 bg-gray-100 rounded-lg shrink-0">
-                <span className="text-lg font-semibold">
-                  {new Date(issue.date_of_Issue).getDate()}
-                </span>
-                <span className="text-xs text-gray-500">
-                  {new Date(issue.date_of_Issue).toLocaleDateString("en-US", {
-                    month: "short",
-                  })}
-                </span>
-              </div>
-              <div>
-                <h3 className="font-medium">{issue.title}</h3>
-                <div className="flex flex-wrap gap-2 mt-1">
-                  <span
-                    className={`px-2 py-0.5 text-xs font-medium rounded-full border ${getStatusStyles(
-                      issue.status
-                    )}`}
-                  >
-                    {issue.status}
-                  </span>
-                  <span
-                    className={`px-2 py-0.5 text-xs font-medium rounded-full border ${getPriorityStyles(
-                      issue.priority
-                    )}`}
-                  >
-                    {issue.priority}
-                  </span>
-                  <span className="px-2 py-0.5 text-xs font-medium rounded-full bg-blue-100 text-blue-800 border border-blue-200">
-                    {issue.category}
-                  </span>
-                </div>
-                <p className="text-xs text-gray-500 mt-1">
-                  Last updated: {new Date(issue.date_of_Issue).toLocaleDateString()}
-                </p>
-              </div>
-            </div>
-            <Button
-              variant="outline"
-              size="sm"
-              className="flex items-center gap-1 self-end md:self-auto"
-              onClick={() => navigate(`/viewissue/${issue.id}`)}
-            >
-              <Eye className="h-4 w-4" />
-              View Details
-            </Button>
-          </div>
-        ))}
-      </div>
-    );
-  };
 
   return (
     <div className="space-y-6">
@@ -306,7 +250,7 @@ const Studentissues = () => {
             </div>
           </CardContent>
         </Card>
-        
+
         <Card className="bg-white shadow-sm">
           <CardContent className="p-4">
             <div className="flex justify-between items-center">
@@ -320,7 +264,7 @@ const Studentissues = () => {
             </div>
           </CardContent>
         </Card>
-        
+
         <Card className="bg-white shadow-sm">
           <CardContent className="p-4">
             <div className="flex justify-between items-center">
@@ -334,7 +278,7 @@ const Studentissues = () => {
             </div>
           </CardContent>
         </Card>
-        
+
         <Card className="bg-white shadow-sm">
           <CardContent className="p-4">
             <div className="flex justify-between items-center">
@@ -423,9 +367,9 @@ const Studentissues = () => {
                     onChange={(e) => setStatusFilter(e.target.value)}
                   >
                     <option value="all">All Statuses</option>
-                    <option value="pending">Pending</option>
-                    <option value="in progress">In Progress</option>
-                    <option value="resolved">Resolved</option>
+                    <option value="Pending">Pending</option>
+                    <option value="In Progress">In Progress</option>
+                    <option value="Resolved">Resolved</option>
                   </select>
                 </div>
                 <div>
@@ -454,9 +398,9 @@ const Studentissues = () => {
                     onChange={(e) => setPriorityFilter(e.target.value)}
                   >
                     <option value="all">All Priorities</option>
-                    <option value="high">High</option>
-                    <option value="medium">Medium</option>
-                    <option value="low">Low</option>
+                    <option value="High">High</option>
+                    <option value="Medium">Medium</option>
+                    <option value="Low">Low</option>
                   </select>
                 </div>
               </div>
@@ -493,7 +437,18 @@ const Studentissues = () => {
               </TabsTrigger>
             </TabsList>
 
-            {renderIssuesList(issues)}
+            <TabsContent value="all" className="mt-0">
+              {renderIssuesList(issues)}
+            </TabsContent>
+            <TabsContent value="pending" className="mt-0">
+              {renderIssuesList(issues)}
+            </TabsContent>
+            <TabsContent value="in progress" className="mt-0">
+              {renderIssuesList(issues)}
+            </TabsContent>
+            <TabsContent value="resolved" className="mt-0">
+              {renderIssuesList(issues)}
+            </TabsContent>
           </Tabs>
         </CardContent>
 
@@ -516,6 +471,79 @@ const Studentissues = () => {
       </Card>
     </div>
   );
+
+  function renderIssuesList(issues) {
+    if (issues.length === 0) {
+      return (
+        <div className="text-center py-8">
+          <p className="text-gray-500">
+            No issues found matching your filters.
+          </p>
+          <button onClick={clearFilters} className="mt-2 text-blue-600 text-sm">
+            Clear filters
+          </button>
+        </div>
+      );
+    }
+
+    return (
+      <div className="space-y-4">
+        {issues.map((issue) => (
+          <div
+            key={issue.id}
+            className="flex flex-col md:flex-row md:items-center justify-between p-4 border border-gray-200 rounded-md hover:bg-gray-50 transition-colors"
+          >
+            <div className="flex items-start gap-4 mb-3 md:mb-0">
+              <div className="flex flex-col items-center justify-center w-12 h-12 bg-gray-100 rounded-lg shrink-0">
+                <span className="text-lg font-semibold">
+                  {new Date(issue.lastUpdate).getDate()}
+                </span>
+                <span className="text-xs text-gray-500">
+                  {new Date(issue.lastUpdate).toLocaleDateString("en-US", {
+                    month: "short",
+                  })}
+                </span>
+              </div>
+              <div>
+                <h3 className="font-medium">{issue.title}</h3>
+                <div className="flex flex-wrap gap-2 mt-1">
+                  <span
+                    className={`px-2 py-0.5 text-xs font-medium rounded-full border ${getStatusStyles(
+                      issue.status
+                    )}`}
+                  >
+                    {issue.status}
+                  </span>
+                  <span
+                    className={`px-2 py-0.5 text-xs font-medium rounded-full border ${getPriorityStyles(
+                      issue.priority
+                    )}`}
+                  >
+                    {issue.priority}
+                  </span>
+                  <span className="px-2 py-0.5 text-xs font-medium rounded-full bg-blue-100 text-blue-800 border border-blue-200">
+                    {issue.category}
+                  </span>
+                </div>
+                <p className="text-xs text-gray-500 mt-1">
+                  Last updated: {issue.lastUpdate}
+                </p>
+              </div>
+            </div>
+            <Button
+              variant="outline"
+              size="sm"
+              className="flex items-center gap-1 self-end md:self-auto"
+              onClick={() => navigate(`/viewissue/${issue.id}`)}
+            >
+              <Eye className="h-4 w-4" />
+              View Details
+            </Button>
+          </div>
+        ))}
+      </div>
+    );
+  }
 };
 
 export default Studentissues;
