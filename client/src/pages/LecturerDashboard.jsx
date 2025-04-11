@@ -1,20 +1,34 @@
-"use client";
-
 import { Calendar, FileText, FileTextIcon, MessageSquare } from "lucide-react";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import {
-  Card,
-  CardHeader,
-  CardFooter,
-  CardTitle,
-  CardDescription,
-  CardContent,
-} from "../components";
+import { Card, CardHeader, CardFooter, CardTitle, CardDescription, CardContent } from "../components";
+import axios from "axios";
 
 const LecturerDashboard = () => {
   const navigate = useNavigate();
+  const [issues, setIssues] = useState([]);
   const userRole = localStorage.getItem("role");
+  const lecturerId = localStorage.getItem("id"); // Get the logged-in lecturer's ID from localStorage
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get("http://localhost:8000/api/issues/");
+        console.log(response.data); // Debugging the response
+
+        // Filter issues for the logged-in lecturer
+        const myIssues = response.data.filter(
+          (issue) => issue.lecturer_id?.toString() === lecturerId
+        );
+
+        setIssues(myIssues);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
+
+    fetchData();
+  }, [lecturerId]); // Dependency array ensures the effect runs when lecturerId changes
 
   useEffect(() => {
     // Ensure the user is a lecturer
@@ -26,37 +40,29 @@ const LecturerDashboard = () => {
   const OverviewPanel = [
     {
       title: "Pending Issues",
-      number: 12,
+      number: issues.filter((issue) => issue.status === "pending").length,
+    },
+    {
+      title: "In progress Issues",
+      number: issues.filter((issue) => issue.status === "in_progress").length,
     },
     {
       title: "Resolved Issues",
-      number: 8,
+      number: issues.filter((issue) => issue.status === "resolved").length,
     },
     {
-      title: "New Issues",
-      number: 5,
+      title: "Total Issues",
+      number: issues.length,
     },
   ];
-  const AssignedIssues = [
-    {
-      title1: "Missing marks",
-      student: "John Doe",
-      status: "pending",
-      action: "View",
-    },
-    {
-      title1: "Login Issue",
-      student: "Kalema Joshua",
-      status: "Resolved",
-      action: "View",
-    },
-    {
-      title1: "Missing marks",
-      student: "John Doe",
-      status: "Critical",
-      action: "View",
-    },
-  ];
+
+  const AssignedIssues = issues.map((issue) => ({
+    Category: issue.category,
+    student: issue.student_name,
+    status: issue.status,
+    action: "View",
+  }));
+
   const Updates = [
     {
       logo: MessageSquare,
@@ -74,15 +80,16 @@ const LecturerDashboard = () => {
       time: "10 minutes ago",
     },
   ];
+
   return (
     <div>
-      <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3 mb-8 mt-4 ">
+      <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3 mb-8 mt-4">
         {OverviewPanel.map((issue, index) => (
           <div
             key={index}
             className="bg-white rounded-lg shadow p-6 flex items-center"
           >
-            <div className="rounded-full bg-blue-100 p-3 mr-4 ">
+            <div className="rounded-full bg-blue-100 p-3 mr-4">
               <FileTextIcon className="w-6 h-6 text-blue-600" />
             </div>
             <div>
@@ -94,9 +101,7 @@ const LecturerDashboard = () => {
       </div>
       <Card className="w-full">
         <CardHeader>
-          <CardTitle className="text-xl font-semibold">
-            Assigned Issues
-          </CardTitle>
+          <CardTitle className="text-xl font-semibold">Assigned Issues</CardTitle>
         </CardHeader>
         <CardContent className="overflow-x-auto">
           <table className="w-full table-auto border-collapse">

@@ -1,4 +1,4 @@
-import { Card, CardHeader, CardTitle, CardContent } from "../components/ui/card"
+import { Card, CardHeader, CardTitle, CardContent } from "../components/index"
 import { Eye, Filter, Search } from "lucide-react"
 const IssueTracking = () => {
   const issues = [

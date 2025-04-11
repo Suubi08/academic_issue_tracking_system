@@ -56,10 +56,9 @@ class User(AbstractUser):
 # Issues model
 class Issue(models.Model):
     STATUS_CHOICES = [
-        ('open', 'Open'),
+        ('pending', 'Pending'),
         ('in_progress', 'In Progress'),
         ('resolved', 'Resolved'),
-        ('closed', 'Closed'),
     ]
 
     category = models.CharField(max_length=120)
@@ -76,7 +75,7 @@ class Issue(models.Model):
     attachment = models.FileField(upload_to='issue_attachments/', null=True, blank=True)
     year_of_study = models.CharField(max_length=50)
     semester = models.CharField(max_length=50)
-    status = models.CharField(max_length=20, choices=STATUS_CHOICES, default='open')
+    status = models.CharField(max_length=20, choices=STATUS_CHOICES, default='pending')
     created_by = models.ForeignKey(User, related_name='created_issues', on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
 
