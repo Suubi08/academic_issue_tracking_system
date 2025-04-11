@@ -10,17 +10,17 @@ def assign_user_group(sender, instance, created, **kwargs):
      """
     Automatically assign a user to a group based on their role when a new user is created.
     """
-    if created: #Only assign groups when a new user is created
-        if instance.role == "student":
-            group, _ = Group.objects.get_or_create(name='Student')
-        elif instance.role == "lecturer":
-            group, _ = Group.objects.get_or_create(name="Lecturer")
-        elif instance.role == "academic_registrar":
-            group, _ = Group.objects.get_or_create(name="Academic Registrar")
-        elif instance.role == "admin":
-            group, _ = Group.objects.get_or_create(name="Adminstrator")
-        else:
-            return   #Skip if no valid role
+    # if created: #Only assign groups when a new user is created
+    #     if instance.role == "student":
+    #         group, _ = Group.objects.get_or_create(name='Student')
+    #     elif instance.role == "lecturer":
+    #         group, _ = Group.objects.get_or_create(name="Lecturer")
+    #     elif instance.role == "academic_registrar":
+    #         group, _ = Group.objects.get_or_create(name="Academic Registrar")
+    #     elif instance.role == "admin":
+    #         group, _ = Group.objects.get_or_create(name="Adminstrator")
+    #     else:
+    #         return   #Skip if no valid role
 
             instance.groups.add(group) #Assign the user to the correct group
 @receiver(post_save, sender=Issue)
