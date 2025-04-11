@@ -35,7 +35,7 @@ class User(AbstractUser):
      if self.role == 'student':
         if not self.student_number or not self.course_name or not self.college:
             raise ValueError("Student-specific fields must be filled.")
-        if self.role == 'student':
+        # if self.role == 'student':
             self.lecture_number = None
             self.subject_taught = None
             self.department = None
