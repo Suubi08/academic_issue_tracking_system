@@ -14,7 +14,7 @@ function Layout() {
     setSidebarOpen(false);
   }, [location.pathname]);
 
-  // Verify authentication on mount
+  // Verify authentication on mount the 
   useEffect(() => {
     const token = localStorage.getItem("accessToken");
     const tokenExpiry = localStorage.getItem("tokenExpiry");
