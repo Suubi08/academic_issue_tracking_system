@@ -18,35 +18,35 @@ class User (AbstractUser):
     college = models.CharField(max_length=100, blank=True, null=True)
     
     lecturer_number = models.CharField(max_length=20, blank=True, null=True)
-    subject_taught = models.textFiled(blank=True, null=True)
+    subject_taught = models.TextFiled(blank=True, null=True)
     department = models.CharField(max_length=50, blank=True, null=True)
     
     groups = models.ManyToManyField("auth.Group, related_name="custom_user_groups", blank=True)
     user_permissions = models.ManyToManyField("auth.Permission", related_name="custom_user_permissions", blank=True)     
     
     def save(self, *args, **kwargs):
-    if self.role == 'student':
-        if not self.student_number or not self.course_name or not self.college:
+       if self.role == 'student':
+         if not self.student_number or not self.course_name or not self.college:
            raise ValueError('Student-specific fileds must be filled."
       
            self.Lecturer_number = None
            self.subject_taught= None
            self.department = None
            
-      elif self.role =="lecturer":  
+       elif self.role =="lecturer":  
          if not self.lecture_number or not self.subject_taught or not self.department:
-         raise valueError("Lecturer-specific fileds must be filled.")
+         raise ValueError("Lecturer-specific fileds must be filled.")
          self.student_number = None
          self.course_name = None
          self.college = None
          
-     elif self.role in ['academic_registrar', 'admin']:
+      elif self.role in ['academic_registrar', 'admin']:
          self.student_number = None
          self.course_name = None
          self.lecture_number = None
          self.subject_taught = None
 
-    super().save(*args, **kwargs)
+      super().save(*args, **kwargs)
         
     def __str__(self):
         return f"{self.username} ({self.role})"
