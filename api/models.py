@@ -8,7 +8,7 @@ class User (AbstractUser):
         ('lecturer', 'Lecturer'),
         ('academic_registrar', 'Academic Registrar'),
         ('admin', 'Administrator'),
-             ]
+    ]
     
     role = models.CharField(max_length=20, choices=ROLE_CHOICES, default="student")
     
@@ -27,15 +27,16 @@ class User (AbstractUser):
     def save(self, *args, **kwargs):
        if self.role == 'student':
          if not self.student_number or not self.course_name or not self.college:
-           raise ValueError('Student-specific fileds must be filled."
+           raise ValueError('Student-specific fileds must be filled.")
       
-           self.Lecturer_number = None
+           self.lecturer_number = None
            self.subject_taught= None
            self.department = None
            
        elif self.role =="lecturer":  
          if not self.lecture_number or not self.subject_taught or not self.department:
          raise ValueError("Lecturer-specific fileds must be filled.")
+         
          self.student_number = None
          self.course_name = None
          self.college = None
@@ -48,7 +49,7 @@ class User (AbstractUser):
 
       super().save(*args, **kwargs)
         
-    def __str__(self):
+def __str__(self):
         return f"{self.username} ({self.role})"
     
 class Notification(models.Model):
@@ -57,7 +58,7 @@ class Notification(models.Model):
         status = models.BooleanField(default=False)
         created_at = models.DateTimeField(auto_now_add=True)
 
-        def _str_(self):
+        def __str__(self):
            return f"Notification for {self.user.username}"
            
         
@@ -65,7 +66,7 @@ class Issue(models.Model):
     STATUS_CHOICE =[
         ('open', 'Open'),
         ('in_progress', 'In Progress'),
-        ('resolved', 'Resolved')
+        ('resolved', 'Resolved'),
         ('closed', 'Closed'),
     ]
     
@@ -74,7 +75,7 @@ class Issue(models.Model):
     course_unit = models.CharField(max_length=200)
     assigned_to = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True, limit_choices_to = {'role': 'lecturer'})
     description = models.TextField()
-    attachment =mosels.FileField(upload_to='issue_attachment/', null=True, blank=True)
+    attachment = mosels.FileField(upload_to='issue_attachment/', null=True, blank=True)
     year_of_study = models.CharField(max_length=50)
     semester = models.CharField(max_length=50)
     status = models.CharField(max_length=20, choices=STATUS_CHOICE, default='open')
