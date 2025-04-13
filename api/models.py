@@ -27,7 +27,7 @@ class User (AbstractUser):
     def save(self, *args, **kwargs):
        if self.role == 'student':
          if not self.student_number or not self.course_name or not self.college:
-            raise ValueError('Student-specific fileds must be filled.")
+            raise ValueError("Student-specific fileds must be filled.")
       
          self.lecturer_number = None
          self.subject_taught= None
@@ -49,7 +49,7 @@ class User (AbstractUser):
 
       super().save(*args, **kwargs)
         
-   def __str__(self):
+    def __str__(self):
         return f"{self.username} ({self.role})"
     
 class Notification(models.Model):
