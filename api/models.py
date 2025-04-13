@@ -34,20 +34,20 @@ class User (AbstractUser):
          self.department = None
            
        elif self.role =="lecturer":  
-         if not self.lecture_number or not self.subject_taught or not self.department:
+         if not self.lecturer_number or not self.subject_taught or not self.department:
            raise ValueError("Lecturer-specific fileds must be filled.")
          
          self.student_number = None
          self.course_name = None
          self.college = None
          
-      elif self.role in ['academic_registrar', 'admin']:
+       elif self.role in ['academic_registrar', 'admin']:
          self.student_number = None
          self.course_name = None
          self.lecturer_number = None
          self.subject_taught = None
 
-      super().save(*args, **kwargs)
+       super().save(*args, **kwargs)
         
     def __str__(self):
         return f"{self.username} ({self.role})"
