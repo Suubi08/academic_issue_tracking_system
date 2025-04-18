@@ -222,6 +222,9 @@ const AdminNotifications = () => {
                  <p className="text-sm font-medium">
                   Issue #ISS-1002 assigned to Dr. Williams
                 </p>
+                 <p className="text-xs text-muted-foreground">
+                  Today at 10:30 AM
+                </p>
                </div>
              </div>
            </div>
