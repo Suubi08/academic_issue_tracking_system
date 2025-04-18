@@ -205,6 +205,14 @@ const AdminNotifications = () => {
           </Tabs>
         </CardContent>
       </Card>
+       <Card>
+         <CardHeader>
+           <CardTitle>Recent Assignments</CardTitle>
+          <CardDescription>
+            Issues recently assigned to lecturers
+          </CardDescription>
+         </CardHeader>
+       </Card>
   )
 };
 export default AdminNotifications;
