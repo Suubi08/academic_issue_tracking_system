@@ -107,4 +107,18 @@ const Studentissuereport = () => {
     return Object.keys(newErrors).length === 0;
   };
 
+ const handleSubmit = (e) => {
+    e.preventDefault();
+    if (!validateForm()) return;
+
+    console.log("Form submitted:", formData);
+    setSuccessMessage("Issue reported successfully!");
+    setTimeout(() => {
+      navigate("/studentdashboard");
+    }, 2000);
+  };
+
+  const handleCancel = () => {
+    navigate("/studentdashboard");
+  };
 
