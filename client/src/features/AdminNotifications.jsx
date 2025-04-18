@@ -13,6 +13,7 @@ import {
   TabsList,
   TabsTrigger,
 } from "../components/ui/Tabs";
+import { Alert, AlertTitle, AlertDescription } from "../components/ui/Alert";
 const AdminNotifications = () => {
   
   const markAllAsRead = () => {
