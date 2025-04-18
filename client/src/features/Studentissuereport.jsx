@@ -66,3 +66,15 @@ const Studentissuereport = () => {
     yearOfStudy: "",
     semester: "",
   });
+  
+  const [errors, setErrors] = useState({});
+  const [successMessage, setSuccessMessage] = useState("");
+
+  const handleChange = (e) => {
+    const { id, value } = e.target;
+    setFormData((prev) => ({
+      ...prev,
+      [id]: value,
+    }));
+  };
+
