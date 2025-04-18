@@ -6,6 +6,15 @@ import {
   Loader2,
   RefreshCcw,
 } from "lucide-react";
+import { Button } from "../components";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "../components";
 const AdminReports = () => {
   
   return (
