@@ -1,4 +1,12 @@
 import { useState } from "react";
+import { AlertCircle, Bell, CheckCircle, Info, UserPlus } from "lucide-react";
+import {
+  Card,
+  CardHeader,
+  CardTitle,
+  CardDescription,
+  CardContent,
+} from "../components";
 const AdminNotifications = () => {
   
   const markAllAsRead = () => {
