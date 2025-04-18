@@ -234,6 +234,11 @@ const AdminNotifications = () => {
              div className="bg-blue-100 p-2 rounded-full">
                 <UserPlus className="h-5 w-5 text-blue-600" />
               </div>
+           <div>
+             <p className="text-sm font-medium">
+                  Issue #ISS-1005 assigned to Dr. Martinez
+                </p>
+           </div>
            </div>
          </CardContent>
        </Card>
