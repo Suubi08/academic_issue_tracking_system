@@ -153,6 +153,9 @@ const AdminReports = () => {
              <p className="text-sm text-muted-foreground">
             Showing {updates.length} updates
           </p>
+              <Button variant="outline" size="sm">
+            View All Updates
+          </Button>
            </CardFooter>
         </CardHeader>
       </Card>
