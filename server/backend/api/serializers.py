@@ -79,7 +79,7 @@ class UserSerializer(serializers.ModelSerializer):
 
 class IssueSerializer(serializers.ModelSerializer):
     created_by = UserSerializer(read_only=True)
-    assigned_to = UserSerializer(read_only=True) # show user details
+    assigned_to = UserSerializer(read_only=True) 
     class Meta:
         model = Issue
         fields = '__all__'
