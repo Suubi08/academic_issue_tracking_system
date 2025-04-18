@@ -15,7 +15,57 @@ import {
 } from "../components/ui/Tabs";
 import { Alert, AlertTitle, AlertDescription } from "../components/ui/Alert";
 const AdminNotifications = () => {
-  
+  const [notifications, setNotifications] = useState([
+    {
+      id: "n1",
+      title: "Issue Assigned",
+      description: "Issue #ISS-1002 has been assigned to Dr. Williams",
+      timestamp: "Today at 10:30 AM",
+      type: "info",
+      read: false,
+    },
+    {
+      id: "n2",
+      title: "Issue Resolved",
+      description: "Issue #ISS-1003 has been marked as resolved by Dr. Davis",
+      timestamp: "Today at 9:15 AM",
+      type: "success",
+      read: false,
+    },
+    {
+      id: "n3",
+      title: "New Issue Created",
+      description: "A new issue #ISS-1008 has been created by Olivia White",
+      timestamp: "Yesterday at 3:45 PM",
+      type: "info",
+      read: true,
+    },
+    {
+      id: "n4",
+      title: "System Update",
+      description: "The system will undergo maintenance tonight at 11:00 PM",
+      timestamp: "Yesterday at 2:30 PM",
+      type: "warning",
+      read: true,
+    },
+    {
+      id: "n5",
+      title: "Login Attempt Failed",
+      description:
+        "Multiple failed login attempts detected from IP 192.168.1.45",
+      timestamp: "2 days ago at 8:20 AM",
+      type: "error",
+      read: true,
+    },
+    {
+      id: "n6",
+      title: "New Lecturer Added",
+      description: "Dr. Thompson has been added to the system",
+      timestamp: "3 days ago at 11:10 AM",
+      type: "success",
+      read: true,
+    },
+  ]);
   const markAllAsRead = () => {
     setNotifications(
       notifications.map((notification) => ({ ...notification, read: true }))
