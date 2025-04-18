@@ -86,6 +86,27 @@ const AdminNotifications = () => {
           </button>
         )}
       </div>
+      <Card>
+        <CardContent>
+          <Tabs>
+            <TabsList className="mb-4 grid w-full grid-cols-3">
+              <TabsTrigger value="all">
+                All
+                <span className="ml-1 rounded-full bg-muted px-2 py-0.5 text-xs">
+                  {notifications.length}
+                </span>
+              </TabsTrigger>
+              <TabsTrigger value="unread">
+                Unread
+                <span className="ml-1 rounded-full bg-primary text-primary-foreground px-2 py-0.5 text-xs">
+                  {unreadCount}
+                </span>
+              </TabsTrigger>
+              <TabsTrigger value="system">System</TabsTrigger>
+            </TabsList>
+          </Tabs>
+        </CardContent>
+      </Card>
   )
 };
 export default AdminNotifications;
