@@ -128,7 +128,27 @@ const AdminReports = () => {
           <CardDescription>
             History of system state changes and updates
           </CardDescription>
-          <CardContent></CardContent>
+          <CardContent>
+            <div className="space-y-4">
+               {updates.map((update) => (
+              <div
+                key={update.id}
+                className="flex items-start space-x-4 border-b pb-4 last:border-0"
+              >
+                <div className="mt-0.5">{getUpdateIcon(update.type)}</div>
+                <div className="flex-1">
+                  <h4 className="text-sm font-medium">{update.title}</h4>
+                  <p className="text-sm text-muted-foreground">
+                    {update.description}
+                  </p>
+                  <p className="text-xs text-muted-foreground mt-1">
+                    {update.timestamp}
+                  </p>
+                </div>
+              </div>
+            ))}
+            </div>
+          </CardContent>
         </CardHeader>
       </Card>
 
