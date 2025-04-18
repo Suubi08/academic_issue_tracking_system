@@ -220,3 +220,86 @@ const Studentissuereport = () => {
                     />
                   </div>
                 </div>
+                     <FormSelect
+                  id="yearOfStudy"
+                  label="Year of Study"
+                  value={formData.yearOfStudy}
+                  onChange={handleSelectChange}
+                  options={yearsOfStudy}
+                  placeholder="Select academic year"
+                />
+                <FormSelect
+                  id="semester"
+                  label="Semester"
+                  value={formData.semester}
+                  onChange={handleSelectChange}
+                  options={semesters}
+                  placeholder="Select semester"
+                />
+              </div>
+            </div>
+
+            <div className="flex justify-end gap-4 pt-4">
+              <Button type="button" variant="outline" onClick={handleCancel}>
+                Cancel
+              </Button>
+              <Button type="submit">Submit Issue</Button>
+            </div>
+          </form>
+        </CardContent>
+      </Card>
+    </div>
+  );
+};
+
+const FormField = ({
+  id,
+  label,
+  type = "text",
+  placeholder,
+  value,
+  onChange,
+  error,
+}) => (
+  <div className="space-y-2">
+    <Label htmlFor={id}>{label}</Label>
+    <Input
+      id={id}
+      type={type}
+      placeholder={placeholder}
+      value={value}
+      onChange={onChange}
+    />
+    {error && <p className="text-red-600 text-sm">{error}</p>}
+  </div>
+);
+
+const FormSelect = ({
+  id,
+  label,
+  value,
+  onChange,
+  options,
+  placeholder,
+  error,
+}) => (
+  <div className="space-y-2">
+    <Label htmlFor={id}>{label}</Label>
+    <Select onValueChange={(value) => onChange(id, value)} value={value}>
+      <SelectTrigger id={id}>
+        <SelectValue placeholder={placeholder} />
+      </SelectTrigger>
+      <SelectContent>
+        {options.map((option) => (
+          <SelectItem key={option.value} value={option.value}>
+            {option.label}
+          </SelectItem>
+        ))}
+      </SelectContent>
+    </Select>
+    {error && <p className="text-red-600 text-sm">{error}</p>}
+  </div>
+);
+
+export default Studentissuereport;
+
