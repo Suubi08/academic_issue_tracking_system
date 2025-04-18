@@ -94,9 +94,25 @@ const AdminReports = () => {
 
 
   
-  return (
+  return ( 
     <div className="space-y-6">
       <h2 className="text-lg font-medium">System Reports</h2>
+      <div className="flex items-center justify-between">
+        <h2 className="text-2xl font-bold tracking-tight">State Updates</h2>
+        <Button onClick={refreshUpdates} disabled={loading}>
+          {loading ? (
+            <>
+              <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+              Refreshing...
+            </>
+          ) : (
+            <>
+              <RefreshCcw className="mr-2 h-4 w-4" />
+              Refresh State
+            </>
+          )}
+        </Button>
+      </div>
 
       <div className="grid gap-6 md:grid-cols-2">
         <div className="rounded-lg border bg-white p-6 shadow">
