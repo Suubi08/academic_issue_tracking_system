@@ -241,6 +241,7 @@ const AdminNotifications = () => {
              <p className="text-xs text-muted-foreground">
                   Yesterday at 2:15 PM
                 </p>
+              <p className="text-sm mt-1">Student: David Lee</p>
            </div>
            </div>
          </CardContent>
