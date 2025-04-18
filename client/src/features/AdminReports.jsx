@@ -54,6 +54,31 @@ const AdminReports = () => {
       type: "success",
     },
   ]);
+  const refreshUpdates = async () => {
+    setLoading(true);
+
+    // Simulate API call
+    await new Promise((resolve) => setTimeout(resolve, 2000));
+
+    // Add a new update at the top
+    const newUpdate = {
+      id: `u${updates.length + 1}`,
+      title: "State Refresh Completed",
+      description: "System state has been refreshed with the latest data",
+      timestamp: "Just now",
+      type: "success",
+    };
+
+    setUpdates([newUpdate, ...updates]);
+    setLastUpdated("Just now");
+    setLoading(false);
+
+    toast({
+      title: "State Updated",
+      description: "The system state has been refreshed successfully",
+    });
+  };
+
 
   
   return (
