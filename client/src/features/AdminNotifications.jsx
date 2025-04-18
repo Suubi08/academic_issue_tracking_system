@@ -71,6 +71,20 @@ const AdminNotifications = () => {
       notifications.map((notification) => ({ ...notification, read: true }))
     );
   };
+  const getNotificationIcon = (type) => {
+    switch (type) {
+      case "info":
+        return <Info className="h-5 w-5 text-blue-500" />;
+      case "success":
+        return <CheckCircle className="h-5 w-5 text-green-500" />;
+      case "warning":
+        return <AlertCircle className="h-5 w-5 text-yellow-500" />;
+      case "error":
+        return <AlertCircle className="h-5 w-5 text-red-500" />;
+      default:
+        return <Bell className="h-5 w-5" />;
+    }
+  };
   const getNotificationAlert = (notification) => {
     let variant = "default";
 
