@@ -19,6 +19,9 @@ import { useToast } from "../components/ui/use_toast";
 import { Alert, AlertDescription, AlertTitle } from "../components/ui/Alert";
 
 const AdminReports = () => {
+   const { toast } = useToast();
+  const [loading, setLoading] = useState(false);
+  const [lastUpdated, setLastUpdated] = useState("Today at 10:30 AM");
   
   return (
     <div className="space-y-6">
