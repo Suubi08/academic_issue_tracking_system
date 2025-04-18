@@ -238,6 +238,9 @@ const AdminNotifications = () => {
              <p className="text-sm font-medium">
                   Issue #ISS-1005 assigned to Dr. Martinez
                 </p>
+             <p className="text-xs text-muted-foreground">
+                  Yesterday at 2:15 PM
+                </p>
            </div>
            </div>
          </CardContent>
