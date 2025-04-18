@@ -1,6 +1,4 @@
-import { useState, useEffect } from "react"
-import { Card, CardContent, CardHeader, CardTitle } from "./ui/Card"
-import { Search, Filter, X } from "lucide-react"
+
 
 const IssueTracking = () => {
   const allIssues = [
