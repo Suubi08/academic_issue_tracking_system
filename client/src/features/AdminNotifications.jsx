@@ -230,6 +230,11 @@ const AdminNotifications = () => {
                </div>
              </div>
            </div>
+           <div className="flex items-start space-x-4" >
+             div className="bg-blue-100 p-2 rounded-full">
+                <UserPlus className="h-5 w-5 text-blue-600" />
+              </div>
+           </div>
          </CardContent>
        </Card>
   )
