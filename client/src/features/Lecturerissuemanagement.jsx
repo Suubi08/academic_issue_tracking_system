@@ -36,9 +36,9 @@ const LecturerIssueManagement = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get("http://localhost:8000/api/issues/");
+        const response = await API.get("issues/");
         const myIssues = response.data.filter(
-          (issue) => issue.lecturer_id?.toString() === lecturerId
+          (issue) => issue.assigned_to?.id?.toString() === lecturerId
         );
         setIssues(myIssues);
         setLoading(false);
