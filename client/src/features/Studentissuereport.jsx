@@ -49,3 +49,20 @@ const semesters = [
   { value: "one", label: "Semester One" },
   { value: "two", label: "Semester Two" },
 ];
+
+const Studentissuereport = () => {
+  const navigate = useNavigate();
+  const [formData, setFormData] = useState({
+    name: "",
+    studentNumber: "",
+    registrationNumber: "",
+    issueId: "",
+    category: "",
+    dateOfIssue: "",
+    courseUnit: "",
+    lecturer: "",
+    description: "",
+    attachment: null,
+    yearOfStudy: "",
+    semester: "",
+  });
