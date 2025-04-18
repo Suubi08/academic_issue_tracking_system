@@ -1,6 +1,26 @@
+import { useState } from "react";
 const AdminNotifications = () => {
-  return <div>AdminNotifications</div>
-}
-
-export default AdminNotifications
-
+  
+  const markAllAsRead = () => {
+    setNotifications(
+      notifications.map((notification) => ({ ...notification, read: true }))
+    );
+  };
+  return(
+     <div className="space-y-6">
+      <div className="flex items-center justify-between">
+        <h2 className="text-2xl font-bold tracking-tight">
+          Notifications & Alerts
+        </h2>
+        {unreadCount > 0 && (
+          <button
+            onClick={markAllAsRead}
+            className="text-sm text-primary hover:underline"
+          >
+            Mark all as read
+          </button>
+        )}
+      </div>
+  )
+};
+export default AdminNotifications;
