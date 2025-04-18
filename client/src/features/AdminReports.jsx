@@ -1,4 +1,13 @@
+import { useState } from "react";
+import {
+  Activity,
+  AlertCircle,
+  CheckCircle,
+  Loader2,
+  RefreshCcw,
+} from "lucide-react";
 const AdminReports = () => {
+  
   return (
     <div className="space-y-6">
       <h2 className="text-lg font-medium">System Reports</h2>
