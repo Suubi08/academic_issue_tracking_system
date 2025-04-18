@@ -237,3 +237,103 @@ const  RegistrarSettings = () => {
                   </div>
                 </div>
               </div>
+                     />
+                  </div>
+                  <div className="flex items-center justify-between">
+                    <div className="space-y-0.5">
+                      <Label htmlFor="system-updates">System Updates</Label>
+                      <p className="text-sm text-gray-500">
+                        Notifications about system maintenance and updates
+                      </p>
+                    </div>
+                    <Switch
+                      id="system-updates"
+                      checked={notifications.systemUpdates}
+                      onCheckedChange={(checked) =>
+                        handleNotificationChange("systemUpdates", checked)
+                      }
+                    />
+                  </div>
+                </div>
+              </div>
+            </CardContent>
+            <CardFooter className="flex justify-end space-x-2">
+              <Button variant="outline">Reset to Default</Button>
+              <Button>Save Preferences</Button>
+            </CardFooter>
+          </Card>
+        </TabsContent>
+
+        <TabsContent value="security">
+          <Card>
+            <CardHeader>
+              <CardTitle>Security Settings</CardTitle>
+              <CardDescription>
+                Manage your account security and authentication methods
+              </CardDescription>
+            </CardHeader>
+            <CardContent className="space-y-6">
+              <div className="space-y-4">
+                <h3 className="text-lg font-medium">Change Password</h3>
+                <div className="space-y-3">
+                  <div className="space-y-2">
+                    <Label htmlFor="current-password">Current Password</Label>
+                    <Input id="current-password" type="password" />
+                  </div>
+                  <div className="space-y-2">
+                    <Label htmlFor="new-password">New Password</Label>
+                    <Input id="new-password" type="password" />
+                  </div>
+                  <div className="space-y-2">
+                    <Label htmlFor="confirm-password">
+                      Confirm New Password
+                    </Label>
+                    <Input id="confirm-password" type="password" />
+                  </div>
+                  <Button className="mt-2">Update Password</Button>
+                </div>
+              </div>
+
+              <div className="space-y-4">
+                <h3 className="text-lg font-medium">
+                  Two-Factor Authentication
+                </h3>
+                <div className="space-y-3">
+                  <div className="flex items-center justify-between">
+                    <div className="space-y-0.5">
+                      <Label>Two-Factor Authentication</Label>
+                      <p className="text-sm text-gray-500">
+                        Add an extra layer of security to your account
+                      </p>
+                    </div>
+                    <Button variant="outline">
+                      <Key className="h-4 w-4 mr-2" />
+                      Setup 2FA
+                    </Button>
+                  </div>
+                </div>
+              </div>
+
+              <div className="space-y-4">
+                <h3 className="text-lg font-medium">Session Management</h3>
+                <div className="space-y-3">
+                  <div className="flex items-center justify-between">
+                    <div className="space-y-0.5">
+                      <Label>Active Sessions</Label>
+                      <p className="text-sm text-gray-500">
+                        Manage your active login sessions
+                      </p>
+                    </div>
+                    <Button variant="outline">View Sessions</Button>
+                  </div>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+        </TabsContent>
+      </Tabs>
+    </div>
+  );
+};
+export default RegistrarSettings;
+
