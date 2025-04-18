@@ -7,14 +7,7 @@ import API from "../utils/axiosInstance";
 import { Navigate, useNavigate } from "react-router-dom"
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "./ui/Dropdown-menu"
 
-const TrackStudentIssues = () => {
-  const navigate = useNavigate();
-  const [issues, setIssues] = useState([])
-  const [allIssues, setAllIssues] = useState([])
-  const [searchTerm, setSearchTerm] = useState("")
-  const [statusFilter, setStatusFilter] = useState("all")
-  const [sortBy, setSortBy] = useState("newest")
-  const [showFilters, setShowFilters] = useState(false)
+
 
   // Apply filters when search term, status filter, or sort changes
   useEffect(() => {
