@@ -159,6 +159,14 @@ const AdminReports = () => {
            </CardFooter>
         </CardHeader>
       </Card>
+      <Card>
+        <CardHeader>
+          <CardTitle>System Health</CardTitle>
+          <CardDescription>Current status of system components</CardDescription>
+        </CardHeader>
+        <CardContent>
+        </CardContent>
+        </Card>
 
         <div className="rounded-lg border bg-white p-6 shadow">
           <h3 className="mb-4 text-base font-medium">Issue Resolution</h3>
