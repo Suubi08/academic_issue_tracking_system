@@ -78,6 +78,19 @@ const AdminReports = () => {
       description: "The system state has been refreshed successfully",
     });
   };
+  const getUpdateIcon = (type) => {
+    switch (type) {
+      case "info":
+        return <Activity className="h-5 w-5 text-blue-500" />;
+      case "success":
+        return <CheckCircle className="h-5 w-5 text-green-500" />;
+      case "warning":
+      case "error":
+        return <AlertCircle className="h-5 w-5 text-red-500" />;
+      default:
+        return <Activity className="h-5 w-5" />;
+    }
+  };
 
 
   
