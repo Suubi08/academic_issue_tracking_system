@@ -66,6 +66,13 @@ const AdminNotifications = () => {
       read: true,
     },
   ]);
+   const markAsRead = (id) => {
+    setNotifications(
+      notifications.map((notification) =>
+        notification.id === id ? { ...notification, read: true } : notification
+      )
+    );
+  };
   const markAllAsRead = () => {
     setNotifications(
       notifications.map((notification) => ({ ...notification, read: true }))
