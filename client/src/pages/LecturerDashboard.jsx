@@ -1,6 +1,7 @@
 import { Calendar, FileText, FileTextIcon, MessageSquare } from "lucide-react";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import API from "../utils/axiosInstance";
 import { Card, CardHeader, CardFooter, CardTitle, CardDescription, CardContent } from "../components";
 import axios from "axios";
 
@@ -13,12 +14,12 @@ const LecturerDashboard = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get("http://localhost:8000/api/issues/");
-        console.log(response.data); // Debugging the response
+        const response = await API.get("issues/");
+        console.log(response.data); // Debugging the
 
         // Filter issues for the logged-in lecturer
         const myIssues = response.data.filter(
-          (issue) => issue.lecturer_id?.toString() === lecturerId
+          (issue) => issue.assigned_to?.id.toString() === lecturerId
         );
 
         setIssues(myIssues);
@@ -57,8 +58,8 @@ const LecturerDashboard = () => {
   ];
 
   const AssignedIssues = issues.map((issue) => ({
-    Category: issue.category,
-    student: issue.student_name,
+    title: issue.category,
+    student: `${issue.created_by?.first_name} ${issue.created_by?.last_name}`,
     status: issue.status,
     action: "View",
   }));
@@ -116,16 +117,16 @@ const LecturerDashboard = () => {
             <tbody className="divide-y">
               {AssignedIssues.map((issue, index) => (
                 <tr key={index} className="hover:bg-gray-50">
-                  <td className="py-4 px-6">{issue.title1}</td>
+                  <td className="py-4 px-6">{issue.title}</td>
                   <td className="py-4 px-6">{issue.student}</td>
                   <td className="py-4 px-6">
                     <span
                       className={`px-2 py-1 rounded-full text-xs font-medium ${
                         issue.status === "pending"
                           ? "bg-amber-100 text-amber-800"
-                          : issue.status === "Critical"
-                          ? "bg-red-100 text-red-800"
-                          : issue.status === "Resolved"
+                          : issue.status === "in_progress"
+                          ? "bg-blue-100 text-blue-800"
+                          : issue.status === "resolved"
                           ? "bg-green-100 text-green-800"
                           : "bg-gray-100 text-gray-800" // Default case
                       }`}
