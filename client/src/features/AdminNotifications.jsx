@@ -7,6 +7,12 @@ import {
   CardDescription,
   CardContent,
 } from "../components";
+import {
+  Tabs,
+  TabsContent,
+  TabsList,
+  TabsTrigger,
+} from "../components/ui/Tabs";
 const AdminNotifications = () => {
   
   const markAllAsRead = () => {
