@@ -122,6 +122,16 @@ const AdminReports = () => {
         </AlertDescription>
       </Alert>
 
+      <Card>
+        <CardHeader>
+          <CardTitle>State Update Log</CardTitle>
+          <CardDescription>
+            History of system state changes and updates
+          </CardDescription>
+          <CardContent></CardContent>
+        </CardHeader>
+      </Card>
+
         <div className="rounded-lg border bg-white p-6 shadow">
           <h3 className="mb-4 text-base font-medium">Issue Resolution</h3>
           <div className="h-60 bg-gray-100 flex items-center justify-center">
