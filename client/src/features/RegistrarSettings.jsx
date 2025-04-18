@@ -165,4 +165,39 @@ const  RegistrarSettings = () => {
                 </div>
               </div>
             </CardContent>
+               <CardFooter className="flex justify-end space-x-2">
+              <Button variant="outline">Cancel</Button>
+              <Button>Save Changes</Button>
+            </CardFooter>
+          </Card>
+        </TabsContent>
+
+        <TabsContent value="notifications">
+          <Card>
+            <CardHeader>
+              <CardTitle>Notification Preferences</CardTitle>
+              <CardDescription>
+                Configure how and when you receive notifications
+              </CardDescription>
+            </CardHeader>
+            <CardContent className="space-y-6">
+              <div className="space-y-4">
+                <h3 className="text-lg font-medium">Notification Channels</h3>
+                <div className="space-y-3">
+                  <div className="flex items-center justify-between">
+                    <div className="space-y-0.5">
+                      <Label htmlFor="email-notifications">
+                        Email Notifications
+                      </Label>
+                      <p className="text-sm text-gray-500">
+                        Receive notifications via email
+                      </p>
+                    </div>
+                    <Switch
+                      id="email-notifications"
+                      checked={notifications.email}
+                      onCheckedChange={(checked) =>
+                        handleNotificationChange("email", checked)
+                      }
+                    />
          
