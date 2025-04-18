@@ -178,3 +178,45 @@ const Studentissuereport = () => {
                   onChange={handleChange}
                 />
               </div>
+                    <div className="space-y-2 mb-6">
+                <Label htmlFor="description">Issue Description</Label>
+                <Textarea
+                  id="description"
+                  placeholder="Please describe your issue in detail..."
+                  rows={4}
+                  value={formData.description}
+                  onChange={handleChange}
+                  required
+                />
+                {errors.description && (
+                  <p className="text-red-600 text-sm">{errors.description}</p>
+                )}
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div className="space-y-2">
+                  <Label htmlFor="attachment" className="block">
+                    Attachment
+                  </Label>
+                  <div className="flex items-center gap-2">
+                    <Button
+                      type="button"
+                      variant="outline"
+                      className="w-full"
+                      onClick={() =>
+                        document.getElementById("attachment").click()
+                      }
+                    >
+                      <Paperclip className="mr-2 h-4 w-4" />
+                      {formData.attachment
+                        ? formData.attachment.name
+                        : "Upload File"}
+                    </Button>
+                    <Input
+                      id="attachment"
+                      type="file"
+                      className="hidden"
+                      onChange={handleFileChange}
+                    />
+                  </div>
+                </div>
