@@ -193,6 +193,15 @@ const AdminNotifications = () => {
                   ))
               )}
             </TabsContent>
+            <TabsContent value="system" className="space-y-4">
+              {notifications
+                .filter((n) => n.type === "warning" || n.type === "error")
+                .map((notification) => (
+                  <div key={notification.id}>
+                    {getNotificationAlert(notification)}
+                  </div>
+                ))}
+            </TabsContent>
           </Tabs>
         </CardContent>
       </Card>
