@@ -114,16 +114,13 @@ const AdminReports = () => {
         </Button>
       </div>
 
-      <div className="grid gap-6 md:grid-cols-2">
-        <div className="rounded-lg border bg-white p-6 shadow">
-          <h3 className="mb-4 text-base font-medium">User Activity</h3>
-          <div className="h-60 bg-gray-100 flex items-center justify-center">
-            <p className="text-gray-500">User activity chart placeholder</p>
-          </div>
-          <div className="mt-4 text-sm text-gray-500">
-            <p>Shows login activity and system usage over time.</p>
-          </div>
-        </div>
+      <Alert>
+        <Activity className="h-4 w-4" />
+        <AlertTitle>System Status</AlertTitle>
+        <AlertDescription>
+          All systems are operational. Last updated: {lastUpdated}
+        </AlertDescription>
+      </Alert>
 
         <div className="rounded-lg border bg-white p-6 shadow">
           <h3 className="mb-4 text-base font-medium">Issue Resolution</h3>
