@@ -149,6 +149,11 @@ const AdminReports = () => {
             ))}
             </div>
           </CardContent>
+           <CardFooter className="flex justify-between">
+             <p className="text-sm text-muted-foreground">
+            Showing {updates.length} updates
+          </p>
+           </CardFooter>
         </CardHeader>
       </Card>
 
