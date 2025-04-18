@@ -200,4 +200,40 @@ const  RegistrarSettings = () => {
                         handleNotificationChange("email", checked)
                       }
                     />
-         
+            </div>
+                  <div className="flex items-center justify-between">
+                    <div className="space-y-0.5">
+                      <Label htmlFor="browser-notifications">
+                        Browser Notifications
+                      </Label>
+                      <p className="text-sm text-gray-500">
+                        Receive notifications in your browser
+                      </p>
+                    </div>
+                    <Switch
+                      id="browser-notifications"
+                      checked={notifications.browser}
+                      onCheckedChange={(checked) =>
+                        handleNotificationChange("browser", checked)
+                      }
+                    />
+                  </div>
+                  <div className="flex items-center justify-between">
+                    <div className="space-y-0.5">
+                      <Label htmlFor="mobile-notifications">
+                        Mobile Notifications
+                      </Label>
+                      <p className="text-sm text-gray-500">
+                        Receive notifications on your mobile device
+                      </p>
+                    </div>
+                    <Switch
+                      id="mobile-notifications"
+                      checked={notifications.mobile}
+                      onCheckedChange={(checked) =>
+                        handleNotificationChange("mobile", checked)
+                      }
+                    />
+                  </div>
+                </div>
+              </div>
