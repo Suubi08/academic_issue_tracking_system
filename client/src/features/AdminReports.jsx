@@ -165,6 +165,15 @@ const AdminReports = () => {
           <CardDescription>Current status of system components</CardDescription>
         </CardHeader>
         <CardContent>
+          <div className="space-y-4">
+            <div className="flex items-center justify-between">
+              <div className="flex items-center">
+                <div className="mr-2 h-2 w-2 rounded-full bg-green-500"></div>
+                <span className="text-sm font-medium">Frontend Services</span>
+              </div>
+              <span className="text-sm text-green-600">Operational</span>
+            </div>
+          </div>
         </CardContent>
         </Card>
 
