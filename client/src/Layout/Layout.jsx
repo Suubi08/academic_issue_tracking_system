@@ -1,13 +1,3 @@
-import { useState, useEffect } from "react";
-import { Outlet, useLocation, useNavigate } from "react-router-dom";
-import Navbar from "../components/Navbar";
-import Sidebar from "../components/Sidebar";
-
-function Layout() {
-  const [sidebarOpen, setSidebarOpen] = useState(false);
-  const location = useLocation();
-  const navigate = useNavigate();
-  const userRole = localStorage.getItem("role") || "student";
 
   // Close sidebar on route change (mobile)
   useEffect(() => {
