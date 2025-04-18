@@ -122,3 +122,59 @@ const Studentissuereport = () => {
     navigate("/studentdashboard");
   };
 
+ return (
+    <div className="flex-1 p-4 md:p-6 max-w-6xl mx-auto w-full">
+      <Card>
+        <CardHeader className="pb-3">
+          <CardTitle className="text-center">
+            Academic Issue Report Form
+          </CardTitle>
+        </CardHeader>
+        <CardContent>
+          {successMessage && (
+            <p className="text-green-600 text-center mb-4">{successMessage}</p>
+          )}
+          <form onSubmit={handleSubmit} className="space-y-6">
+            {/* Issue Details Section */}
+            <div>
+              <h2 className="text-lg font-semibold mb-4 pb-1 border-b">
+                Issue Details
+              </h2>
+              <div className="flex items-center justify-center">
+                <FormSelect
+                  id="category"
+                  label="Issue Category"
+                  value={formData.category}
+                  onChange={handleSelectChange}
+                  options={categories}
+                  placeholder="Select Issue"
+                  error={errors.category}
+                />
+                <FormField
+                  id="dateOfIssue"
+                  label="Date of Issue"
+                  type="date"
+                  value={formData.dateOfIssue}
+                  onChange={handleChange}
+                  error={errors.dateOfIssue}
+                />
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                <FormSelect
+                  id="courseUnit"
+                  label="Course Unit"
+                  value={formData.courseUnit}
+                  onChange={handleSelectChange}
+                  options={courseUnits}
+                  placeholder="Select course unit"
+                />
+                <FormField
+                  id="lecturer"
+                  label="Lecturer"
+                  type="search"
+                  placeholder="Search lecturer"
+                  value={formData.lecturer}
+                  onChange={handleChange}
+                />
+              </div>
