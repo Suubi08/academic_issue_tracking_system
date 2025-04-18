@@ -78,11 +78,11 @@ class UserSerializer(serializers.ModelSerializer):
         fields = ['id', 'username', 'first_name', 'last_name', 'email', 'role', 'college', 'department']
 
 class IssueSerializer(serializers.ModelSerializer):
+    created_by = UserSerializer(read_only=True)
     assigned_to = UserSerializer(read_only=True) # show user details
     class Meta:
         model = Issue
         fields = '__all__'
-        read_only_fields = ['status', 'created_at']
 
 class IssueStatusUpdateSerializer(serializers.ModelSerializer):
     class meta:
