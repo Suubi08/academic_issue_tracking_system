@@ -96,4 +96,15 @@ const Studentissuereport = () => {
       attachment: file,
     }));
   };
+   const validateForm = () => {
+    const newErrors = {};
+    if (!formData.category) newErrors.category = "Category is required.";
+    if (!formData.dateOfIssue)
+      newErrors.dateOfIssue = "Date of issue is required.";
+    if (!formData.description)
+      newErrors.description = "Description is required.";
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
+
 
