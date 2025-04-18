@@ -104,6 +104,19 @@ const AdminNotifications = () => {
               </TabsTrigger>
               <TabsTrigger value="system">System</TabsTrigger>
             </TabsList>
+            <TabsContent value="all" className="space-y-4">
+              {notifications.length === 0 ? (
+                <p className="text-center text-muted-foreground py-8">
+                  No notifications
+                </p>
+              ) : (
+                notifications.map((notification) => (
+                  <div key={notification.id}>
+                    {getNotificationAlert(notification)}
+                  </div>
+                ))
+              )}
+            </TabsContent>
           </Tabs>
         </CardContent>
       </Card>
