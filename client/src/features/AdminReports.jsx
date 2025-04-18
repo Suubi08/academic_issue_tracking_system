@@ -22,6 +22,39 @@ const AdminReports = () => {
    const { toast } = useToast();
   const [loading, setLoading] = useState(false);
   const [lastUpdated, setLastUpdated] = useState("Today at 10:30 AM");
+  const [updates, setUpdates] = useState([
+    {
+      id: "u1",
+      title: "System Update Completed",
+      description:
+        "All system components have been updated to the latest version",
+      timestamp: "Today at 10:30 AM",
+      type: "success",
+    },
+    {
+      id: "u2",
+      title: "Database Maintenance",
+      description: "Scheduled database maintenance completed successfully",
+      timestamp: "Yesterday at 11:45 PM",
+      type: "info",
+    },
+    {
+      id: "u3",
+      title: "API Rate Limit Increased",
+      description:
+        "The API rate limit has been increased to handle more requests",
+      timestamp: "2 days ago at 3:20 PM",
+      type: "info",
+    },
+    {
+      id: "u4",
+      title: "Security Patch Applied",
+      description: "Critical security patch has been applied to all servers",
+      timestamp: "3 days ago at 9:15 AM",
+      type: "success",
+    },
+  ]);
+
   
   return (
     <div className="space-y-6">
