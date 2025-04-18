@@ -88,7 +88,7 @@ const AdminNotifications = () => {
       </div>
       <Card>
         <CardContent>
-          <Tabs>
+          <Tabs  defaultValue="all">
             <TabsList className="mb-4 grid w-full grid-cols-3">
               <TabsTrigger value="all">
                 All
