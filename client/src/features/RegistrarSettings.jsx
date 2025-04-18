@@ -1,4 +1,5 @@
 
+
 import { Switch } from "../components/ui";
 import { Textarea } from "../components/ui";
 import {
@@ -25,6 +26,7 @@ import { Button } from "../components/ui";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "../components/ui";
 
 import { User, Bell, Shield, Key } from "lucide-react";
+
 const  RegistrarSettings = () => {
   const [profile, setProfile] = useState({
     name: "Dr. Jane Smith",
@@ -81,9 +83,8 @@ const  RegistrarSettings = () => {
               <div className="flex flex-col md:flex-row gap-6">
                 <div className="flex flex-col items-center space-y-4">
                   <Avatar className="h-24 w-24">
-                    <AvatarImage src={profile.avatar} alt={profile.name} /
-                      >
-                             <AvatarFallback>
+                    <AvatarImage src={profile.avatar} alt={profile.name} />
+                    <AvatarFallback>
                       {profile.name
                         .split(" ")
                         .map((n) => n[0])
@@ -165,7 +166,7 @@ const  RegistrarSettings = () => {
                 </div>
               </div>
             </CardContent>
-               <CardFooter className="flex justify-end space-x-2">
+            <CardFooter className="flex justify-end space-x-2">
               <Button variant="outline">Cancel</Button>
               <Button>Save Changes</Button>
             </CardFooter>
@@ -200,7 +201,7 @@ const  RegistrarSettings = () => {
                         handleNotificationChange("email", checked)
                       }
                     />
-            </div>
+                  </div>
                   <div className="flex items-center justify-between">
                     <div className="space-y-0.5">
                       <Label htmlFor="browser-notifications">
@@ -237,7 +238,39 @@ const  RegistrarSettings = () => {
                   </div>
                 </div>
               </div>
-                     />
+
+              <div className="space-y-4">
+                <h3 className="text-lg font-medium">Notification Types</h3>
+                <div className="space-y-3">
+                  <div className="flex items-center justify-between">
+                    <div className="space-y-0.5">
+                      <Label htmlFor="issue-assigned">Issue Assigned</Label>
+                      <p className="text-sm text-gray-500">
+                        When a new issue is assigned to you
+                      </p>
+                    </div>
+                    <Switch
+                      id="issue-assigned"
+                      checked={notifications.issueAssigned}
+                      onCheckedChange={(checked) =>
+                        handleNotificationChange("issueAssigned", checked)
+                      }
+                    />
+                  </div>
+                  <div className="flex items-center justify-between">
+                    <div className="space-y-0.5">
+                      <Label htmlFor="issue-updated">Issue Updated</Label>
+                      <p className="text-sm text-gray-500">
+                        When there are updates to your assigned issues
+                      </p>
+                    </div>
+                    <Switch
+                      id="issue-updated"
+                      checked={notifications.issueUpdated}
+                      onCheckedChange={(checked) =>
+                        handleNotificationChange("issueUpdated", checked)
+                      }
+                    />
                   </div>
                   <div className="flex items-center justify-between">
                     <div className="space-y-0.5">
@@ -336,4 +369,3 @@ const  RegistrarSettings = () => {
   );
 };
 export default RegistrarSettings;
-
