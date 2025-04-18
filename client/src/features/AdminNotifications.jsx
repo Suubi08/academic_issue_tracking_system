@@ -226,6 +226,7 @@ const AdminNotifications = () => {
                   Today at 10:30 AM
                 </p>
                  <p className="text-sm mt-1">Student: Sarah Johnson</p>
+                 <p className="text-sm">Type: Administrative</p>
                </div>
              </div>
            </div>
