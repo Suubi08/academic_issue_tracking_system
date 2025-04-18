@@ -178,6 +178,21 @@ const AdminNotifications = () => {
                 ))
               )}
             </TabsContent>
+             <TabsContent value="unread" className="space-y-4">
+              {unreadCount === 0 ? (
+                <p className="text-center text-muted-foreground py-8">
+                  No unread notifications
+                </p>
+              ) : (
+                notifications
+                  .filter((n) => !n.read)
+                  .map((notification) => (
+                    <div key={notification.id}>
+                      {getNotificationAlert(notification)}
+                    </div>
+                  ))
+              )}
+            </TabsContent>
           </Tabs>
         </CardContent>
       </Card>
