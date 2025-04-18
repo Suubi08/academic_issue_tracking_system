@@ -71,6 +71,46 @@ const AdminNotifications = () => {
       notifications.map((notification) => ({ ...notification, read: true }))
     );
   };
+  const getNotificationAlert = (notification) => {
+    let variant = "default";
+
+    if (notification.type === "error") {
+      variant = "destructive";
+    }
+
+    return (
+      <Alert
+        variant={variant}
+        className={`mb-4 ${
+          !notification.read ? "border-l-4 border-primary" : ""
+        }`}
+      >
+        <div className="flex items-start">
+          {getNotificationIcon(notification.type)}
+          <div className="ml-3 flex-1">
+            <AlertTitle className="text-sm font-medium">
+              {notification.title}
+            </AlertTitle>
+            <AlertDescription className="text-sm">
+              {notification.description}
+              <div className="mt-1 text-xs text-muted-foreground">
+                {notification.timestamp}
+              </div>
+            </AlertDescription>
+          </div>
+          {!notification.read && (
+            <button
+              onClick={() => markAsRead(notification.id)}
+              className="text-xs text-primary hover:underline"
+            >
+              Mark as read
+            </button>
+          )}
+        </div>
+      </Alert>
+    );
+  };
+
   return(
      <div className="space-y-6">
       <div className="flex items-center justify-between">
