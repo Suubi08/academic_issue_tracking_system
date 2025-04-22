@@ -29,4 +29,3 @@ export {
   Studentsubmitissue,
   Studentsettings,
 }
-
