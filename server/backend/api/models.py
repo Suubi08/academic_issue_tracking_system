@@ -48,7 +48,7 @@ class User(AbstractUser):
             self.lecture_number = None
             self.subject_taught = None
 
-        super().save(*args, **kwargs)
+        super().save(*args, **kwargs) #calls save changes from abstracteruser
 
     def __str__(self):
         return f"{self.username} ({self.role})"
