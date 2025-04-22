@@ -42,7 +42,7 @@ class User(AbstractUser):
             self.course_name = None
             self.college = None
 
-        elif self.role in ['academic_registrar', 'admin']:
+        elif self.role in ['academic_registrar', 'admin']: #grouping roles
             self.student_number = None
             self.course_name = None
             self.lecture_number = None
