@@ -21,13 +21,13 @@ class User (AbstractUser):
     subject_taught = models.TextField(blank=True, null=True)
     department = models.CharField(max_length=50, blank=True, null=True)
     
-    groups = models.ManyToManyField("auth.Group, related_name="custom_user_groups", blank=True)
+    groups = models.ManyToManyField("auth.Group", related_name="custom_user_groups", blank=True)
     user_permissions = models.ManyToManyField("auth.Permission", related_name="custom_user_permissions", blank=True)     
     
     def save(self, *args, **kwargs):
        if self.role == 'student':
          if not self.student_number or not self.course_name or not self.college:
-            raise ValueError("Student-specific fileds must be filled.")
+            raise ValueError("Student-specific fields must be filled.")
       
          self.lecturer_number = None
          self.subject_taught= None
