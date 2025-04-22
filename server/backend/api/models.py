@@ -12,7 +12,7 @@ class User(AbstractUser):
         ('academic_registrar', 'Academic Registrar'),
         ('admin', 'Administrator'),
     ]
-    
+    #stores user's role as a string
     role = models.CharField(max_length=20, choices=ROLE_CHOICES, default="student")
 
     # Student-specific fields
