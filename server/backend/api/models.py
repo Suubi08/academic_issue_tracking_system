@@ -53,7 +53,7 @@ class User(AbstractUser):
     def __str__(self):
         return f"{self.username} ({self.role})"
     
-# Issues model
+# list of status choices for Issue model
 class Issue(models.Model):
     STATUS_CHOICES = [
         ('pending', 'Pending'),
