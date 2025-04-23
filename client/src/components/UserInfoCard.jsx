@@ -1,5 +1,3 @@
-
-
 import { useState, useEffect } from "react";
 import { Copy, Check, User } from "lucide-react";
 import { Card, CardContent, CardHeader } from "./ui/Card";
