@@ -8,7 +8,6 @@ const categories = [
   { value: "appeals", label: "Appeals" },
   { value: "corrections", label: "Corrections" },
 ];
-
 const course_units = [
   { value: "OS", label: "Operating Systems" },
   { value: "DSA", label: "Data Structures and Algorithms" },
@@ -16,7 +15,6 @@ const course_units = [
   { value: "SD", label: "Software Development" },
   { value: "PS", label: "Probability and Statistics" },
 ];
-
 
 const years_of_Study = [
   { value: "2025/2026", label: "2025/2026" },
@@ -31,7 +29,7 @@ const semesters = [
   { value: "two", label: "Semester Two" },
 ];
 
-const Studentsubmitissue = () => {
+  const Studentsubmitissue = () => {
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
     category: "",
