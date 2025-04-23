@@ -1,6 +1,6 @@
 import { createContext, useContext, useState } from "react"
 
- Create context
+// Create context
 const IssueContext = createContext(undefined)
 
 // Sample data
@@ -172,4 +172,3 @@ export const useIssueContext = () => {
   }
   return context
 }
-
