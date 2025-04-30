@@ -1,13 +1,7 @@
 
 import { Routes, Route, Navigate } from "react-router-dom";
 import Layout from "../Layout/Layout";
-// import {
-//   Issues,
-//   Reports,
-//   Settings,
-//   Studentdashboard,
-//   Issuereport,
-// } from "../pages/";
+
 import Login from "../pages/Auth/Login";
 import Signup from "../pages/Auth/Signup";
 import IssueDetail from "../pages/id/IssueDetail";
