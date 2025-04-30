@@ -5,7 +5,6 @@ import Layout from "../Layout/Layout";
 import Login from "../pages/Auth/Login";
 import Signup from "../pages/Auth/Signup";
 import IssueDetail from "../pages/id/IssueDetail";
-// import Auth from "../Auth/Auth";
 import ProtectedRoute from "../components/ProtectedRoute";
 
 import {
