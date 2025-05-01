@@ -1,5 +1,6 @@
 "use client"
 
+// issuetable to display & manage a list of issues search, filter, sort
 import { useState, useEffect } from "react"
 import { Search, Filter, ChevronDown, X } from "lucide-react"
 import { Card, CardHeader, CardContent, CardTitle, CardFooter } from "./ui/Card"
