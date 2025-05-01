@@ -13,6 +13,10 @@ const Issuetable = ({ issue: initialIssues }) => {
   const [sortOrder, setSortOrder] = useState("newest")
   const [showFilters, setShowFilters] = useState(false)
 
+  const Issuetable = ({issue: initialIssues}) =>{
+    const [issues, setIssues] = useState(initialIssues || [])
+    const [searchTerm, setSearchTerm] = useState(
+
   useEffect(() => {
     let filteredIssues = [...initialIssues]
 
