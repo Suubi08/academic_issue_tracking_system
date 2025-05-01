@@ -11,15 +11,7 @@ const Issuetable = ({ issue: initialIssues }) => {
   const [searchTerm, setSearchTerm] = useState("")
   const [statusFilter, setStatusFilter] = useState("all")
   const [sortOrder, setSortOrder] = useState("newest")
-  const [showFilters, setShowFilters] = useState(false)
-
-  const Issuetable = ({issue: initialIssues}) =>{
-    const [issues, setIssues] = useState(initialIssues || [])
-    const [searchTerm, setSearchTerm] = useState("")
-    const [statusFilter, setStatusFilter] = useState("all")
-    const [sortOrder, setSortOrder] = useState("newest")
-    const [showFilters, setShowFilters] = useState(false)
-    
+  const [showFilters, setShowFilters] = useState(false)    
 
   useEffect(() => {
     let filteredIssues = [...initialIssues]
