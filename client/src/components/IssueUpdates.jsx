@@ -10,6 +10,17 @@ const IssueUpdates = ({ issues }) => {
     }
   }
 
+  const IssueUpdates = ({ issues }) => {
+  const getStatusStyles = (status) => {
+    switch (status) {
+      case "Resolved":
+        return "bg-green-800"
+      case "Pending":
+        return "bg-yellow-400"
+      default:
+        return "bg-red-800"
+    }
+  }
   const getStatusTime = (status) => {
     switch (status) {
       case "Resolved":
