@@ -10,16 +10,16 @@ const IssueUpdates = ({ issues }) => {
     }
   }
 
-  //  const getStatusTime = (status) => {
-  //   switch (status) {
-  //     case "Resolved":
-  //       return "Wed 10:30-13:30"
-  //     case "In Progress":
-  //       return "Thu 09:00-11:00"
-  //     default:
-  //       return "14:30-17:30"
-  //   }
-  // }
+   const getStatusTime = (status) => {
+    switch (status) {
+      case "Resolved":
+        return "Wed 10:30-13:30"
+      case "In Progress":
+        return "Thu 09:00-11:00"
+      default:
+        return "14:30-17:30"
+    }
+  }
 
   return (
     <div className="space-y-4">
