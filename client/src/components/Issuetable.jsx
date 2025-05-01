@@ -1,19 +1,19 @@
 "use client"
 
-// import { useState, useEffect } from "react"
-// import { Search, Filter, ChevronDown, X } from "lucide-react"
-// import { Card, CardHeader, CardContent, CardTitle, CardFooter } from "./ui/Card"
-// import { Button } from "./ui/Button"
+import { useState, useEffect } from "react"
+import { Search, Filter, ChevronDown, X } from "lucide-react"
+import { Card, CardHeader, CardContent, CardTitle, CardFooter } from "./ui/Card"
+import { Button } from "./ui/Button"
 
-const Issuetable = ({ issue: initialIssues }) => {
-  const [issues, setIssues] = useState(initialIssues || [])
-  const [searchTerm, setSearchTerm] = useState("")
-  const [statusFilter, setStatusFilter] = useState("all")
-  const [sortOrder, setSortOrder] = useState("newest")
-  const [showFilters, setShowFilters] = useState(false)
+// const Issuetable = ({ issue: initialIssues }) => {
+//   const [issues, setIssues] = useState(initialIssues || [])
+//   const [searchTerm, setSearchTerm] = useState("")
+//   const [statusFilter, setStatusFilter] = useState("all")
+//   const [sortOrder, setSortOrder] = useState("newest")
+//   const [showFilters, setShowFilters] = useState(false)
 
-  useEffect(() => {
-    let filteredIssues = [...initialIssues]
+//   useEffect(() => {
+//     let filteredIssues = [...initialIssues]
 
     // Apply search filter
     if (searchTerm) {
