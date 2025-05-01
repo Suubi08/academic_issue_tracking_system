@@ -100,6 +100,7 @@ const DropdownMenuLabel = ({ className, inset, ...props }) => (
   />
 )
 
+//improve the usability and visual structure of your dropdown menu
 const DropdownMenuSeparator = ({ className, ...props }) => (
   <DropdownMenuPrimitive.Separator className={cn("-mx-1 my-1 h-px bg-muted", className)} {...props} />
 )
