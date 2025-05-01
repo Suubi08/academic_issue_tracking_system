@@ -108,6 +108,7 @@ const DropdownMenuShortcut = ({ className, ...props }) => (
   <span className={cn("ml-auto text-xs tracking-widest opacity-60", className)} {...props} />
 )
 
+//exporting reuseable dropdown menu
 export {
   DropdownMenu,
   DropdownMenuTrigger,
