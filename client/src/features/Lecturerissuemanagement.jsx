@@ -115,7 +115,6 @@ const LecturerIssueManagement = () => {
     setComment("");
     setModalOpen(true);
   }
-  console.log(localStorage.getItem("access_token"))
 
   const handleAssignSubmit = () => {
     if (!status || !comment) return; // Don't proceed if status or comment is empty
@@ -295,7 +294,7 @@ const LecturerIssueManagement = () => {
       </Card>
 
       {/* Update Issue Modal */}
-      {modalOpen && selectedIssue && (
+{/*       {modalOpen && selectedIssue && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
           <div className="bg-white rounded-lg p-6 w-full max-w-md">
             <h2 className="text-xl font-bold mb-4">Update Issue</h2>
@@ -337,7 +336,7 @@ const LecturerIssueManagement = () => {
             </div>
           </div>
         </div>
-      )}
+      )} */}
     </div>
   );
 };
