@@ -4,6 +4,7 @@ import { useIssueContext } from "../context/IssueContext"
 
 const IssueDetails = ({ issue, isOpen, onClose }) => {
   const { addComment, updateIssueStatus } = useIssueContext()
+  const { addComment, updateIssueStatus} = useIssueContext()
   const [comment, setComment] = useState("")
   const [file, setFile] = useState(null)
 
