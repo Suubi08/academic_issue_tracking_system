@@ -4,12 +4,10 @@ import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "./ui/Card"
 const IssueChart = ({ totalissues, resolvedIssues, inProgressIssues, pendingIssues }) => {
   const data = [
     { name: "Resolved", value: resolvedIssues, color: "#166534" },
+    { name: "Resolved", value: resolvedIssues, color: "#166534" },
     { name: "In Progress", value: inProgressIssues, color: "#DC2626" },
     { name: "Pending", value: pendingIssues, color: "#EAB308" },
   ]
-  const data = [
-    {name: "Resolved", value: resolvedIssues, color: "#166534"},
-    {name: "In Progress", value: inProgressIssues, color: "#DC2626"},
     
   return (
     <Card className="mt-4 shadow-md">
