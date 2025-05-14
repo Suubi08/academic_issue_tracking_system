@@ -61,5 +61,4 @@ const IssueChart = ({ totalissues, resolvedIssues, inProgressIssues, pendingIssu
     </Card>
   )
 }
-
 export default IssueChart
