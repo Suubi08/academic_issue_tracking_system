@@ -35,6 +35,7 @@ export {
   Issuetable,
   IssueChart,
   IssueUpdates,
+  StatusDropdown,
   Calendar,
   UserInfoCard,
   ShowSlide,
