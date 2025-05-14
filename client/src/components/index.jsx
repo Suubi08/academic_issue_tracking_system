@@ -8,6 +8,7 @@ import IssueChart from "./IssueChart";
 import Calendar from "./Calendar";
 import UserInfoCard from "./UserInfoCard";
 import ShowSlide from "./ShowSlide";
+import StatusDropdown from "./StatusDropdown";
 import IssueUpdates from "./IssueUpdates";
 import { Button } from "./ui/Button";
 
