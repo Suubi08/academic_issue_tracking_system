@@ -43,6 +43,4 @@ const IssueUpdates = ({ issues }) => {
     </div>
   )
 }
-
 export default IssueUpdates
-
