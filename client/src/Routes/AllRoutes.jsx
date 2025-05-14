@@ -12,7 +12,8 @@ import {
   LecturerDashboard,
   // PageNotFound,
   Studentdashboard,
-} from "../pages";
+} 
+  from "../pages";
 
 import {
   Lecturerissuemanagement,
@@ -27,7 +28,8 @@ import {
   Studentissues,
   Studentsubmitissue,
   Studentsettings,
-} from "../features";
+} 
+  from "../features";
 
 const AllRoutes = () => {
   return (
