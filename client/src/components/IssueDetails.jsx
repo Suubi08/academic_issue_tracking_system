@@ -138,5 +138,4 @@ const IssueDetails = ({ issue, isOpen, onClose }) => {
     </div>
   )
 }
-
 export default IssueDetails
