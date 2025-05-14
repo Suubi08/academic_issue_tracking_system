@@ -211,5 +211,4 @@ const IssueTracking = () => {
     </Card>
   )
 }
-
 export default IssueTracking
