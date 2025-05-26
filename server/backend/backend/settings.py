@@ -79,10 +79,21 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'backend.urls'
 
+# Static files (CSS, JavaScript, Images)
+# https://docs.djangoproject.com/en/5.1/howto/static-files/
+
+STATIC_URL = 'static/'
+STATIC_ROOT = BASE_DIR/'staticfiles'
+STATICFILES_DIRS = [
+    os.path.join(STATIC_ROOT, 'reactapp'),
+]
+
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [
+            os.path.join(STATIC_ROOT, 'reactapp'),
+        ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -105,14 +116,13 @@ EMAIL_HOST_USER = 'your-email@gmail.com'  # Replace with your email
 EMAIL_HOST_PASSWORD = 'your-email-password'  # Replace with an App Password for security
 DEFAULT_FROM_EMAIL = 'AIT Support <your-email@gmail.com>'
 
-
-
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
 DATABASES = {
     'default': dj_database_url.config(
-        default='postgres://postgres:1234@localhost:5432/aits'
+        # default='postgres://postgres:1234@localhost:5432/aits'
+        default='sqlite://:@localhost/aits'
     )
 }
 
@@ -147,12 +157,6 @@ USE_I18N = True
 
 USE_TZ = True
 
-
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/5.1/howto/static-files/
-
-STATIC_URL = 'static/'
-
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
@@ -164,3 +168,7 @@ CORS_ALLOWS_CREDENTIALS = True
 AUTHENTICATION_BACKENDS = [
     "django.contrib.auth.backends.ModelBackend",
 ]
+
+FIXTURE_DIRS = (
+    os.path.join(BASE_DIR, 'fixtures'),
+)

@@ -1,0 +1,1035 @@
+[
+  {
+    "model": "api.user",
+    "pk": 1,
+    "fields": {
+      "password": "pbkdf2_sha256$870000$B6hFVLKYRA3mVl0jV5e8Cf$B6pnGE/QZAXJZhHScs6OtwkPljV/ia+kfdkYqyvsz/A=",
+      "last_login": "2025-05-23T11:29:03.441Z",
+      "is_superuser": false,
+      "username": "shadear",
+      "first_name": "shadiah",
+      "last_name": "nalubega",
+      "email": "shadiatolbert@gmail.com",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2025-04-09T10:25:40.230Z",
+      "role": "admin",
+      "student_number": null,
+      "course_name": null,
+      "college": "College of Engineering",
+      "lecture_number": null,
+      "subject_taught": null,
+      "department": "",
+      "groups": [],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "api.user",
+    "pk": 2,
+    "fields": {
+      "password": "pbkdf2_sha256$870000$RV3sgXrOKyk7X6qlfD3Tcj$krPhXN1ISFC9DgxYQ9OENbXS2C+LzPlsK8y3zdG79AU=",
+      "last_login": "2025-05-24T13:39:07.130Z",
+      "is_superuser": false,
+      "username": "buke",
+      "first_name": "bukenya",
+      "last_name": "samuel",
+      "email": "samuel@gmai.com",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2025-04-09T10:31:19.110Z",
+      "role": "student",
+      "student_number": "240070980",
+      "course_name": "computer science",
+      "college": "engineering",
+      "lecture_number": null,
+      "subject_taught": null,
+      "department": null,
+      "groups": [],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "api.user",
+    "pk": 3,
+    "fields": {
+      "password": "pbkdf2_sha256$870000$sseloDzWSZvhqUcVLmHvd2$x7iwda2ngkurDT50vsCxmiQINjfXNjFVxF1UEV8IOM4=",
+      "last_login": "2025-05-24T16:09:00.214Z",
+      "is_superuser": false,
+      "username": "asiah",
+      "first_name": "asiah",
+      "last_name": "nalugwa",
+      "email": "asiah@gmail.com",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2025-04-09T10:34:59.245Z",
+      "role": "lecturer",
+      "student_number": null,
+      "course_name": null,
+      "college": null,
+      "lecture_number": "0700000001",
+      "subject_taught": "math",
+      "department": "computer_science",
+      "groups": [],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "api.user",
+    "pk": 4,
+    "fields": {
+      "password": "pbkdf2_sha256$870000$twdll9c9FEkyaIn6kRJTEK$ZdNqKiBGTOzBwmQl5ZB2Xj+jGW9zz0dzede33ENbtMg=",
+      "last_login": "2025-05-24T15:47:57.927Z",
+      "is_superuser": false,
+      "username": "paul",
+      "first_name": "paul",
+      "last_name": "nsamba",
+      "email": "paul@gmail.com",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2025-04-09T13:41:39.145Z",
+      "role": "academic_registrar",
+      "student_number": null,
+      "course_name": null,
+      "college": "engineering",
+      "lecture_number": null,
+      "subject_taught": null,
+      "department": "",
+      "groups": [],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "api.user",
+    "pk": 5,
+    "fields": {
+      "password": "pbkdf2_sha256$870000$OkKDbXffla1WZC3C046VfO$JJyNZU6npJ97CMgL9MCMAACPt+xll9tO2FESe8VZISU=",
+      "last_login": null,
+      "is_superuser": false,
+      "username": "abdu",
+      "first_name": "abdallah",
+      "last_name": "nsamba",
+      "email": "abduh@gmail.com",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2025-04-15T05:40:35.605Z",
+      "role": "admin",
+      "student_number": null,
+      "course_name": null,
+      "college": "engineering",
+      "lecture_number": null,
+      "subject_taught": null,
+      "department": "",
+      "groups": [],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "api.user",
+    "pk": 6,
+    "fields": {
+      "password": "pbkdf2_sha256$870000$zJVJJ6z8c70XvU7wo7rN4N$y3fR3pdYqrrhYQblKdJAPsHWE9xQ1vuyyVoGpUQzvvo=",
+      "last_login": "2025-05-24T15:44:05.292Z",
+      "is_superuser": false,
+      "username": "johndoe",
+      "first_name": "John",
+      "last_name": "Doe",
+      "email": "john@example.com",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2025-05-23T15:29:52.850Z",
+      "role": "student",
+      "student_number": "S12345",
+      "course_name": "Computer Science",
+      "college": "Engineering",
+      "lecture_number": null,
+      "subject_taught": null,
+      "department": null,
+      "groups": [2],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "api.user",
+    "pk": 7,
+    "fields": {
+      "password": "pbkdf2_sha256$870000$6AFL1wq4wqF1ZWv3jYz1Ry$BO4XLD8kAwIySfrdxxlomN3ROnXDnI9ra5W4KavNh6I=",
+      "last_login": "2025-05-23T16:13:49.762Z",
+      "is_superuser": false,
+      "username": "steady",
+      "first_name": "RegistrarFirst",
+      "last_name": "RegistrarLast",
+      "email": "registrar@example.com",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2025-05-23T15:32:40.383Z",
+      "role": "academic_registrar",
+      "student_number": null,
+      "course_name": null,
+      "college": "College of Science",
+      "lecture_number": null,
+      "subject_taught": null,
+      "department": null,
+      "groups": [4],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "api.user",
+    "pk": 8,
+    "fields": {
+      "password": "pbkdf2_sha256$870000$QbwlXCqA2CVrYgmIyhYHfR$jASMS1E4uYL/bO+/shvDwli8vaocONodPsOeJEl1KgY=",
+      "last_login": "2025-05-23T17:39:57.515Z",
+      "is_superuser": false,
+      "username": "denish",
+      "first_name": "denish",
+      "last_name": "azamuke",
+      "email": "azamuke@gmail.com",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2025-05-23T15:37:57.458Z",
+      "role": "lecturer",
+      "student_number": null,
+      "course_name": null,
+      "college": null,
+      "lecture_number": "07000011111",
+      "subject_taught": "application development",
+      "department": "computer_science",
+      "groups": [3],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "api.user",
+    "pk": 9,
+    "fields": {
+      "password": "pbkdf2_sha256$870000$FNXowmYXYNh0KOeYjwGWgk$djqvCQ526klLHLynlCAwzRbvEta3gllILVR0aGddQCE=",
+      "last_login": "2025-05-23T17:10:26.570Z",
+      "is_superuser": false,
+      "username": "Timo",
+      "first_name": "StudentFirst",
+      "last_name": "StudentLast",
+      "email": "student@example.com",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2025-05-23T15:41:54.679Z",
+      "role": "student",
+      "student_number": "S123456",
+      "course_name": "Computer Science",
+      "college": "College of Science",
+      "lecture_number": null,
+      "subject_taught": null,
+      "department": null,
+      "groups": [2],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "api.user",
+    "pk": 10,
+    "fields": {
+      "password": "pbkdf2_sha256$870000$pQSO1oGgRnD5MAAT1OqgkZ$Pe2jdBva+tKsSb8+H65477yfdEasPAS3v2Hh7ipMzbU=",
+      "last_login": "2025-05-24T15:48:48.371Z",
+      "is_superuser": false,
+      "username": "rayan",
+      "first_name": "rayan",
+      "last_name": "Male",
+      "email": "rayan@gmail.com",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2025-05-24T14:28:06.605Z",
+      "role": "lecturer",
+      "student_number": null,
+      "course_name": null,
+      "college": null,
+      "lecture_number": "0700001222",
+      "subject_taught": "application development",
+      "department": "electrical_engineering",
+      "groups": [3],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "api.issue",
+    "pk": 1,
+    "fields": {
+      "date_of_issue": "2025-02-20",
+      "course_unit": "OS",
+      "assigned_to": 3,
+      "description": "the word of us",
+      "attachment": "",
+      "year_of_study": "2023/2024",
+      "semester": "one",
+      "status": "resolved",
+      "created_by": 2,
+      "category": "marks",
+      "created_at": "2025-04-09T11:09:29.578Z"
+    }
+  },
+  {
+    "model": "api.issue",
+    "pk": 2,
+    "fields": {
+      "date_of_issue": "2025-03-20",
+      "course_unit": "SD",
+      "assigned_to": 3,
+      "description": "the appeal of the exams",
+      "attachment": "",
+      "year_of_study": "2025/2026",
+      "semester": "two",
+      "status": "resolved",
+      "created_by": 2,
+      "category": "appeals",
+      "created_at": "2025-04-09T11:26:37.484Z"
+    }
+  },
+  {
+    "model": "api.issue",
+    "pk": 3,
+    "fields": {
+      "date_of_issue": "2025-04-11",
+      "course_unit": "SAD",
+      "assigned_to": null,
+      "description": "i need my paper to be remarked",
+      "attachment": "",
+      "year_of_study": "2025/2026",
+      "semester": "two",
+      "status": "resolved",
+      "created_by": 2,
+      "category": "corrections",
+      "created_at": "2025-04-11T07:52:17.710Z"
+    }
+  },
+  {
+    "model": "api.issue",
+    "pk": 4,
+    "fields": {
+      "date_of_issue": "2025-04-11",
+      "course_unit": "SAD",
+      "assigned_to": 3,
+      "description": "i need my paper to be remarked",
+      "attachment": "",
+      "year_of_study": "2025/2026",
+      "semester": "two",
+      "status": "in_progress",
+      "created_by": 2,
+      "category": "corrections",
+      "created_at": "2025-04-11T07:59:05.310Z"
+    }
+  },
+  {
+    "model": "api.issue",
+    "pk": 5,
+    "fields": {
+      "date_of_issue": "2025-03-23",
+      "course_unit": "PS",
+      "assigned_to": 3,
+      "description": "my marks are missing in mathematics",
+      "attachment": "",
+      "year_of_study": "2024/2025",
+      "semester": "two",
+      "status": "in_progress",
+      "created_by": 2,
+      "category": "marks",
+      "created_at": "2025-04-11T13:18:46.473Z"
+    }
+  },
+  {
+    "model": "api.issue",
+    "pk": 6,
+    "fields": {
+      "date_of_issue": "2025-05-13",
+      "course_unit": "DSA",
+      "assigned_to": null,
+      "description": "jnjjjmj jjnmkkki",
+      "attachment": "",
+      "year_of_study": "2024/2025",
+      "semester": "two",
+      "status": "pending",
+      "created_by": 2,
+      "category": "marks",
+      "created_at": "2025-05-19T16:03:10.883Z"
+    }
+  },
+  {
+    "model": "api.issue",
+    "pk": 7,
+    "fields": {
+      "date_of_issue": "2025-05-20",
+      "course_unit": "SD",
+      "assigned_to": 3,
+      "description": "i have a 0% on test 1.",
+      "attachment": "",
+      "year_of_study": "2024/2025",
+      "semester": "two",
+      "status": "in_progress",
+      "created_by": 2,
+      "category": "marks",
+      "created_at": "2025-05-20T09:44:14.939Z"
+    }
+  },
+  {
+    "model": "api.issue",
+    "pk": 8,
+    "fields": {
+      "date_of_issue": "2025-05-23",
+      "course_unit": "OS",
+      "assigned_to": null,
+      "description": "am missing course work marks for operating system ...yet  i did all the course work that was given",
+      "attachment": "",
+      "year_of_study": "2024/2025",
+      "semester": "two",
+      "status": "pending",
+      "created_by": 2,
+      "category": "appeals",
+      "created_at": "2025-05-23T07:27:02.412Z"
+    }
+  },
+  {
+    "model": "api.issue",
+    "pk": 9,
+    "fields": {
+      "date_of_issue": "2025-05-23",
+      "course_unit": "PS",
+      "assigned_to": null,
+      "description": "missing marks in prob and statistics",
+      "attachment": "",
+      "year_of_study": "2024/2025",
+      "semester": "two",
+      "status": "pending",
+      "created_by": 2,
+      "category": "marks",
+      "created_at": "2025-05-23T08:31:12.509Z"
+    }
+  },
+  {
+    "model": "api.issue",
+    "pk": 10,
+    "fields": {
+      "date_of_issue": "2025-05-23",
+      "course_unit": "OS",
+      "assigned_to": null,
+      "description": "release the marks",
+      "attachment": "issue_attachments/react.svg",
+      "year_of_study": "2025/2026",
+      "semester": "one",
+      "status": "pending",
+      "created_by": 9,
+      "category": "marks",
+      "created_at": "2025-05-23T15:57:42.321Z"
+    }
+  },
+  {
+    "model": "api.issue",
+    "pk": 11,
+    "fields": {
+      "date_of_issue": "2025-05-23",
+      "course_unit": "DSA",
+      "assigned_to": null,
+      "description": "testing whether this works",
+      "attachment": "",
+      "year_of_study": "2024/2025",
+      "semester": "two",
+      "status": "pending",
+      "created_by": 9,
+      "category": "appeals",
+      "created_at": "2025-05-23T17:11:15.043Z"
+    }
+  },
+  {
+    "model": "api.issue",
+    "pk": 12,
+    "fields": {
+      "date_of_issue": "2025-05-24",
+      "course_unit": "PS",
+      "assigned_to": 10,
+      "description": "I noticed an error in the grade calculation for the Probability and Statistics course. The marks recorded on the portal do not match the scores I received on my assignments and exams. Specifically, the total percentage is lower than expected. I would like a review of the grade breakdown.",
+      "attachment": "",
+      "year_of_study": "2024/2025",
+      "semester": "two",
+      "status": "in_progress",
+      "created_by": 6,
+      "category": "corrections",
+      "created_at": "2025-05-24T14:43:17.359Z"
+    }
+  },
+  {
+    "model": "api.issue",
+    "pk": 13,
+    "fields": {
+      "date_of_issue": "2025-05-24",
+      "course_unit": "SAD",
+      "assigned_to": 10,
+      "description": "I am submitting an appeal regarding my results for the System Analysis and Design course. After reviewing my performance and comparing it with the feedback received, I believe there may have been a mistake in the grading or assessment process. I would appreciate a re-evaluation or clarification of the marking scheme used. Please let me know if additional documentation is required.",
+      "attachment": "",
+      "year_of_study": "2024/2025",
+      "semester": "two",
+      "status": "in_progress",
+      "created_by": 6,
+      "category": "appeals",
+      "created_at": "2025-05-24T15:45:52.552Z"
+    }
+  },
+  {
+    "model": "api.notification",
+    "pk": 1,
+    "fields": {
+      "user": 3,
+      "title": null,
+      "message": "You have been assigned a new issue: the word of us",
+      "type": "info",
+      "read": false,
+      "timestamp": "2025-04-09T11:09:29.628Z"
+    }
+  },
+  {
+    "model": "api.notification",
+    "pk": 2,
+    "fields": {
+      "user": 3,
+      "title": null,
+      "message": "You have been assigned a new issue: the appeal of the exams",
+      "type": "info",
+      "read": false,
+      "timestamp": "2025-04-09T11:26:37.490Z"
+    }
+  },
+  {
+    "model": "api.notification",
+    "pk": 3,
+    "fields": {
+      "user": 3,
+      "title": null,
+      "message": "You have been assigned a new issue: the word of us",
+      "type": "info",
+      "read": false,
+      "timestamp": "2025-04-10T17:56:42.398Z"
+    }
+  },
+  {
+    "model": "api.notification",
+    "pk": 4,
+    "fields": {
+      "user": 3,
+      "title": null,
+      "message": "You have been assigned a new issue: the word of us",
+      "type": "info",
+      "read": false,
+      "timestamp": "2025-04-11T07:44:55.923Z"
+    }
+  },
+  {
+    "model": "api.notification",
+    "pk": 5,
+    "fields": {
+      "user": 3,
+      "title": null,
+      "message": "You have been assigned a new issue: the word of us",
+      "type": "info",
+      "read": true,
+      "timestamp": "2025-04-11T07:45:06.974Z"
+    }
+  },
+  {
+    "model": "api.notification",
+    "pk": 6,
+    "fields": {
+      "user": 3,
+      "title": null,
+      "message": "You have been assigned a new issue: the word of us",
+      "type": "info",
+      "read": true,
+      "timestamp": "2025-04-11T07:48:12.194Z"
+    }
+  },
+  {
+    "model": "api.notification",
+    "pk": 7,
+    "fields": {
+      "user": 3,
+      "title": null,
+      "message": "You have been assigned a new issue: the appeal of the exams",
+      "type": "info",
+      "read": true,
+      "timestamp": "2025-04-11T11:19:57.651Z"
+    }
+  },
+  {
+    "model": "api.notification",
+    "pk": 8,
+    "fields": {
+      "user": 3,
+      "title": null,
+      "message": "You have been assigned a new issue: the word of us",
+      "type": "info",
+      "read": true,
+      "timestamp": "2025-04-11T13:12:28.831Z"
+    }
+  },
+  {
+    "model": "api.notification",
+    "pk": 9,
+    "fields": {
+      "user": 3,
+      "title": null,
+      "message": "You have been assigned a new issue: the word of us",
+      "type": "info",
+      "read": true,
+      "timestamp": "2025-04-11T13:12:46.513Z"
+    }
+  },
+  {
+    "model": "api.notification",
+    "pk": 10,
+    "fields": {
+      "user": 3,
+      "title": null,
+      "message": "You have been assigned a new issue: the word of us",
+      "type": "info",
+      "read": true,
+      "timestamp": "2025-04-11T14:40:52.703Z"
+    }
+  },
+  {
+    "model": "api.notification",
+    "pk": 11,
+    "fields": {
+      "user": 3,
+      "title": null,
+      "message": "You have been assigned a new issue: the word of us",
+      "type": "info",
+      "read": true,
+      "timestamp": "2025-04-11T15:19:24.454Z"
+    }
+  },
+  {
+    "model": "api.notification",
+    "pk": 12,
+    "fields": {
+      "user": 1,
+      "title": "New Issue Submitted",
+      "message": "A new issue has been submitted: i have a 0% on test 1.",
+      "type": "info",
+      "read": false,
+      "timestamp": "2025-05-20T09:44:14.953Z"
+    }
+  },
+  {
+    "model": "api.notification",
+    "pk": 13,
+    "fields": {
+      "user": 4,
+      "title": "New Issue Submitted",
+      "message": "A new issue has been submitted: i have a 0% on test 1.",
+      "type": "info",
+      "read": false,
+      "timestamp": "2025-05-20T09:44:14.964Z"
+    }
+  },
+  {
+    "model": "api.notification",
+    "pk": 14,
+    "fields": {
+      "user": 5,
+      "title": "New Issue Submitted",
+      "message": "A new issue has been submitted: i have a 0% on test 1.",
+      "type": "info",
+      "read": false,
+      "timestamp": "2025-05-20T09:44:14.971Z"
+    }
+  },
+  {
+    "model": "api.notification",
+    "pk": 15,
+    "fields": {
+      "user": 1,
+      "title": "New Issue Submitted",
+      "message": "A new issue has been submitted: am missing course work marks for operating system ...yet  i did all the course work that was given",
+      "type": "info",
+      "read": false,
+      "timestamp": "2025-05-23T07:27:02.418Z"
+    }
+  },
+  {
+    "model": "api.notification",
+    "pk": 16,
+    "fields": {
+      "user": 4,
+      "title": "New Issue Submitted",
+      "message": "A new issue has been submitted: am missing course work marks for operating system ...yet  i did all the course work that was given",
+      "type": "info",
+      "read": false,
+      "timestamp": "2025-05-23T07:27:02.424Z"
+    }
+  },
+  {
+    "model": "api.notification",
+    "pk": 17,
+    "fields": {
+      "user": 5,
+      "title": "New Issue Submitted",
+      "message": "A new issue has been submitted: am missing course work marks for operating system ...yet  i did all the course work that was given",
+      "type": "info",
+      "read": false,
+      "timestamp": "2025-05-23T07:27:02.429Z"
+    }
+  },
+  {
+    "model": "api.notification",
+    "pk": 18,
+    "fields": {
+      "user": 1,
+      "title": "New Issue Submitted",
+      "message": "A new issue has been submitted: missing marks in prob and statistics",
+      "type": "info",
+      "read": false,
+      "timestamp": "2025-05-23T08:31:12.516Z"
+    }
+  },
+  {
+    "model": "api.notification",
+    "pk": 19,
+    "fields": {
+      "user": 4,
+      "title": "New Issue Submitted",
+      "message": "A new issue has been submitted: missing marks in prob and statistics",
+      "type": "info",
+      "read": false,
+      "timestamp": "2025-05-23T08:31:12.520Z"
+    }
+  },
+  {
+    "model": "api.notification",
+    "pk": 20,
+    "fields": {
+      "user": 5,
+      "title": "New Issue Submitted",
+      "message": "A new issue has been submitted: missing marks in prob and statistics",
+      "type": "info",
+      "read": false,
+      "timestamp": "2025-05-23T08:31:12.524Z"
+    }
+  },
+  {
+    "model": "api.notification",
+    "pk": 21,
+    "fields": {
+      "user": 3,
+      "title": "New Issue Assigned",
+      "message": "You have been assigned a new issue: the word of us",
+      "type": "info",
+      "read": false,
+      "timestamp": "2025-05-23T09:34:19.131Z"
+    }
+  },
+  {
+    "model": "api.notification",
+    "pk": 22,
+    "fields": {
+      "user": 3,
+      "title": "New Issue Assigned",
+      "message": "You have been assigned a new issue: the appeal of the exams",
+      "type": "info",
+      "read": false,
+      "timestamp": "2025-05-23T09:47:18.466Z"
+    }
+  },
+  {
+    "model": "api.notification",
+    "pk": 23,
+    "fields": {
+      "user": 3,
+      "title": "New Issue Assigned",
+      "message": "You have been assigned a new issue: i need my paper to be remarked",
+      "type": "info",
+      "read": false,
+      "timestamp": "2025-05-23T12:33:40.268Z"
+    }
+  },
+  {
+    "model": "api.notification",
+    "pk": 24,
+    "fields": {
+      "user": 3,
+      "title": "New Issue Assigned",
+      "message": "You have been assigned a new issue: my marks are missing in mathematics",
+      "type": "info",
+      "read": false,
+      "timestamp": "2025-05-23T12:33:58.561Z"
+    }
+  },
+  {
+    "model": "api.notification",
+    "pk": 25,
+    "fields": {
+      "user": 3,
+      "title": "New Issue Assigned",
+      "message": "You have been assigned a new issue: i have a 0% on test 1.",
+      "type": "info",
+      "read": true,
+      "timestamp": "2025-05-23T12:38:38.098Z"
+    }
+  },
+  {
+    "model": "api.notification",
+    "pk": 26,
+    "fields": {
+      "user": 1,
+      "title": "New Issue Submitted",
+      "message": "A new issue has been submitted: release the marks",
+      "type": "info",
+      "read": false,
+      "timestamp": "2025-05-23T15:57:42.326Z"
+    }
+  },
+  {
+    "model": "api.notification",
+    "pk": 27,
+    "fields": {
+      "user": 4,
+      "title": "New Issue Submitted",
+      "message": "A new issue has been submitted: release the marks",
+      "type": "info",
+      "read": false,
+      "timestamp": "2025-05-23T15:57:42.330Z"
+    }
+  },
+  {
+    "model": "api.notification",
+    "pk": 28,
+    "fields": {
+      "user": 5,
+      "title": "New Issue Submitted",
+      "message": "A new issue has been submitted: release the marks",
+      "type": "info",
+      "read": false,
+      "timestamp": "2025-05-23T15:57:42.334Z"
+    }
+  },
+  {
+    "model": "api.notification",
+    "pk": 29,
+    "fields": {
+      "user": 7,
+      "title": "New Issue Submitted",
+      "message": "A new issue has been submitted: release the marks",
+      "type": "info",
+      "read": false,
+      "timestamp": "2025-05-23T15:57:42.337Z"
+    }
+  },
+  {
+    "model": "api.notification",
+    "pk": 30,
+    "fields": {
+      "user": 1,
+      "title": "New Issue Submitted",
+      "message": "A new issue has been submitted: testing whether this works",
+      "type": "info",
+      "read": false,
+      "timestamp": "2025-05-23T17:11:15.050Z"
+    }
+  },
+  {
+    "model": "api.notification",
+    "pk": 31,
+    "fields": {
+      "user": 4,
+      "title": "New Issue Submitted",
+      "message": "A new issue has been submitted: testing whether this works",
+      "type": "info",
+      "read": false,
+      "timestamp": "2025-05-23T17:11:15.054Z"
+    }
+  },
+  {
+    "model": "api.notification",
+    "pk": 32,
+    "fields": {
+      "user": 5,
+      "title": "New Issue Submitted",
+      "message": "A new issue has been submitted: testing whether this works",
+      "type": "info",
+      "read": false,
+      "timestamp": "2025-05-23T17:11:15.057Z"
+    }
+  },
+  {
+    "model": "api.notification",
+    "pk": 33,
+    "fields": {
+      "user": 7,
+      "title": "New Issue Submitted",
+      "message": "A new issue has been submitted: testing whether this works",
+      "type": "info",
+      "read": false,
+      "timestamp": "2025-05-23T17:11:15.060Z"
+    }
+  },
+  {
+    "model": "api.notification",
+    "pk": 34,
+    "fields": {
+      "user": 1,
+      "title": "New Issue Submitted",
+      "message": "A new issue has been submitted: I noticed an error in the grade calculation for the Probability and Statistics course. The marks recorded on the portal do not match the scores I received on my assignments and exams. Specifically, the total percentage is lower than expected. I would like a review of the grade breakdown.",
+      "type": "info",
+      "read": false,
+      "timestamp": "2025-05-24T14:43:17.365Z"
+    }
+  },
+  {
+    "model": "api.notification",
+    "pk": 35,
+    "fields": {
+      "user": 4,
+      "title": "New Issue Submitted",
+      "message": "A new issue has been submitted: I noticed an error in the grade calculation for the Probability and Statistics course. The marks recorded on the portal do not match the scores I received on my assignments and exams. Specifically, the total percentage is lower than expected. I would like a review of the grade breakdown.",
+      "type": "info",
+      "read": false,
+      "timestamp": "2025-05-24T14:43:17.369Z"
+    }
+  },
+  {
+    "model": "api.notification",
+    "pk": 36,
+    "fields": {
+      "user": 5,
+      "title": "New Issue Submitted",
+      "message": "A new issue has been submitted: I noticed an error in the grade calculation for the Probability and Statistics course. The marks recorded on the portal do not match the scores I received on my assignments and exams. Specifically, the total percentage is lower than expected. I would like a review of the grade breakdown.",
+      "type": "info",
+      "read": false,
+      "timestamp": "2025-05-24T14:43:17.372Z"
+    }
+  },
+  {
+    "model": "api.notification",
+    "pk": 37,
+    "fields": {
+      "user": 7,
+      "title": "New Issue Submitted",
+      "message": "A new issue has been submitted: I noticed an error in the grade calculation for the Probability and Statistics course. The marks recorded on the portal do not match the scores I received on my assignments and exams. Specifically, the total percentage is lower than expected. I would like a review of the grade breakdown.",
+      "type": "info",
+      "read": false,
+      "timestamp": "2025-05-24T14:43:17.375Z"
+    }
+  },
+  {
+    "model": "api.notification",
+    "pk": 38,
+    "fields": {
+      "user": 1,
+      "title": "New Issue Submitted",
+      "message": "A new issue has been submitted: I am submitting an appeal regarding my results for the System Analysis and Design course. After reviewing my performance and comparing it with the feedback received, I believe there may have been a mistake in the grading or assessment process. I would appreciate a re-evaluation or clarification of the marking scheme used. Please let me know if additional documentation is required.",
+      "type": "info",
+      "read": false,
+      "timestamp": "2025-05-24T15:45:52.557Z"
+    }
+  },
+  {
+    "model": "api.notification",
+    "pk": 39,
+    "fields": {
+      "user": 4,
+      "title": "New Issue Submitted",
+      "message": "A new issue has been submitted: I am submitting an appeal regarding my results for the System Analysis and Design course. After reviewing my performance and comparing it with the feedback received, I believe there may have been a mistake in the grading or assessment process. I would appreciate a re-evaluation or clarification of the marking scheme used. Please let me know if additional documentation is required.",
+      "type": "info",
+      "read": false,
+      "timestamp": "2025-05-24T15:45:52.561Z"
+    }
+  },
+  {
+    "model": "api.notification",
+    "pk": 40,
+    "fields": {
+      "user": 5,
+      "title": "New Issue Submitted",
+      "message": "A new issue has been submitted: I am submitting an appeal regarding my results for the System Analysis and Design course. After reviewing my performance and comparing it with the feedback received, I believe there may have been a mistake in the grading or assessment process. I would appreciate a re-evaluation or clarification of the marking scheme used. Please let me know if additional documentation is required.",
+      "type": "info",
+      "read": false,
+      "timestamp": "2025-05-24T15:45:52.564Z"
+    }
+  },
+  {
+    "model": "api.notification",
+    "pk": 41,
+    "fields": {
+      "user": 7,
+      "title": "New Issue Submitted",
+      "message": "A new issue has been submitted: I am submitting an appeal regarding my results for the System Analysis and Design course. After reviewing my performance and comparing it with the feedback received, I believe there may have been a mistake in the grading or assessment process. I would appreciate a re-evaluation or clarification of the marking scheme used. Please let me know if additional documentation is required.",
+      "type": "info",
+      "read": false,
+      "timestamp": "2025-05-24T15:45:52.567Z"
+    }
+  },
+  {
+    "model": "api.comments",
+    "pk": 1,
+    "fields": {
+      "issue": 1,
+      "user": 3,
+      "message": "the worg is good",
+      "created_at": "2025-04-11T07:48:12.217Z"
+    }
+  },
+  {
+    "model": "api.comments",
+    "pk": 2,
+    "fields": {
+      "issue": 2,
+      "user": 3,
+      "message": "still working on it",
+      "created_at": "2025-04-11T11:19:57.691Z"
+    }
+  },
+  {
+    "model": "api.comments",
+    "pk": 3,
+    "fields": {
+      "issue": 1,
+      "user": 3,
+      "message": "gyghhkm",
+      "created_at": "2025-04-11T13:12:28.870Z"
+    }
+  },
+  {
+    "model": "api.comments",
+    "pk": 4,
+    "fields": {
+      "issue": 1,
+      "user": 3,
+      "message": "huklm;lk",
+      "created_at": "2025-04-11T13:12:46.540Z"
+    }
+  },
+  {
+    "model": "api.comments",
+    "pk": 5,
+    "fields": {
+      "issue": 1,
+      "user": 3,
+      "message": "hfeiofrufjsl;ajfj",
+      "created_at": "2025-04-11T14:40:52.768Z"
+    }
+  },
+  {
+    "model": "api.comments",
+    "pk": 6,
+    "fields": {
+      "issue": 1,
+      "user": 3,
+      "message": "xxdcx",
+      "created_at": "2025-04-11T15:19:24.490Z"
+    }
+  },
+  {
+    "model": "api.comments",
+    "pk": 7,
+    "fields": {
+      "issue": 3,
+      "user": 3,
+      "message": "i remarked the paper",
+      "created_at": "2025-05-20T14:20:53.142Z"
+    }
+  }
+]

@@ -15,8 +15,16 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path, include
+from django.urls import path, include, re_path
 from django.http import HttpResponse
+from django.views.generic import TemplateView
+
+FRONTEND_EXCLUDES = "|".join([
+    "api/",
+    "admin/",
+    "static/",
+    "media/",
+])
 
 def home(request):
     return HttpResponse("Welcome to the academic Issue Tracking System (AITS)!")
@@ -24,5 +32,6 @@ def home(request):
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/', include('api.urls')),
-    path('', home),
+    # path('', home),
+    re_path(f'^(?!{FRONTEND_EXCLUDES}).*$', TemplateView.as_view(template_name='index.html'), name='reactapp'),  # Catch-all for React routing
 ]
