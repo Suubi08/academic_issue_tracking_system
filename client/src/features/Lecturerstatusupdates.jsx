@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import axios from "axios";
+import API from "../utils/axiosInstance";
 import {
   Card,
   CardHeader,
@@ -39,7 +39,7 @@ const Lecturerstatusupdates = () => {
     const fetchIssues = async () => {
       try {
         const token = localStorage.getItem("accessToken");
-        const response = await axios.get("https://aitsh-47039bb03354.herokuapp.com/api/issues/", {
+        const response = await API.get("/issues/", {
           headers: {
             Authorization: `Bearer ${token}`,
           },
