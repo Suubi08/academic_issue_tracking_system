@@ -1,3 +1,5 @@
+"use client";
+
 import { useState, useEffect } from "react";
 import { Outlet, useLocation, useNavigate } from "react-router-dom";
 import Navbar from "../components/Navbar";
@@ -62,12 +64,15 @@ function Layout() {
     },
   };
 
-  const getPageTitle = () => routeConfig[location.pathname]?.title || "Dashboard";
+  const getPageTitle = () =>
+    routeConfig[location.pathname]?.title || "Dashboard";
   const getPageDescription = () =>
     routeConfig[location.pathname]?.description || "";
 
   // Determine if we should show specific buttons
-  const shouldShowBackButton = location.pathname.includes("/issuereport") || location.pathname.includes("/settings");
+  const shouldShowBackButton =
+    location.pathname.includes("/issuereport") ||
+    location.pathname.includes("/settings");
   const shouldShowReportButton =
     !location.pathname.includes("/issuereport") &&
     !location.pathname.includes("/settings") &&
@@ -76,12 +81,28 @@ function Layout() {
   return (
     <div className="h-screen flex flex-col md:flex-row">
       {/* Sidebar */}
-      <div className="w-64 bg-zinc-900 text-white fixed inset-y-0">
+      <div
+        className={`
+          bg-zinc-900 text-white w-64
+          fixed inset-y-0 left-0 z-40
+          transition-transform duration-200
+          ${sidebarOpen ? "translate-x-0" : "-translate-x-full"}
+          md:static md:translate-x-0 md:z-auto
+        `}
+      >
         <Sidebar open={sidebarOpen} setOpen={setSidebarOpen} />
       </div>
 
+      {/* Overlay for mobile */}
+      {sidebarOpen && (
+        <div
+          className="fixed inset-0 bg-black bg-opacity-40 z-30 md:hidden"
+          onClick={() => setSidebarOpen(false)}
+        />
+      )}
+
       {/* Main content */}
-      <div className="flex-1 flex flex-col ml-64">
+      <div className="flex-1 flex flex-col transition-all duration-200 md:ml-0">
         <Navbar
           setSidebarOpen={setSidebarOpen}
           sidebarOpen={sidebarOpen}
@@ -90,7 +111,7 @@ function Layout() {
           showBackButton={shouldShowBackButton}
           showReportButton={shouldShowReportButton}
         />
-        <main className="flex-1 overflow-y-auto p-6 bg-zinc-200">
+        <main className="flex-1 overflow-y-auto p-4 sm:p-6 bg-zinc-200">
           <Outlet />
         </main>
       </div>
