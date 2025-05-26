@@ -10,7 +10,7 @@ import {
 import { Button } from "../components";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "../components/ui";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
+import API from "../utils/axiosInstance";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
@@ -28,14 +28,11 @@ const LecturerNotifications = () => {
         return;
       }
       try {
-        const response = await axios.get(
-          "https://aitsh-47039bb03354.herokuapp.com/api/notifications/",
-          {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          }
-        );
+        const response = await API.get("/notifications/", {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
         setNotifications(response.data);
       } catch (error) {
         console.error("Error fetching notifications:", error);
@@ -62,8 +59,8 @@ const LecturerNotifications = () => {
       notifications.map((n) => (n.id === id ? { ...n, read: true } : n))
     );
     try {
-      await axios.patch(
-        `http://localhost:8000/api/notifications/${id}/`,
+      await API.patch(
+        `/notifications/${id}/`,
         { read: true },
         {
           headers: {
