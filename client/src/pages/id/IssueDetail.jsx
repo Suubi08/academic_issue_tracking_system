@@ -13,7 +13,7 @@ import {
   SelectItem,
 } from "../../components/ui/select";
 import LoadingSpinner from "../../components/loading-spinner";
-import axios from "axios";
+import API from "../../utils/axiosInstance";
 
 function IssueDetail() {
   const { id } = useParams();
@@ -42,9 +42,7 @@ function IssueDetail() {
     try {
       setLoading(true);
 
-      const issueResponse = await axios.get(
-        `https://aitsh-47039bb03354.herokuapp.com/api/issues/${id}`
-      );
+      const issueResponse = await API.get(`/issues/${id}`);
 
       setIssue(issueResponse.data);
       console.log(issueResponse.data);
