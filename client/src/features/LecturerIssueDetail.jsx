@@ -1,4 +1,4 @@
-import axios from "axios";
+import API from "../utils/axiosInstance";
 import { format } from "date-fns";
 import React, { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
@@ -13,9 +13,7 @@ const LecturerIssueDetails = () => {
     console.log("Issue ID:", id); // Debugging
     const fetchData = async () => {
       try {
-        const response = await axios.get(
-          `http://127.0.0.1:8000/api/issues/${id}`
-        );
+        const response = await API.get(`/issues/${id}`);
         setNotification(response.data); // Update state with fetched data
         setError(null); // Clear any previous errors
       } catch (error) {

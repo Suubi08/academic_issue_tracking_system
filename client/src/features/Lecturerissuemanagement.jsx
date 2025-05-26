@@ -3,8 +3,8 @@ import { Button } from "../components/ui";
 import { CardContent, StatusDropdown, Card, CardHeader, CardTitle } from "../components";
 import { Badge } from "../components/ui";
 import { Textarea } from "../components/ui";
-import axios from "axios";
-import { CheckCircle, Clock } from "lucide-react";
+
+
 import API from '../utils/axiosInstance';
 
 const Lecturerissuemanagement = () => {
