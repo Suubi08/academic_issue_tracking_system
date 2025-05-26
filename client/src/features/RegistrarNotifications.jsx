@@ -1,10 +1,7 @@
 import { useEffect, useState } from "react";
-import axios from "axios";
+import API from "../utils/axiosInstance";
 import { AlertCircle, Bell, CheckCircle, Info, UserPlus } from "lucide-react";
-import {
-  Card,
-  CardContent,
-} from "../components";
+import { Card, CardContent } from "../components";
 import {
   Tabs,
   TabsContent,
@@ -20,14 +17,11 @@ const RegistrarNotifications = () => {
     const fetchNotifications = async () => {
       try {
         const token = localStorage.getItem("accessToken");
-        const response = await axios.get(
-          "https://aitsh-47039bb03354.herokuapp.com/api/notifications/",
-          {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          }
-        );
+        const response = await API.get("/notifications/", {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
         setNotifications(response.data);
       } catch (error) {
         console.error("Error fetching notifications:", error);
