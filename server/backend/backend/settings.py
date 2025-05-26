@@ -123,7 +123,7 @@ DATABASES = {
     'default': dj_database_url.config(
         # default='postgres://postgres:1234@localhost:5432/aits'
         # default='sqlite://:@localhost/aits'
-        default=(os.environ['DB_URL'] or 'sqlite:///' + os.path.join(BASE_DIR, 'db.sqlite3'))
+        default=os.environ.get('DB_URL', 'sqlite:///' + os.path.join(BASE_DIR, 'db.sqlite3'))
     )
 }
 

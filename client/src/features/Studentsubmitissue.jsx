@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { Paperclip } from "lucide-react";
-import API from '../utils/axiosInstance';
+import API from "../utils/axiosInstance";
 import { useNavigate } from "react-router-dom";
 
 const categories = [
@@ -29,7 +29,7 @@ const semesters = [
   { value: "two", label: "Semester Two" },
 ];
 
-  const Studentsubmitissue = () => {
+const Studentsubmitissue = () => {
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
     category: "",
@@ -77,13 +77,15 @@ const semesters = [
     setSearchTerm(lecturer.username);
     setLecturers([]);
   };
-  
 
   const handleFileChange = (e) => {
     const file = e.target.files[0] || null; // Ensure it never becomes undefined
 
     if (file && file.size > 5 * 1024 * 1024) {
-      setErrors((prev) => ({ ...prev, attachment: "File size must be less than 5MB." }));
+      setErrors((prev) => ({
+        ...prev,
+        attachment: "File size must be less than 5MB.",
+      }));
       return;
     }
 
@@ -124,11 +126,11 @@ const semesters = [
     data.append("semester", formData.semester || "");
     data.append("assigned_to", formData.assigned_to || "");
     data.append("year_of_study", formData.year_of_study || "");
-    data.append("created_by", localStorage.getItem('id'));
+    data.append("created_by", localStorage.getItem("id"));
     if (formData.attachment) {
       data.append("attachment", formData.attachment);
     }
-  
+
     try {
       const response = await API.post("issues/", data, {
         headers: {
@@ -136,7 +138,7 @@ const semesters = [
           Authorization: `Bearer ${localStorage.getItem("access_token")}`,
         },
       });
-  
+
       if (response.status === 201) {
         setSuccessMessage("Issue reported successfully!");
         setTimeout(() => {
@@ -146,7 +148,8 @@ const semesters = [
         setErrors("Issue submission failed. Please try again.");
       }
     } catch (error) {
-      const errorMessage = error.response?.data || "Issue failed. Please try again.";
+      const errorMessage =
+        error.response?.data || "Issue failed. Please try again.";
       setErrors(errorMessage);
     } finally {
       setLoading(false);
@@ -157,11 +160,12 @@ const semesters = [
     navigate("/studentdashboard");
   };
 
-
   useEffect(() => {
     const fetchLecturers = async () => {
       try {
-        const response = await fetch(`http://127.0.0.1:8000/api/users/lecturer/?search=${searchTerm}`);
+        const response = await fetch(
+          `https://aitsh-47039bb03354.herokuapp.com/api/users/lecturer/?search=${searchTerm}`
+        );
         if (response.ok) {
           const data = await response.json();
           console.log("Fetched Lecturers:", data);
@@ -186,7 +190,6 @@ const semesters = [
       setFilteredLecturers([]);
     }
   }, [searchTerm]);
-
 
   return (
     <div className="flex-1 p-4 md:p-6 max-w-6xl mx-auto w-full">
@@ -289,10 +292,11 @@ const semesters = [
                     ))}
                   </ul>
                 ) : (
-                  showDropdown && <p className="text-gray-500">No lecturers found.</p> // Show only when dropdown is open
+                  showDropdown && (
+                    <p className="text-gray-500">No lecturers found.</p>
+                  ) // Show only when dropdown is open
                 )}
               </div>
-
             </div>
 
             <div className="space-y-2 mb-6">
@@ -314,8 +318,10 @@ const semesters = [
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <div className="space-y-2">
-                <label htmlFor="attachment" className="block">Attachment</label>
+              <div className="space-y-2">
+                <label htmlFor="attachment" className="block">
+                  Attachment
+                </label>
                 <div className="flex items-center space-x-2">
                   <input
                     type="file"
@@ -323,9 +329,14 @@ const semesters = [
                     onChange={handleFileChange}
                     className="hidden"
                   />
-                  <label htmlFor="attachment" className="cursor-pointer text-blue-500">
+                  <label
+                    htmlFor="attachment"
+                    className="cursor-pointer text-blue-500"
+                  >
                     <Paperclip size={16} />
-                    {formData.attachment ? formData.attachment.name : "Attach a file"}
+                    {formData.attachment
+                      ? formData.attachment.name
+                      : "Attach a file"}
                   </label>
                 </div>
                 {errors.attachment && (
@@ -333,7 +344,9 @@ const semesters = [
                 )}
               </div>
               <div className="space-y-2">
-                <label htmlFor="year_of_study" className="block">Year of Study</label>
+                <label htmlFor="year_of_study" className="block">
+                  Year of Study
+                </label>
                 <select
                   id="year_of_study"
                   value={formData.year_of_study}
