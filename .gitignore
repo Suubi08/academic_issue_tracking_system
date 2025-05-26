@@ -1,6 +1,7 @@
 server/backend/staticfiles
 # Ignore the sqlite database file
 server/backend/aits
+server/backend/db.sqlite3
 
 # Ignore __pycache__ directories
 # server/backend/backend/__pycache__/*

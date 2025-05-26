@@ -209,7 +209,7 @@ const Lecturerstatusupdates = () => {
         <CardContent>
           <Tabs
             defaultValue="all"
-            className="w-full"
+            className="w-full overflow-x-auto"
             onValueChange={setActiveTab}
           >
             <TabsList className="mb-4">
