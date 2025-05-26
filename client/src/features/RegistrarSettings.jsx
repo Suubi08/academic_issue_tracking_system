@@ -43,7 +43,7 @@ const RegistrarSettings = () => {
       }
       try {
         const response = await axios.get(
-          `http://localhost:8000/api/users/registrar/${registrarId}/`,
+          `https://aitsh-47039bb03354.herokuapp.com/api/users/registrar/${registrarId}/`,
           {
             headers: {
               Authorization: `Bearer ${token}`,

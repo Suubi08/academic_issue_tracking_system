@@ -49,7 +49,7 @@ const Studentsettings = () => {
       }
       try {
         const response = await axios.get(
-          `http://localhost:8000/api/users/student/${studentId}/`,
+          `https://aitsh-47039bb03354.herokuapp.com/api/users/student/${studentId}/`,
           {
             headers: {
               Authorization: `Bearer ${token}`,
