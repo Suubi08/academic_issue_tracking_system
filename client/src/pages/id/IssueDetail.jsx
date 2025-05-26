@@ -43,7 +43,7 @@ function IssueDetail() {
       setLoading(true);
 
       const issueResponse = await axios.get(
-        `http://localhost:8000/api/issues/${id}`
+        `https://aitsh-47039bb03354.herokuapp.com/api/issues/${id}`
       );
 
       setIssue(issueResponse.data);
