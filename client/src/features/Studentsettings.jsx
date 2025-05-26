@@ -13,7 +13,7 @@ import {
 import { Button } from "../components/ui";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "../components/ui";
 import { User, Bell, Shield } from "lucide-react";
-import axios from "axios";
+import API from "../utils/axiosInstance";
 import { toast } from "react-toastify";
 
 const Studentsettings = () => {
@@ -48,14 +48,11 @@ const Studentsettings = () => {
         return;
       }
       try {
-        const response = await axios.get(
-          `https://aitsh-47039bb03354.herokuapp.com/api/users/student/${studentId}/`,
-          {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          }
-        );
+        const response = await API.get(`/users/student/${studentId}/`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
         setProfile({
           first_name: response.data.first_name || "",
           last_name: response.data.last_name || "",
