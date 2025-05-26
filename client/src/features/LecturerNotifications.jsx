@@ -29,7 +29,7 @@ const LecturerNotifications = () => {
       }
       try {
         const response = await axios.get(
-          "http://localhost:8000/api/notifications/",
+          "https://aitsh-47039bb03354.herokuapp.com/api/notifications/",
           {
             headers: {
               Authorization: `Bearer ${token}`,

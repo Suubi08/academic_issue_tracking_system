@@ -15,7 +15,7 @@ const NotificationDetails = () => {
     const fetchNotification = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:8000/api/notifications/${id}/`,
+          `https://aitsh-47039bb03354.herokuapp.com/api/notifications/${id}/`,
           {
             headers: {
               Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
@@ -27,7 +27,7 @@ const NotificationDetails = () => {
         // Mark as read if not already
         if (!response.data.read) {
           await axios.patch(
-            `http://localhost:8000/api/notifications/${id}/`,
+            `https://aitsh-47039bb03354.herokuapp.com/api/notifications/${id}/`,
             { read: true },
             {
               headers: {

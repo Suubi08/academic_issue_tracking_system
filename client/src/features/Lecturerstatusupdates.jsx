@@ -39,7 +39,7 @@ const Lecturerstatusupdates = () => {
     const fetchIssues = async () => {
       try {
         const token = localStorage.getItem("accessToken");
-        const response = await axios.get("http://localhost:8000/api/issues/", {
+        const response = await axios.get("https://aitsh-47039bb03354.herokuapp.com/api/issues/", {
           headers: {
             Authorization: `Bearer ${token}`,
           },
