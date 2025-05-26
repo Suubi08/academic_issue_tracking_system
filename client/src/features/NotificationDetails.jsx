@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import axios from "axios";
+import API from "../utils/axiosInstance";
 import { Card, CardHeader, CardTitle, CardContent } from "../components";
 import { Button } from "../components";
 import { toast } from "react-toastify";
@@ -14,27 +14,12 @@ const NotificationDetails = () => {
   useEffect(() => {
     const fetchNotification = async () => {
       try {
-        const response = await axios.get(
-          `https://aitsh-47039bb03354.herokuapp.com/api/notifications/${id}/`,
-          {
-            headers: {
-              Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
-            },
-          }
-        );
+        const response = await API.get(`/notifications/${id}/`);
         setNotification(response.data);
 
         // Mark as read if not already
         if (!response.data.read) {
-          await axios.patch(
-            `https://aitsh-47039bb03354.herokuapp.com/api/notifications/${id}/`,
-            { read: true },
-            {
-              headers: {
-                Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
-              },
-            }
-          );
+          await API.patch(`/notifications/${id}/`, { read: true });
         }
       } catch (error) {
         toast.error("Failed to fetch notification details.");

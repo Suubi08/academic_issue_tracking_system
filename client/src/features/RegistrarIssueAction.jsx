@@ -37,7 +37,7 @@ import {
 import { useToast } from "../components/ui/use_toast";
 import { Badge } from "../components";
 import { Card, CardHeader, CardTitle, CardContent } from "../components";
-import axios from "axios";
+
 import API from '../utils/axiosInstance';
 
 const RegistrarIssueAction = () => {
