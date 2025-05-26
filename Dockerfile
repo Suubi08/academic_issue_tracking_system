@@ -7,7 +7,7 @@ RUN mkdir /app
 COPY . /app/
  
 # Set the working directory inside the container
-WORKDIR /app/frontend
+WORKDIR /app/client
 
 # RUN npm install --global corepack@latest && corepack enable && \
 #     corepack prepare pnpm@latest-10 --activate && pnpm config set store-dir ~/.pnpm-store \
