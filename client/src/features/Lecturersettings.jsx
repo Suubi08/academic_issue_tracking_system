@@ -3,7 +3,6 @@
 import { useState, useEffect } from "react";
 import { Switch } from "../components/ui";
 
-
 import { Input } from "../components/ui";
 import { Label } from "../components/ui";
 import {
@@ -17,7 +16,7 @@ import {
 import { Button } from "../components/ui";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "../components/ui";
 import { User, Bell, Shield, Key } from "lucide-react";
-import axios from "axios";
+import API from "../utils/axiosInstance";
 import { toast } from "react-toastify";
 
 const Lecturersettings = () => {
@@ -48,14 +47,11 @@ const Lecturersettings = () => {
         return;
       }
       try {
-        const response = await axios.get(
-          `https://aitsh-47039bb03354.herokuapp.com/api/users/lecturer/${lecturerId}/`,
-          {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          }
-        );
+        const response = await API.get(`/users/lecturer/${lecturerId}/`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
         setProfile({
           first_name: response.data.first_name || "",
           last_name: response.data.last_name || "",
