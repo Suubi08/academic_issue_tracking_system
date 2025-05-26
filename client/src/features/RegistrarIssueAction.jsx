@@ -1,3 +1,5 @@
+"use client";
+
 import { useState, useEffect } from "react";
 import {
   CheckCircle2,
@@ -37,8 +39,7 @@ import {
 import { useToast } from "../components/ui/use_toast";
 import { Badge } from "../components";
 import { Card, CardHeader, CardTitle, CardContent } from "../components";
-
-import API from '../utils/axiosInstance';
+import API from "../utils/axiosInstance";
 
 const RegistrarIssueAction = () => {
   const { toast } = useToast();
@@ -59,10 +60,10 @@ const RegistrarIssueAction = () => {
       try {
         const token = localStorage.getItem("accessToken");
         const [issuesRes, lecturersRes] = await Promise.all([
-          API.get("issues/", {
+          API.get("/issues/", {
             headers: { Authorization: `Bearer ${token}` },
           }),
-          API.get("users/lecturer/", {
+          API.get("/users/lecturer/", {
             headers: { Authorization: `Bearer ${token}` },
           }),
         ]);
@@ -72,17 +73,16 @@ const RegistrarIssueAction = () => {
         toast({
           title: "Error",
           description: "Failed to fetch issues or lecturers.",
-          variant: "destructive",
         });
       }
       setLoading(false);
     };
     fetchData();
-  }, [toast]);
+  }, []);
 
   const handleAssignIssue = (issue) => {
     setSelectedIssue(issue);
-    setSelectedLecturer("");
+    setSelectedLecturer(""); // Reset lecturer selection
     setAssignDialogOpen(true);
   };
 
@@ -90,15 +90,18 @@ const RegistrarIssueAction = () => {
     if (selectedIssue && selectedLecturer) {
       try {
         const token = localStorage.getItem("accessToken");
+        // PATCH the issue to assign a lecturer and set status to "in_progress"
         await API.patch(
-          `issues/${selectedIssue.id}/`,
+          `/issues/${selectedIssue.id}/`,
           { assigned_to: selectedLecturer, status: "in_progress" },
           { headers: { Authorization: `Bearer ${token}` } }
         );
-        const issuesRes = await API.get("issues/", {
+        // Refresh issues
+        const issuesRes = await API.get("/issues/", {
           headers: { Authorization: `Bearer ${token}` },
         });
         setIssues(issuesRes.data);
+
         toast({
           title: "Issue Assigned",
           description: `Issue ${selectedIssue.id} has been assigned.`,
@@ -109,7 +112,6 @@ const RegistrarIssueAction = () => {
         toast({
           title: "Error",
           description: "Failed to assign issue.",
-          variant: "destructive",
         });
       }
     }
@@ -119,14 +121,16 @@ const RegistrarIssueAction = () => {
     try {
       const token = localStorage.getItem("accessToken");
       await API.patch(
-        `issues/${issue.id}/`,
+        `/issues/${issue.id}/`,
         { status: "resolved" },
         { headers: { Authorization: `Bearer ${token}` } }
       );
-      const issuesRes = await API.get("issues/", {
+      // Refresh issues
+      const issuesRes = await API.get("/issues/", {
         headers: { Authorization: `Bearer ${token}` },
       });
       setIssues(issuesRes.data);
+
       toast({
         title: "Issue Resolved",
         description: `Issue ${issue.id} has been marked as resolved`,
@@ -135,7 +139,6 @@ const RegistrarIssueAction = () => {
       toast({
         title: "Error",
         description: "Failed to resolve issue.",
-        variant: "destructive",
       });
     }
   };
@@ -143,6 +146,8 @@ const RegistrarIssueAction = () => {
   // Filter issues based on search term and filters
   const filteredIssues = issues.filter((issue) => {
     const search = searchTerm.toLowerCase();
+
+    // Combine all relevant fields into a single string for searching
     const combined = [
       issue.id,
       issue.student_full_name,
@@ -158,7 +163,9 @@ const RegistrarIssueAction = () => {
     ]
       .map((v) => (v ? v.toString().toLowerCase() : ""))
       .join(" ");
+
     const matchesSearch = combined.includes(search);
+
     const matchesStatus =
       statusFilter === "all" ||
       (issue.status &&
@@ -166,6 +173,7 @@ const RegistrarIssueAction = () => {
     const matchesType =
       typeFilter === "all" ||
       (issue.type && issue.type.toLowerCase() === typeFilter.toLowerCase());
+
     return matchesSearch && matchesStatus && matchesType;
   });
 
@@ -233,14 +241,9 @@ const RegistrarIssueAction = () => {
                   onChange={(e) => setSearchTerm(e.target.value)}
                 />
               </div>
-              <Select
-                value={statusFilter}
-                onValueChange={setStatusFilter}
-                className="w-full sm:w-[180px]"
-                placeholder="Filter by status"
-              >
-                <SelectTrigger>
-                  <SelectValue />
+              <Select value={statusFilter} onValueChange={setStatusFilter}>
+                <SelectTrigger className="w-full sm:w-[180px]">
+                  <SelectValue placeholder="Filter by status" />
                 </SelectTrigger>
                 <SelectContent>
                   <SelectItem value="all">All Statuses</SelectItem>
@@ -249,14 +252,9 @@ const RegistrarIssueAction = () => {
                   <SelectItem value="resolved">Resolved</SelectItem>
                 </SelectContent>
               </Select>
-              <Select
-                value={typeFilter}
-                onValueChange={setTypeFilter}
-                className="w-full sm:w-[180px]"
-                placeholder="Filter by type"
-              >
-                <SelectTrigger>
-                  <SelectValue />
+              <Select value={typeFilter} onValueChange={setTypeFilter}>
+                <SelectTrigger className="w-full sm:w-[180px]">
+                  <SelectValue placeholder="Filter by type" />
                 </SelectTrigger>
                 <SelectContent>
                   <SelectItem value="all">All Types</SelectItem>
@@ -303,14 +301,8 @@ const RegistrarIssueAction = () => {
                               {issue.id}
                             </TableCell>
                             <TableCell>
-                              {issue.student_full_name ||
-                                issue.surname ||
-                                issue.student_name ||
-                                issue.student ||
-                                "—"}
-                              {issue.student_number
-                                ? ` (${issue.student_number})`
-                                : ""}
+                              {issue.student_first_name}{" "}
+                              {issue.student_last_name} {issue.student_number}
                             </TableCell>
                             <TableCell>
                               {issue.type || issue.category || "—"}
@@ -319,6 +311,7 @@ const RegistrarIssueAction = () => {
                               {getStatusBadge(issue.status)}
                             </TableCell>
                             <TableCell>
+                              {/* Lecturer Name */}
                               {(() => {
                                 const lecturerObj = lecturers.find(
                                   (l) =>
@@ -439,28 +432,25 @@ const RegistrarIssueAction = () => {
               </p>
             </div>
 
-            <Select
+            <select
               value={selectedLecturer}
-              onValueChange={setSelectedLecturer}
-              className="w-full"
-              placeholder="Select a lecturer"
+              onChange={(e) => setSelectedLecturer(e.target.value)}
+              className="w-full border rounded-md p-2"
             >
-              <SelectTrigger>
-                <SelectValue />
-              </SelectTrigger>
-              <SelectContent>
-                {lecturers.map((lecturer) => (
-                  <SelectItem key={lecturer.id} value={lecturer.id.toString()}>
-                    {lecturer.first_name || lecturer.last_name
-                      ? `Dr. ${lecturer.first_name ?? ""} ${
-                          lecturer.last_name ?? ""
-                        }`.trim()
-                      : lecturer.username ?? lecturer.name ?? "Unknown"}{" "}
-                    ({lecturer.department ?? "N/A"})
-                  </SelectItem>
-                ))}
-              </SelectContent>
-            </Select>
+              <option value="" disabled>
+                Select a lecturer
+              </option>
+              {lecturers.map((lecturer) => (
+                <option key={lecturer.id} value={lecturer.id}>
+                  {lecturer.first_name || lecturer.last_name
+                    ? `Dr. ${lecturer.first_name ?? ""} ${
+                        lecturer.last_name ?? ""
+                      }`.trim()
+                    : lecturer.username ?? lecturer.name ?? "Unknown"}{" "}
+                  ({lecturer.department ?? "N/A"})
+                </option>
+              ))}
+            </select>
           </div>
 
           <DialogFooter>

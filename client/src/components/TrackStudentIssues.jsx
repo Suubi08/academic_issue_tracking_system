@@ -15,7 +15,7 @@ import {
   DropdownMenuTrigger,
 } from "./ui/Dropdown-menu";
 import { Navigate, useNavigate } from "react-router-dom";
-import axios from "axios";
+
 import API from '../utils/axiosInstance';
 
 const TrackStudentIssues = () => {
