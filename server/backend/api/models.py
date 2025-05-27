@@ -16,7 +16,7 @@ class User(AbstractUser):
     
     role = models.CharField(max_length=20, choices=ROLE_CHOICES, default="student")
 
-    #
+    #Student specific fields
     student_number = models.CharField(max_length=20, blank=True, null=True)
     course_name = models.CharField(max_length=100, blank=True, null=True)
     college = models.CharField(max_length=100, blank=True, null=True)
