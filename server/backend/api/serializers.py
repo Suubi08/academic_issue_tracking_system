@@ -73,7 +73,7 @@ class RegisterSerializer(serializers.ModelSerializer):
 
         return user
     
-class UserSerializer(serializers.ModelSerializer):
+class UserSerializer(serializers.ModelSerializer): # Defining the field a user needs to enter
     class Meta:
         model = User
         fields = [
