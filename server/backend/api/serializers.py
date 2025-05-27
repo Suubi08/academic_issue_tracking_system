@@ -3,7 +3,7 @@ from django.contrib.auth.models import User
 from rest_framework import serializers
 from .models import User, Issue, Notification,Comments
 from django.contrib.auth.hashers import make_password
-
+# changing data in json 
 class RegisterSerializer(serializers.ModelSerializer):
     confirm_password = serializers.CharField(write_only=True)
 
