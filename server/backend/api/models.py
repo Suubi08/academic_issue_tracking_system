@@ -86,7 +86,7 @@ class Issue(models.Model):
     def __str__(self):
         return f"{self.category} - {self.status}"
 
-# Notifications model
+# 
 class Notification(models.Model):
     NOTIFICATION_TYPES = [
         ('info', 'Info'),
