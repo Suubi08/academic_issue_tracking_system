@@ -52,7 +52,7 @@ class RegisterSerializer(serializers.ModelSerializer):
 
         return data
 
-    def create(self, validated_data):
+    def create(self, validated_data):  # validating data input
         """Create user & hash password properly"""
         validated_data.pop('confirm_password', None)  # Avoid KeyError
 
