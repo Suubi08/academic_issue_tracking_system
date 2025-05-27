@@ -73,7 +73,7 @@ class Issue(models.Model):
         null=True, 
         blank=True, 
         limit_choices_to={'role': 'lecturer'}
-    )  # Only lecturers can be assigned
+    )  # Only lecturers can be assigned issues.
     description = models.TextField()
     attachment = models.FileField(upload_to='issue_attachments/', null=True, blank=True)
     year_of_study = models.CharField(max_length=50)
