@@ -20,7 +20,7 @@ class RegisterSerializer(serializers.ModelSerializer):
             'confirm_password': {'write_only': True}
         }
 
-    def validate(self, data):
+    def validate(self, data):  # validating data input
         if data['password'] != data['confirm_password']:
             raise serializers.ValidationError({"password": "Passwords do not match."})
 
@@ -52,7 +52,7 @@ class RegisterSerializer(serializers.ModelSerializer):
 
         return data
 
-    def create(self, validated_data):  # validating data input
+    def create(self, validated_data):  
         """Create user & hash password properly"""
         validated_data.pop('confirm_password', None)  # Avoid KeyError
 
@@ -73,7 +73,7 @@ class RegisterSerializer(serializers.ModelSerializer):
 
         return user
     
-class UserSerializer(serializers.ModelSerializer): # Defining the field a user needs to enter
+class UserSerializer(serializers.ModelSerializer): # Defining the fields a user needs to enter
     class Meta:
         model = User
         fields = [
