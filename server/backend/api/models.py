@@ -106,7 +106,7 @@ class Notification(models.Model):
     def __str__(self):
         return f"{self.title} - {self.user.username}"
 
-# Comments model
+# Comments model.
 class Comments(models.Model):
     issue = models.ForeignKey(Issue, on_delete=models.CASCADE, related_name='comments')
     user = models.ForeignKey(User, on_delete=models.CASCADE)
